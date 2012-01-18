@@ -1,0 +1,18 @@
+\name{is.negative}
+\alias{is.negative}
+\title{is negative}
+
+\usage{is.negative(number)}
+\arguments{
+  \item{number}{
+}
+}
+
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>}
+
+
+
+
+

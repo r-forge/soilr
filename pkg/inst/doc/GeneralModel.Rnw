@@ -1,0 +1,70 @@
+% vim:fenc=utf-8
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\author{Carlos Sierra, Susan Trumbore, Markus Müller }
+\title{How to use GeneralModel.R}
+\begin{document}
+\maketitle
+\abstract{
+The objective of this vignette is to demonstrate the application range of the Model class. We will start with the most simple running example that focuses on the basic building blocks from a technical, rather abstract point of view and then show how we can exploit the abstraction to implement the well known  ICBM example.
+}
+\section{Abstract example}
+
+<<print=TRUE>>=
+
+<<results=hide>>=
+print(1:20)
+@ % the above is just to ensure that 2 code chunks can follow each other
+We can also emulate a simple calculator:
+<<echo=TRUE,print=TRUE>>=
+1 + 1
+1 + pi
+sin(pi/2)
+@
+
+Now we look at Gaussian data:
+
+<<>>=
+library(stats)
+x <- rnorm(20)
+print(x)
+print(t1 <- t.test(x))
+@
+Note that we can easily integrate some numbers into standard text: The
+third element of vector \texttt{x} is \Sexpr{x[3]}, the
+$p$-value of the test is \Sexpr{format.pval(t1$p.value)}. % $
+
+Now we look at a summary of the famous \texttt{iris} data set, and we
+want to see the commands in the code chunks:
+
+\SweaveOpts{echo=true}
+
+<<>>=
+data(iris)
+summary(iris)
+@ %def
+
+
+\begin{figure}[htbp]
+  \begin{center}
+<<fig=TRUE>>=
+library(graphics)
+pairs(iris)
+@
+     \caption{Pairs plot of the iris data.}
+  \end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+  \begin{center}
+<<fig=true>>=
+boxplot(Sepal.Length~Species, data=iris)
+@
+    \caption{Boxplot of sepal length grouped by species.}
+  \end{center}
+\end{figure}
+@
+
+\end{document}
+
