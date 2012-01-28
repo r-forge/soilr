@@ -13,15 +13,25 @@ ThreepParallelModel=structure(
        solver=deSolve.lsoda.wrapper 	##<< A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.
       )
       {
+        t_start=min(t)
+        t_end=max(t)
         if(length(ks)!=3) stop("ks must be of length = 3")
         if(length(C0)!=3) stop("the vector with initial conditions must be of length = 3")
 
-        if(length(In)==1) inputrates=function(t){matrix(nrow=3,ncol=1,c(gam1*In,gam2*In,(1-gam1-gam2)*In))}
+        if(length(In)==1) inputrates_tm=TimeMap.new(
+            t_start,
+            t_end,
+            function(t){matrix(nrow=3,ncol=1,c(gam1*In,gam2*In,(1-gam1-gam2)*In))}
+        )
         if(class(In)=="data.frame"){
          x=In[,1]  
          y=In[,2]  
          inputrate=function(t0){as.numeric(spline(x,y,xout=t0)[2])}
-         inputrates=function(t){matrix(nrow=2,ncol=1,c(gam1*inputrate(t),gam2*inputrate(t),(1-gam1-gam2)*inputrate(t)))}
+         inputrates_tm=TimeMap.new(
+            t_start,
+            t_end,
+            function(t){matrix(nrow=2,ncol=1,c(gam1*inputrate(t),gam2*inputrate(t),(1-gam1-gam2)*inputrate(t)))}
+         )
         }
 
       if(length(xi)==1) fX=function(t){xi}
@@ -31,9 +41,9 @@ ThreepParallelModel=structure(
       fX=function(t){as.numeric(spline(X,Y,xout=t)[2])}
       }
       
-      coeffs=function(times){fX(t)*(-1*abs(ks))}  
+      coeffs_tm=TimeMap.new(min(t),max(t),function(times){fX(t)*(-1*abs(ks))})  
         
-     res=ParallelModel(t,coeffs,startvalues=C0,inputrates,solver)
+     res=ParallelModel(t,coeffs_tm,startvalues=C0,inputrates_tm,solver)
    ### A  Model Object that can be further queried
    ##seealso<< \code{\link{TwopParallelModel}} and \code{\link{ParallelModel}} 
 }

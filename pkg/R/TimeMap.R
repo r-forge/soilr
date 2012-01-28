@@ -14,11 +14,37 @@ setMethod(
     f="initialize",
     signature="TimeMap",
     definition=function(.Object,starttime=numeric(),endtime=numeric(),map=function(t){t}){
-        cat("-initializer at work-\n")
-        .Object@starttime=starttime
-        .Object@endtime=endtime
-        .Object@map=map
-        return(.Object)
+    #cat("-initializer at work-\n")
+    .Object@starttime=starttime
+    .Object@endtime=endtime
+    .Object@map=map
+    return(.Object)
     }
 )
-
+setGeneric(
+    name="getTimeRange",
+    def=function(object){
+        standardGeneric("getTimeRange")
+    }
+)
+setMethod(
+    f="getTimeRange",
+    signature="TimeMap",
+    definition=function(object){
+        return(
+               c(object@starttime,object@endtime))
+    }
+)
+setGeneric(
+    name="getFunction",
+    def=function(object){
+        standardGeneric("getFunction")
+    }
+)
+setMethod(
+    f="getFunction",
+    signature="TimeMap",
+    definition=function(object){
+        return(object@map)
+    }
+)

@@ -6,7 +6,7 @@ GeneralModel=structure(function
 (t,			##<< A vector containing the points in time where the solution is sought.
  A,			##<< A TimeMap object consisting of  a matrix valued function describing the whole model decay rates for the n pools, connection and feedback coefficients as functions of time and a time range for which this function is valid. The size of the quadtratic matric must be equal to the number of pools. The time range must cover the times given in the first argument. 
  ivList,		##<< A vector containing the initial amount of carbon for the n pools. The length of this vector is equal to the number of pools and thus equal to the length of k. This is checked by the function \code{\link{correctnessOfModel}}.
- inputrates, ##<< A vector function describing the inputs to the pools as funtions of time.
+ inputrates, ##<< A TimeMap object consisting of a vector valued function describing the inputs to the pools as funtions of time \code{\link{TimeMap.new}}.
  solverfunc=deSolve.lsoda.wrapper		##<< The function used by to actually solve the ODE system. This can be \code{\link{SoilR.euler}} or \code{\link{deSolve.lsoda.wrapper}} or any other user provided function with the same interface. 
  )
 {
@@ -31,23 +31,34 @@ GeneralModel=structure(function
       timestep=(t_end-t_start)/tn 
       t=seq(t_start,t_end,timestep) 
       n=3
-      A=matrix(nrow=n,ncol=n,byrow=TRUE,
-        c(-1,    0,    0, 
-           1, -0.7,    0,   
-           0,  1/2, -0.5)
-      )    
-      Af=function(t0){A}
-      c0=c(1, 2, 3)
+      At=TimeMap.new(
+        t_start,
+        t_end,
+        function(t0){
+              #matrix(nrow=n,ncol=n,byrow=TRUE,
+              #  c(-0.2,    0,    0, 
+              #     0.1, -0.7,    0,   
+              #     0,    1/2,   -0.5)
+              #)
+              matrix(nrow=n,ncol=n,byrow=TRUE,
+                c(-0.2,    0,    0, 
+                   0  , -0.3,    0,   
+                   0,      0,   -0.4)
+              )
+        }
+      ) 
+      
+      c0=c(0.5, 0.5, 0.5)
       #constant inputrate
-      inputrates=function(t){matrix(nrow=n,ncol=1,c(1,1,1))}
-      mod=GeneralModel(t,Af,c0,inputrates)
+      inputrates=TimeMap.new(
+        t_start,
+        t_end,
+        function(t0){matrix(nrow=n,ncol=1,c(0.0,0,0))}
+      ) 
+      mod=GeneralModel(t,At,c0,inputrates)
       Y=getC(mod)
-      lt1=1 
-      lt2=2 
-      lt3=3 
-      col1=1
-      col2=2
-      col3=3
+      lt1=1;  lt2=2; lt3=3 
+      col1=1;  col2=2; col3=3
       plot(t,Y[,1],type="l",lty=lt1,col=col1,
            ylab="C stocks (arbitrary units)",xlab="Time") 
       lines(t,Y[,2],type="l",lty=lt2,col=col2) 
