@@ -53,12 +53,12 @@ test."+name+"=function(){\n\
    print(tol)\n\
    timestep=(t_end-t_start)/tn\n\
    t=seq(t_start,t_end,timestep)\n\
-   A=function(t){"+rmatrixprint(m,shift)+"}\n"
+   A=TimeMap.new(t_start,t_end,function(t){"+rmatrixprint(m,shift)+"})\n"
         
         for j in range(n):       
            Text+=(shift+c_sym_strs[j]+"="+str(ck[j])+"\n")
         Text+="\
-   inputrates=function(t){return("+rmatrixprint(inputrates,shift)+")}\n\
+   inputrates=TimeMap.new(t_start,t_end,function(t){return("+rmatrixprint(inputrates,shift)+")})\n\
    Y=matrix(ncol="+str(n)+",nrow=length(t))\n"
         
         for j in range(n):       
@@ -77,7 +77,7 @@ test."+name+"=function(){\n\
         +",\n"+shift+"inputrates,\n"\
         +shift+"deSolve.lsoda.wrapper\n   )\n\
    Yode=getC(mod) \n\
-   Rode=getRelease(mod) \n\
+   Rode=getReleaseFlux(mod) \n\
    checkEquals(\n\
     Y,\n\
     Yode,\n\
@@ -120,7 +120,7 @@ test."+name+"=function(){\n\
      lty=c(lt1,lt2),\n\
      col="+collist+"\n\
    )\n\
-   plot(t,R[,1],type=\"l\",lty=lt1,col=1,ylab=\"Respirations\",xlab=\"Time\")\n"
+   plot(t,R[,1],type=\"l\",lty=lt1,col=1,ylab=\"Respirationfluxes\",xlab=\"Time\")\n"
         
         Text+=(shift+"lines(t,Rode[,1],type=\"l\",lty=lt2,col=1)\n")
         collist="c(1,1"

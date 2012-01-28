@@ -12,7 +12,7 @@ The returned function y' defines the ode system and thus reflects the model.}
 
 \value{The return value is a function (or closure in R jargon ) that can compute the derivative vector for the ode system  y'=y'(y,t).}
 
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
 
 
 

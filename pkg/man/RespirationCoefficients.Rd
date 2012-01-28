@@ -10,7 +10,7 @@ according to the given matrix A}
 
 \value{A vector valued function of time containing the respiration coefficients for all pools.}
 
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
 
 
 

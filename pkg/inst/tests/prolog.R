@@ -1,0 +1,20 @@
+#!/usr/bin/Rscript
+library("RUnit")
+prefix="../../R/"
+globstring=paste(prefix,"*.R",sep="")
+files=Sys.glob(globstring)
+print(files)
+fnames=c("TimeMap.R",
+           "TimeMap.new.R",
+           "Model.R",
+           "GeneralModel.R",
+           "deSolve.lsoda.Wrapper.R",
+           "correctnessOfModel.R",
+           "RespirationCoefficients.R",
+           "NpYdot.R",
+           "solver.R"
+          )
+filenames=sapply(fnames,function(x){paste("../../R/",x,sep="")})
+filelist=c(filenames,files)
+cat(filelist)
+sapply(filelist,source,echo=FALSE)

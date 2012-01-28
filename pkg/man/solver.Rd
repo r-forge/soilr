@@ -14,7 +14,7 @@ A user can thus decide which method is used to solve his model by providing the 
 
 
 
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
 
 
 

@@ -15,7 +15,7 @@
 \value{A data.frame with accumulated top soil moisture deficit (Acc.TSMD) and the rate modifying factor b. }
 \references{Coleman, K., and D. S. Jenkinson (1999), RothC-26.3 A model for the turnover of carbon in soil: 
 model description and windows user guide (modified 2008), 47 pp, IACR Rothamsted, Harpenden.}
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
 
 
 

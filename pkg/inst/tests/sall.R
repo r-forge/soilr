@@ -1,9 +1,5 @@
 #!/usr/bin/Rscript
-library("RUnit")
-filelist=Sys.glob("../../R/*.R")
-cat(filelist)
-sapply(filelist,source)
-
+source("prolog.R")
 alltests <- defineTestSuite(
    name="allTests",
    #dirs = file.path(.path.package(package="SoilR"),

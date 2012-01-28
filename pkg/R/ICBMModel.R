@@ -13,15 +13,21 @@ ICBMModel<-structure(
      In=0 ##<< Mean annual carbon input to the soil. 
      )
     { 
+      t_start=min(t)
+      t_end=max(t)
      if(length(ks)!=2) stop("The vector of decomposition rates is not of length = 2")
      if(length(c0)!=2) stop("The vector with initial conditions is not of length = 2")
      
      A=diag(-ks)
      A[2,1]=ks[1]*h
      Ar=A*r
-     inputrates=function(t){matrix(nrow=nrow(A),ncol=1,c(In,0))}
-     Af=function(t0) Ar
-     Mod=GeneralModel(t=t,A=Af,c0,inputrates)
+     inputFluxes=TimeMap.new(
+        t_start,
+        t_end,
+        function(t){matrix(nrow=nrow(A),ncol=1,c(In,0))}
+     )
+     Af=TimeMap.new(t_start,t_end, function(t0){Ar})
+     Mod=GeneralModel(t=t,A=Af,c0,inputFluxes)
      return(Mod)
  
      ##seealso<< \code{\link{TwopSeriesModel}} 

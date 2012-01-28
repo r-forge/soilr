@@ -1,8 +1,8 @@
-\name{getRelease}
-\alias{getRelease}
-\title{access to the C content of the pools }
+\name{getTimeRange}
+\alias{getTimeRange}
+\title{getTimeRange}
 
-\usage{getRelease(object)}
+\usage{getTimeRange(object)}
 \arguments{
   \item{object}{
 }

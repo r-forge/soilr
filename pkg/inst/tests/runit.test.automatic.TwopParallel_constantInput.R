@@ -9,23 +9,23 @@ test.TwopParallel_constantInput=function(){
    print(tol)
    timestep=(t_end-t_start)/tn
    t=seq(t_start,t_end,timestep)
-   A=function(t){matrix(
+   A=TimeMap.new(t_start,t_end,function(t){matrix(
      nrow=2,
      ncol=2,
      c(
         -1/20,  0,  
         0,  -1/30
      )
-   )}
+   )})
    c01=3
    c02=2
-   inputrates=function(t){return(matrix(
+   inputrates=TimeMap.new(t_start,t_end,function(t){return(matrix(
      nrow=2,
      ncol=1,
      c(
         0.100000000000000,  0.200000000000000
      )
-   ))}
+   ))})
    Y=matrix(ncol=2,nrow=length(t))
    Y[,1]=c01*exp(-t/20) + 2.0 - 2.0*exp(-t/20)
    Y[,2]=c02*exp(-t/30) + 6.0 - 6.0*exp(-t/30)
@@ -43,7 +43,7 @@ test.TwopParallel_constantInput=function(){
    deSolve.lsoda.wrapper
    )
    Yode=getC(mod) 
-   Rode=getRelease(mod) 
+   Rode=getReleaseFlux(mod) 
    checkEquals(
     Y,
     Yode,
@@ -73,7 +73,7 @@ test.TwopParallel_constantInput=function(){
      lty=c(lt1,lt2),
      col=c(1,1,2,2)
    )
-   plot(t,R[,1],type="l",lty=lt1,col=1,ylab="Respirations",xlab="Time")
+   plot(t,R[,1],type="l",lty=lt1,col=1,ylab="Respirationfluxes",xlab="Time")
    lines(t,Rode[,1],type="l",lty=lt2,col=1)
    lines(t,R[,2],type="l",lty=lt1,col=2)
    lines(t,Rode[,2],type="l",lty=lt2,col=2)

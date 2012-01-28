@@ -19,7 +19,7 @@
 
 \value{A Model Object that can be further queried }
 
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
 
 
 
@@ -39,7 +39,7 @@ TempEffect=data.frame(t,fT.Daycent1(Temp))
 
 Ex1=ThreepFeedbackModel(t=t,ks=ks,a21=0.5,a12=0.1,a32=0.2,a23=0.1,C0=C0,In=In,xi=TempEffect)
 Ct=getC(Ex1)
-Rt=getRelease(Ex1)
+Rt=getReleaseFlux(Ex1)
 
 plot(t,rowSums(Ct),type="l",ylab="Carbon stocks (arbitrary units)",xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Ct[51,]))) 
 lines(t,Ct[,1],col=2)
@@ -58,7 +58,7 @@ plot(Inr,type="l")
 
 Ex2=ThreepFeedbackModel(t=t,ks=ks,a21=0.5,a12=0.1,a32=0.2,a23=0.1,C0=C0,In=Inr)
 Ctr=getC(Ex2)
-Rtr=getRelease(Ex2)
+Rtr=getReleaseFlux(Ex2)
 
 plot(t,rowSums(Ctr),type="l",ylab="Carbon stocks (arbitrary units)",xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Ctr[51,]))) 
 lines(t,Ctr[,1],col=2)

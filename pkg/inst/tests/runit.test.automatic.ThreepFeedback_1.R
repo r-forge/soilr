@@ -9,7 +9,7 @@ test.ThreepFeedback_1=function(){
    print(tol)
    timestep=(t_end-t_start)/tn
    t=seq(t_start,t_end,timestep)
-   A=function(t){matrix(
+   A=TimeMap.new(t_start,t_end,function(t){matrix(
      nrow=3,
      ncol=3,
      c(
@@ -17,17 +17,17 @@ test.ThreepFeedback_1=function(){
         1/3,  -2/3,  1/3,  
         0,  0,  -1
      )
-   )}
+   )})
    c01=3
    c02=2
    c03=2.5
-   inputrates=function(t){return(matrix(
+   inputrates=TimeMap.new(t_start,t_end,function(t){return(matrix(
      nrow=3,
      ncol=1,
      c(
         1,  2,  3
      )
-   ))}
+   ))})
    Y=matrix(ncol=3,nrow=length(t))
    Y[,1]=c01*(2*exp(-t)/5 + 3*exp(-t/6)/5) + c02*(-2*exp(-t)/5 + 2*exp(-t/6)/5) + 8 + 2*exp(-t)/5 - 42*exp(-t/6)/5
    Y[,2]=c01*(-3*exp(-t)/5 + 3*exp(-t/6)/5) + c02*(3*exp(-t)/5 + 2*exp(-t/6)/5) + 9 - 3*exp(-t)/5 - 42*exp(-t/6)/5
@@ -48,7 +48,7 @@ test.ThreepFeedback_1=function(){
    deSolve.lsoda.wrapper
    )
    Yode=getC(mod) 
-   Rode=getRelease(mod) 
+   Rode=getReleaseFlux(mod) 
    checkEquals(
     Y,
     Yode,
@@ -82,7 +82,7 @@ test.ThreepFeedback_1=function(){
      lty=c(lt1,lt2),
      col=c(1,1,2,2,3,3)
    )
-   plot(t,R[,1],type="l",lty=lt1,col=1,ylab="Respirations",xlab="Time")
+   plot(t,R[,1],type="l",lty=lt1,col=1,ylab="Respirationfluxes",xlab="Time")
    lines(t,Rode[,1],type="l",lty=lt2,col=1)
    lines(t,R[,2],type="l",lty=lt1,col=2)
    lines(t,Rode[,2],type="l",lty=lt2,col=2)

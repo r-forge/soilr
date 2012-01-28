@@ -1,8 +1,8 @@
-\name{getRelease}
-\alias{getRelease}
-\title{access to the C content of the pools }
+\name{getFunction}
+\alias{getFunction}
+\title{getFunction}
 
-\usage{getRelease(object)}
+\usage{getFunction(object)}
 \arguments{
   \item{object}{
 }

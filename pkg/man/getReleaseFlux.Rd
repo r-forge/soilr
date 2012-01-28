@@ -1,8 +1,8 @@
-\name{getRelease}
-\alias{getRelease}
+\name{getReleaseFlux}
+\alias{getReleaseFlux}
 \title{access to the C content of the pools }
 
-\usage{getRelease(object)}
+\usage{getReleaseFlux(object)}
 \arguments{
   \item{object}{
 }

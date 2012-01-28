@@ -10,7 +10,7 @@
 \value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
 \references{Lloyd, J., and J. A. Taylor (1994), On the Temperature Dependence of Soil Respiration, 
 Functional Ecology, 8(3), 315-323.}
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
 
 
 

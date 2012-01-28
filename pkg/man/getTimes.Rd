@@ -1,6 +1,6 @@
 \name{getTimes}
 \alias{getTimes}
-\title{access to the C content of the pools }
+\title{access to the time values the model solution is sougth for }
 
 \usage{getTimes(object)}
 \arguments{
@@ -10,7 +10,7 @@
 
 
 
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
 
 
 

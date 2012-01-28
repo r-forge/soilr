@@ -17,7 +17,7 @@ This is simply a two pool model connected in series.}
 
 \references{Andren, O. and T. Katterer. 1997. ICBM: The Introductory Carbon Balance Model 
 for Exploration of Soil Carbon Balances. Ecological Applications 7:1226-1236.}
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
 
 
 

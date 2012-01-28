@@ -4,13 +4,11 @@ setClass(# Model
    representation=representation(
 	times="numeric"
     ,
-    #mat="function"
     mat="TimeMap"
     ,
     initialValues="numeric"
     ,
-    #inputrates="function"
-    inputrates="TimeMap"
+    inputFluxes="TimeMap"
     ,
     solverfunc="function"
    )
@@ -29,12 +27,12 @@ zeromat=TimeMap.new(
 setMethod(
     f="initialize",
     signature="Model",
-    definition=function(.Object,times=numeric(),mat=zeromat,initialValues=numeric(),inputrates=zerorate,solverfunc=deSolve.lsoda.wrapper){
+    definition=function(.Object,times=numeric(),mat=zeromat,initialValues=numeric(),inputFluxes=zerorate,solverfunc=deSolve.lsoda.wrapper){
         cat("-initializer at work-\n")
         .Object@times=times
         .Object@mat=mat
         .Object@initialValues=initialValues
-        .Object@inputrates=inputrates
+        .Object@inputFluxes=inputFluxes
         .Object@solverfunc=solverfunc
         return(.Object)
     }
@@ -121,7 +119,7 @@ setMethod(
       #print(Atm)
       A=getFunction(Atm)
       #print(A)
-      itm=object@inputrates
+      itm=object@inputFluxes
       input=getFunction(itm)
       #print(input)
       ydot=NpYdot(A,input)

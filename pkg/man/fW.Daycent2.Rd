@@ -12,7 +12,7 @@
 \value{A data frame with values of relative water content (RWC) and the effects of RWC on decomposition rates (fRWC).}
 \references{Del Grosso, S. J., W. J. Parton, A. R. Mosier, E. A. Holland, E. Pendall, D. S. Schimel, and D. S. Ojima (2005), 
 Modeling soil CO2 emissions from ecosystems, Biogeochemistry, 73(1), 71-91.}
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
 
 
 

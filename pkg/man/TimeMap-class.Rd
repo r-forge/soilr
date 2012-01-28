@@ -3,6 +3,8 @@
 \docType{class}
 \alias{TimeMap-class}
 \alias{TimeMap}
+\alias{getFunction,TimeMap-method}
+\alias{getTimeRange,TimeMap-method}
 \alias{initialize,TimeMap-method}
 
 \title{TimeMap}
@@ -17,11 +19,13 @@
 }
 \section{Methods}{
   \describe{
+    \item{getFunction}{\code{signature(object = "TimeMap")}: ... }
+    \item{getTimeRange}{\code{signature(object = "TimeMap")}: ... }
     \item{initialize}{\code{signature(.Object = "TimeMap")}: ... }
 	 }
 }
 
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
 
 
 

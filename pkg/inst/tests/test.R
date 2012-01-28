@@ -1,7 +1,7 @@
 #!/usr/bin/Rscript
-library(RUnit)
-filelist=Sys.glob("../../R/*.R")
-cat(filelist)
-sapply(filelist,source,echo=FALSE)
-runTestFile("runit.test.TimeMap.R")
+source("prolog.R")
+library("deSolve")
+attr(GeneralModel,"ex")()
+runTestFile("runit.test.automatic.FourpSerial_1.R")
+#runTestFile("runit.test.Model.R")
 #runTestFile("runit.test.automatic.TwopParallel.R")

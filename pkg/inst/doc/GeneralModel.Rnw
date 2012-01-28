@@ -7,14 +7,37 @@
 \begin{document}
 \maketitle
 \abstract{
-The objective of this vignette is to demonstrate the application range of the Model class. We will start with the most simple running example that focuses on the basic building blocks from a technical, rather abstract point of view and then show how we can exploit the abstraction to implement the well known  ICBM example.
+The objective of this vignette is to demonstrate the application range of class Model. We will start with the most simple running example that focuses on the basic building blocks from a technical, rather abstract point of view and then show how we can exploit the abstraction to implement the well known  ICBM example.
 }
 \section{Abstract example}
+First we load the package.
+<<>>=
+library("SoilR")
+@
+Now we create an object of class TimeMap to represent the coefficient matrix $\mathbf{A}$ as a function of time. 
+In our simple example this will be just be a constant function but we are nethertheless forced to supply information about the time-domain where this function is valid. 
+<<>>=
+A=function(times){
+   matrix(nrow=3,ncol=3,byrow=TRUE,
+    c(-1,    0,    0, 
+        1, -0.7,    0,   
+        0,    1, -0.5)
+    )
+}   
+t_start=0;t_end=1
+At=TimeMap.new(t_start,t_end,A) 
+@
+Now we do the same thing for the inputrate as a function of time. We also choose the simplest possible case which is a constant function of time being $1$ .
+<<>>=
+inp=function(t){matrix(nrow=3,ncol=1,c(1,0,0))}
+inputrates=TimeMap.new(t_start,t_end,inp) 
+@
 
+Then we define the times where we want to compute the C-content and the respiration 
 <<print=TRUE>>=
 
 <<results=hide>>=
-print(1:20)
+t=seq(0,1,.1)
 @ % the above is just to ensure that 2 code chunks can follow each other
 We can also emulate a simple calculator:
 <<echo=TRUE,print=TRUE>>=

@@ -4,18 +4,18 @@
 \description{This function creates a numerical model for n independent (parallel) pools that can be queried afterwards. 
 It is used by the convinient wrapper functions \code{\link{TwopParallelModel}} and \code{\link{ThreepParallelModel}}
 but can also be used independently.}
-\usage{ParallelModel(times, coeffs, startvalues, inputrates, solverfunc = deSolve.lsoda.wrapper)}
+\usage{ParallelModel(times, coeffs_tm, startvalues, inputrates, solverfunc = deSolve.lsoda.wrapper)}
 \arguments{
   \item{times}{A vector containing the points in time where the solution is sought.}
-  \item{coeffs}{A vector valued function containing the decay rates for the n pools as function of time. The length of the vector is equal to the number of pools.}
+  \item{coeffs_tm}{A TimeMap object consisting of a vector valued function containing the decay rates for the n pools as function of time and the time range where this function is valid. The length of the vector is equal to the number of pools.}
   \item{startvalues}{A vector containing the initial amount of carbon for the n pools. The length of this vector is equal to the number of pools and thus equal to the length of k. This is checked by the function.}
-  \item{inputrates}{A vector function describing the inputs to the pools as funtions of time.}
+  \item{inputrates}{A TimeMap object consisting of a vector valued function describing the inputs to the pools as funtions of time \code{\link{TimeMap.new}}}
   \item{solverfunc}{The function used to actually solve the ODE system. This can be \code{\link{SoilR.euler}} or \code{\link{deSolve.lsoda.wrapper}} or any other user provided function with the same interface.}
 }
 
 \value{a model object}
 
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
 
 
 
@@ -26,10 +26,14 @@ but can also be used independently.}
       tn=50
       timestep=(t_end-t_start)/tn 
       t=seq(t_start,t_end,timestep) 
-      k=function(times){c(0.5,0.2,0.3)}
+      k=TimeMap.new(t_start,t_end,function(times){c(0.5,0.2,0.3)})
       c0=c(1, 2, 3)
       #constant inputrates
-      inputrates=function(t){matrix(nrow=3,ncol=1,c(1,1,1))}
+      inputrates=TimeMap.new(
+          t_start,
+          t_end,
+          function(t){matrix(nrow=3,ncol=1,c(1,1,1))}
+      ) 
       mod=ParallelModel(t,k,c0,inputrates)
       Y=getC(mod)
       lt1=1 ;lt2=2 ;lt3=3 

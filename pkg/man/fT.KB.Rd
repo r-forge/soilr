@@ -10,7 +10,7 @@
 \value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
 \references{Kirschbaum, M. U. F. (1995), The temperature dependence of soil organic matter decomposition,
 and the effect of global warming on soil organic C storage, Soil Biology and Biochemistry, 27(6), 753-760.}
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
 
 
 
