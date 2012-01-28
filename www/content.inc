@@ -9,7 +9,7 @@ hosted on our own server.
  R-forge provides a good platform for this intermediate releases that are smaller than a package version but have a longer lifespan than the revisions of our mercurial repository, which is the place where the development takes place on a day to day basis. 
 </p>
 <p>
-The mercurial repository is part of our site also contains a lot more information e.g. a       
+The mercurial repository is part of a site which contains a lot more information e.g. a       
 <a href="http://gauss1.igw.uni-jena.de/trac//wiki/WikiStart"/>                                 
 wiki
 </a>
