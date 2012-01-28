@@ -19,6 +19,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title><?php echo $group_name; ?></title>
 	<link href="http://<?php echo $themeroot; ?>styles/estilo1.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="formate.css">
   </head>
 
 <body>
@@ -43,8 +44,16 @@ echo $contents; } ?>
 
 <!-- end of project description -->
 
-<p> The main development at the moment takes place on our own server: </p>
-<link href="http://gauss1.igw.uni-jena.de"/>
+    <h1 align="center">Welcome to SoilR </h1>
+    <p> 
+    At the moment we use R-forge as an intermediate between a package release at cran and the the actual  development site hosted on our own server.
+    R-forge provides a good platform for intermediate releases that are smaller than a package version but have a much longer lifespan than the revisions of our mercurial repository, which is the place where the development actually takes place.
+    This site also contains a lot more information e.g. a wiki and ticket system.
+    So please visit us on:
+    </p>
+<a href="http://gauss1.igw.uni-jena.de"/>
+    SoilR development site
+</a>
 
 
 <p> The <strong>project summary page</strong> you can find <a href="http://<?php echo $domain; ?>/projects/<?php echo $group_name; ?>/"><strong>here</strong></a>. </p>
