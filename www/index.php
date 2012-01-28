@@ -44,15 +44,20 @@ echo $contents; } ?>
 
 <!-- end of project description -->
 
-    <h1 align="center">Welcome to SoilR </h1>
-    <p> 
-    At the moment we use R-forge as an intermediate between a package release at cran and the the actual  development site hosted on our own server.
-    R-forge provides a good platform for intermediate releases that are smaller than a package version but have a much longer lifespan than the revisions of our mercurial repository, which is the place where the development actually takes place.
-    This site also contains a lot more information e.g. a wiki and ticket system.
-    So please visit us on:
-    </p>
+<p> 
+At the moment we use R-forge as an intermediate between a package a future release at cran and the the actual  
 <a href="http://gauss1.igw.uni-jena.de"/>
-    SoilR development site
+development site
+<\a>
+ hosted on our own server.
+</p>
+<p>
+R-forge provides a good platform for intermediate releases that are smaller than a package version but have a much longer lifespan than the revisions of our mercurial repository, which is the place where the development actually takes place.
+This site also contains a lot more information e.g. a wiki and ticket system.
+So please visit the:
+</p>
+<a href="http://gauss1.igw.uni-jena.de"/>
+    SoilR intranet
 </a>
 
 
