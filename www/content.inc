@@ -1,5 +1,5 @@
 <p>                                                                                            
-At the moment we use R-forge as an device to fill the gap between a package release at cran and the latest version of the project at the 
+At the moment we use R-forge as a device to fill the gap between a package release at cran and the latest version of the project at the 
 <a href="http://gauss1.igw.uni-jena.de"/>                                                      
 SoilR intranet
 </a>
