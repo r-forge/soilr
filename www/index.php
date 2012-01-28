@@ -45,20 +45,9 @@ echo $contents; } ?>
 <!-- end of project description -->
 
 <p> 
-At the moment we use R-forge as an intermediate between a package a future release at cran and the the actual  
-<a href="http://gauss1.igw.uni-jena.de"/>
-development site
-<\a>
- hosted on our own server.
+<?php include("content.inc"); ?> 
+
 </p>
-<p>
-R-forge provides a good platform for intermediate releases that are smaller than a package version but have a much longer lifespan than the revisions of our mercurial repository, which is the place where the development actually takes place.
-This site also contains a lot more information e.g. a wiki and ticket system.
-So please visit the:
-</p>
-<a href="http://gauss1.igw.uni-jena.de"/>
-    SoilR intranet
-</a>
 
 
 <p> The <strong>project summary page</strong> you can find <a href="http://<?php echo $domain; ?>/projects/<?php echo $group_name; ?>/"><strong>here</strong></a>. </p>
