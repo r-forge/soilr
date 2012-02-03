@@ -11,16 +11,22 @@ ThreepSeriesModel<-structure(
       solver=deSolve.lsoda.wrapper  ##<< A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.
     )	
     { 
+      t_start=min(t)
+      t_end=max(t)
       if(length(ks)!=3) stop("ks must be of length = 3")
       if(length(C0)!=3) stop("the vector with initial conditions must be of length = 3")
       
-      if(length(In)==1) inputrates=function(t){matrix(nrow=3,ncol=1,c(In,0,0))}
+      if(length(In)==1) inputrate=function(t){matrix(nrow=3,ncol=1,c(In,0,0))}
       if(class(In)=="data.frame"){
          x=In[,1]  
          y=In[,2]
          inputrate=function(t0){as.numeric(spline(x,y,xout=t0)[2])}
-         inputrates=function(t){matrix(nrow=3,ncol=1,c(inputrate(t),0,0))}
-        }
+      }
+      inputrates=TimeMap.new(
+         t_start,
+         t_end,
+         function(t){matrix(nrow=3,ncol=1,c(inputrate(t),0,0))}
+      )
       A=-1*abs(diag(ks))
       A[2,1]=a21
       A[3,2]=a32
@@ -29,10 +35,14 @@ ThreepSeriesModel<-structure(
       if(class(xi)=="data.frame"){
         X=xi[,1]
         Y=xi[,2]
-        fX=function(t){as.numeric(spline(X,Y,xout=t)[2])}
+        fX=splinefun(X,Y)
        }
-      Af=function(t) fX(t)*A
-      Mod=GeneralModel(t=t,A=Af,ivList=C0,inputrates=inputrates)
+      Af=TimeMap.new(
+            t_start,
+            t_end,
+            function(t){fX(t)*A}
+      )
+      Mod=GeneralModel(t=t,A=Af,ivList=C0,inputFluxes=inputrates)
      return(Mod)
 ### A Model Object that can be further queried 
       ##seealso<< \code{\link{ThreepParallelModel}}, \code{\link{ThreepFeedbackModel}} 

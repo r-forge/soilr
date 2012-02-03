@@ -1,4 +1,4 @@
-GeneralModel=structure(function
+GeneralModel=structure(function #The most general costructor for class Model
 ### The function creates a numerical model  for n arbitrarily connected pools.
 ### It is one of the constructors of class Model                       
 ### It is e.g. used by some more specialized wrapper functions like for instance \code{\link{ParallelModel}} but can also be used directly. It is in fact the most### versatile interface to produce instances of class Model. 
@@ -64,7 +64,7 @@ GeneralModel=structure(function
       lines(t,Y[,2],type="l",lty=lt2,col=col2) 
       lines(t,Y[,3],type="l",lty=lt3,col=col3) 
       legend(
-         "topleft",
+         "topright",
          c("C in pool 1",
            "C in pool 2",
            "C in pool 3"
@@ -72,11 +72,12 @@ GeneralModel=structure(function
          lty=c(lt1,lt2,lt3),
          col=c(col1,col2,col3)
       )
+#now compute the accumulated release
       Y=getRelease(mod)
       plot(t,Y[,1],type="l",lty=lt1,col=col1,ylab="C Release (arbitrary units)",xlab="Time") 
       lines(t,Y[,2],lt2,type="l",lty=lt2,col=col2) 
       lines(t,Y[,3],type="l",lty=lt3,col=col3) 
-      legend("topright",c("R1","R2","R3"),lty=c(lt1,lt2,lt3),col=c(col1,col2,col3))
+      legend("topleft",c("R1","R2","R3"),lty=c(lt1,lt2,lt3),col=c(col1,col2,col3))
  
 }       
 )

@@ -8,7 +8,7 @@ ParallelModel=structure(function
  inputrates, ##<< A TimeMap object consisting of a vector valued function describing the inputs to the pools as funtions of time \code{\link{TimeMap.new}}
  solverfunc =deSolve.lsoda.wrapper    ##<< The function used to actually solve the ODE system. This can be \code{\link{SoilR.euler}} or \code{\link{deSolve.lsoda.wrapper}} or any other user provided function with the same interface. 
  ){
-    coeffs=getFunction(coeffs_tm)
+    coeffs=getFunctionDefinition(coeffs_tm)
     ns=length(startvalues)
     nk=length(coeffs(1))
     if (nk!=ns){

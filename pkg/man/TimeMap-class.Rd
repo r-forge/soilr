@@ -3,11 +3,11 @@
 \docType{class}
 \alias{TimeMap-class}
 \alias{TimeMap}
-\alias{getFunction,TimeMap-method}
+\alias{getFunctionDefinition,TimeMap-method}
 \alias{getTimeRange,TimeMap-method}
 \alias{initialize,TimeMap-method}
 
-\title{TimeMap}
+\title{TimeMap S4 class}
 \description{NA}
 \section{Objects from the Class}{Objects can be created by calls of the form \code{new(TimeMap ...)}}
 \section{Slots}{
@@ -19,7 +19,7 @@
 }
 \section{Methods}{
   \describe{
-    \item{getFunction}{\code{signature(object = "TimeMap")}: ... }
+    \item{getFunctionDefinition}{\code{signature(object = "TimeMap")}: ... }
     \item{getTimeRange}{\code{signature(object = "TimeMap")}: ... }
     \item{initialize}{\code{signature(.Object = "TimeMap")}: ... }
 	 }

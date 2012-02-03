@@ -12,7 +12,6 @@ Date: \tab 2012-01-23\cr
 Author: \tab Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>\cr
 Maintainer: \tab Markus Mueller <mamueller@bgc-jena.mpg.de>\cr
 License: \tab GPL-3\cr
-LazyLoad: \tab yes\cr
 Depends: \tab deSolve\cr}
 }
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}

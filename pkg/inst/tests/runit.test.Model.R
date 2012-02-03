@@ -14,6 +14,9 @@ test.ThreepParallelModel=function(){
 test.ThreepFeedbackModel=function(){
    attr(ThreepFeedbackModel,"ex")()
 }
+test.ThreepSeriesModel=function(){
+   attr(ThreepSeriesModel,"ex")()
+}
 test.ParallelModel=function(){
   attr(ParallelModel,"ex")()
 }

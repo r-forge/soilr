@@ -15,79 +15,102 @@ First we load the package.
 library("SoilR")
 @
 Now we create an object of class TimeMap to represent the coefficient matrix $\mathbf{A}$ as a function of time. 
-In our simple example this will be just be a constant function but we are nethertheless forced to supply information about the time-domain where this function is valid. 
+In our simple example this will be just be a constant function but we are nethertheless forced to supply information about the time-domain where this function is valid. Why this requirement is sensible will be demonstrated later in the document where the time-domain data will we used to check automatically for an inconsistent model. 
 <<>>=
-A=function(times){
-   matrix(nrow=3,ncol=3,byrow=TRUE,
-    c(-1,    0,    0, 
-        1, -0.7,    0,   
-        0,    1, -0.5)
-    )
-}   
-t_start=0;t_end=1
-At=TimeMap.new(t_start,t_end,A) 
+n=3;t_start=0;t_end=1
+At=TimeMap.new(
+  t_start,
+  t_end,
+  function(t0){
+        matrix(nrow=n,ncol=n,byrow=TRUE,
+          c(-0.33,    0,    0, 
+             0.1, -0.35,    0,   
+             0,    1/3,   -0.39)
+        )
+  }
+)
 @
 Now we do the same thing for the inputrate as a function of time. We also choose the simplest possible case which is a constant function of time being $1$ .
 <<>>=
-inp=function(t){matrix(nrow=3,ncol=1,c(1,0,0))}
-inputrates=TimeMap.new(t_start,t_end,inp) 
+inputFluxes=TimeMap.new(
+    t_start,
+    t_end,
+    function(t0){matrix(nrow=3,ncol=1,c(.1,0,0))}
+) 
 @
-
-Then we define the times where we want to compute the C-content and the respiration 
-<<print=TRUE>>=
-
+Then we define the times where we want to compute the C-content and the respirations.
 <<results=hide>>=
 t=seq(0,1,.1)
-@ % the above is just to ensure that 2 code chunks can follow each other
-We can also emulate a simple calculator:
-<<echo=TRUE,print=TRUE>>=
-1 + 1
-1 + pi
-sin(pi/2)
-@
-
-Now we look at Gaussian data:
-
+@ 
+We also need to specify the startvalues for the C content of the pools.
 <<>>=
-library(stats)
-x <- rnorm(20)
-print(x)
-print(t1 <- t.test(x))
+ c0=c(0.5, 0.5, 0.5)
 @
-Note that we can easily integrate some numbers into standard text: The
-third element of vector \texttt{x} is \Sexpr{x[3]}, the
-$p$-value of the test is \Sexpr{format.pval(t1$p.value)}. % $
-
-Now we look at a summary of the famous \texttt{iris} data set, and we
-want to see the commands in the code chunks:
-
-\SweaveOpts{echo=true}
-
+We can now assemble the Model object
 <<>>=
-data(iris)
-summary(iris)
-@ %def
-
-
+mod=GeneralModel(t,At,c0,inputFluxes)
+@ 
+and ask it several questions for instance the C content:
+<<>>=
+Y_c=getC(mod)
+@
+which we can plot
+%
+%\SweaveOpts{echo=true}
+%
 \begin{figure}[htbp]
   \begin{center}
 <<fig=TRUE>>=
-library(graphics)
-pairs(iris)
+lt1=1;  lt2=2; lt3=3 
+      col1=1;  col2=2; col3=3
+      plot(t,Y_c[,1],type="l",lty=lt1,col=col1,
+           ylab="C stocks (arbitrary units)",xlab="Time") 
+      lines(t,Y_c[,2],type="l",lty=lt2,col=col2) 
+      lines(t,Y_c[,3],type="l",lty=lt3,col=col3) 
+      legend(
+         "topright",
+         c("C in pool 1",
+           "C in pool 2",
+           "C in pool 3"
+         ),
+         lty=c(lt1,lt2,lt3),
+         col=c(col1,col2,col3)
+      )
 @
-     \caption{Pairs plot of the iris data.}
+     \caption{The amount of carbon in the pools}
   \end{center}
 \end{figure}
-
+We also could ask for the $CO_2$ flux as a function of time.
+<<>>=
+Y_rf=getReleaseFlux(mod)
+@
 \begin{figure}[htbp]
   \begin{center}
-<<fig=true>>=
-boxplot(Sepal.Length~Species, data=iris)
+<<fig=TRUE>>=
+      plot(t,Y_rf[,1],type="l",lty=lt1,col=col1,ylab="C Release (arbitrary units)",xlab="Time") 
+      lines(t,Y_rf[,2],lt2,type="l",lty=lt2,col=col2) 
+      lines(t,Y_rf[,3],type="l",lty=lt3,col=col3) 
+      legend("topright",c("R1","R2","R3"),lty=c(lt1,lt2,lt3),col=c(col1,col2,col3))
 @
-    \caption{Boxplot of sepal length grouped by species.}
+     \caption{The respiration flux  }
   \end{center}
 \end{figure}
+Or we could look at the accumulated release of $CO_2$ which is actually a good test for the model.
+<<>>=
+Y_r=getRelease(mod)
 @
+\begin{figure}[htbp]
+  \begin{center}
+<<fig=TRUE>>=
+      plot(t,Y_r[,1],type="l",lty=lt1,col=col1,ylab="C Release (arbitrary units)",xlab="Time") 
+      lines(t,Y_r[,2],lt2,type="l",lty=lt2,col=col2) 
+      lines(t,Y_r[,3],type="l",lty=lt3,col=col3) 
+      legend("topleft",c("R1","R2","R3"),lty=c(lt1,lt2,lt3),col=c(col1,col2,col3))
+@
+     \caption{The accumulated respiration}
+  \end{center}
+\end{figure}
+\section{Application including moisture and temperature dependence}
+
 
 \end{document}
-

@@ -41,7 +41,7 @@ Rt=getRelease(Ex1)
 plot(t,rowSums(Ct),type="l",ylab="Carbon stocks (arbitrary units)",xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Ct[1,]))) 
 lines(t,Ct[,1],col=2)
 lines(t,Ct[,2],col=4) 
-legend("topright",c("Total C","C in pool 1", "C in pool 2"),lty=c(1,1,1),col=c(1,2,4),lwd=c(2,1,1),bty="n")
+legend("bottomright",c("Total C","C in pool 1", "C in pool 2"),lty=c(1,1,1),col=c(1,2,4),lwd=c(2,1,1),bty="n")
 
 plot(t,rowSums(Rt),type="l",ylab="Carbon released (arbitrary units)",xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Rt[1,]))) 
 lines(t,Rt[,1],col=2)

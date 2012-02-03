@@ -27,7 +27,7 @@ TwopParallelModel<-structure(
          inputrate=function(t0){as.numeric(spline(x,y,xout=t0)[2])}
          inputrates=TimeMap.new(
             t_start,
-            t_end,
+            t_stop,
             function(t){
                 matrix(nrow=2,ncol=1,
                     c(
@@ -72,10 +72,10 @@ TwopParallelModel<-structure(
       legend("topright",c("Total C","C in pool 1", "C in pool 2"),lty=c(1,1,1),col=c(1,2,4),lwd=c(2,1,1),bty="n")
       
       Rt=getRelease(Ex)
-      plot(t,rowSums(Rt),type="l",ylab="Carbon released (arbitrary units)",xlab="Time",lwd=2,ylim=c(0,sum(Rt[1,]))) 
+      plot(t,rowSums(Rt),type="l",ylab="Carbon released (arbitrary units)",xlab="Time",lwd=2) 
       lines(t,Rt[,1],col=2)
       lines(t,Rt[,2],col=4) 
-      legend("topright",c("Total C release","C release from pool 1", "C release from pool 2"),lty=c(1,1,1),col=c(1,2,4),lwd=c(2,1,1),bty="n")
+      legend("topleft",c("Total C release","C release from pool 1", "C release from pool 2"),lty=c(1,1,1),col=c(1,2,4),lwd=c(2,1,1),bty="n")
 
 }
 )
