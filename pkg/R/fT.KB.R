@@ -1,5 +1,5 @@
 fT.KB<-structure(
-  function
+  function #Effects of temperature on decomposition rates according to a model proposed by M. Kirschbaum (1995)
     ### Calculates the effects of temperature on decomposition rates according to a model proposed by Kirschbaum (1995).
     ##references<<  Kirschbaum, M. U. F. (1995), The temperature dependence of soil organic matter decomposition,
     ##and the effect of global warming on soil organic C storage, Soil Biology and Biochemistry, 27(6), 753-760.

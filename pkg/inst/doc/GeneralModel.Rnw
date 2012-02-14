@@ -10,6 +10,7 @@
 The objective of this vignette is to demonstrate the application range of class Model. We will start with the most simple running example that focuses on the basic building blocks from a technical, rather abstract point of view and then show how we can exploit the abstraction to implement the well known  ICBM example.
 }
 \section{Abstract example}
+\subsection{Example}
 First we load the package.
 <<>>=
 library("SoilR")
@@ -17,15 +18,15 @@ library("SoilR")
 Now we create an object of class TimeMap to represent the coefficient matrix $\mathbf{A}$ as a function of time. 
 In our simple example this will be just be a constant function but we are nethertheless forced to supply information about the time-domain where this function is valid. Why this requirement is sensible will be demonstrated later in the document where the time-domain data will we used to check automatically for an inconsistent model. 
 <<>>=
-n=3;t_start=0;t_end=1
+n=3;t_start=0;t_end=2
 At=TimeMap.new(
   t_start,
   t_end,
   function(t0){
         matrix(nrow=n,ncol=n,byrow=TRUE,
-          c(-0.33,    0,    0, 
+          c(-0.39,    0,    0, 
              0.1, -0.35,    0,   
-             0,    1/3,   -0.39)
+             0,    1/3,   -0.33)
         )
   }
 )
@@ -35,12 +36,15 @@ Now we do the same thing for the inputrate as a function of time. We also choose
 inputFluxes=TimeMap.new(
     t_start,
     t_end,
-    function(t0){matrix(nrow=3,ncol=1,c(.1,0,0))}
+    #function(t0){matrix(nrow=3,ncol=1,c(.1,0,0))}
+    function(t0){matrix(nrow=3,ncol=1,c(0.05,0,0))}
 ) 
 @
 Then we define the times where we want to compute the C-content and the respirations.
 <<results=hide>>=
-t=seq(0,1,.1)
+tn=500
+timestep=(t_end-t_start)/tn 
+t=seq(t_start,t_end,timestep) 
 @ 
 We also need to specify the startvalues for the C content of the pools.
 <<>>=
@@ -58,13 +62,15 @@ which we can plot
 %
 %\SweaveOpts{echo=true}
 %
-\begin{figure}[htbp]
   \begin{center}
 <<fig=TRUE>>=
-lt1=1;  lt2=2; lt3=3 
+      lt1=1;  lt2=2; lt3=3 
       col1=1;  col2=2; col3=3
       plot(t,Y_c[,1],type="l",lty=lt1,col=col1,
-           ylab="C stocks (arbitrary units)",xlab="Time") 
+           ylab="C stocks (arbitrary units)",
+           xlab="Time",
+           ylim=c(min(Y_c),max(Y_c))
+      ) 
       lines(t,Y_c[,2],type="l",lty=lt2,col=col2) 
       lines(t,Y_c[,3],type="l",lty=lt3,col=col3) 
       legend(
@@ -77,40 +83,157 @@ lt1=1;  lt2=2; lt3=3
          col=c(col1,col2,col3)
       )
 @
-     \caption{The amount of carbon in the pools}
+     \\{The amount of carbon in the pools}
   \end{center}
-\end{figure}
 We also could ask for the $CO_2$ flux as a function of time.
 <<>>=
 Y_rf=getReleaseFlux(mod)
 @
-\begin{figure}[htbp]
   \begin{center}
 <<fig=TRUE>>=
-      plot(t,Y_rf[,1],type="l",lty=lt1,col=col1,ylab="C Release (arbitrary units)",xlab="Time") 
+      plot(t,Y_rf[,1],type="l",lty=lt1,col=col1,
+           ylab="C Release (arbitrary units)",
+           xlab="Time",
+           ylim=c(min(Y_rf),max(Y_rf))
+           ) 
       lines(t,Y_rf[,2],lt2,type="l",lty=lt2,col=col2) 
       lines(t,Y_rf[,3],type="l",lty=lt3,col=col3) 
       legend("topright",c("R1","R2","R3"),lty=c(lt1,lt2,lt3),col=c(col1,col2,col3))
 @
-     \caption{The respiration flux  }
+     \\{The respiration flux  }
   \end{center}
-\end{figure}
 Or we could look at the accumulated release of $CO_2$ which is actually a good test for the model.
 <<>>=
 Y_r=getRelease(mod)
 @
-\begin{figure}[htbp]
   \begin{center}
 <<fig=TRUE>>=
-      plot(t,Y_r[,1],type="l",lty=lt1,col=col1,ylab="C Release (arbitrary units)",xlab="Time") 
+      plot(t,Y_r[,1],type="l",lty=lt1,col=col1,
+           ylab="accumulated Release (arbitrary units)",
+           xlab="Time",
+           ylim=c(min(Y_r),max(Y_r))
+           ) 
       lines(t,Y_r[,2],lt2,type="l",lty=lt2,col=col2) 
       lines(t,Y_r[,3],type="l",lty=lt3,col=col3) 
       legend("topleft",c("R1","R2","R3"),lty=c(lt1,lt2,lt3),col=c(col1,col2,col3))
 @
-     \caption{The accumulated respiration}
+     \\{The accumulated respiration}
   \end{center}
-\end{figure}
+\subsection{Outlook}
+At the beginning we mentioned that the given example is very abstract and also very simple.
+Actually this means that there is much more abstraction than is necessary for this simple example.
+This up to now unused abstraction can be represented by the use of an object of class TimeMap.
+The objects of class TimeMap are made of a function definition and the time domain of this function.
+Two questions arise. 
+\begin{enumerate}
+    \item
+    Why do we need a function definition? 
+    \item
+    Why do we need a explicit specification of the computational domain?
+\end{enumerate}
+We will answer the first question in the next section.
+
+
 \section{Application including moisture and temperature dependence}
+We now create a time dependent coeffictient matrix  
+where we give moisture and temperature as functions of time and create the coefficients 
+as functions of moisture and temperature. 
+We will give the inputrate as a periodic function.
+Let's start with a somewhat arbitrary definition of a dayli temperature curve.
+<<fig=TRUE>>=
+Temp=function(t0){ #Temperature in Celsius 
+    T0=10   #anual average temperature in Celsius degree
+    A=10    #Amplitude in K
+    P=1     #Period in years
+    T0+A*sin(2*pi*P*t0)
+}
+plot(t,Temp(t),xlab="Time",ylab="Temperature",type="l")
+@
+\\
+and something similar arbirtrary for moisture.
+<<fig=TRUE>>=
+Moist=function(t0){#Moisture in percent
+    W0=70       #average moisture in percent
+    A=10        #Amplitude of change
+    P=1         #Period in years
+    ps=pi/7     #phase shift
+    W0+A*sin(2*pi*P*t0-ps)
+}
+plot(t,Moist(t),xlab="Time",ylab="Moisture",type="l")
+@
+\\
+Now we choose a function for determining the temperature effects on decomposition rates.
+Actually we have $A(T)=\xi(T) A_0$ with a constant $A_0$ and $\xi(T)$ is given by the product of functions
+{\tt fT.Daycent1} and 
+{\tt fW.Daycent2} :
+where we have to take into account that {\tt fW.Daycent2} returns a dataframe from which we will have to extract the decay coefficient influencing part first.
+<<>>=
+xi=function(t0){
+    fT.Daycent1(Temp(t0))*as.numeric(fW.Daycent2(Moist(t0))["fRWC"])
+}
+@
+We define $A_0$ and combine it with $xi$ to the complete TimeMap object.
+<<<>>=
+A_0=matrix(nrow=n,ncol=n,byrow=TRUE,
+  c(-0.2,    0,    0, 
+     0.1, -0.7,    0,   
+     0,    1/2,   -0.5)
+)
+A_t=TimeMap.new(
+  t_start,
+  t_end,
+  function(t0){xi(t0)*A_0}
+  )
+@
+We define the input fluxes explicitly:
+<<fig=TRUE>>=
+inputFluxes=function(t0){
+    t_peak1=0.75
+    t_peak2=1.75
+    matrix(nrow=3,
+           ncol=1,
+           c(
+             exp(-((t0-t_peak1)*40.0)^2)+exp(-((t0-t_peak2)*40.0)^2),
+             0,
+             0
+           )
+    )
+}
+inputFluxes_tm=TimeMap.new(
+    t_start,
+    t_end,
+    inputFluxes
+) 
+#since inputFluxes is a matrix valued function we have to evaluate it more 
+#explicitly to be able to plot it. We chose the input to the first pool here. 
+ifl_1=matrix(nrow=1,ncol=length(t))
+for (i in 1:length(t)){ifl_1[i]=inputFluxes(t[i])[1]}
+plot(t,ifl_1,xlab="Time",ylab="external inputflux to pool 1",type="l")
+@
+We can now combine the time dependent functions for the coefficients and the inputrates to a Model.
+<<fig=TRUE>>=
+mod=GeneralModel(t,A_t,c0,inputFluxes_tm)
+Y_c=getC(mod)
+      plot(t,Y_c[,1],type="l",lty=lt1,col=col1,
+           ylab="C stocks (arbitrary units)",
+           xlab="Time",
+           ylim=c(min(Y_c),max(Y_c))
+      ) 
+      lines(t,Y_c[,2],type="l",lty=lt2,col=col2) 
+      lines(t,Y_c[,3],type="l",lty=lt3,col=col3) 
+      legend(
+         "topright",
+         c("C in pool 1",
+           "C in pool 2",
+           "C in pool 3"
+         ),
+         lty=c(lt1,lt2,lt3),
+         col=c(col1,col2,col3)
+      )
+@
+\section{Real data combined with synthetic functions}
+Until now all functions were given explicitly, but sometimes some of them will be given by observational data that have to be interpolated. 
+Of course you could just produce the interpolating  function and proceed as in the previos chapters. However there is a shortcut. Objects of class TimeMap can be produced directly from {\tt data.frames } eliminating the need to specify the time range explicitly.
 
 
 \end{document}

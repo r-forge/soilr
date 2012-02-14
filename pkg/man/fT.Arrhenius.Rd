@@ -1,6 +1,6 @@
 \name{fT.Arrhenius}
 \alias{fT.Arrhenius}
-\title{fT Arrhenius}
+\title{Effects of temperature on decomposition rates according the Arrhenius equation}
 \description{Calculates the effects of temperature on decomposition rates according to the Arrhenius equation.}
 \usage{fT.Arrhenius(Temp, A = 1000, Ea = 75000, Re = 8.3144621)}
 \arguments{

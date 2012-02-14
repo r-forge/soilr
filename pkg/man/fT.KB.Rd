@@ -1,6 +1,6 @@
 \name{fT.KB}
 \alias{fT.KB}
-\title{fT KB}
+\title{Effects of temperature on decomposition rates according to a model proposed by M. Kirschbaum (1995)}
 \description{Calculates the effects of temperature on decomposition rates according to a model proposed by Kirschbaum (1995).}
 \usage{fT.KB(Temp)}
 \arguments{

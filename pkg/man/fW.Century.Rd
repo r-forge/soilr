@@ -1,6 +1,6 @@
 \name{fW.Century}
 \alias{fW.Century}
-\title{fW Century}
+\title{Effects of moisture on decomposition rates according to the CENTURY model}
 \description{Calculates the effects of precipitation and potential evapotranspiration on decomposition rates.}
 \usage{fW.Century(PPT, PET)}
 \arguments{

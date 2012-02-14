@@ -1,6 +1,6 @@
 \name{fW.Demeter}
 \alias{fW.Demeter}
-\title{fW Demeter}
+\title{Effects of moisture on decomposition rates according to the DEMETER model}
 \description{Calculates the effects of soil moisture on decomposition rates according to the DEMETER model.}
 \usage{fW.Demeter(M, Msat = 100)}
 \arguments{

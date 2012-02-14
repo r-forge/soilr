@@ -1,6 +1,6 @@
 \name{fT.Standcarb}
 \alias{fT.Standcarb}
-\title{fT Standcarb}
+\title{effects of temperature on decomposition rates according to the StandCarb model}
 \description{Calculates the effects of temperature on decomposition rates according to the StandCarb model.}
 \usage{fT.Standcarb(Temp, Topt = 45, Tlag = 4, Tshape = 15, Q10 = 2)}
 \arguments{

@@ -1,4 +1,7 @@
 require(RUnit)
+test.OnepModel=function(){
+   attr(OnepModel,"ex")()
+}
 test.TwopParallelModel=function(){
    attr(TwopParallelModel,"ex")()
 }

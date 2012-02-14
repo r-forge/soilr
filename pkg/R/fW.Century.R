@@ -1,5 +1,5 @@
 fW.Century<- structure(
-  function
+  function #Effects of moisture on decomposition rates according to the CENTURY model
     ### Calculates the effects of precipitation and potential evapotranspiration on decomposition rates.
     ##references<<  Adair, E. C., W. J. Parton, S. J. D. Grosso, W. L. Silver, M. E. Harmon, S. A. Hall, I. C. Burke, and S. C. Hart (2008), 
     ##Simple three-pool model accurately describes patterns of long-term litter decomposition in diverse climates, Global Change Biology, 14(11), 2636-2660.

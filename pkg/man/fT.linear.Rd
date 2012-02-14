@@ -1,6 +1,6 @@
 \name{fT.linear}
 \alias{fT.linear}
-\title{fT linear}
+\title{Effects of temperature on decomposition rates according to a linear model}
 \description{Calculates the effects of temperature on decomposition rates according to a linear model.}
 \usage{fT.linear(Temp, a = 0.198306, b = 0.036337)}
 \arguments{

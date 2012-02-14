@@ -1,6 +1,6 @@
 \name{fT.Century1}
 \alias{fT.Century1}
-\title{fT Century1}
+\title{Effects of temperature on decomposition rates according the the CENTURY model}
 \description{Calculates the effects of temperature on decomposition rates according to the CENTURY model.}
 \usage{fT.Century1(Temp, Tmax = 45, Topt = 35)}
 \arguments{

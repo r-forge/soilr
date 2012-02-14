@@ -1,5 +1,5 @@
 fT.Standcarb<-structure(
-  function
+  function #effects of temperature on decomposition rates according to the StandCarb model
     ### Calculates the effects of temperature on decomposition rates according to the StandCarb model.
     ##references<< Harmon, M. E., and J. B. Domingo (2001), A users guide to STANDCARB version 2.0: 
     ##A model to simulate carbon stores in forest stands. Oregon State University, Corvallis.

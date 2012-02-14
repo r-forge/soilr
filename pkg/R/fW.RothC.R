@@ -1,5 +1,5 @@
 fW.RothC<- structure(
-    function
+    function #Effects of moisture on decomposition rates according to the RothC model
         ###Calculates the effects of moisture (precipitation and pan evaporation) on decomposition rates according to the RothC model.
         ##references<< Coleman, K., and D. S. Jenkinson (1999), RothC-26.3 A model for the turnover of carbon in soil: 
         ##model description and windows user guide (modified 2008), 47 pp, IACR Rothamsted, Harpenden.

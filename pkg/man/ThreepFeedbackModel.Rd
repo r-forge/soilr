@@ -1,6 +1,6 @@
 \name{ThreepFeedbackModel}
 \alias{ThreepFeedbackModel}
-\title{ThreepFeedbackModel}
+\title{Implementation of a three pool model with feedback structure}
 \description{This function creates a model for three pools connected with feedback. It is a wrapper for the more general function \code{\link{GeneralModel}}.}
 \usage{ThreepFeedbackModel(t, ks, a21, a12, a32, a23, C0, In, xi = 1, 
     solver = deSolve.lsoda.wrapper)}
@@ -34,7 +34,7 @@ ks=c(k1=0.8,k2=0.4,k3=0.2)
 C0=c(C10=100,C20=150, C30=50)
 In = 60
 
-Temp=rnorm(t,15,2)
+Temp=rnorm(t,15,1)
 TempEffect=data.frame(t,fT.Daycent1(Temp))
 
 Ex1=ThreepFeedbackModel(t=t,ks=ks,a21=0.5,a12=0.1,a32=0.2,a23=0.1,C0=C0,In=In,xi=TempEffect)

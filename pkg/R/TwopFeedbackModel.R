@@ -1,5 +1,5 @@
 TwopFeedbackModel<-structure(
-    function
+    function #Implementation of a two pool model with feedback structure
     ### This function creates a model for two pools connected with feedback. It is a wrapper for the more general function \code{\link{GeneralModel}}.
      (t,    	##<< A vector containing the points in time where the solution is sought.
       ks,	##<< A vector of length 2 with the values of the decomposition rate for pools 1 and 2. 
@@ -64,26 +64,26 @@ TwopFeedbackModel<-structure(
       C0=c(C10=100,C20=150)
       In = 30
       
-      Ex1=TwopFeedbackModel(t,ks,a21=0.5,a12=0.4,C0,In,xi=fT.Q10(15))
+      Ex1=TwopFeedbackModel(t,ks,a21=0.5,a12=0.3,C0,In,xi=fT.Q10(15))
       Ct=getC(Ex1)
-      Rt=getRelease(Ex1)
+      Rt=getReleaseFlux(Ex1)
       
       plot(t,rowSums(Ct),type="l",ylab="Carbon stocks (arbitrary units)",xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Ct[1,]))) 
       lines(t,Ct[,1],col=2)
       lines(t,Ct[,2],col=4) 
       legend("topright",c("Total C","C in pool 1", "C in pool 2"),lty=c(1,1,1),col=c(1,2,4),lwd=c(2,1,1),bty="n")
 
-      plot(t,rowSums(Rt),type="l",ylab="Carbon released (arbitrary units)",xlab="Time (arbitrary units)",lwd=2,ylim=c(0,40)) 
+      plot(t,rowSums(Rt),type="l",ylab="Carbon released (arbitrary units)",xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Rt[1,]))) 
       lines(t,Rt[,1],col=2)
       lines(t,Rt[,2],col=4) 
       legend("topright",c("Total C release","C release from pool 1", "C release from pool 2"),lty=c(1,1,1),col=c(1,2,4),lwd=c(2,1,1),bty="n")
       
       Inr=data.frame(t,Random.inputs=rnorm(length(t),30,5))
-      plot(Inr)
+      plot(Inr,type="l")
       
       Ex2=TwopFeedbackModel(t,ks,a21=0.5,a12=0.1,C0,In=Inr)
       Ctr=getC(Ex2)
-      Rtr=getRelease(Ex2)
+      Rtr=getReleaseFlux(Ex2)
       
       plot(t,rowSums(Ctr),type="l",ylab="Carbon stocks (arbitrary units)",xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Ctr[1,]))) 
       lines(t,Ctr[,1],col=2)

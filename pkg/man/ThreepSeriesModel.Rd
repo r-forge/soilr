@@ -1,6 +1,6 @@
 \name{ThreepSeriesModel}
 \alias{ThreepSeriesModel}
-\title{ThreepSeriesModel}
+\title{Implementation of a three pool model with series structure}
 \description{This function creates a model for three pools connected in series. It is a wrapper for the more general function \code{\link{GeneralModel}}.}
 \usage{ThreepSeriesModel(t, ks, a21, a32, C0, In, xi = 1, solver = deSolve.lsoda.wrapper)}
 \arguments{
@@ -33,7 +33,7 @@ In = 50
 
 Ex1=ThreepSeriesModel(t=t,ks=ks,a21=0.5,a32=0.2,C0=C0,In=In,xi=fT.Q10(15))
 Ct=getC(Ex1)
-Rt=getRelease(Ex1)
+Rt=getReleaseFlux(Ex1)
 
 plot(t,rowSums(Ct),type="l",ylab="Carbon stocks (arbitrary units)",xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Ct[1,]))) 
 lines(t,Ct[,1],col=2)
@@ -52,7 +52,7 @@ plot(Inr,type="l")
 
 Ex2=ThreepSeriesModel(t=t,ks=ks,a21=0.5,a32=0.2,C0=C0,In=Inr)
 Ctr=getC(Ex2)
-Rtr=getRelease(Ex2)
+Rtr=getReleaseFlux(Ex2)
 
 plot(t,rowSums(Ctr),type="l",ylab="Carbon stocks (arbitrary units)",xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Ctr[1,]))) 
 lines(t,Ctr[,1],col=2)

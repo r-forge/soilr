@@ -1,6 +1,6 @@
 \name{fW.Daycent1}
 \alias{fW.Daycent1}
-\title{fW Daycent1}
+\title{Effects of moisture on decomposition rates according to the DAYCENT model}
 \description{Calculates the effects of Soil Water Content on decomposition rates according to the Daycent Model.}
 \usage{fW.Daycent1(swc, a = 0.6, b = 1.27, c = 0.0012, d = 2.84, partd = 2.65, 
     bulkd = 1, width = 1)}

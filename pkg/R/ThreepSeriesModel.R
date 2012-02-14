@@ -1,5 +1,5 @@
 ThreepSeriesModel<-structure(
-    function
+    function #Implementation of a three pool model with series structure
     ### This function creates a model for three pools connected in series. It is a wrapper for the more general function \code{\link{GeneralModel}}.
      (t,    	##<< A vector containing the points in time where the solution is sought.
       ks,	##<< A vector of lenght 3 containing the values of the decomposition rates for pools 1, 2, and 3.
@@ -16,17 +16,24 @@ ThreepSeriesModel<-structure(
       if(length(ks)!=3) stop("ks must be of length = 3")
       if(length(C0)!=3) stop("the vector with initial conditions must be of length = 3")
       
-      if(length(In)==1) inputrate=function(t){matrix(nrow=3,ncol=1,c(In,0,0))}
+      if(length(In)==1){
+          inputFluxes=TimeMap.new(
+            t_start,
+            t_end,
+            function(t){matrix(nrow=3,ncol=1,c(In,0,0))}
+        )
+      }
       if(class(In)=="data.frame"){
          x=In[,1]  
-         y=In[,2]
-         inputrate=function(t0){as.numeric(spline(x,y,xout=t0)[2])}
-      }
-      inputrates=TimeMap.new(
-         t_start,
-         t_end,
-         function(t){matrix(nrow=3,ncol=1,c(inputrate(t),0,0))}
-      )
+         y=In[,2]  
+         inputFlux=splinefun(x,y)
+          inputFluxes=TimeMap.new(
+            t_start,
+            t_end,
+            function(t){matrix(nrow=3,ncol=1,c(inputFlux(t),0,0))}
+          )
+        }
+
       A=-1*abs(diag(ks))
       A[2,1]=a21
       A[3,2]=a32
@@ -42,7 +49,7 @@ ThreepSeriesModel<-structure(
             t_end,
             function(t){fX(t)*A}
       )
-      Mod=GeneralModel(t=t,A=Af,ivList=C0,inputFluxes=inputrates)
+      Mod=GeneralModel(t=t,A=Af,ivList=C0,inputFluxes=inputFluxes)
      return(Mod)
 ### A Model Object that can be further queried 
       ##seealso<< \code{\link{ThreepParallelModel}}, \code{\link{ThreepFeedbackModel}} 
@@ -60,7 +67,7 @@ ThreepSeriesModel<-structure(
       
       Ex1=ThreepSeriesModel(t=t,ks=ks,a21=0.5,a32=0.2,C0=C0,In=In,xi=fT.Q10(15))
       Ct=getC(Ex1)
-      Rt=getRelease(Ex1)
+      Rt=getReleaseFlux(Ex1)
       
       plot(t,rowSums(Ct),type="l",ylab="Carbon stocks (arbitrary units)",xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Ct[1,]))) 
       lines(t,Ct[,1],col=2)
@@ -79,7 +86,7 @@ ThreepSeriesModel<-structure(
       
       Ex2=ThreepSeriesModel(t=t,ks=ks,a21=0.5,a32=0.2,C0=C0,In=Inr)
       Ctr=getC(Ex2)
-      Rtr=getRelease(Ex2)
+      Rtr=getReleaseFlux(Ex2)
       
       plot(t,rowSums(Ctr),type="l",ylab="Carbon stocks (arbitrary units)",xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Ctr[1,]))) 
       lines(t,Ctr[,1],col=2)

@@ -1,6 +1,6 @@
 \name{fT.Daycent2}
 \alias{fT.Daycent2}
-\title{fT Daycent2}
+\title{Effects of temperature on decomposition rates according to the DAYCENT model}
 \description{Calculates the effects of temperature on decomposition rates according to the Daycent/Century models.}
 \usage{fT.Daycent2(Temp)}
 \arguments{

@@ -1,5 +1,5 @@
 ICBMModel<-structure(
-    function
+    function #Implementation of the Introductory Carbon Balance Model (ICBM)
     ### This function is an implementation of the Introductory Carbon Balance Model (ICBM).
     ### This is simply a two pool model connected in series.
     ##references<< Andren, O. and T. Katterer. 1997. ICBM: The Introductory Carbon Balance Model 

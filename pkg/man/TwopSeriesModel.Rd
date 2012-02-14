@@ -1,6 +1,6 @@
 \name{TwopSeriesModel}
 \alias{TwopSeriesModel}
-\title{TwopSeriesModel}
+\title{Implementation of a two pool model with series structure}
 \description{This function creates a model for two pools connected in series. It is a wrapper for the more general function \code{\link{GeneralModel}}.}
 \usage{TwopSeriesModel(t, ks, a21, C0, In, xi = 1, solver = deSolve.lsoda.wrapper)}
 \arguments{
@@ -31,12 +31,12 @@ a21=0.5
 C0=c(C10=100,C20=150)
 In = 30
 
-Temp=rnorm(t,15,2)
+Temp=rnorm(t,15,1)
 TempEffect=data.frame(t,fT.Daycent1(Temp))
 
 Ex1=TwopSeriesModel(t,ks,a21,C0,In,xi=TempEffect)
 Ct=getC(Ex1)
-Rt=getRelease(Ex1)
+Rt=getReleaseFlux(Ex1)
 
 plot(t,rowSums(Ct),type="l",ylab="Carbon stocks (arbitrary units)",xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Ct[1,]))) 
 lines(t,Ct[,1],col=2)
@@ -53,7 +53,7 @@ plot(Inr)
 
 Ex2=TwopSeriesModel(t,ks,a21,C0,In=Inr,xi=fT.Q10(15))
 Ctr=getC(Ex2)
-Rtr=getRelease(Ex2)
+Rtr=getReleaseFlux(Ex2)
 
 plot(t,rowSums(Ctr),type="l",ylab="Carbon stocks (arbitrary units)",xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Ctr[1,]))) 
 lines(t,Ctr[,1],col=2)

@@ -1,5 +1,5 @@
 fT.Arrhenius<-structure(
-  function
+  function #Effects of temperature on decomposition rates according the Arrhenius equation
     ### Calculates the effects of temperature on decomposition rates according to the Arrhenius equation.
     (Temp,     ##<< A scalar or vector containing values of temperature (in degrees Kelvin) for which the effects on decomposition rates are calculated.
      A=1000,  ##<< A scalar defining the pre-exponential factor.

@@ -1,5 +1,5 @@
 fT.LandT<-structure(
-  function
+  function #Effects of temperature on decomposition rates according to a function proposed by Lloyd and Taylor (1994)
     ### Calculates the effects of temperature on decomposition rates according to a function proposed by Lloyd and Taylor (1994).
     ##references<<  Lloyd, J., and J. A. Taylor (1994), On the Temperature Dependence of Soil Respiration, 
     ##Functional Ecology, 8(3), 315-323.

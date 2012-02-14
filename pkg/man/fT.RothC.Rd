@@ -1,6 +1,6 @@
 \name{fT.RothC}
 \alias{fT.RothC}
-\title{fT RothC}
+\title{Effects of temperature on decomposition rates according to the functions included in the RothC model}
 \description{Calculates the effects of temperature on decomposition rates according to the functions included in the RothC model.}
 \usage{fT.RothC(Temp)}
 \arguments{

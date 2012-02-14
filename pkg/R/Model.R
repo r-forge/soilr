@@ -155,13 +155,19 @@ setMethod(
       signature= "Model",
       definition=function(object){
       C=getC(object)
+      print("dim(C)=")
+      print(dim(C))
       times=object@times
       Atm=object@mat
       A=getFunctionDefinition(Atm)
       n=length(object@initialValues)
+      print(n)
       rfunc=RespirationCoefficients(A)
       #rfunc is vector valued function of time
-      r=t(sapply(times,rfunc))
+      if (n==1) { r=matrix(ncol=n,sapply(times,rfunc))}
+      else {r=t(sapply(times,rfunc))}
+      print("dim(r)=")
+      print(dim(r))
       R=r*C
       ### A matrix. Every column represents a pool and every row a point in time
       return(R)
@@ -177,10 +183,15 @@ setMethod(
       n=ncol(R)
       #transform the array to a list of functions of time by
       #intepolating it with splines
-      Rfuns=list(splinefun(times,R[,1]))
-      for (i in 2:n){
-          Rf=splinefun(times,R[,i])
-          Rfuns=append(Rfuns,Rf)
+      if (n==1) {
+          Rfuns=list(splinefun(times,R))
+      }
+      else{
+        Rfuns=list(splinefun(times,R[,1]))
+        for (i in 2:n){
+            Rf=splinefun(times,R[,i])
+            Rfuns=append(Rfuns,Rf)
+        }
       }
       #test=Rfuns[[1]]
       #now we can construct the derivative of the respiration as function of time

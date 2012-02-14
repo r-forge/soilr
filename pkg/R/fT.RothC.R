@@ -1,5 +1,5 @@
 fT.RothC<-structure(
-  function
+  function #Effects of temperature on decomposition rates according to the functions included in the RothC model
     ### Calculates the effects of temperature on decomposition rates according to the functions included in the RothC model.
     ##references<<  Jenkinson, D. S., S. P. S. Andrew, J. M. Lynch, M. J. Goss, and P. B. Tinker (1990), 
     ##The Turnover of Organic Carbon and Nitrogen in Soil, Philosophical Transactions: Biological Sciences, 329(1255), 361-368.

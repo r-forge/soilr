@@ -1,6 +1,6 @@
 \name{fW.RothC}
 \alias{fW.RothC}
-\title{fW RothC}
+\title{Effects of moisture on decomposition rates according to the RothC model}
 \description{Calculates the effects of moisture (precipitation and pan evaporation) on decomposition rates according to the RothC model.}
 \usage{fW.RothC(P, E, S.Thick = 23, pClay = 23.4, pE = 0.75, bare = FALSE)}
 \arguments{

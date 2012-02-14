@@ -1,6 +1,6 @@
 \name{fT.Demeter}
 \alias{fT.Demeter}
-\title{fT Demeter}
+\title{effects of temperature on decomposition rates according to the DEMETER model}
 \description{Calculates the effects of temperature on decomposition rates according to the DEMETER model.}
 \usage{fT.Demeter(Temp, Q10 = 2)}
 \arguments{

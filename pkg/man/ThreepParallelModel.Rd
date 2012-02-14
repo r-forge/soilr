@@ -1,6 +1,6 @@
 \name{ThreepParallelModel}
 \alias{ThreepParallelModel}
-\title{ThreepParallelModel}
+\title{Implementation of a three pool model with parallel structure}
 \description{The function creates a model for three independent (parallel) pools. It is a wrapper for the more general function
 \code{\link{ParallelModel}} that can handle an arbitrary number of pools.}
 \usage{ThreepParallelModel(t, ks, C0, In, gam1, gam2, xi = 1, solver = deSolve.lsoda.wrapper)}
@@ -38,7 +38,7 @@ lines(t,Ct[,2],col=4)
 lines(t,Ct[,3],col=3)
 legend("topright",c("Total C","C in pool 1", "C in pool 2","C in pool 3"),lty=c(1,1,1,1),col=c(1,2,4,3),lwd=c(2,1,1,1),bty="n")
 
-Rt=getRelease(Ex)
+Rt=getReleaseFlux(Ex)
 plot(t,rowSums(Rt),type="l",ylab="Carbon released (arbitrary units)",xlab="Time",lwd=2,ylim=c(0,sum(Rt[1,]))) 
 lines(t,Rt[,1],col=2)
 lines(t,Rt[,2],col=4)

@@ -1,5 +1,5 @@
 ThreepFeedbackModel<-structure(
-    function
+    function #Implementation of a three pool model with feedback structure
     ### This function creates a model for three pools connected with feedback. It is a wrapper for the more general function \code{\link{GeneralModel}}.
      (t,      ##<< A vector containing the points in time where the solution is sought.
       ks,	##<< A vector of lenght 3 containing the values of the decomposition rates for pools 1, 2, and 3.
@@ -64,7 +64,7 @@ ThreepFeedbackModel<-structure(
       C0=c(C10=100,C20=150, C30=50)
       In = 60
       
-      Temp=rnorm(t,15,2)
+      Temp=rnorm(t,15,1)
       TempEffect=data.frame(t,fT.Daycent1(Temp))
 
       Ex1=ThreepFeedbackModel(t=t,ks=ks,a21=0.5,a12=0.1,a32=0.2,a23=0.1,C0=C0,In=In,xi=TempEffect)

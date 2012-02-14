@@ -1,5 +1,5 @@
 fW.Daycent1= structure(
-  function
+  function #Effects of moisture on decomposition rates according to the DAYCENT model
   ###Calculates the effects of Soil Water Content on decomposition rates according to the Daycent Model.
   ##references<< Kelly, R. H., W. J. Parton, M. D. Hartman, L. K. Stretch, D. S. Ojima, and D. S. Schimel (2000), 
   ##Intra-annual and interannual variability of ecosystem processes in shortgrass steppe, J. Geophys. Res., 105.

@@ -1,6 +1,6 @@
 \name{fW.Standcarb}
 \alias{fW.Standcarb}
-\title{fW Standcarb}
+\title{Effects of moisture on decomposition rates according to the StandCarb model}
 \description{Calculates the effects of moisture on decomposition rates according to the StandCarb model.}
 \usage{fW.Standcarb(Moist, MatricShape = 5, MatricLag = 0, MoistMin = 30, 
     MoistMax = 350, DiffuseShape = 15, DiffuseLag = 4)}

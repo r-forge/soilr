@@ -1,6 +1,6 @@
 \name{fT.Q10}
 \alias{fT.Q10}
-\title{fT Q10}
+\title{Effects of temperature on decomposition rates according to a Q10 function}
 \description{Calculates the effects of temperature on decomposition rates according to a Q10 function.}
 \usage{fT.Q10(Temp, a = 1, Q10 = 2)}
 \arguments{

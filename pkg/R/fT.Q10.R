@@ -1,5 +1,5 @@
 fT.Q10<-structure(
-  function
+  function #Effects of temperature on decomposition rates according to a Q10 function
     ### Calculates the effects of temperature on decomposition rates according to a Q10 function.
     (Temp,     ##<< A scalar or vector containing values of temperature for which the effects on decomposition rates are calculated.
      a=1,      ##<< A scalar.

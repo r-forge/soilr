@@ -1,5 +1,5 @@
 fT.Century1<-structure(
-  function
+  function #Effects of temperature on decomposition rates according the the CENTURY model
     ### Calculates the effects of temperature on decomposition rates according to the CENTURY model.
     ##references<<  Burke, I. C., J. P. Kaye, S. P. Bird, S. A. Hall, R. L. McCulley, and G. L. Sommerville. 2003. 
     ##Evaluating and testing models of terrestrial biogeochemistry: the role of temperature in controlling decomposition. 

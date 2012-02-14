@@ -1,6 +1,6 @@
 \name{ICBMModel}
 \alias{ICBMModel}
-\title{ICBMModel}
+\title{Implementation of the Introductory Carbon Balance Model (ICBM)}
 \description{This function is an implementation of the Introductory Carbon Balance Model (ICBM).
 This is simply a two pool model connected in series.}
 \usage{ICBMModel(t, ks = c(k1 = 0.8, k2 = 0.00605), h = 0.13, r = 1.32, 

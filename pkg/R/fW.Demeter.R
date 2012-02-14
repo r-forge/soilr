@@ -1,5 +1,5 @@
 fW.Demeter<-structure(
-  function
+  function #Effects of moisture on decomposition rates according to the DEMETER model
     ### Calculates the effects of soil moisture on decomposition rates according to the DEMETER model.
     ##references<< Foley, J. A. (1995), An equilibrium model of the terrestrial carbon budget, Tellus B, 47(3), 310-319.
 
