@@ -23,7 +23,7 @@ deSolve.lsoda.wrapper=function(
    require(deSolve)
    out <- lsoda(startValues,t,lsexamp, parms, rtol, atol= my.atol)
       #print(paste("out=",out))
-      print(out)
+      #print(out)
    # The output of lsoda is unsuiteable for our needs for two reasons
    # 1.) It also returns the time vector in column 1 
    # 2.) the columns get names instead of the default numbers created
@@ -32,15 +32,15 @@ deSolve.lsoda.wrapper=function(
    n=length(startValues)
    if (n==1) { Yt=matrix(ncol=n,out[,-1])}
    else {Yt=out[,-1]}
-   print("Yt=")
-   print(Yt)
+   #print("Yt=")
+   #print(Yt)
    #determine the number of pools 
    #determine the number of time values for which the solution is sought
    tn=length(t) 
    Y=matrix(ncol=n,nrow=length(t))
-   print(Yt[,1])
+   #print(Yt[,1])
    for (i in 1:n){
-      print(paste("i=",i))
+      #print(paste("i=",i))
       Y[,i]=Yt[,i]
    }
    return(Y)

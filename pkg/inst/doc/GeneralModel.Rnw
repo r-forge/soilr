@@ -235,5 +235,21 @@ Y_c=getC(mod)
 Until now all functions were given explicitly, but sometimes some of them will be given by observational data that have to be interpolated. 
 Of course you could just produce the interpolating  function and proceed as in the previos chapters. However there is a shortcut. Objects of class TimeMap can be produced directly from {\tt data.frames } eliminating the need to specify the time range explicitly.
 
+<<echo=False,print=False>>=
+# To make it simpler to keep consistency between the # data and the vignett 
+# we silently produce a new file here everytime we 
+# re create the vignette
+# although we later read it from the data subdir.
+t_peak1=0.75
+t_peak2=1.75
+df=data.frame("time"=t,"inputFlux"=exp(-((t-t_peak1)*40.0)^2)+exp(-((t-t_peak2)*40.0)^2))
+name="inputFluxForVignette_GeneralModel"
+source_path=file.path("..","..","data",name)
+install_path=file.path(system.file(package="SoilR"),"data",name)
+write.csv(df,source_path)
+write.csv(df,install_path)
+@
+
+There is a small tesfile in the 
 
 \end{document}

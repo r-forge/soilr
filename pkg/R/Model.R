@@ -155,19 +155,19 @@ setMethod(
       signature= "Model",
       definition=function(object){
       C=getC(object)
-      print("dim(C)=")
-      print(dim(C))
+      #print("dim(C)=")
+      #print(dim(C))
       times=object@times
       Atm=object@mat
       A=getFunctionDefinition(Atm)
       n=length(object@initialValues)
-      print(n)
+      #print(n)
       rfunc=RespirationCoefficients(A)
       #rfunc is vector valued function of time
       if (n==1) { r=matrix(ncol=n,sapply(times,rfunc))}
       else {r=t(sapply(times,rfunc))}
-      print("dim(r)=")
-      print(dim(r))
+      #print("dim(r)=")
+      #print(dim(r))
       R=r*C
       ### A matrix. Every column represents a pool and every row a point in time
       return(R)
