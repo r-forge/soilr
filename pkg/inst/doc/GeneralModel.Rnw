@@ -7,16 +7,29 @@
 \begin{document}
 \maketitle
 \abstract{
-The objective of this vignette is to demonstrate the application range of class Model. We will start with the most simple running example that focuses on the basic building blocks from a technical, rather abstract point of view and then show how we can exploit the abstraction to implement the well known  ICBM example.
-}
+The objective of this vignette is to demonstrate
+the application range of class Model. We will
+start with the most simple running example that
+focuses on the basic building blocks from a
+technical, rather abstract point of view and then
+show how we can exploit the abstraction to
+implement the well known  ICBM example.  }
 \section{Abstract example}
 \subsection{Example}
 First we load the package.
 <<>>=
 library("SoilR")
 @
-Now we create an object of class TimeMap to represent the coefficient matrix $\mathbf{A}$ as a function of time. 
-In our simple example this will be just be a constant function but we are nethertheless forced to supply information about the time-domain where this function is valid. Why this requirement is sensible will be demonstrated later in the document where the time-domain data will we used to check automatically for an inconsistent model. 
+Now we create an object of class TimeMap to
+represent the coefficient matrix $\mathbf{A}$ as a
+function of time.  In our simple example this will
+be just be a constant function but we are
+nethertheless forced to supply information about
+the time-domain where this function is valid. Why
+this requirement is sensible will be demonstrated
+later in the document where the time-domain data
+will we used to check automatically for an
+inconsistent model.  
 <<>>=
 n=3;t_start=0;t_end=2
 At=TimeMap.new(
@@ -29,117 +42,127 @@ At=TimeMap.new(
              0,    1/3,   -0.33)
         )
   }
-)
-@
-Now we do the same thing for the inputrate as a function of time. We also choose the simplest possible case which is a constant function of time being $1$ .
-<<>>=
+) 
+@ 
+Now we do the same thing for the inputrate as
+afunction of time. We also choose the simplest
+possible case which is a constant function of time
+being $1$ .  
+<<>>= 
 inputFluxes=TimeMap.new(
     t_start,
     t_end,
     #function(t0){matrix(nrow=3,ncol=1,c(.1,0,0))}
     function(t0){matrix(nrow=3,ncol=1,c(0.05,0,0))}
-) 
-@
-Then we define the times where we want to compute the C-content and the respirations.
-<<results=hide>>=
+)
+@ Then we define the times where we want to
+compute the C-content and the respirations.
+<<results=hide>>= 
 tn=500
-timestep=(t_end-t_start)/tn 
+timestep=(t_end-t_start)/tn
 t=seq(t_start,t_end,timestep) 
 @ 
-We also need to specify the startvalues for the C content of the pools.
-<<>>=
- c0=c(0.5, 0.5, 0.5)
+We also need to
+specify the startvalues for the C content of the
+pools.  
+<<>>= 
+c0=c(0.5, 0.5, 0.5) 
 @
-We can now assemble the Model object
+We can now assemble the Model object 
 <<>>=
-mod=GeneralModel(t,At,c0,inputFluxes)
+mod=GeneralModel(t,At,c0,inputFluxes) 
 @ 
-and ask it several questions for instance the C content:
-<<>>=
-Y_c=getC(mod)
+and ask it several questions for 
+instance the C content:
+<<>>= 
+Y_c=getC(mod) 
 @
-which we can plot
-%
-%\SweaveOpts{echo=true}
-%
-  \begin{center}
-<<fig=TRUE>>=
-      lt1=1;  lt2=2; lt3=3 
-      col1=1;  col2=2; col3=3
-      plot(t,Y_c[,1],type="l",lty=lt1,col=col1,
-           ylab="C stocks (arbitrary units)",
-           xlab="Time",
-           ylim=c(min(Y_c),max(Y_c))
-      ) 
-      lines(t,Y_c[,2],type="l",lty=lt2,col=col2) 
-      lines(t,Y_c[,3],type="l",lty=lt3,col=col3) 
-      legend(
-         "topright",
-         c("C in pool 1",
-           "C in pool 2",
-           "C in pool 3"
-         ),
-         lty=c(lt1,lt2,lt3),
-         col=c(col1,col2,col3)
-      )
-@
-     \\{The amount of carbon in the pools}
-  \end{center}
-We also could ask for the $CO_2$ flux as a function of time.
-<<>>=
+which we can plot %
+\SweaveOpts{echo=true} %
+\begin{center}
+<<fig=TRUE>>= 
+lt1=1;  lt2=2; lt3=3 
+col1=1; col2=2; col3=3 
+plot(t,
+	Y_c[, 1],
+	type="l",
+	lty=lt1,
+	col=col1,
+	ylab="C stocks (arbitrary units)",
+	xlab="Time",
+	ylim=c(min(Y_c),max(Y_c))
+)
+lines(t,Y_c[,2],type="l",lty=lt2,col=col2)
+lines(t,Y_c[,3],type="l",lty=lt3,col=col3) 
+legend(
+    "topright",
+    c("C in pool 1", "C in pool 2", "C in pool 3"),
+    lty=c(lt1,lt2,lt3),
+    col=c(col1,col2,col3)
+)
+@ \\{The amount of carbon in the pools} 
+\end{center} 
+We also could ask for the $CO_2$ flux as a
+function of time.  
+<<>>= 
 Y_rf=getReleaseFlux(mod)
-@
-  \begin{center}
+@ 
+\begin{center} 
 <<fig=TRUE>>=
-      plot(t,Y_rf[,1],type="l",lty=lt1,col=col1,
-           ylab="C Release (arbitrary units)",
-           xlab="Time",
-           ylim=c(min(Y_rf),max(Y_rf))
-           ) 
-      lines(t,Y_rf[,2],lt2,type="l",lty=lt2,col=col2) 
-      lines(t,Y_rf[,3],type="l",lty=lt3,col=col3) 
-      legend("topright",c("R1","R2","R3"),lty=c(lt1,lt2,lt3),col=c(col1,col2,col3))
+    plot(t,Y_rf[,1],type="l",lty=lt1,col=col1,
+    ylab="C Release (arbitrary units)",
+    xlab="Time", ylim=c(min(Y_rf),max(Y_rf)))
+    lines(t,Y_rf[,2],lt2,type="l",lty=lt2,col=col2)
+    lines(t,Y_rf[,3],type="l",lty=lt3,col=col3)
+    legend("topright",c("R1","R2","R3"),lty=c(lt1,lt2,lt3),col=c(col1,col2,col3))
+@ 
+\\{The respiration flux } 
+\end{center} 
+Or we could look at the accumulated release of
+$CO_2$ which is actually a good test for the
+model.  
+<<>>= 
+Y_r=getRelease(mod) 
 @
-     \\{The respiration flux  }
-  \end{center}
-Or we could look at the accumulated release of $CO_2$ which is actually a good test for the model.
-<<>>=
-Y_r=getRelease(mod)
-@
-  \begin{center}
+\begin{center} 
 <<fig=TRUE>>=
-      plot(t,Y_r[,1],type="l",lty=lt1,col=col1,
-           ylab="accumulated Release (arbitrary units)",
-           xlab="Time",
-           ylim=c(min(Y_r),max(Y_r))
-           ) 
-      lines(t,Y_r[,2],lt2,type="l",lty=lt2,col=col2) 
-      lines(t,Y_r[,3],type="l",lty=lt3,col=col3) 
-      legend("topleft",c("R1","R2","R3"),lty=c(lt1,lt2,lt3),col=c(col1,col2,col3))
-@
-     \\{The accumulated respiration}
-  \end{center}
-\subsection{Outlook}
-At the beginning we mentioned that the given example is very abstract and also very simple.
-Actually this means that there is much more abstraction than is necessary for this simple example.
-This up to now unused abstraction can be represented by the use of an object of class TimeMap.
-The objects of class TimeMap are made of a function definition and the time domain of this function.
-Two questions arise. 
-\begin{enumerate}
-    \item
-    Why do we need a function definition? 
-    \item
-    Why do we need a explicit specification of the computational domain?
+    plot(t,Y_r[,1],type="l",lty=lt1,col=col1,
+    ylab="accumulated Release (arbitrary
+    units)", xlab="Time",
+    ylim=c(min(Y_r),max(Y_r)))
+    lines(t,Y_r[,2],lt2,type="l",lty=lt2,col=col2)
+    lines(t,Y_r[,3],type="l",lty=lt3,col=col3)
+    legend("topleft",c("R1","R2","R3"),lty=c(lt1,lt2,lt3),col=c(col1,col2,col3))
+@ 
+\\{The accumulated respiration}
+\end{center} 
+\subsection{Outlook} At the beginning 
+we mentioned that the given example
+is very abstract and also very simple.
+Actually this means that there is much more
+abstraction than is necessary for this simple
+example.  This up to now unused abstraction
+can be represented by the use of an object of
+class TimeMap.  The objects of class TimeMap
+are made of a function definition and the time
+domain of this function.  Two questions arise.
+\begin{enumerate} 
+    \item 
+    Why do we need a function definition?  
+    \item 
+    Why do we need a explicit specification of the
+    computational domain?  
 \end{enumerate}
-We will answer the first question in the next section.
-
-
-\section{Application including moisture and temperature dependence}
-We now create a time dependent coeffictient matrix  
-where we give moisture and temperature as functions of time and create the coefficients 
-as functions of moisture and temperature. 
-We will give the inputrate as a periodic function.
-Let's start with a somewhat arbitrary definition of a dayli temperature curve.
+We will answer the first question in
+the next section.
+\section{Application including moisture and temperature dependence} 
+We now create a time
+dependent coeffictient matrix  where we give
+moisture and temperature as functions of time and
+create the coefficients as functions of moisture
+and temperature.  We will give the inputrate as a
+periodic function.  Let's start with a somewhat
+arbitrary definition of a dayli temperature curve.
 <<fig=TRUE>>=
 Temp=function(t0){ #Temperature in Celsius 
     T0=10   #anual average temperature in Celsius degree
@@ -162,11 +185,16 @@ Moist=function(t0){#Moisture in percent
 plot(t,Moist(t),xlab="Time",ylab="Moisture",type="l")
 @
 \\
-Now we choose a function for determining the temperature effects on decomposition rates.
-Actually we have $A(T)=\xi(T) A_0$ with a constant $A_0$ and $\xi(T)$ is given by the product of functions
-{\tt fT.Daycent1} and 
+Now we choose a function for determining the
+temperature effects on decomposition rates.
+Actually we have $A(T)=\xi(T) A_0$ with a constant
+$A_0$ and $\xi(T)$ is given by the product of
+functions {\tt fT.Daycent1} and 
 {\tt fW.Daycent2} :
-where we have to take into account that {\tt fW.Daycent2} returns a dataframe from which we will have to extract the decay coefficient influencing part first.
+where we have to take into account that {\tt fW.Daycent2} 
+returns a dataframe from which we
+will have to extract the decay coefficient
+influencing part first.  
 <<>>=
 xi=function(t0){
     fT.Daycent1(Temp(t0))*as.numeric(fW.Daycent2(Moist(t0))["fRWC"])
@@ -217,7 +245,7 @@ Y_c=getC(mod)
       plot(t,Y_c[,1],type="l",lty=lt1,col=col1,
            ylab="C stocks (arbitrary units)",
            xlab="Time",
-           ylim=c(min(Y_c),max(Y_c))
+           ylim=c(1.1*min(Y_c),1.1*max(Y_c))
       ) 
       lines(t,Y_c[,2],type="l",lty=lt2,col=col2) 
       lines(t,Y_c[,3],type="l",lty=lt3,col=col3) 
@@ -232,24 +260,95 @@ Y_c=getC(mod)
       )
 @
 \section{Real data combined with synthetic functions}
-Until now all functions were given explicitly, but sometimes some of them will be given by observational data that have to be interpolated. 
-Of course you could just produce the interpolating  function and proceed as in the previos chapters. However there is a shortcut. Objects of class TimeMap can be produced directly from {\tt data.frames } eliminating the need to specify the time range explicitly.
-
+Until now all functions were given explicitly, but
+sometimes some of them will be given by observational
+data that have to be interpolated.  Of course you could
+just produce the interpolating  function and proceed as
+in the previos chapters. There is a shortcut however.
+Objects of class TimeMap can be produced directly from
+{\tt data.frames } eliminating the need to specify the
+time range explicitly.
+There are some small tesfiles in the data
+directory of the package which contain  a
+dataframe for time dependend input flux data each.
+We will read the data from these files and create
+an object of class {\tt TimeMap} automatically
+using a function for this purpose. It will read
+the data 
+produce an interpolation and will also determine
+$t_{start}$ and {\tt $t_{end}$} previously used in 
+the explicit creation of TimeMap objects.
+at first we define some filenames and paths:
+<<echo=True,print=False>>=
+    fn="inputFluxForVignetteGeneralModel"
+    fn2="inputFluxForVignetteGeneralModelShort"
+    p=file.path(system.file(package="SoilR"),"data",fn)
+    p2=file.path(system.file(package="SoilR"),"data",fn2)
+@
 <<echo=False,print=False>>=
-# To make it simpler to keep consistency between the # data and the vignett 
+# 1.)
+# To make it simpler to keep consistency between the
+# data and the vignett 
 # we silently produce a new file here everytime we 
-# re create the vignette
+# create the vignette
 # although we later read it from the data subdir.
+# 2.)
+# Note that we use a smaller time range for the 
+# inputFlux dataframe than in the previous part 
+# of the document
+#
+# first we create a helper for the paths
+sp=function(fn){file.path("..","..","data",fn)}
+# now we create a dataframe using the same time 
+# rangeas all the examples before 
 t_peak1=0.75
 t_peak2=1.75
 df=data.frame("time"=t,"inputFlux"=exp(-((t-t_peak1)*40.0)^2)+exp(-((t-t_peak2)*40.0)^2))
-name="inputFluxForVignette_GeneralModel"
-source_path=file.path("..","..","data",name)
-install_path=file.path(system.file(package="SoilR"),"data",name)
-write.csv(df,source_path)
-write.csv(df,install_path)
+write.csv(df,p)
+
+# Now we create a second dataset spanning a smaller 
+# time range which we will use later to demonstrate 
+# the safety net provided by the use of TimeMap 
+d=t_end-t_start
+ts2=t_start+d/4
+te2=t_end-d/4
+df2=data.frame("time"=t,"inputFlux"=exp(-((t-t_peak1)*40.0)^2)+exp(-((t-t_peak2)*40.0)^2))
+write.csv(df2,p2)
+#write.csv(df,sp(fn)) uncommente this to update the dataset
+#write.csv(df2,sp(fn2))
 @
-
-There is a small tesfile in the 
-
+There is a small tesfile in the data directory of
+the package which contains a dataframe for time
+dependend input flux data.
+We will read it from there and create an object 
+of class {\tt TimeMap} automatically using a 
+function for this purpose. It will read the data 
+produce an interpolation and will also determine
+$t_{start}$ and {\tt $t_{end}$} previously used in
+the explicit creation of TimeMap objects.
+<<echo=true,print=False>>=
+df=read.csv(p)
+iTm=TimeMap.from.Dataframe(df)
+@
+We have the usual ingredients for a model object
+andcan create it.  
+<<echo=true,print=False>>=
+mod=GeneralModel(t,A_t,c0,iTm)
+@
+\subsection{Safety net}
+We will now show what happens if we try to
+extrapolate a given dataset by accident.  To show
+this we have created a different file 
+containing a time series of an input flux.
+with 
+<<echo=true,print=False>>=
+df2=read.csv(p2)
+iTm=TimeMap.from.Dataframe(df)
+@
+If we try to create a Model from this we will get
+an error message. This is because the dataset we
+used does not contain data valid for the times we
+required in the first argument and also in the
+other objects of class TimeMap that would be used
+to create the Model.
 \end{document}

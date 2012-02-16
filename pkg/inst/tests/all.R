@@ -1,3 +1,4 @@
+#!/usr/bin/Rscript
 library("RUnit")
 library("SoilR")
 alltests <- defineTestSuite(
