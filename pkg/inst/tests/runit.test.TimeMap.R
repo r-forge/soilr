@@ -9,6 +9,6 @@ test.TimeMap=function(){
    inp=seq(1.05,2,0.05)
    tframe=data.frame(times=t,inputrates=inp)
    obj3=TimeMap.from.Dataframe(tframe)#a third one
-   checkEquals(c(1,20),getTimeRange(obj3))
+   checkEquals(c("t_min"=1,"t_max"=20),getTimeRange(obj3))
 }
 

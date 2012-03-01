@@ -14,3 +14,7 @@ alltests <- defineTestSuite(
 testResult <- runTestSuite(alltests)
 printTextProtocol(testResult)
 
+#produce exitstatus ne 0 for buildbot to notice
+ef=getErrors(testResult)
+n=ef$nErr+ef$nFail
+if (n>0) {stop(1)}

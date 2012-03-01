@@ -29,7 +29,7 @@ test.GeneralModel=function(){
 test.ICBMModle=function(){
   attr(ICBMModel,"ex")()
 }
-test.correctnessOfModel.incorrectModel=function(){
+test.correctnessOfModel.impossibleCoefficients=function(){
    t_start=0 
    t_end=10 
    tn=50
@@ -47,10 +47,129 @@ test.correctnessOfModel.incorrectModel=function(){
         )
       }
    )   
-   res=correctnessOfModel(t,A)
-   target=FALSE
-   checkEquals(target, res, "correctnessOfModel should have returned FALSE because the model is impossible, but has not")
+   I=TimeMap.new(
+      t_start,
+      t_end,
+      function(times){
+        matrix(nrow=3,ncol=1,byrow=TRUE,
+            c(-1,    0,    0)
+        )
+      }
+    )
 
+   res=correctnessOfModel(t,A,I)
+   target=FALSE
+   checkEquals(target, res, "correctnessOfModel should have returned FALSE because the matrix values indicate unbiological behavior (ruwsum should be smaller than zero), but has not")
+}
+test.correctnessOfModel.impossibleTimeRanges=function(){
+   mess="correctnessOfModel should have returned FALSE, but has not"
+   t_start=0 
+   t_end=10 
+   tdiff=t_end-t_start
+   tn=50
+   timestep=(tdiff)/tn 
+   t=seq(t_start,t_end,timestep) 
+
+   #we create an A(t) with sensible coeficients 
+   #but where the time range begins to late 
+
+   A=TimeMap.new(
+      t_start+1/4*tdiff,
+      t_end,
+      function(times){
+        matrix(nrow=3,ncol=3,byrow=TRUE,
+            c(-1,    0,    0, 
+            1, -0.7,    0,   
+            0,    0.5, -0.5)
+        )
+      }
+   )   
+   I=TimeMap.new(
+      t_start,
+      t_end,
+      function(times){
+        matrix(nrow=3,ncol=1,byrow=TRUE,
+            c(-1,    0,    0)
+        )
+      }
+    )
+   res=correctnessOfModel(t,A,I)
+   checkEquals(FALSE, res,mess)
+   #now we do the same to the InputFluxes(t) while A(t) is correct 
+   A=TimeMap.new(
+      t_start,
+      t_end,
+      function(times){
+        matrix(nrow=3,ncol=3,byrow=TRUE,
+            c(-1,    0,    0, 
+            1, -0.7,    0,   
+            0,  0.5, -0.5)
+        )
+      }
+   )   
+   I=TimeMap.new(
+      t_start+1/4*tdiff,
+      t_end,
+      function(times){
+        matrix(nrow=3,ncol=1,byrow=TRUE,
+            c(-1,    0,    0)
+        )
+      }
+    )
+   res=correctnessOfModel(t,A,I)
+   print("res=")
+   print(res)
+   checkEquals(FALSE, res,mess)
+   #we create an A(t) with sensible coeficients 
+   #but where the time range ends to early 
+
+   A=TimeMap.new(
+      t_start,
+      t_end-1/4*tdiff,
+      function(times){
+        matrix(nrow=3,ncol=3,byrow=TRUE,
+            c(-1,    0,    0, 
+            1, -0.7,    0,   
+            0,    0.5, -0.5)
+        )
+      }
+   )   
+   I=TimeMap.new(
+      t_start,
+      t_end,
+      function(times){
+        matrix(nrow=3,ncol=1,byrow=TRUE,
+            c(-1,    0,    0)
+        )
+      }
+    )
+   res=correctnessOfModel(t,A,I)
+   checkEquals(FALSE, res,mess)
+   #now we do the same to the InputFluxes(t) while A(t) is correct 
+   A=TimeMap.new(
+      t_start,
+      t_end,
+      function(times){
+        matrix(nrow=3,ncol=3,byrow=TRUE,
+            c(-1,    0,    0, 
+            1, -0.7,    0,   
+            0,  0.5, -0.5)
+        )
+      }
+   )   
+   I=TimeMap.new(
+      t_start,
+      t_end-1/4*tdiff,
+      function(times){
+        matrix(nrow=3,ncol=1,byrow=TRUE,
+            c(-1,    0,    0)
+        )
+      }
+    )
+   res=correctnessOfModel(t,A,I)
+   print("res=")
+   print(res)
+   checkEquals(FALSE, res,mess)
 }
 test.correctnessOfModel.correctModel=function(){
    t_start=0 
@@ -68,7 +187,16 @@ test.correctnessOfModel.correctModel=function(){
    )    
    }
   )  
-  res=correctnessOfModel(t,A)
+  I=TimeMap.new(
+     t_start,
+     t_end,
+     function(times){
+       matrix(nrow=3,ncol=1,byrow=TRUE,
+           c(-1,    0,    0)
+       )
+     }
+  )
+  res=correctnessOfModel(t,A,I)
   target=TRUE
   checkEquals(target, res, "correctnessOfModel should have returned TRUE because the model was correct, but has not")
 
