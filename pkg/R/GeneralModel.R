@@ -16,7 +16,7 @@ GeneralModel=structure(function #The most general costructor for class Model
    #   print("error")
    #   }
    obj=new(Class="Model",t,A,ivList,inputFluxes,solverfunc)
-   if (correctnessOfModel(t,A)){
+   if (correctnessOfModel(t,A,inputFluxes)){
         obj=new(Class="Model",t,A,ivList,inputFluxes,solverfunc)
  }
    else {stop("Invalid Model")}

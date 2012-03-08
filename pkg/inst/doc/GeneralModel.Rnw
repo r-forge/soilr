@@ -289,33 +289,26 @@ at first we define some filenames and paths:
 # 1.)
 # To make it simpler to keep consistency between the
 # data and the vignett 
-# we silently produce a new file here everytime we 
-# create the vignette
-# although we later read it from the data subdir.
-# 2.)
-# Note that we use a smaller time range for the 
-# inputFlux dataframe than in the previous part 
-# of the document
-#
-# first we create a helper for the paths
-sp=function(fn){file.path("..","..","data",fn)}
-# now we create a dataframe using the same time 
-# rangeas all the examples before 
+# we provide the code to create the datafiles here
+# To this end we  now create a dataframe using the same time 
+# range as all the examples before 
 t_peak1=0.75
 t_peak2=1.75
 df=data.frame("time"=t,"inputFlux"=exp(-((t-t_peak1)*40.0)^2)+exp(-((t-t_peak2)*40.0)^2))
-write.csv(df,p)
 
-# Now we create a second dataset spanning a smaller 
+# Additionally we create a second dataset spanning a smaller 
 # time range which we will use later to demonstrate 
 # the safety net provided by the use of TimeMap 
 d=t_end-t_start
 ts2=t_start+d/4
 te2=t_end-d/4
-df2=data.frame("time"=t,"inputFlux"=exp(-((t-t_peak1)*40.0)^2)+exp(-((t-t_peak2)*40.0)^2))
-write.csv(df2,p2)
-#write.csv(df,sp(fn)) uncommente this to update the dataset
-#write.csv(df2,sp(fn2))
+t2=seq(ts2,te2,timestep) 
+df2=data.frame("time"=t2,"inputFlux"=exp(-((t2-t_peak1)*40.0)^2)+exp(-((t2-t_peak2)*40.0)^2))
+# temporary uncomment the next line to write the file to the appropriate source dir and
+# comment it out again before you checkin the vignette.
+mmdir="~/SoilR/RPackages/SoilR/pkg/data"
+#write.csv(df2,mmdir)
+#write.csv(df,mmdir)
 @
 There is a small tesfile in the data directory of
 the package which contains a dataframe for time
@@ -326,14 +319,14 @@ function for this purpose. It will read the data
 produce an interpolation and will also determine
 $t_{start}$ and {\tt $t_{end}$} previously used in
 the explicit creation of TimeMap objects.
-<<echo=true,print=False>>=
+<<echo=true,print=True>>=
 df=read.csv(p)
 iTm=TimeMap.from.Dataframe(df)
 @
 We have the usual ingredients for a model object
-andcan create it.  
+and can create it.  
 <<echo=true,print=False>>=
-mod=GeneralModel(t,A_t,c0,iTm)
+#mod=GeneralModel(t,A_t,c0,iTm)
 @
 \subsection{Safety net}
 We will now show what happens if we try to
@@ -343,9 +336,9 @@ containing a time series of an input flux.
 with 
 <<echo=true,print=False>>=
 df2=read.csv(p2)
-iTm=TimeMap.from.Dataframe(df)
+#iTm=TimeMap.from.Dataframe(df)
 @
-If we try to create a Model from this we will get
+If we try to create a Model from this (by removing the comment) we will get
 an error message. This is because the dataset we
 used does not contain data valid for the times we
 required in the first argument and also in the

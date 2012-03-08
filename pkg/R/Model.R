@@ -32,7 +32,7 @@ setMethod(
     signature="TimeMap",
     definition=function(object){
         return(
-               c(object@starttime,object@endtime))
+               c("t_min"=object@starttime,"t_max"=object@endtime))
     }
 )
 setGeneric(
