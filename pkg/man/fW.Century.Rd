@@ -14,13 +14,13 @@ Simple three-pool model accurately describes patterns of long-term litter decomp
  Parton, W. J., J. A. Morgan, R. H. Kelly, and D. S. Ojima (2001), Modeling soil C responses to environmental change in grassland systems, 
 in The potential of U.S. grazing lands to sequester carbon and mitigate the greenhouse effect, edited by R. F. Follett, J. M. Kimble and R. Lal, pp. 371-398, Lewis Publishers, Boca Raton.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
-\note{The original formula in Adair et al. (2008) was modified due to a potential error. We use the ratio PET/PTT instead of PPT/PET.}
+
 
 
 
 \examples{
-PET=seq(0,1500,by=10)
-PPT=rep(1500,length(PET))
+PPT=seq(0,1500,by=10)
+PET=rep(1500,length(PPT))
 PPT.PET=fW.Century(PPT,PET)
-plot(PET/PPT,PPT.PET, ylab="f(PPT, PET) (unitless)", main="Effects of precipitation and potential evapotranspiration on decomposition rates")
+plot(PPT/PET,PPT.PET, ylab="f(PPT, PET) (unitless)", main="Effects of precipitation and potential evapotranspiration on decomposition rates")
 }

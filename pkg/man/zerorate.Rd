@@ -1,16 +1,9 @@
 \name{zerorate}
 \alias{zerorate}
+\docType{data}
 \title{zerorate}
 
-\usage{zerorate(t)}
-\arguments{
-  \item{t}{
-}
-}
-
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
+\usage{zerorate}
 
 
 

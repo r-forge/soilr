@@ -1,7 +1,7 @@
 \name{TimeMap.from.Dataframe}
 \alias{TimeMap.from.Dataframe}
 \title{TimeMap from Dataframe}
-\description{This function is the basic constructor of the class TimeMap.}
+\description{This function is another constructor of the class TimeMap.}
 \usage{TimeMap.from.Dataframe(dframe, interpolation = splinefun)}
 \arguments{
   \item{dframe}{A data frame containing exactly two columns:

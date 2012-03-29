@@ -1,7 +1,8 @@
 \name{SoilR.euler}
 \alias{SoilR.euler}
 \title{SoilR euler}
-\description{This function can solve arbitrary first order ode systems with the euler forward method and an
+\description{This function can solve arbitrary first order ode systems with the euler forward 
+method and an
 adaptive time-step size control given a tolerance for the deviation of a coarse and fine 
 estimate of the change in y for the next time step.
 It is an alternative to \code{\link{ode}} and has the same interface.

@@ -10,15 +10,14 @@ fW.Century<- structure(
      PET   ##<< A scalar or vector containing values of potential evapotranspiration.
      )
    {
-      1/(1+30*exp(-8.5*(PET/PPT)))
+      1/(1+30*exp(-8.5*(PPT/PET)))
       ### A scalar or a vector containing the effects of precipitation and potential evapotranspiration on decomposition rates (unitless).
-      ##note<< The original formula in Adair et al. (2008) was modified due to a potential error. We use the ratio PET/PTT instead of PPT/PET.
    }
     ,
     ex=function(){
-      PET=seq(0,1500,by=10)
-      PPT=rep(1500,length(PET))
+      PPT=seq(0,1500,by=10)
+      PET=rep(1500,length(PPT))
       PPT.PET=fW.Century(PPT,PET)
-      plot(PET/PPT,PPT.PET, ylab="f(PPT, PET) (unitless)", main="Effects of precipitation and potential evapotranspiration on decomposition rates")
+      plot(PPT/PET,PPT.PET, ylab="f(PPT, PET) (unitless)", main="Effects of precipitation and potential evapotranspiration on decomposition rates")
     }
 )

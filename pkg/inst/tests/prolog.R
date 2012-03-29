@@ -6,13 +6,13 @@ files=Sys.glob(globstring)
 print(files)
 fnames=c(
 #           "Model.R",
-#           "GeneralModel.R",
 #           "deSolve.lsoda.Wrapper.R",
 #           "correctnessOfModel.R",
 #
 #           "RespirationCoefficients.R",
 #           "NpYdot.R",
-#           "solver.R"
+#           "solver.R",
+           "GeneralModel14.R"
           )
 filenames=sapply(fnames,function(x){paste(prefix,x,sep="")})
 filelist=c(filenames,files)

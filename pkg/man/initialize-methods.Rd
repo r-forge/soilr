@@ -2,6 +2,7 @@
 \docType{methods}
 \alias{initialize-methods}
 \alias{initialize,Model-method}
+\alias{initialize,Model_14-method}
 \alias{initialize,TimeMap-method}
 \title{ ~~ Methods for Function \code{initialize}  ~~}
 \description{
@@ -11,6 +12,10 @@
 \describe{
 
 \item{\code{signature(.Object = "Model")}}{
+%%  ~~describe this method here~~
+}
+
+\item{\code{signature(.Object = "Model_14")}}{
 %%  ~~describe this method here~~
 }
 
