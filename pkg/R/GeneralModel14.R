@@ -1,14 +1,15 @@
-GeneralModel_14=structure(function #The most general costructor for class Model
+GeneralModel_14=structure(function #The most general costructor for class Model14
 ### The function creates a numerical model  for n arbitrarily connected pools.
-### It is one of the constructors of class Model                       
-### It is e.g. used by some more specialized wrapper functions like for instance \code{\link{ParallelModel}} but can also be used directly. It is in fact the most### versatile interface to produce instances of class Model. 
+### It is one of the constructors of class Model14 which is a subclass of Model
+### It will b used by some more specialized wrapper functions like for instance but can also be used directly. It is in fact the most
+### versatile interface to produce instances of class Model14. 
 
-(t,			##<< A vector containing the points in time where the solution is sought.
- A,			##<< A TimeMap object consisting of  a matrix valued function describing the whole model decay rates for the n pools, connection and feedback coefficients as functions of time and a time range for which this function is valid. The size of the quadtratic matric must be equal to the number of pools. The time range must cover the times given in the first argument. 
- ivList,		##<< A vector containing the initial amount of carbon for the n pools. The length of this vector is equal to the number of pools and thus equal to the length of k. This is checked by the function \code{\link{correctnessOfModel}}.
+(t,	##<< A vector containing the points in time where the solution is sought.
+ A,	##<< A TimeMap object consisting of  a matrix valued function describing the whole model decay rates for the n pools, connection and feedback coefficients as functions of time and a time range for which this function is valid. The size of the quadtratic matric must be equal to the number of pools. The time range must cover the times given in the first argument. 
+ ivList,##<< A vector containing the initial amount of carbon for the n pools. The length of this vector is equal to the number of pools and thus equal to the length of k. This is checked by the function \code{\link{correctnessOfModel}}.
  inputFluxes, ##<< A TimeMap object consisting of a vector valued function describing the inputs to the pools as funtions of time \code{\link{TimeMap.new}}.
- Fc,        ##<< A TimeMap object consisting of  a function describing the fraction of C_14 in per mille.
- di=-0.0001209681, ## << the rate at which C_14 leaves the system. If you dont provide a value here we assume the following value: k=-0.0001209681 y^-1 . This has the sideffect that all your time related data are treated as if the time unit was year. Thus beside time itself it also  affects decayrates the inputrates and the output of 
+ Fc,##<< A TimeMap object consisting of  a function describing the fraction of C_14 in per mille.
+ di=-0.0001209681, ## << the rate at which C_14 decays radioactivly. If you dont provide a value here we assume the following value: k=-0.0001209681 y^-1 . This has the sideffect that all your time related data are treated as if the time unit was year. Thus beside time itself it also  affects decayrates the inputrates and the output of 
  solverfunc=deSolve.lsoda.wrapper		##<< The function used by to actually solve the ODE system. This can be \code{\link{SoilR.euler}} or \code{\link{deSolve.lsoda.wrapper}} or any other user provided function with the same interface. 
  )
 {
