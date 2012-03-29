@@ -83,7 +83,7 @@ GeneralModel_14=structure(function #The most general costructor for class Model1
          lty=c(lt1,lt2,lt3),
          col=c(col1,col2,col3)
       )
-#now compute the accumulated release
+      #now compute the accumulated release
       Y=getRelease(mod)
       #x11()
       plot(t,Y[,1],type="l",lty=lt1,col=col1,ylab="C Release (arbitrary units)",xlab="Time") 
