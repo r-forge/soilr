@@ -10,7 +10,7 @@
 \alias{initialize,Model-method}
 
 \title{Model}
-\description{NA}
+\description{serves as a fence to the interface of SoilR functions. So that later implementations can differ	 }
 \section{Objects from the Class}{Objects can be created by calls of the form \code{new(Model ...)}}
 \section{Slots}{
   \describe{

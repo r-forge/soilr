@@ -1,8 +1,8 @@
-\name{getRelease}
-\alias{getRelease}
+\name{getRelease14}
+\alias{getRelease14}
 \title{access to the C content of the pools }
-\description{This function computes the overall  carbon release of the given model as funtion of time }
-\usage{getRelease(object)}
+\description{This function computes the overall  14C  release of the given model as funtion of time }
+\usage{getRelease14(object)}
 \arguments{
   \item{object}{
 }

@@ -1,4 +1,5 @@
 % vim:fenc=utf-8
+% \VignetteIndexEntry{TimeMap GeneralModel}
 \documentclass[a4paper]{article}
 %\documentclass[article,nojss]{jss}
 
@@ -379,7 +380,7 @@ in the previous examples. There is a shortcut however.
 Objects of class \TimeMap \ can be produced directly from
 {\tt dataframes } eliminating the need to specify the
 time range explicitly.
-There are some small example plain text files in the data
+There are some small example plain text files in the  \codestyle{inst/extdata}
 directory of the package which contain 
 the data for time dependend input fluxes.
 (Although every \codestyle{dataframe} could be used 
@@ -397,8 +398,9 @@ First we define some filenames and paths:
 <<echo=True,print=False>>=
     fn="inputFluxForVignetteGeneralModel"
     fn2="inputFluxForVignetteGeneralModelShort"
-    p=file.path(system.file(package="SoilR"),"data",fn)
-    p2=file.path(system.file(package="SoilR"),"data",fn2)
+    subdir=file.path(system.file(package="SoilR"),"extdata")
+    p=file.path(subdir,fn)
+    p2=file.path(subdir,fn2)
 @
 You can have a look at the example files by typing:
 <<<echo=True,print=False>>=
@@ -426,9 +428,9 @@ i2=exp(-((t2-t_peak1)*40.0)^2)+exp(-((t2-t_peak2)*40.0)^2)
 df2=data.frame(t2,i2)
 # temporary uncomment the next lines to write the file to the appropriate source dir and
 # comment it out again before you check in the vignette because it will not pass the package check otherwise
-#mmdir="~/SoilR/RPackages/SoilR/pkg/data"
+#mmdir="~/SoilR/RPackages/SoilR/pkg/inst/extdata"
 #write.csv(df ,row.names=FALSE,file.path(mmdir,fn))
-#write.csv(df ,row.names=FALSE,p2)
+#write.csv(df ,row.names=FALSE,p)
 #write.csv(df2,row.names=FALSE,file.path(mmdir,fn2))
 #write.csv(df2,row.names=FALSE,p2)
 @

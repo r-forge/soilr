@@ -1,7 +1,7 @@
 \name{is.negative}
 \alias{is.negative}
 \title{is negative}
-
+\description{the function returns True if the argumente is negative}
 \usage{is.negative(number)}
 \arguments{
   \item{number}{

@@ -54,5 +54,6 @@ correctnessOfModel=function
     return(res)
 }
 is.negative=function(number){
+   ### the function returns True if the argumente is negative
    return(number<0)
 }

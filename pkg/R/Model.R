@@ -56,11 +56,11 @@ deSolve.lsoda.wrapper=function(
    return(Y)
    ### A matrix. Every column represents a pool and every row a point in time
 }
+##########################################################################
 
+### defines a (time dependent) mapping including the function definition and the ### domain where the function is well define.  This can be used to avoid interpolations out of range when mixing different time dependent data sets
 setClass(
    Class="TimeMap",
-   ### defines a (time dependent) mapping including the function definition and the ### domain where the function is well define.
-### This can be used to avoid interpolations out of range when mixing different time dependent data sets
    representation=representation(
 	starttime="numeric"
     ,
@@ -83,6 +83,7 @@ setMethod(
 setGeneric(
     name="getTimeRange",
     def=function(object){
+    ### The function returns the time range of the given TimeMap object. 
         standardGeneric("getTimeRange")
     }
 )
@@ -97,6 +98,7 @@ setMethod(
 setGeneric(
     name="getFunctionDefinition",
     def=function(object){
+    ### extract the function definition (the R-function) from the argument
         standardGeneric("getFunctionDefinition")
     }
 )
@@ -104,6 +106,7 @@ setMethod(
     f="getFunctionDefinition",
     signature="TimeMap",
     definition=function(object){
+    ### extract the function definition (the R-function) from the TimeMap 
         return(object@map)
     }
 )
@@ -132,22 +135,10 @@ return(obj)
 ### this serves as a saveguard for Model which thus can check that all involved functions of time are actually defined for the times of interest  
 }
 
-TimeMap.from.Matrix=function
-### This function is the basic constructor of the class TimeMap.
-(mat ##<<A Matrix containing points in time and corresponding values
- ## the time is expected to be represented by the first column
 
- ){
-    -
-   obj=new(Class="TimeMap",t_start,t_end,f) 
-return(obj)
-### An object of class TimeMap that can be used to describe models.
-}
-
-
+   ### serves as a fence to the interface of SoilR functions. So that later implementations can differ	 
 setClass(# Model
    Class="Model",
-   ### serves as a fence to the interface of SoilR functions. So that later implementations can differ	 
    representation=representation(
 	times="numeric"
     ,
@@ -160,24 +151,33 @@ setClass(# Model
     solverfunc="function"
    )
 )
-zerorate=TimeMap.new(
-    0,
-    0,
-    function(t){
-        return(matrix(nrow=1,ncol=1,1))
-    }
-)
-zeromat=TimeMap.new(
-    0,
-    0,
-    function(t){
-        return(matrix(nrow=1,ncol=1,1))
-    }
-) 
+
 setMethod(
     f="initialize",
     signature="Model",
-    definition=function(.Object,times=numeric(),mat=zeromat,initialValues=numeric(),inputFluxes=zerorate,solverfunc=deSolve.lsoda.wrapper){
+    definition=function(
+        .Object,times=numeric()
+        ,
+        mat=TimeMap.new(
+                0,
+                0,
+                function(t){
+                    return(matrix(nrow=1,ncol=1,1))
+                }
+        ) 
+        ,
+        initialValues=numeric()
+        ,
+        inputFluxes= TimeMap.new(
+            0,
+            0,
+            function(t){
+                return(matrix(nrow=1,ncol=1,1))
+            }
+        )
+        ,
+        solverfunc=deSolve.lsoda.wrapper
+        ){
        # cat("-initializer at work-\n")
         .Object@times=times
         .Object@mat=mat
@@ -193,20 +193,16 @@ setMethod(
 setGeneric ( # This function 
    name= "getReleaseFlux",
    def=function(# access to the C content of the pools 
+   ### This function computes the overall  carbon release of the given model as funtion of time 
 	object
 	){standardGeneric("getReleaseFlux")}
 )
 setGeneric ( # This function 
    name= "getRelease",
    def=function(# access to the C content of the pools 
+   ### This function computes the overall  carbon release of the given model as funtion of time 
 	object
 	){standardGeneric("getRelease")}
-)
-setGeneric ( # This function 
-   name= "getRelease14",
-   def=function(# access to the C content of the pools 
-	object
-	){standardGeneric("getRelease14")}
 )
 setMethod(
    f= "getReleaseFlux",
@@ -233,49 +229,9 @@ setMethod(
 )
 setMethod(
    f= "getRelease",
-      # This function integrates the release Flux over time
       signature= "Model",
       definition=function(object){
-      times=object@times
-      R=getReleaseFlux(object)
-      n=ncol(R)
-      #transform the array to a list of functions of time by
-      #intepolating it with splines
-      if (n==1) {
-          Rfuns=list(splinefun(times,R))
-      }
-      else{
-        Rfuns=list(splinefun(times,R[,1]))
-        for (i in 2:n){
-            Rf=splinefun(times,R[,i])
-            Rfuns=append(Rfuns,Rf)
-        }
-      }
-      #test=Rfuns[[1]]
-      #now we can construct the derivative of the respiration as function of time
-      #as needed by the ode solver
-      rdot=function(y,t0){
-           # the simples possible case for an ode solver is that the ode is
-           # just an integral and does not depend on the value but only on t
-           # This is the case here
-           rv=matrix(nrow=n,ncol=1)
-           for (i in 1:n){
-               #print(Rfuns[i])
-               rv[i,1]=Rfuns[[i]](t0)
-           }
-           return(rv)
-      }
-      sVmat=matrix(0,nrow=n,ncol=1)
-      Y=solver(object@times,rdot,sVmat,object@solverfunc)
-      #### A matrix. Every column represents a pool and every row a point in time
-      return(Y)
-   }
-)
-setMethod(
-   f= "getRelease14",
-      # This function integrates the release Flux over time
-      signature= "Model",
-      definition=function(object){
+      ### This function integrates the release Flux over time
       times=object@times
       R=getReleaseFlux(object)
       n=ncol(R)
@@ -314,6 +270,7 @@ setMethod(
 setGeneric ( # This function 
    name= "getC",
    def=function(# access to the C content of the pools 
+    ### This function computes the value for C (mass or concentration ) as function of time
 	object
 	){standardGeneric("getC")}
 )
@@ -321,6 +278,7 @@ setMethod(
    f= "getC",
       signature= "Model",
       definition=function(object){
+      ### This function computes the value for C (mass or concentration ) as function of time
       ns=length(object@initialValues)
       Atm=object@mat
       #print(Atm)
@@ -341,6 +299,7 @@ setMethod(
 setGeneric ( # This function 
    name= "getTimes",
    def=function(# access to the time values the model solution is sougth for 
+    ### This functions extracts the times argument
 	object
 	){standardGeneric("getTimes")}
 )
@@ -348,11 +307,14 @@ setMethod(
    f= "getTimes",
       signature= "Model",
       definition=function(object){
+      ### This functions extracts the times argument from an argument of class Model
       return(object@times)
    }
 )
 ##########################################################
-setClass(
+
+    ### defines a representation of a 14C model
+setClass(# Model_14
     Class="Model_14",
     representation=representation(
         c14Fraction="TimeMap",
@@ -363,7 +325,33 @@ setClass(
 setMethod(
     f="initialize",
     signature="Model_14",
-    definition=function(.Object,times=numeric(),mat=zeromat,initialValues=numeric(),inputFluxes=zerorate,c14Fraction=TimeMap(),c14DecayRate=0,solverfunc=deSolve.lsoda.wrapper){
+    definition=function(
+        .Object,times=numeric()
+        ,
+        mat=TimeMap.new(
+                0,
+                0,
+                function(t){
+                    return(matrix(nrow=1,ncol=1,1))
+                }
+        ) 
+        ,
+        initialValues=numeric()
+        ,
+        inputFluxes= TimeMap.new(
+            0,
+            0,
+            function(t){
+                return(matrix(nrow=1,ncol=1,1))
+            }
+        )
+        ,
+        c14Fraction=TimeMap()
+        ,
+        c14DecayRate=0
+        ,
+        solverfunc=deSolve.lsoda.wrapper
+     ){
        # cat("-initializer at work-\n")
         .Object@times=times
         .Object@mat=mat
@@ -378,12 +366,13 @@ setMethod(
 setGeneric ( # This function 
    name= "getRelease14",
    def=function(# access to the C content of the pools 
+   ### This function computes the overall  14C  release of the given model as funtion of time 
 	object
 	){standardGeneric("getRelease14")}
 )
 setMethod(
    f= "getRelease14",
-      # This function integrates the release Flux over time
+      ### This function integrates the release Flux over time
       signature= "Model_14",
       definition=function(object){
       times=object@times
@@ -424,6 +413,7 @@ setMethod(
 setGeneric ( # This function 
    name= "getC14",
    def=function(# access to the C content of the pools 
+    ### This function computes the value for C (mass or concentration ) as function of time
 	object
 	){standardGeneric("getC14")}
 )
@@ -431,6 +421,7 @@ setMethod(
    f= "getC14",
       signature= "Model_14",
       definition=function(object){
+      ### This function computes the value for C (mass or concentration ) as function of time
       ns=length(object@initialValues)
       #get the coefficient matrix TimeMap 
       Atm=object@mat
