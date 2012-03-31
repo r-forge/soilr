@@ -1,7 +1,6 @@
-% vim:fenc=utf-8
-% \VignetteIndexEntry{TimeMap GeneralModel}
 \documentclass[a4paper]{article}
 %\documentclass[article,nojss]{jss}
+%\VignetteIndexEntry{TimeMap GeneralModel}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Add-on packages and fonts
 \usepackage[utf8]{inputenc}
