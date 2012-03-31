@@ -402,9 +402,9 @@ First we define some filenames and paths:
     p=file.path(subdir,fn)
     p2=file.path(subdir,fn2)
 @
-You can have a look at the example files by typing:
+You can have a look at the example files by uncommenting:
 <<<echo=True,print=False>>=
-file.show(p)
+#file.show(p)
 @
 <<echo=False,print=False>>=
 # 1.)
