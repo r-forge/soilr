@@ -3,7 +3,7 @@
 %\VignetteIndexEntry{TimeMap GeneralModel}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Add-on packages and fonts
-\usepackage[utf8]{inputenc}
+%\usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{Sweave}
@@ -24,7 +24,7 @@
 %\keywords{organic matter decomposition, compartment models, 
 %          linear dynamical systems}
 
-\author{Markus Müller\thanks{mamueller@bgc-jena.mpg.de} \ 
+\author{Markus M\"uller\thanks{mamueller@bgc-jena.mpg.de} \ 
      and Carlos A. Sierra\thanks{csierra@bgc-jena.mpg.de} \\ 
          Max Planck Institute for \\
          Biogeochemistry }
