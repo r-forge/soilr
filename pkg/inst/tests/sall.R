@@ -1,4 +1,5 @@
 #!/usr/bin/Rscript
+library("SoilR")
 source("prolog.R")
 alltests <- defineTestSuite(
    name="allTests",

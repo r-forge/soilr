@@ -27,7 +27,7 @@ It is e.g. used by some more specialized wrapper functions like for instance \co
       timestep=(t_end-t_start)/tn 
       t=seq(t_start,t_end,timestep) 
       n=3
-      At=TimeMap.new(
+      At=new("TimeMap",
         t_start,
         t_end,
         function(t0){
@@ -69,7 +69,7 @@ It is e.g. used by some more specialized wrapper functions like for instance \co
          col=c(col1,col2,col3)
       )
 #now compute the accumulated release
-      Y=getRelease(mod)
+      Y=getAccumulatedRelease(mod)
       plot(t,Y[,1],type="l",lty=lt1,col=col1,ylab="C Release (arbitrary units)",xlab="Time") 
       lines(t,Y[,2],lt2,type="l",lty=lt2,col=col2) 
       lines(t,Y[,3],type="l",lty=lt3,col=col3) 

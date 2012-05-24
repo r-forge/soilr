@@ -10,13 +10,9 @@ GeneralModel=structure(function #The most general costructor for class Model
  solverfunc=deSolve.lsoda.wrapper		##<< The function used by to actually solve the ODE system. This can be \code{\link{SoilR.euler}} or \code{\link{deSolve.lsoda.wrapper}} or any other user provided function with the same interface. 
  )
 {
-   ns=length(ivList)
-   nk=ncol(A)
-   #if (nk!=ns){
-   #   print("error")
-   #   }
+   # first we test that the input values are compatible with each other
    obj=new(Class="Model",t,A,ivList,inputFluxes,solverfunc)
-   if (correctnessOfModel(t,A,inputFluxes)){
+   if (correctnessOfModel(t,A,ivList,inputFluxes)){
         obj=new(Class="Model",t,A,ivList,inputFluxes,solverfunc)
  }
    else {stop("Invalid Model")}
@@ -31,7 +27,7 @@ GeneralModel=structure(function #The most general costructor for class Model
       timestep=(t_end-t_start)/tn 
       t=seq(t_start,t_end,timestep) 
       n=3
-      At=TimeMap.new(
+      At=new("TimeMap",
         t_start,
         t_end,
         function(t0){
@@ -73,7 +69,7 @@ GeneralModel=structure(function #The most general costructor for class Model
          col=c(col1,col2,col3)
       )
 #now compute the accumulated release
-      Y=getRelease(mod)
+      Y=getAccumulatedRelease(mod)
       plot(t,Y[,1],type="l",lty=lt1,col=col1,ylab="C Release (arbitrary units)",xlab="Time") 
       lines(t,Y[,2],lt2,type="l",lty=lt2,col=col2) 
       lines(t,Y[,3],type="l",lty=lt3,col=col3) 

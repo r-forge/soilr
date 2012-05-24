@@ -56,8 +56,7 @@ test.correctnessOfModel.impossibleCoefficients=function(){
         )
       }
     )
-
-   res=correctnessOfModel(t,A,I)
+   res=correctnessOfModel(t,A,c(0,0,0),I)
    target=FALSE
    checkEquals(target, res, "correctnessOfModel should have returned FALSE because the matrix values indicate unbiological behavior (ruwsum should be smaller than zero), but has not")
 }
@@ -93,7 +92,7 @@ test.correctnessOfModel.impossibleTimeRanges=function(){
         )
       }
     )
-   res=correctnessOfModel(t,A,I)
+   res=correctnessOfModel(t,A,c(0,0,0),I)
    checkEquals(FALSE, res,mess)
    #now we do the same to the InputFluxes(t) while A(t) is correct 
    A=TimeMap.new(
@@ -116,7 +115,7 @@ test.correctnessOfModel.impossibleTimeRanges=function(){
         )
       }
     )
-   res=correctnessOfModel(t,A,I)
+   res=correctnessOfModel(t,A,c(0,0,0),I)
    print("res=")
    print(res)
    checkEquals(FALSE, res,mess)
@@ -143,7 +142,7 @@ test.correctnessOfModel.impossibleTimeRanges=function(){
         )
       }
     )
-   res=correctnessOfModel(t,A,I)
+   res=correctnessOfModel(t,A,c(0,0,0),I)
    checkEquals(FALSE, res,mess)
    #now we do the same to the InputFluxes(t) while A(t) is correct 
    A=TimeMap.new(
@@ -166,7 +165,7 @@ test.correctnessOfModel.impossibleTimeRanges=function(){
         )
       }
     )
-   res=correctnessOfModel(t,A,I)
+   res=correctnessOfModel(t,A,c(0,0,0),I)
    print("res=")
    print(res)
    checkEquals(FALSE, res,mess)
@@ -196,7 +195,7 @@ test.correctnessOfModel.correctModel=function(){
        )
      }
   )
-  res=correctnessOfModel(t,A,I)
+  res=correctnessOfModel(t,A,c(0,0,0),I)
   target=TRUE
   checkEquals(target, res, "correctnessOfModel should have returned TRUE because the model was correct, but has not")
 

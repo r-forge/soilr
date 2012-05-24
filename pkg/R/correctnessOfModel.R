@@ -9,9 +9,13 @@ correctnessOfModel=function
 (times,			##<< A vector containing the points in time where the solution is sought. 
 
  Atm,			##<< An object of class TimeMap containing a matrix valued function and the time range where it is applicable. The matrix function contains the whole model decomposition rates , connection and feedback coefficients for the n pools. The size of this matrix is equal to the number of pools.
+ ivList,		##<< A vector containing the initial amount of carbon for the n pools. The length of this vector has to be equal to the number of pools and thus equal to the length of k. This is checked by this function 
  InputFluxes	##<< An object of class TimeMap containing a vecotor valued function and the time range where it is applicable. The vector function contains the whole model inputFluxes for the n pools. The size of this vector is therefor equal to the number of pools.
 )
-{   A=Atm@map
+{   
+    #first we check the dimensions
+    A=getFunctionDefinition(Atm)
+    na=nrow(A(0))
     #compute the respiration coefficients as funtions of time
     rcoeffs=RespirationCoefficients(A)
     r=sapply(times,rcoeffs)
