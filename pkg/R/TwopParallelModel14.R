@@ -1,17 +1,18 @@
 TwopParallelModel14<-structure(
     function #Implementation of a two-pool C14 model with parallel structure
     ### This function creates a model for two independent (parallel) pools. 
-    ### It is a wrapper for the more general function \code{\link{GeneralModel14}} that can handle an arbitrary number of pools.
+    ### It is a wrapper for the more general function \code{\link{GeneralModel_14}} that can handle an arbitrary number of pools.
      (t,			##<< A vector containing the points in time where the solution is sought. It must be specified within the same period for which the Delta 14 C of the atmosphere is provided. The default period in the provided dataset \code{\link{C14Atm_NH}} is 1900-2010.
      ks,	##<< A vector of length 2 containing the decomposition rates for the 2 pools. 
      C0,	##<< A vector of length 2 containing the initial amount of carbon for the 2 pools.
      In,     ##<< A scalar or a data.frame object specifying the amount of litter inputs by time.
      gam,  ##<< A scalar representing the partitioning coefficient, i.e. the proportion from the total amount of inputs that goes to pool 1.
      xi=1,   ##<< A scalar or a data.frame specifying the external (environmental and/or edaphic) effects on decomposition rates. 
-     FcAtm,##<< A Data Frame object consisting of  a function describing the fraction of C_14 in per mille.
+     FcAtm,##<< A Data Frame object consisting of  a function describing the fraction of C_14 in per mille. The first column will be assumed to contain the times.
      lambda=-0.0001209681, ##<< Radioactive decay constant. By default lambda=-0.0001209681 y^-1 . This has the side effect that all your time related data are treated as if the time unit was year.
      lag=0, ##<< A positive scalar representing a time lag for radiocarbon to enter the system. 
-     solver=deSolve.lsoda.wrapper ##<< A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.
+     solver=deSolve.lsoda.wrapper, ##<< A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.
+     pass=FALSE  ##<< if TRUE Forces the constructor to create the model even if it is invalid 
     )	
     { 
       t_start=min(t)
@@ -73,8 +74,8 @@ TwopParallelModel14<-structure(
       LitterInput=700 
 
       Ex=TwopParallelModel14(t=years,ks=c(k1=1/2.8, k2=1/35),C0=c(200,5000), In=LitterInput, gam=0.7,FcAtm=C14Atm_NH,lag=2)
-      R14m=getMeanR14C(Ex)
-      C14m=getMeanC14(Ex)
+      R14m=getTotalReleaseFluxC14CRatio(Ex)
+      C14m=getTotalC14CRatio(Ex)
       C14t=getSoilC14Fraction(Ex)
       
       par(mfrow=c(2,1))

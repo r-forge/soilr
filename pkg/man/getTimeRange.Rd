@@ -1,7 +1,7 @@
 \name{getTimeRange}
 \alias{getTimeRange}
 \title{getTimeRange}
-
+\description{The function returns the time range of the given TimeMap object. }
 \usage{getTimeRange(object)}
 \arguments{
   \item{object}{

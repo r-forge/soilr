@@ -7,15 +7,12 @@ GeneralModel=structure(function #The most general costructor for class Model
  A,			##<< A TimeMap object consisting of  a matrix valued function describing the whole model decay rates for the n pools, connection and feedback coefficients as functions of time and a time range for which this function is valid. The size of the quadtratic matric must be equal to the number of pools. The time range must cover the times given in the first argument. 
  ivList,		##<< A vector containing the initial amount of carbon for the n pools. The length of this vector is equal to the number of pools and thus equal to the length of k. This is checked by the function \code{\link{correctnessOfModel}}.
  inputFluxes, ##<< A TimeMap object consisting of a vector valued function describing the inputs to the pools as funtions of time \code{\link{TimeMap.new}}.
- solverfunc=deSolve.lsoda.wrapper		##<< The function used by to actually solve the ODE system. This can be \code{\link{SoilR.euler}} or \code{\link{deSolve.lsoda.wrapper}} or any other user provided function with the same interface. 
+ solverfunc=deSolve.lsoda.wrapper,		##<< The function used by to actually solve the ODE system. This can be \code{\link{SoilR.euler}} or \code{\link{deSolve.lsoda.wrapper}} or any other user provided function with the same interface. 
+ pass=FALSE  ##<< Forces the constructor to create the model even if it is invalid 
  )
 {
    # first we test that the input values are compatible with each other
-   obj=new(Class="Model",t,A,ivList,inputFluxes,solverfunc)
-   if (correctnessOfModel(t,A,ivList,inputFluxes)){
-        obj=new(Class="Model",t,A,ivList,inputFluxes,solverfunc)
- }
-   else {stop("Invalid Model")}
+   obj=new(Class="Model",t,A,ivList,inputFluxes,solverfunc,pass)
    return(obj)
    ### A model object that can be further queried. 
    ##seealso<< \code{\link{TwopParallelModel}} 

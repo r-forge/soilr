@@ -2,7 +2,7 @@
 \alias{ThreepParallelModel14}
 \title{Implementation of a three-pool C14 model with parallel structure}
 \description{This function creates a model for two independent (parallel) pools. 
-It is a wrapper for the more general function \code{\link{GeneralModel14}} that can handle an arbitrary number of pools.}
+It is a wrapper for the more general function \code{\link{GeneralModel_14}} that can handle an arbitrary number of pools.}
 \usage{ThreepParallelModel14(t, ks, C0, In, gam1, gam2, xi = 1, FcAtm, 
     lambda = -0.0001209681, lag = 0, solver = deSolve.lsoda.wrapper)}
 \arguments{
@@ -15,7 +15,7 @@ It is a wrapper for the more general function \code{\link{GeneralModel14}} that 
   \item{xi}{A scalar or a data.frame specifying the external (environmental and/or edaphic) effects on decomposition rates.}
   \item{FcAtm}{A Data Frame object consisting of  a function describing the fraction of C_14 in per mille.}
   \item{lambda}{Radioactive decay constant. By default lambda=-0.0001209681 y^-1 . This has the side effect that all your time related data are treated as if the time unit was year.}
-  \item{lag}{A positive integer representing a time lag for radiocarbon to enter the system.}
+  \item{lag}{A positive scalar representing a time lag for radiocarbon to enter the system.}
   \item{solver}{A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.}
 }
 
@@ -34,8 +34,8 @@ years=seq(1901,2009,by=0.5)
 LitterInput=700 
 
 Ex=ThreepParallelModel14(t=years,ks=c(k1=1/2.8, k2=1/35, k3=1/100),C0=c(200,5000,500), In=LitterInput, gam1=0.7, gam2=0.1, FcAtm=C14Atm_NH,lag=2)
-R14m=getMeanR14C(Ex)
-C14m=getMeanC14(Ex)
+R14m=getTotalReleaseFluxC14CRatio(Ex)
+C14m=getTotalC14CRatio(Ex)
 C14t=getSoilC14Fraction(Ex)
 
 par(mfrow=c(2,1))

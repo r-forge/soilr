@@ -3,23 +3,58 @@
     ### defines a representation of a 14C model
 setClass(# Model_14
     Class="Model_14",
+    contains="Model",
     representation=representation(
+        #"Model",                          
         c14Fraction="TimeMap",
         c14DecayRate="numeric"
-    ),
-    contains="Model"     
-   )
+    )
+   #,
+   #prototype=prototype(
+   #     times=c(0,1),
+   #     mat=TimeMap.new(
+   #         0,
+   #         1,
+   #         function(t){
+   #             return(matrix(nrow=1,ncol=1,1))
+   #         }
+   #     ) 
+   #     ,
+   #     initialValues=numeric()
+   #     ,
+   #     inputFluxes= TimeMap.new(
+   #         0,
+   #         1,
+   #         function(t){
+   #             return(matrix(nrow=1,ncol=1,1))
+   #         }
+   #     )
+   #     ,
+   #     c14Fraction=TimeMap.new(
+   #         0,
+   #         1,
+   #         function(t){
+   #             return(matrix(nrow=1,ncol=1,1))
+   #         }
+   #     )
+   #     ,
+   #     c14DecayRate=0
+   #     ,
+   #     solverfunc=deSolve.lsoda.wrapper
+   #  )
+    , validity=correctnessOfModel #set the validating function
+)
 setMethod(
     f="initialize",
     signature="Model_14",
     definition=function(
-        .Object,times=numeric()
-        ,
+        .Object,
+        times=c(0,1),
         mat=TimeMap.new(
                 0,
-                0,
+                1,
                 function(t){
-                    return(matrix(nrow=1,ncol=1,1))
+                    return(matrix(nrow=1,ncol=1,0))
                 }
         ) 
         ,
@@ -27,17 +62,25 @@ setMethod(
         ,
         inputFluxes= TimeMap.new(
             0,
-            0,
+            1,
             function(t){
                 return(matrix(nrow=1,ncol=1,1))
             }
         )
         ,
-        c14Fraction=TimeMap()
+        c14Fraction=TimeMap.new(
+            0,
+            1,
+            function(t){
+                return(matrix(nrow=1,ncol=1,1))
+            }
+        )
         ,
         c14DecayRate=0
         ,
         solverfunc=deSolve.lsoda.wrapper
+        ,
+        pass=FALSE
      ){
         .Object@times=times
         .Object@mat=mat
@@ -46,6 +89,7 @@ setMethod(
         .Object@c14Fraction=c14Fraction
         .Object@c14DecayRate=c14DecayRate
         .Object@solverfunc=solverfunc
+        if (pass==FALSE) validObject(.Object) #call of the ispector if not explicitly disabled
         return(.Object)
     }
 )
@@ -164,14 +208,14 @@ setMethod(
 
 #Added by C. Sierra, 28/4/2012
 setGeneric ( # This function 
-  name= "getMeanR14C",
+  name= "getTotalReleaseFluxC14CRatio",
   def=function(# access to the C release flux from the pools 
     ### This function computes the \eqn{\frac{^{14}C}{C}}{14C/C} ratio of the released C as funtion of time 
     object
-    ){standardGeneric("getMeanR14C")}
+    ){standardGeneric("getTotalReleaseFluxC14CRatio")}
   )
 setMethod(
-  f= "getMeanR14C",
+  f= "getTotalReleaseFluxC14CRatio",
   signature= "Model_14",
   definition=function(object){
     R=getReleaseFlux(object) ### we use the C14 here
@@ -183,14 +227,14 @@ setMethod(
   }
   )
 setGeneric ( # This function 
-  name= "getMeanC14",
+  name= "getTotalC14CRatio",
   def=function(# access to the C release flux from the pools 
     ### This function computes the \eqn{\frac{^{14}C}{C}}{14C/C} ratio of the released C as funtion of time 
     object
-    ){standardGeneric("getMeanC14")}
+    ){standardGeneric("getTotalC14CRatio")}
   )
 setMethod(
-  f= "getMeanC14",
+  f= "getTotalC14CRatio",
   signature= "Model_14",
   definition=function(object){
     C=getC(object) ### we use the C14 here

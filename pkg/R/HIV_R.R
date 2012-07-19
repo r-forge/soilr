@@ -1,5 +1,7 @@
 # vim: set expandtab ts=4
-HIV_R <-function(pars,V_0=50000,dV_0=-200750,T_0=100){
+HIV_R <-function
+### a test function to be put somewhere else soon
+(pars,V_0=50000,dV_0=-200750,T_0=100){
     derivs <- function(time,y,pars){
         with(as.list(c(pars,y)),{
             dT <- lam-rho*T-bet*T*V

@@ -82,7 +82,6 @@ setMethod(
     }
 )
 
-
 TimeMap.from.Dataframe=function
 ### This function is another constructor of the class TimeMap.
 (dframe, ##<<A data frame containing exactly two columns:

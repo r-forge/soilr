@@ -10,7 +10,8 @@ GeneralModel_14=structure(function #The most general costructor for class Model1
  inputFluxes, ##<< A TimeMap object consisting of a vector valued function describing the inputs to the pools as funtions of time \code{\link{TimeMap.new}}.
  Fc,##<< A TimeMap object consisting of  a function describing the fraction of C_14 in per mille.
  di=-0.0001209681, ## << the rate at which C_14 decays radioactivly. If you don't provide a value here we assume the following value: k=-0.0001209681 y^-1 . This has the side effect that all your time related data are treated as if the time unit was year. Thus beside time itself it also  affects decay rates the inputrates and the output of 
- solverfunc=deSolve.lsoda.wrapper		##<< The function used by to actually solve the ODE system. This can be \code{\link{SoilR.euler}} or \code{\link{deSolve.lsoda.wrapper}} or any other user provided function with the same interface. 
+ solverfunc=deSolve.lsoda.wrapper,		##<< The function used by to actually solve the ODE system. This can be \code{\link{SoilR.euler}} or \code{\link{deSolve.lsoda.wrapper}} or any other user provided function with the same interface. 
+ pass=FALSE  ##<< if TRUE Forces the constructor to create the model even if it is invalid 
  )
 {
    ns=length(ivList)
@@ -19,10 +20,7 @@ GeneralModel_14=structure(function #The most general costructor for class Model1
    #   print("error,  dimensions of ivList and A must be compatible")
    #   }
    #obj=new(Class="Model",t,A,ivList,inputFluxes,solverfunc)
-   if (correctnessOfModel(t,A,ivList,inputFluxes)){
-        obj=new(Class="Model_14",t,A,ivList,inputFluxes,Fc,di)
- }
-   else {stop("Invalid Model")}
+   obj=new(Class="Model_14",t,A,ivList,inputFluxes,Fc,di,solverfunc,pass=pass)
    return(obj)
    ### A model object that can be further queried. 
    ##seealso<< \code{\link{Model}} 
@@ -133,8 +131,8 @@ GeneralModel_14=structure(function #The most general costructor for class Model1
                           )
          ,lty=c(lt1,lt2,lt3),col=c(col1,col2,col3))
 
-      R14m=getMeanR14C(mod)
-      C14m=getMeanC14(mod)
+      R14m=getTotalReleaseFluxC14CRatio(mod)
+      C14m=getTotalC14CRatio(mod)
       plot(C14Atm_NH, type="l",xlim=c(1960,2010),col=4)
       lines(t,C14m) 
       lines(t,R14m,col=2) 

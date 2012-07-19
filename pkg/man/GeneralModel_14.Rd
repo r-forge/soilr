@@ -6,7 +6,7 @@ It is one of the constructors of class Model14 which is a subclass of Model
 It will be used by some more specialized wrapper functions like for instance but can also be used directly. It is in fact the most
 versatile interface to produce instances of class Model14. }
 \usage{GeneralModel_14(t, A, ivList, inputFluxes, Fc, di = -0.0001209681, 
-    solverfunc = deSolve.lsoda.wrapper)}
+    solverfunc = deSolve.lsoda.wrapper, pass = FALSE)}
 \arguments{
   \item{t}{A vector containing the points in time where the solution is sought.}
   \item{A}{A DecompositionOperator object consisting of  a matrix valued function describing the whole model decay rates for the n pools, connection and feedback coefficients as functions of time and a time range for which this function is valid. The size of the quadtratic matric must be equal to the number of pools. The time range must cover the times given in the first argument.}
@@ -16,6 +16,7 @@ versatile interface to produce instances of class Model14. }
   \item{di}{
 }
   \item{solverfunc}{The function used by to actually solve the ODE system. This can be \code{\link{SoilR.euler}} or \code{\link{deSolve.lsoda.wrapper}} or any other user provided function with the same interface.}
+  \item{pass}{if TRUE Forces the constructor to create the model even if it is invalid}
 }
 
 \value{A model object that can be further queried. }
@@ -131,8 +132,8 @@ par(mfrow=c(3,2))
                     )
    ,lty=c(lt1,lt2,lt3),col=c(col1,col2,col3))
 
-R14m=getMeanR14C(mod)
-C14m=getMeanC14(mod)
+R14m=getTotalReleaseFluxC14CRatio(mod)
+C14m=getTotalC14CRatio(mod)
 plot(C14Atm_NH, type="l",xlim=c(1960,2010),col=4)
 lines(t,C14m) 
 lines(t,R14m,col=2) 

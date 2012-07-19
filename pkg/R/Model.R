@@ -1,80 +1,114 @@
-deSolve.lsoda.wrapper=function(
-### The function serves as a wrapper for lsoda using a much simpler interface which allows the use 
-### of matrices in the definition of the derivative. 
-### To use lsoda we have to convert our vectors to lists, define tolerances and so on.
-### This function does this for us , so we don't need to bother about it.
-	       t,	##<< A row vector containing the points in time where the solution is sought.
-	       ydot,    ##<< The function of y and t that computes the derivative for a given 
-	       ## point in time and a column vector y.
-	       startValues ##<< A column vector with the starting values.
-	       ){
-   
-   parms=NULL
-   my.atol <- 1e-6
-   rtol=1e-4
-   lsexamp <- function(t, y,parms)
-     {
-	yv=cbind(y)
-	YD=ydot(y,t)
-	yd=as.vector(YD)
-       #list(yd,c(massbalance=sum(y))) we could add other output parameter if we are interested
-       list(yd)
-     }
-   require(deSolve)
-   out <- lsoda(startValues,t,lsexamp, parms, rtol, atol= my.atol)
-      #print(paste("out=",out))
-      #print(out)
-   # The output of lsoda is unsuiteable for our needs for two reasons
-   # 1.) It also returns the time vector in column 1 
-   # 2.) the columns get names instead of the default numbers created
-   #     by the matrix function
-   # we threrefore extract the information and store it in a new matrix witch will be t 
-   n=length(startValues)
-   if (n==1) { Yt=matrix(ncol=n,out[,-1])}
-   else {Yt=out[,-1]}
-   #print("Yt=")
-   #print(Yt)
-   #determine the number of pools 
-   #determine the number of time values for which the solution is sought
-   tn=length(t) 
-   Y=matrix(ncol=n,nrow=length(t))
-   #print(Yt[,1])
-   for (i in 1:n){
-      #print(paste("i=",i))
-      Y[,i]=Yt[,i]
-   }
-   return(Y)
-   ### A matrix. Every column represents a pool and every row a point in time
+correctnessOfModel=function
+### The parameters used by the function \code{\link{GeneralModel}} in SoilR have a biological meaning, and therefore cannot be arbitrary.
+### This functions tests some of the obvious constraints of the general model. 
+### Up to now these are:
+### 1) The compatibility of the decomposition rates and the transport parameters to and from other pools, i.e. 
+### the column-wise sum of the elements cannot be negative. Otherwise this would create negative values of respiration, which are not biologically meaningful.
+### 2) The compatibility of the time ranges of the supplied functions 
+
+(object)
+{   
+    times=object@times
+    Atm=object@mat
+    ivList=object@initialValues
+    InputFluxes=object@inputFluxes
+    #first we check the dimensions
+    A=getFunctionDefinition(Atm)
+    na=nrow(A(0))
+    #compute the respiration coefficients as funtions of time
+    rcoeffs=RespirationCoefficients(A)
+    r=sapply(times,rcoeffs)
+    #mark the negative respirations (which will trigger the refusal of the matrix )
+    truthv=sapply(r,is.negative)
+    #find the bad columns 
+    positions=grep("TRUE",truthv)
+    res=TRUE
+    if (length(positions)>0){
+       stop(simpleError("The following columns contain unreasonable entries that lead to negative respirations for these pools. Please check your matrix as function of time."))
+        }
+     
+    tA_min=getTimeRange(Atm)["t_min"]
+    tA_max=getTimeRange(Atm)["t_max"]
+    tI_min=getTimeRange(InputFluxes)["t_min"]
+    tI_max=getTimeRange(InputFluxes)["t_max"]
+    t_min=min(times)
+    t_max=max(times)
+    if (t_min<tA_min) {
+        stop(simpleError("You ordered a timeinterval that starts earlier than the interval your matrix valued function A(t) is defined for. \n Have look at the timeMap object of A(t) or the data it is created from")
+        )
+    }
+    if (t_max>tA_max) {
+        stop(simpleError("You ordered a timeinterval that ends later than the interval your matrix valued function A(t) is defined for. \n Have look at the timeMap object of A(t) or the data it is created from")
+        )
+    }
+    if (t_min<tI_min) {
+        stop(simpleError("You ordered a timeinterval that starts earlier than the interval your function I(t) (InputFluxes) is defined for. \n Have look at the timeMap object of I(t) or the data it is created from")
+        )
+    }
+    if (t_max>tI_max) {
+        stop(simpleError("You ordered a timeinterval that ends later than the interval your function I(t) (InputFluxes) is defined for. \n Have look at the timeMap object of I(t) or the data it is created from")
+        )
+    }
+
+    return(res)
 }
-
-
-   ### serves as a fence to the interface of SoilR functions. So that later implementations can differ	 
+is.negative=function(number){
+   ### the function returns True if the argumente is negative
+   return(number<0)
+}
+### serves as a fence to the interface of SoilR functions. So that later implementations can differ	 
 setClass(# Model
    Class="Model",
    representation=representation(
-	times="numeric"
-    ,
-    mat="TimeMap"
-    ,
-    initialValues="numeric"
-    ,
-    inputFluxes="TimeMap"
-    ,
-    solverfunc="function"
+        times="numeric"
+        ,
+        mat="TimeMap"
+        ,
+        initialValues="numeric"
+        ,
+        inputFluxes="TimeMap"
+        ,
+        solverfunc="function"
    )
+#   ,
+#   prototype=prototype(
+#        times=c(0,1),
+#        mat=TimeMap.new(
+#            0,
+#            1,
+#            function(t){
+#                return(matrix(nrow=1,ncol=1,1))
+#            }
+#        ) 
+#        ,
+#        initialValues=numeric()
+#        ,
+#        inputFluxes= TimeMap.new(
+#            0,
+#            1,
+#            function(t){
+#                return(matrix(nrow=1,ncol=1,1))
+#            }
+#        )
+#        ,
+#        solverfunc=deSolve.lsoda.wrapper
+#    )
+#
+    , validity=correctnessOfModel #set the validating function
 )
+
 
 setMethod(
     f="initialize",
     signature="Model",
     definition=function(
-        .Object,times=numeric()
-        ,
+        .Object,
+        times=c(0,1),
         mat=TimeMap.new(
                 0,
-                0,
+                1,
                 function(t){
-                    return(matrix(nrow=1,ncol=1,1))
+                    return(matrix(nrow=1,ncol=1,0))
                 }
         ) 
         ,
@@ -82,13 +116,15 @@ setMethod(
         ,
         inputFluxes= TimeMap.new(
             0,
-            0,
+            1,
             function(t){
                 return(matrix(nrow=1,ncol=1,1))
             }
         )
         ,
         solverfunc=deSolve.lsoda.wrapper
+        ,
+        pass=FALSE
         ){
        # cat("-initializer at work-\n")
         .Object@times=times
@@ -96,6 +132,8 @@ setMethod(
         .Object@initialValues=initialValues
         .Object@inputFluxes=inputFluxes
         .Object@solverfunc=solverfunc
+        #if (pass==FALSE) validObject(.Object) #call of the ispector if not explicitly disabled
+        if (pass==FALSE) correctnessOfModel(.Object) #call of the ispector if not explicitly disabled
         return(.Object)
     }
 )

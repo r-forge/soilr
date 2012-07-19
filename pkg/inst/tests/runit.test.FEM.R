@@ -1,7 +1,8 @@
+#!/usr/bin/Rscript
+# vim: set expandtab ts=4
 require(RUnit)
 require(FME)
 
-# vim: set expandtab ts=4
 HIV_R <-function(pars,V_0=50000,dV_0=-200750,T_0=100){
     derivs <- function(time,y,pars){
         with(as.list(c(pars,y)),{
@@ -92,4 +93,19 @@ HIVcost2 <- function(lpars){
     lines(final$time,final$T)
 
     par(mfrow=c(1,1))
-#}
+#bayesian part
+    var0 <- Fit$var_ms_unweighted
+    cov0 <- summary(Fit)$cov.scaled*2.4^2/5
+    n=500
+    t1=Sys.time()
+    MCMC  <- modMCMC(f=HIVcost2,p=Fit$par,niter=n,jump=cov0,var0=var0,wvar0=0.1,updatecov=50)
+    #backtransform the parameters
+    MCMC$pars <- exp(MCMC$pars)
+    t2=Sys.time()
+    print(t1-t2)
+    summary(MCMC)
+    #plot(MCMC, Full = TRUE)
+    #pairs(MCMC, nsample = n/2)
+#}  
+
+

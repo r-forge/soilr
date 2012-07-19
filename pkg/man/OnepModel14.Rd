@@ -2,7 +2,7 @@
 \alias{OnepModel14}
 \title{Implementation of a one-pool C14 model}
 \description{This function creates a model for one pool. 
-It is a wrapper for the more general function \code{\link{GeneralModel14}} that can handle an arbitrary number of pools.}
+It is a wrapper for the more general function \code{\link{GeneralModel_14}} that can handle an arbitrary number of pools.}
 \usage{OnepModel14(t, k, C0, In, xi = 1, FcAtm, lambda = -0.0001209681, 
     lag = 0, solver = deSolve.lsoda.wrapper)}
 \arguments{
@@ -13,7 +13,7 @@ It is a wrapper for the more general function \code{\link{GeneralModel14}} that 
   \item{xi}{A scalar or a data.frame specifying the external (environmental and/or edaphic) effects on decomposition rates.}
   \item{FcAtm}{A Data Frame object consisting of  a function describing the fraction of C_14 in per mille.}
   \item{lambda}{Radioactive decay constant. By default lambda=-0.0001209681 y^-1 . This has the side effect that all your time related data are treated as if the time unit was year.}
-  \item{lag}{A positive integer representing a time lag for radiocarbon to enter the system.}
+  \item{lag}{A (positive) scalar representing a time lag for radiocarbon to enter the system.}
   \item{solver}{A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.}
 }
 

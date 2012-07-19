@@ -1,14 +1,14 @@
 \name{getTransitTimeDistributionDensity}
 \alias{getTransitTimeDistributionDensity}
 \title{access to the transit time distribution }
-
+\description{This function computes the transit time distribution density  for a given Decomposition Operator
+by computing the output (respiration) of the system according to an instantaneous input.}
 \usage{getTransitTimeDistributionDensity(object, inputDistribution, 
     times)}
 \arguments{
   \item{object}{
 }
-  \item{inputDistribution}{
-}
+  \item{inputDistribution}{to one!.}
   \item{times}{
 }
 }
@@ -24,9 +24,7 @@ equal to the output of the system, the respiration rate.
 we can therefore compute the transfer time distribution by applying our Decomposition Operator to an 
 instantaneous imput, which is realized by an inputrate of zero and startvalues of one.}
 
-\references{1.) 
- Manzoni, Stefano and Katul, Gabriel G. and Porporato, Amilcare,
- J. Geophys. Res.,}
+\references{1.) <ManzoniJGR>}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
 
 

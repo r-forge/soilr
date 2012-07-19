@@ -1,7 +1,7 @@
 OnepModel14<-structure(
   function #Implementation of a one-pool C14 model
   ### This function creates a model for one pool. 
-  ### It is a wrapper for the more general function \code{\link{GeneralModel14}} that can handle an arbitrary number of pools.
+  ### It is a wrapper for the more general function \code{\link{GeneralModel_14}} that can handle an arbitrary number of pools.
   (t,    	##<< A vector containing the points in time where the solution is sought. It must be specified within the same period for which the Delta 14 C of the atmosphere is provided. The default period in the provided dataset \code{\link{C14Atm_NH}} is 1900-2010.
    k,	##<< A scalar with the decomposition rate of the pool. 
    C0,	##<<  A scalar containing the initial amount of carbon in the pool.

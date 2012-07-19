@@ -26,7 +26,7 @@ but can also be used independently.}
       tn=50
       timestep=(t_end-t_start)/tn 
       t=seq(t_start,t_end,timestep) 
-      k=TimeMap.new(t_start,t_end,function(times){c(0.5,0.2,0.3)})
+      k=TimeMap.new(t_start,t_end,function(times){c(-0.5,-0.2,-0.3)})
       c0=c(1, 2, 3)
       #constant inputrates
       inputrates=TimeMap.new(

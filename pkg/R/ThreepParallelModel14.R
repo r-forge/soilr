@@ -1,7 +1,7 @@
 ThreepParallelModel14<-structure(
   function #Implementation of a three-pool C14 model with parallel structure
   ### This function creates a model for two independent (parallel) pools. 
-  ### It is a wrapper for the more general function \code{\link{GeneralModel14}} that can handle an arbitrary number of pools.
+  ### It is a wrapper for the more general function \code{\link{GeneralModel_14}} that can handle an arbitrary number of pools.
   (t,  		##<< A vector containing the points in time where the solution is sought. It must be specified within the same period for which the Delta 14 C of the atmosphere is provided. The default period in the provided dataset \code{\link{C14Atm_NH}} is 1900-2010.
    ks,	##<< A vector of length 3 containing the decomposition rates for the 3 pools. 
    C0,	##<< A vector of length 3 containing the initial amount of carbon for the 3 pools.
@@ -67,8 +67,8 @@ ThreepParallelModel14<-structure(
     LitterInput=700 
     
     Ex=ThreepParallelModel14(t=years,ks=c(k1=1/2.8, k2=1/35, k3=1/100),C0=c(200,5000,500), In=LitterInput, gam1=0.7, gam2=0.1, FcAtm=C14Atm_NH,lag=2)
-    R14m=getMeanR14C(Ex)
-    C14m=getMeanC14(Ex)
+    R14m=getTotalReleaseFluxC14CRatio(Ex)
+    C14m=getTotalC14CRatio(Ex)
     C14t=getSoilC14Fraction(Ex)
     
     par(mfrow=c(2,1))

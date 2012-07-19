@@ -1,8 +1,8 @@
-\name{getMeanC14}
-\alias{getMeanC14}
+\name{getTotalC14CRatio}
+\alias{getTotalC14CRatio}
 \title{access to the C release flux from the pools }
-
-\usage{getMeanC14(object)}
+\description{This function computes the \eqn{\frac{^{14}C}{C}}{14C/C} ratio of the released C as funtion of time }
+\usage{getTotalC14CRatio(object)}
 \arguments{
   \item{object}{
 }
