@@ -85,59 +85,71 @@ The following code plots the data.
 
 \begin{figure}
 <<echo=T,fig=T,print=FALSE>>=
-     library(ggplot2)
+     #define a small helper function
+     bars=function(x,y,err,...){
+        points(x,y,...)
+        arrows(x,y-err,x,y+err,code=3,angle=90,...)
+     }
      data(CourseExample_R14)
-     lty1=1
-     lty2=2
-     c1="pool 1"
-     c2="pool 2"
-     yl=max(DataC[,"C1"],DataC[,"C2"])
-     ym=min(DataC[,"C1"],DataC[,"C2"])
+     c1="black"
+     c2="red"
+     x=DataC$time
+     xl=min(x);xu=max(x);os=0.05*(xu-xl); xlimits=c(xl-os,xu+os)
+     y1=DataC$C1
+     y2=DataC$C2
+     err=DataC$sd
+     ylimits=range(y1+err,y2+err,y1-err,y2-err)
+     #draw empty field
+     plot(NA, xlim=xlimits, ylim=ylimits)
+     w=3
+     #draw the error arrow
+     bars(x,y1,err,col=c1,lwd=w)
+     bars(x,y2,err,col=c2,lwd=w)
      
-     p <- ggplot(data.frame(DataC))
-     p <- p+geom_point(aes(x=time,y=C1,col=c1)) 
-     p <- p+geom_errorbar(aes(x=time,ymin=C1-sd,ymax=C1+sd,col=c1))
-     p <- p+geom_point(aes(x=time,y=C2,col=c2)) 
-     p <- p+geom_errorbar(aes(x=time,ymin=C2-sd,ymax=C2+sd,col=c2))
-     p <- p+scale_y_continuous(name="C content of the pools")
-     p <- p+opts(legend.title=theme_blank())
-     p
 @
 \end{figure}
 
-\begin{figure}
-<<echo=T,fig=T,print=FALSE>>=
-     yl=max(DataR14[,"R14t"])
-     ym=min(DataR14[,"R14t"])
-     limits<- aes(ymax = R14t + sd, ymin=R14t - sd)
-     p <- ggplot(data.frame(DataR14), aes(colour=c(1), y=R14t, x=time))
-     p <- p + geom_point() + geom_errorbar(limits, width=0.2)
-     p <- p + geom_pointrange(limits)
-     p <- p+scale_y_continuous(name="14C fraction of the Respiration")
-     p <- p + opts(legend.title=theme_blank())
-     p
-@
-\end{figure}
 
 \begin{figure}
 <<echo=T,fig=T,print=FALSE>>=
-     p <- ggplot(DataI)
-     p <- p+geom_point(aes(x=time,y=In,col="inputrate ")) 
-     p <- p+scale_y_continuous(name="C inputs")
-     p <- p+opts(legend.title=theme_blank())
-     p
+     x=DataR14$time
+     xl=min(x);xu=max(x);os=0.05*(xu-xl); xlimits=c(xl-os,xu+os)
+     y=DataR14$R14t
+     err=DataR14$sd
+     ylimits=range(y-err,y+err)
+     #draw empty field
+     plot(NA , xlim=xlimits , ylim=ylimits)
+     w=3
+     #draw the error arrow
+     bars(x,y,err,col=c1,lwd=w)
 @
 \end{figure}
 
+
 \begin{figure}
 <<echo=T,fig=T,print=FALSE>>=
-     p <- ggplot(C14Atm_NH)
-     p <- p+geom_point(aes(x=YEAR,y=Atmosphere,col="Delta 14C (per mil)")) 
-     p <- p+scale_y_continuous(name="atmospheric 14C fraction")
-     p <- p+opts(legend.title=theme_blank())
-     p
+     x=DataI$time
+     xl=min(x);xu=max(x);os=0.05*(xu-xl); xlimits=c(xl-os,xu+os)
+     y=DataI$In
+     err=DataI$sd
+     ylimits=range(y-err,y+err)
+     #draw empty field
+     plot(NA , xlim=xlimits , ylim=ylimits)
+     w=3
+     #draw the error arrow
+     bars(x,y,err,col=c1,lwd=w)
 @
 \end{figure}
+
+
+\begin{figure}
+<<echo=T,fig=T,print=FALSE>>=
+     x=C14Atm_NH$YEAR
+     y=C14Atm_NH$Atmosphere
+     plot(x,y,lwd=w)
+@
+\end{figure}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Available Models}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -223,7 +235,7 @@ The remaining part of the model construction we wrap into a function that depend
 unknown parameters $k_1$ and $k_2$ and the parameter \codestyle{pass} only.
 The \codestyle{pass} argument requires some explanation. It only makes sense in view of the future use of our small function with \FME.
 The reason is this:
-If you create a model in \SoilR \, the package will by default execute an number of tests on the given arguments to prevent the unintentional creation of models that are not biologically meaningful.
+If you create a model in \SoilR \, the package will by default execute a number of tests on the given arguments to prevent the unintentional creation of models that are not biologically meaningful.
 Unfortunately \FME 's algorithms do not care about biologically meaningful parameter combinations and would cause \SoilR \, to exit with an error if by chance such a combination occurs.
 It might for instance happen that during the fitting procedure \FME \, tries a positive value of $k$ to fit the data, which would mean \emph{creation} of organic matter instead of \emph{decomposition}. 
 The interface of \codestyle{modFit} provides only one possibility 
@@ -232,7 +244,7 @@ This would do the job with this simple example but not for all cases.
 \emph{For those cases only} we introduce the \codestyle{pass} facility used as a last resort 
 to switch off the checking at model creation.
 If we do so we have to check the estimated parameters afterwards without this flag.
-We will do so at the end of this example.
+We will do this at the end of this example.
 For the moment, note that we allow for an additional argument to turn off the internal checking by setting \codestyle{pass=TRUE}. 
 <<echo=true,print=F>>=
 pf<-function(ks,pass=FALSE){
@@ -253,8 +265,8 @@ pf<-function(ks,pass=FALSE){
 }
 @
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %<<echo=False,print=False>>=
-%##################################################
 %# this invisible section is used to create a new dataset
 % t_end=2008
 % t_start=t_end-30
@@ -271,8 +283,8 @@ pf<-function(ks,pass=FALSE){
 % DataI <- data.frame(
 %     time=time[iC],
 %     In  =  In+errIn
-%     #,
-%     #sd=stdIn
+%     ,
+%     sd=stdIn
 % )
 % pars=c(k1=-0.3,k2=-0.5)
 % Df=pf(pars)
@@ -309,7 +321,7 @@ We produce a dataset of arbitrarily chosen parameters $k_1$ and $k_2$  and plot 
 <<echo=T,fig=TRUE,print=F>>= 
 pars=c(k1=-0.1,k2=-0.2)
 Df=pf(pars)
-c1="black"; c2="red";lty1=1;lty2=1
+c1="black"; c2="red";lty1=1;lty2=2
 plot(DataC[,"time"],
      DataC[,"C1"],
      col=c1,lty=lty1,
@@ -320,13 +332,15 @@ points(
        DataC[,"time"],
        DataC[,"C2"],
        col=c2,
-       lty=lty2
+       lty=lty1
 )
 lines(Df$time,Df$C1,col=c1,lty=lty1)
-lines(Df$time,Df$C2,col=c2,lty=lty2)
+lines(Df$time,Df$C2,col=c2,lty=lty1)
 legend("topright",
        legend=c("C content of pool 1","C content of pool 2"),
-       col=c(c1,c2),lty=c(lty1,lty2),bty="n")
+       col=c(c1,c2)
+      # ,lty=c(lty1,lty2)
+       ,bty="n")
 @
 \caption{The output for the C stock of a model with arbitrarily chosen parameters $k_1$ and $k_2$ together with the observed data.}
 \end{figure}
@@ -433,15 +447,36 @@ To this end we create again the model with the estimated parameter values, this 
 So we are sure that the best numerical fit is also biologically possible.
 \begin{figure}
 <<echo=true,print=FALSE,fig=TRUE>>=
-#pars=c(k1=-0.6,k2=-0.2)
 Dfinal=pf(Fit$par)
-    plot(Df$time,Df$C1,type="l",lty=lty1,
-         ylim=c(min(Df[,c("C1","C2")]),max(Df[,c("C1","C2")])),
+allval=rbind(Df[,c("C1","C2")],Dfinal[,c("C1","C2")],DataC[,c("C1","C2")])
+    plot(Df$time,Df$C1, type="l", lty=lty2,
+         ylim=c( min(allval) ,max(allval)),
          col=c1)
-    lines(Df$time,Df$C2,lty=lty1,col=c2)
-    lines(Dfinal$time,Dfinal$C1,lty=lty2,col=c1)
-    lines(Dfinal$time,Dfinal$C2,lty=lty2,col=c2)
+    lines(Df$time,Df$C2,lty=lty2,col=c2)
+    lines(Dfinal$time,Dfinal$C1,lty=lty1,col=c1)
+    lines(Dfinal$time,Dfinal$C2,lty=lty1,col=c2)
+    points(
+           DataC[,"time"],
+           DataC[,"C1"],
+           col=c1,
+           lty=lty1
+    )
+    points(
+           DataC[,"time"],
+           DataC[,"C2"],
+           col=c2,
+           lty=lty1
+    )
+legend("topright",
+       legend=c(
+                 "pool 1 initial"
+                ,"pool 2 initial"
+                ,"pool 1 final"
+                ,"pool 2 final"
+                ),
+       col=c(c1,c2,c1,c2),lty=c(lty2,lty2,lty1,lty1),bty="n")
 @
+    \caption{The arbitrary initial guess and the final solution}
 \end{figure}
 \begin{figure}
 <<echo=true,print=FALSE,fig=TRUE>>=
@@ -449,42 +484,42 @@ Dfinal=pf(Fit$par)
     lines(Dfinal$time,Dfinal$R14t,lty=lty2,col=c2)
 @
 \end{figure}
-% begin Bayesian part
-Usually we are not only interested in the best fitting parameters, but rather in the distribution of the parameters. We can estimate them with the Monte Carlo Markov Chain method that is also part of \FME.  
-Once again we refer to the \FME 's vignette for details.
-\begin{figure}
-<<echo=true,print=false,fig=true>>=
-    #var0 <- Fit$var_ms_unweighted
-    #cov0 <- summary(Fit)$cov.scaled#*2.4^2/5
-    #p=Fit$par
-    niter=500
-    t1=Sys.time()
-    MCMC  <- modMCMC(f=DfCost,niter=niter,p=Fit$par)
-    t2=Sys.time()
-
-    print(t1-t2)
-    summary(MCMC)
-    plot(MCMC, Full = TRUE)
-@
-    \caption{The plot shows the accepted values for each parameter. It can be used to identify situations where there is doubt if the collected values represent the equilibrium distribution of the chain}
-\end{figure}
-\begin{figure}
-<<echo=true,print=false,fig=true>>=
-    sR=sensRange(func=pf, parInput=MCMC$par)
-    plot(summary(sR)
-         ,xlab="Years"
-     )
-@
-    \caption{The plot shows the range for the model output based on the estimated 
-    distribution of the parameters }
-\end{figure}
-
-\begin{figure}
-<<echo=true,print=false,fig=true>>=
-    pairs(MCMC, nsample = niter/4)
-@
-    \caption{This plot is the analogon of the pairs plot for the sensitivity}  
-\end{figure}
+%% begin Bayesian part
+%Usually we are not only interested in the best fitting parameters, but rather in the distribution of the parameters. We can estimate them with the Monte Carlo Markov Chain method that is also part of \FME.  
+%Once again we refer to the \FME 's vignette for details.
+%\begin{figure}
+%<<echo=true,print=false,fig=true>>=
+%    #var0 <- Fit$var_ms_unweighted
+%    #cov0 <- summary(Fit)$cov.scaled#*2.4^2/5
+%    #p=Fit$par
+%    niter=500
+%    t1=Sys.time()
+%    MCMC  <- modMCMC(f=DfCost,niter=niter,p=Fit$par)
+%    t2=Sys.time()
+%
+%    print(t1-t2)
+%    summary(MCMC)
+%    plot(MCMC, Full = TRUE)
+%@
+%    \caption{The plot shows the accepted values for each parameter. It can be used to identify situations where there is doubt if the collected values represent the equilibrium distribution of the chain}
+%\end{figure}
+%\begin{figure}
+%<<echo=true,print=false,fig=true>>=
+%    sR=sensRange(func=pf, parInput=MCMC$par)
+%    plot(summary(sR)
+%         ,xlab="Years"
+%     )
+%@
+%    \caption{The plot shows the range for the model output based on the estimated 
+%    distribution of the parameters }
+%\end{figure}
+%
+%\begin{figure}
+%<<echo=true,print=false,fig=true>>=
+%    pairs(MCMC, nsample = niter/4)
+%@
+%    \caption{This plot is the analogon of the pairs plot for the sensitivity}  
+%\end{figure}
 
 
 \clearpage
