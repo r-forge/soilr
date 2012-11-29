@@ -5,7 +5,7 @@
 to avoid duplication}
 \usage{supportedFcAtmFormats()}
 
-
+\value{a list of strings with the supported Format Strings}
 
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
 
