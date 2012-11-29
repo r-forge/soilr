@@ -252,6 +252,8 @@ setMethod(
     R=getReleaseFlux(object) ### we use the C14 here
     R14=getReleaseFlux14(object) ### we use the C14 here
     fr=rowSums(R14)/rowSums(R)
+    # since the result is always in AbsoluteFractionModern wie have to convert it to Delta14C
+    fr=Delta14C_from_AbsoluteFractionModern(fr)
     #print(dim(C))
     ### A matrix. Every column represents a pool and every row a point in time
     return(fr)

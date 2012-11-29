@@ -108,6 +108,7 @@ FcAtm.from.Dataframe=function
 ### This function is another constructor of the class FcAtm
 (dframe, ##<<A data frame containing exactly two columns:
 ## the first one is interpreted as time
+## the secon one is interpreted as atmospheric C14 fraction in the format mentioned
 lag=0, ##<< a scalar describing the time lag. Positive Values shift the argument of the interpolation function forward in time. (retard its effect)
 interpolation=splinefun, ##<<A function that  returns a function  the default is splinefun. Other possible values are the linear interpolation approxfun or any self made function with the same interface.
 format ##<< a string that specifies the format used to represent the atmospheric fracton. Possible values are "Delta14C" which is the default or "afn" the Absolute Fraction Normal representation 
@@ -122,7 +123,7 @@ format ##<< a string that specifies the format used to represent the atmospheric
    t_start=min(t)
    t_end=max(t)
    interpol=interpolation(to,yo)
-   obj=new(Class="FcAtm",t_start,t_end,interpol,lag,format) 
+   obj=new(Class="FcAtm",t_start,t_end,interpol,lag=lag,format=format) 
 return(obj)
 ### An object of class TimeMap that contains the interpolation function and the limits of the time range where the function is valid. Note that the limits change according to the time lag
 }
