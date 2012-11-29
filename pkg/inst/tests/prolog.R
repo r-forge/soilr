@@ -2,15 +2,17 @@
 library("RUnit")
 library("deSolve")
 load("../../data/C14Atm_NH.rda")
+load("../../data/HarvardForest14CO2.rda")
+#load("../../data/afn_Atm_NH.rda")
 prefix="../../R/"
 globstring=paste(prefix,"*.R",sep="")
 auto_paths=Sys.glob(globstring)
 preload_auto_paths=c(
-#           "1_TimeMap.R",
-#           "Model.R",
-#           "Model_14.R",
-#           "DecompositionOperator.R",
-#           "GeneralModel14.R"
+         #  "1_TimeMap.R",
+          # "Model.R"
+          # "Model_14.R",
+          # "DecompositionOperator.R",
+          # "GeneralModel14.R",
           )
 preload_paths=sapply(preload_auto_paths,function(x){return(paste(prefix,x,sep=""))})
 print(preload_paths)

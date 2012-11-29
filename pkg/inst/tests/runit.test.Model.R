@@ -26,8 +26,11 @@ test.ParallelModel=function(){
 test.GeneralModel=function(){
   attr(GeneralModel,"ex")()
 }
-test.ICBMModle=function(){
+test.ICBMModel=function(){
   attr(ICBMModel,"ex")()
+}
+test.RothCModel=function(){
+  attr(RothCModel,"ex")()
 }
 test.correctnessOfModel.impossibleCoefficients=function(){
    t_start=0 

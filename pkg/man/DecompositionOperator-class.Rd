@@ -3,9 +3,9 @@
 \docType{class}
 \alias{DecompositionOperator-class}
 \alias{DecompositionOperator}
-\alias{getMeanTransitTime,DecompositionOperator-method}
-\alias{getTransitTimeDistributionDensity,DecompositionOperator-method}
-\alias{initialize,DecompositionOperator-method}
+%% \alias{getMeanTransitTime}
+%% \alias{getTransitTimeDistributionDensity}
+%% \alias{initialize}
 
 \title{decomposition operator }
 \description{#######################################################}

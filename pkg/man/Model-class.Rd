@@ -3,11 +3,17 @@
 \docType{class}
 \alias{Model-class}
 \alias{Model}
-\alias{getAccumulatedRelease,Model-method}
-\alias{getC,Model-method}
-\alias{getReleaseFlux,Model-method}
-\alias{getTimes,Model-method}
-\alias{initialize,Model-method}
+%% \alias{$}
+\alias{[,Model}
+%% \alias{getAccumulatedRelease}
+%% \alias{getC}
+%% \alias{getReleaseFlux}
+%% \alias{getTimes}
+%% \alias{initialize}
+%% \alias{plot}
+%% \alias{print}
+%% \alias{show}
+%% \alias{summary}
 
 \title{Model}
 \description{serves as a fence to the interface of SoilR functions. So that later implementations can differ	 }
@@ -23,11 +29,17 @@
 }
 \section{Methods}{
   \describe{
+    \item{$}{\code{signature(x = "Model")}: ... }
+    \item{[}{\code{signature(x = "Model", i = "character", j = "ANY", drop = "ANY")}: ... }
     \item{getAccumulatedRelease}{\code{signature(object = "Model")}: ... }
     \item{getC}{\code{signature(object = "Model")}: ... }
     \item{getReleaseFlux}{\code{signature(object = "Model")}: ... }
     \item{getTimes}{\code{signature(object = "Model")}: ... }
     \item{initialize}{\code{signature(.Object = "Model")}: ... }
+    \item{plot}{\code{signature(x = "Model")}: ... }
+    \item{print}{\code{signature(x = "Model")}: ... }
+    \item{show}{\code{signature(object = "Model")}: ... }
+    \item{summary}{\code{signature(object = "Model")}: ... }
 	 }
 }
 

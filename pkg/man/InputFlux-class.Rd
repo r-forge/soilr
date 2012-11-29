@@ -3,7 +3,7 @@
 \docType{class}
 \alias{InputFlux-class}
 \alias{InputFlux}
-\alias{initialize,InputFlux-method}
+%% \alias{initialize}
 
 \title{decomposition operator }
 \description{#######################################################}

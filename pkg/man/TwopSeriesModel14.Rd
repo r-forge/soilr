@@ -12,7 +12,7 @@ It is a wrapper for the more general function \code{\link{GeneralModel_14}} that
   \item{In}{A scalar or a data.frame object specifying the amount of litter inputs by time.}
   \item{a21}{A scalar with the value of the transfer rate from pool 1 to pool 2.}
   \item{xi}{A scalar or a data.frame specifying the external (environmental and/or edaphic) effects on decomposition rates.}
-  \item{FcAtm}{A Data Frame object consisting of  a function describing the fraction of C_14 in per mille.}
+  \item{FcAtm}{A Data Frame object containing values of atmospheric Delta14C per time. First column must be time values, second column must be Delta14C values in per mil.}
   \item{lambda}{Radioactive decay constant. By default lambda=-0.0001209681 y^-1 . This has the side effect that all your time related data are treated as if the time unit was year.}
   \item{lag}{A (positive) scalar representing a time lag for radiocarbon to enter the system.}
   \item{solver}{A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.}
@@ -29,14 +29,13 @@ It is a wrapper for the more general function \code{\link{GeneralModel_14}} that
 \examples{
 
 data(C14Atm_NH)
-#Fc=TimeMap.from.Dataframe(C14Atm_NH)
 years=seq(1901,2009,by=0.5)
 LitterInput=700 
 
 Ex=TwopSeriesModel14(t=years,ks=c(k1=1/2.8, k2=1/35),C0=c(200,5000), In=LitterInput, a21=0.1,FcAtm=C14Atm_NH)
-R14m=getTotalReleaseFluxC14CRatio(Ex)
-C14m=getTotalC14CRatio(Ex)
-C14t=getSoilC14Fraction(Ex)
+R14m=getF14R(Ex)
+C14m=getF14C(Ex)
+C14t=getF14(Ex)
 
 par(mfrow=c(2,1))
 plot(C14Atm_NH,type="l",xlab="Year",ylab="Delta 14C (per mil)",xlim=c(1940,2010)) 

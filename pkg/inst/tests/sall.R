@@ -2,8 +2,6 @@
 source("prolog.R")
 alltests <- defineTestSuite(
    name="allTests",
-   #dirs = file.path(.path.package(package="SoilR"),
-   #"tests"),
    dirs=".",
    testFileRegexp = "^runit.+\\.[rR]",
    testFuncRegexp = "^test.+",

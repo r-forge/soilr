@@ -1,5 +1,5 @@
 # This test function is automatically produced by the python script:/home/mm/SoilR/RPackages/SoilR/pkg/inst/tests/Rexample.py
-test.TwoPool_C14_equalDecay_ZeroInput=function(){
+test.TwoPool_C14_equalDecay_ZeroInput_c14=function(){
    require(RUnit)
    t_start=0
    t_end=2
@@ -8,7 +8,7 @@ test.TwoPool_C14_equalDecay_ZeroInput=function(){
    print(tol)
    timestep=(t_end-t_start)/tn
    t=seq(t_start,t_end,timestep)
-   A=new("DecompositionOperator",t_start,t_end,function(t){matrix(
+   A=new("DecompositionOperator",t_start,Inf,function(t){matrix(
      nrow=2,
      ncol=2,
      c(
@@ -25,7 +25,7 @@ test.TwoPool_C14_equalDecay_ZeroInput=function(){
         0,  0
      )
    ))})
-   Fc=new("TimeMap",t_start,t_end,function(t){.500})
+   Fc=new("FcAtm",t_start,t_end,function(t){0.5},format="AbsoluteFractionModern")
    th=5730
    k=log(0.5)/th
    Y=matrix(ncol=2,nrow=length(t))
@@ -37,6 +37,9 @@ test.TwoPool_C14_equalDecay_ZeroInput=function(){
    Y14=matrix(ncol=2,nrow=length(t))
    Y14[,1]=0.5*c01*exp(-t*log(2)/2865)
    Y14[,2]=0.5*c02*exp(-t*log(2)/2865)
+   F14=matrix(ncol=2,nrow=length(t))
+   F14[,1]=-1000 + 500.0*exp(-t*log(2)/5730)
+   F14[,2]=-1000 + 500.0*exp(-t*log(2)/5730)
    mod=GeneralModel_14(
     t,
     A,
@@ -50,13 +53,14 @@ test.TwoPool_C14_equalDecay_ZeroInput=function(){
    deSolve.lsoda.wrapper
    )
    Y14ode=getC14(mod) 
+   F14ode=getF14(mod) 
    Yode=getC(mod) 
    Rode=getReleaseFlux(mod) 
 #begin plots 
    lt1=2
    lt2=4
-   pdf(file="runit.automatic.TwoPool_C14_equalDecay_ZeroInput.pdf",paper="a4")
-   m=matrix(c(1,2),2,1,byrow=TRUE)
+   pdf(file="runit.automatic.TwoPool_C14_equalDecay_ZeroInput_c14.pdf",paper="a4")
+   m=matrix(c(1,2,3,4),4,1,byrow=TRUE)
    layout(m)
    plot(t,Y[,1],type="l",lty=lt1,col=1,ylab="Concentrations",xlab="Time")
    lines(t,Yode[,1],type="l",lty=lt2,col=1)
@@ -88,18 +92,39 @@ test.TwoPool_C14_equalDecay_ZeroInput=function(){
      lty=c(lt1,lt2),
      col=c(1,1,2,2)
    )
-   dev.off()
-# end plots 
    plot(t,Y14[,1],type="l",lty=lt1,col=1,ylab="14C-Concentrations",xlab="Time",ylim=c(min(Y14),max(Y14)))
    lines(t,Y14ode[,1],type="l",lty=lt2,col=1)
    lines(t,Y14[,2],type="l",lty=lt1,col=2)
    lines(t,Y14ode[,2],type="l",lty=lt2,col=2)
+   plot(t,F14[,1],type="l",lty=lt1,col=1,ylab="14C-C ratio ",xlab="Time",ylim=c(min(F14,F14ode),max(F14,F14ode)))
+   lines(t,F14ode[,1],type="l",lty=lt2,col=1)
+   lines(t,F14[,2],type="l",lty=lt1,col=2)
+   lines(t,F14ode[,2],type="l",lty=lt2,col=2)
+   legend(
+   "topright",
+     c(
+     "anlytic sol for pool 1",
+     "numeric sol for pool 1",
+     "anylytic sol for pool 2",
+     "numeric sol for pool 2"
+     ),
+     lty=c(lt1,lt2),
+     col=c(1,1,2,2)
+   )
+   dev.off()
+# end plots 
 # begin checks 
    tol=.02*max(Y14)/tn
    checkEquals(
     Y14,
     Y14ode,
     "test numeric solution for 14C-Content computed by the ode mehtod against analytical",
+    tolerance = tol,
+   )
+   checkEquals(
+    F14,
+    F14ode,
+    "test numeric solution for F14 computed by the ode mehtod against analytical",
     tolerance = tol,
    )
 

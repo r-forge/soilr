@@ -9,7 +9,7 @@ TwopFeedbackModel14<-structure(
    a21,  ##<< A scalar with the value of the transfer rate from pool 1 to pool 2.
    a12,  ##<< A scalar with the value of the transfer rate from pool 2 to pool 1.
    xi=1,   ##<< A scalar or a data.frame specifying the external (environmental and/or edaphic) effects on decomposition rates. 
-   FcAtm,##<< A Data Frame object consisting of  a function describing the fraction of C_14 in per mille.
+   FcAtm,##<< A Data Frame object containing values of atmospheric Delta14C per time. First column must be time values, second column must be Delta14C values in per mil.
    lambda=-0.0001209681, ##<< Radioactive decay constant. By default lambda=-0.0001209681 y^-1 . This has the side effect that all your time related data are treated as if the time unit was year.
    lag=0, ##<< A positive integer representing a time lag for radiocarbon to enter the system. 
    solver=deSolve.lsoda.wrapper, ##<< A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.
@@ -59,7 +59,7 @@ TwopFeedbackModel14<-structure(
     #Clumsy implementation of the time lag. This should be improved to allow scalar values instead of integers, most likely within the functions GeneralModel_14 or Model
     if(lag!=0) FcAtm=data.frame(FcAtm[-((length(FcAtm[,1])-(lag-1)):(length(FcAtm[,1]))),1],FcAtm[-(1:lag),2])
     
-    Fc=TimeMap.from.Dataframe(FcAtm)
+    Fc=FcAtm.from.Dataframe(FcAtm,format="Delta14C")
     
     mod=GeneralModel_14(t,At,ivList=C0,inputFluxes=inputFluxes,Fc,di=lambda)
     ### A Model Object that can be further queried 
@@ -69,14 +69,13 @@ TwopFeedbackModel14<-structure(
   ex=function(){
     
     data(C14Atm_NH)
-    #Fc=TimeMap.from.Dataframe(C14Atm_NH)
     years=seq(1901,2009,by=0.5)
     LitterInput=700 
     
     Ex=TwopFeedbackModel14(t=years,ks=c(k1=1/2.8, k2=1/35),C0=c(200,5000), In=LitterInput, a21=0.1,a12=0.01,FcAtm=C14Atm_NH)
-    R14m=getTotalReleaseFluxC14CRatio(Ex)
-    C14m=getTotalC14CRatio(Ex)
-    C14t=getSoilC14Fraction(Ex)
+    R14m=getF14R(Ex)
+    C14m=getF14C(Ex)
+    C14t=getF14(Ex)
     
     par(mfrow=c(2,1))
     plot(C14Atm_NH,type="l",xlab="Year",ylab="Delta 14C (per mil)",xlim=c(1940,2010)) 

@@ -53,12 +53,12 @@ GeneralModel_14=structure(function #The most general costructor for class Model1
         function(t0){matrix(nrow=n,ncol=1,c(10,10,10))}
       ) 
       # we have a dataframe representing the C_14 fraction 
-      # note that the time unit is in years.
+      # note that the time unit is in years and the fraction is given in
+      # the Absolute Fraction Modern format.
       # This means that all the other data provided are assumed to have the same value
       # This is especially true for the decay constants to be specified later
       data(C14Atm_NH)
-      Fc=TimeMap.from.Dataframe(C14Atm_NH)
-      #Fc=TimeMap.from.Dataframe(C14Atm_NH)
+      Fc=FcAtm.from.Dataframe(C14Atm_NH,format="Delta14C")
       # add the C14 decay to the matrix which is done by a diagonal matrix which does not vary over time
       # we assume a half life th=5730 years
       th=5730
@@ -100,7 +100,7 @@ GeneralModel_14=structure(function #The most general costructor for class Model1
          )
          #now plot the C14 Fraction in the atmosphere and compute the C14/C fraction of in the Soil 
 
-         FC14=getSoilC14Fraction(mod)
+         FC14=getF14(mod)
          plot(C14Atm_NH, type="l",xlim=c(1960,2010))
          lines(t,FC14[,1],lty=lt1,col=col1) 
          lines(t,FC14[,2],lt2,type="l",lty=lt2,col=col2) 
@@ -131,8 +131,8 @@ GeneralModel_14=structure(function #The most general costructor for class Model1
                           )
          ,lty=c(lt1,lt2,lt3),col=c(col1,col2,col3))
 
-      R14m=getTotalReleaseFluxC14CRatio(mod)
-      C14m=getTotalC14CRatio(mod)
+      R14m=getF14R(mod)
+      C14m=getF14C(mod)
       plot(C14Atm_NH, type="l",xlim=c(1960,2010),col=4)
       lines(t,C14m) 
       lines(t,R14m,col=2) 

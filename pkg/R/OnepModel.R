@@ -6,7 +6,8 @@ OnepModel<-structure(
       C0,	##<< A scalar containing the initial amount of carbon in the pool.
       In,     ##<< A scalar or a data.frame object specifying the amount of litter inputs by time. 
       xi=1,   ##<< A scalar or a data.frame specifying the external (environmental and/or edaphic) effects on decomposition rates. 
-      solver=deSolve.lsoda.wrapper  ##<< A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.
+      solver=deSolve.lsoda.wrapper,  ##<< A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.
+      pass=FALSE  ##<< if TRUE forces the constructor to create the model even if it is invalid 
     )	
     { 
       t_start=min(t)
@@ -45,7 +46,7 @@ OnepModel<-structure(
         t_end,
         function(t){fX(t)*A}
       )
-      Mod=GeneralModel(t=t,A=Af,ivList=C0,inputFluxes=inputFluxes)
+      Mod=GeneralModel(t=t,A=Af,ivList=C0,inputFluxes=inputFluxes,solver,pass)
      return(Mod)
 ### A Model Object that can be further queried 
       ##seealso<< \code{\link{TwopParallelModel}},\code{\link{TwopFeedbackModel}} 

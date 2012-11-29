@@ -1,17 +1,26 @@
 #!/usr/bin/Rscript
 library("RUnit")
 library("SoilR")
-alltests <- defineTestSuite(
-   name="allTests",
-   dirs = file.path(.path.package(package="SoilR"),
-   "tests"),
+source_tests <- defineTestSuite(
+   name="sourc_Tests",
+   dirs = file.path(.path.package(package="SoilR"), "tests"),
+   #dirs=".",
    testFileRegexp = "^runit.+\\.[rR]",
    testFuncRegexp = "^test.+",
    rngKind = "Marsaglia-Multicarry",
    rngNormalKind = "Kinderman-Ramage"
 )
+package_tests <- defineTestSuite(
+   name="package_Tests",
+   dirs = file.path(.path.package(package="SoilR"), "tests"),
+   #dirs=".",
+   testFileRegexp = "^package.+\\.[rR]",
+   testFuncRegexp = "^test.+",
+   rngKind = "Marsaglia-Multicarry",
+   rngNormalKind = "Kinderman-Ramage"
+)
 
-testResult <- runTestSuite(alltests)
+testResult <- runTestSuite(testSuites=list(source_tests,package_tests))
 printTextProtocol(testResult)
 
 #produce exitstatus ne 0 for buildbot to notice

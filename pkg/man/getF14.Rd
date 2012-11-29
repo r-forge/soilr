@@ -1,8 +1,8 @@
-\name{getSoilC14Fraction}
-\alias{getSoilC14Fraction}
+\name{getF14}
+\alias{getF14}
 \title{access to the C content of the pools }
 \description{This function computes the \eqn{\frac{^{14}C}{C}}{14C/C} ratio in the soil as funtion of time }
-\usage{getSoilC14Fraction(object)}
+\usage{getF14(object)}
 \arguments{
   \item{object}{
 }

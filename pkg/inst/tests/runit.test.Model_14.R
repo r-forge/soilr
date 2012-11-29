@@ -2,3 +2,27 @@ require(RUnit)
 test.GeneralModel_14=function(){
   attr(GeneralModel_14,"ex")()
 }
+test.GaudinskiModel14=function(){
+  attr(GaudinskiModel14,"ex")()
+}
+test.OnepModel14=function(){
+  attr(OnepModel14,"ex")()
+}
+test.ThreepFeedbackModel14=function(){
+  attr(ThreepFeedbackModel14,"ex")()
+}
+test.ThreepParallelModel14=function(){
+  attr(ThreepParallelModel14,"ex")()
+}
+test.ThreepSeriesModel14=function(){
+  attr(ThreepSeriesModel14,"ex")()
+}
+test.TwopFeedbackModel14=function(){
+  attr(TwopFeedbackModel14,"ex")()
+}
+test.TwopParallelModel14=function(){
+  attr(TwopParallelModel14,"ex")()
+}
+test.TwopSeriesModel14=function(){
+  attr(TwopSeriesModel14,"ex")()
+}

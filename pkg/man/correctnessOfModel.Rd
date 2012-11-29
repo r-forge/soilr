@@ -1,6 +1,6 @@
 \name{correctnessOfModel}
 \alias{correctnessOfModel}
-\title{correctnessOfModel}
+\title{check for unreasonable input parameters}
 \description{The parameters used by the function \code{\link{GeneralModel}} in SoilR have a biological meaning, and therefore cannot be arbitrary.
 This functions tests some of the obvious constraints of the general model. 
 Up to now these are:

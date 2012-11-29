@@ -260,7 +260,7 @@ pf<-function(ks,pass=FALSE){
             pass=pass
     ) 
     Cs=getC(mod)
-    R14t=getTotalReleaseFluxC14CRatio(mod)
+    R14t=getF14R(mod)
     return(data.frame(time=time,R14t=R14t,C1=Cs[,1],C2=Cs[,2]))
 }
 @

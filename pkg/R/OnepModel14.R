@@ -7,10 +7,11 @@ OnepModel14<-structure(
    C0,	##<<  A scalar containing the initial amount of carbon in the pool.
    In,     ##<< A scalar or a data.frame object specifying the amount of litter inputs by time.
    xi=1,   ##<< A scalar or a data.frame specifying the external (environmental and/or edaphic) effects on decomposition rates. 
-   FcAtm,##<< A Data Frame object consisting of  a function describing the fraction of C_14 in per mille.
+   FcAtm,##<< A Data Frame object consisting of  a function describing the fraction of C_14 in per mille. The first column will be assumed to contain the times.
    lambda=-0.0001209681, ##<< Radioactive decay constant. By default lambda=-0.0001209681 y^-1 . This has the side effect that all your time related data are treated as if the time unit was year.
    lag=0, ##<< A (positive) scalar representing a time lag for radiocarbon to enter the system. 
-   solver=deSolve.lsoda.wrapper ##<< A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.
+   solver=deSolve.lsoda.wrapper, ##<< A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.
+   pass=FALSE  ##<< if TRUE Forces the constructor to create the model even if it is invalid 
    )	
   { 
     t_start=min(t)
@@ -51,7 +52,7 @@ OnepModel14<-structure(
            }
            ) 
     
-    Fc=TimeMap.from.Dataframe(FcAtm,lag)
+    Fc=FcAtm.from.Dataframe(FcAtm,lag,format="Delta14C")
     
     mod=GeneralModel_14(t,At,ivList=C0,inputFluxes=inputFluxes,Fc,di=lambda)
     ### A Model Object that can be further queried 
@@ -61,12 +62,11 @@ OnepModel14<-structure(
   ex=function(){
     
     data(C14Atm_NH)
-    #Fc=TimeMap.from.Dataframe(C14Atm_NH)
     years=seq(1901,2009,by=0.5)
     LitterInput=700 
     
     Ex=OnepModel14(t=years,k=1/10,C0=500, In=LitterInput, FcAtm=C14Atm_NH)
-    C14t=getSoilC14Fraction(Ex)
+    C14t=getF14(Ex)
     
     plot(C14Atm_NH,type="l",xlab="Year",ylab="Delta 14C (per mil)",xlim=c(1940,2010)) 
     lines(years, C14t[,1], col=4)

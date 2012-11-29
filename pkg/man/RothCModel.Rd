@@ -4,7 +4,7 @@
 \description{This function implements the RothC model of Jenkinson et al. It is a wrapper for the more general function \code{\link{GeneralModel}}.}
 \usage{RothCModel(t, ks = c(k.DPM = 10, k.RPM = 0.3, k.BIO = 0.66, k.HUM = 0.02, 
     k.IOM = 0), C0 = c(0, 0, 0, 0, 2.7), In = 1.7, DR = 1.44, 
-    clay = 23.4, xi = 1, solver = deSolve.lsoda.wrapper)}
+    clay = 23.4, xi = 1, solver = deSolve.lsoda.wrapper, pass = FALSE)}
 \arguments{
   \item{t}{A vector containing the points in time where the solution is sought.}
   \item{ks}{A vector of lenght 5 containing the values of the decomposition rates for the different pools}
@@ -14,6 +14,7 @@
   \item{clay}{Percent clay in mineral soil.}
   \item{xi}{A scalar or data.frame object specifying the external (environmental and/or edaphic) effects on decomposition rates.}
   \item{solver}{A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.}
+  \item{pass}{if TRUE forces the constructor to create the model even if it is invalid}
 }
 
 \value{A Model Object that can be further queried }
