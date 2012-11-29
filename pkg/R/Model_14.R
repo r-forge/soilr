@@ -273,6 +273,7 @@ setMethod(
     C=getC(object) ### we use the C14 here
     C14=getC14(object) ### we use the C14 here
     fr=rowSums(C14)/rowSums(C)
+    fr=Delta14C_from_AbsoluteFractionModern(fr)
     #print(dim(C))
     ### A matrix. Every column represents a pool and every row a point in time
     return(fr)
