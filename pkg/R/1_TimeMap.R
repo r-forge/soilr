@@ -1,5 +1,5 @@
-TimeMap.new=function
-### This function is the basic constructor of the class TimeMap.
+TimeMap.new=function#basic constructor of the class TimeMap.
+### A TimeMap is nothing more than an usual R-function of one argument augmented by the lower and upper boundary of the interval where it is defined.
 (t_start, ##<<A number marking the begin of the time domain where the function is valid
  t_end,   ##<<A number the end of the time domain where the function is valid
  f        ##<<The time dependent function definition (a function in R's sense)

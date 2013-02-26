@@ -25,6 +25,13 @@ test.TwoPool_C14_equalDecay_ZeroInput_c14=function(){
         0,  0
      )
    ))})
+   f01=1
+   f02=2
+   initialF=SoilR.F0(    c(
+       f01,
+       f02
+    ),
+ format="AbsoluteFractionModern")
    Fc=new("FcAtm",t_start,t_end,function(t){0.5},format="AbsoluteFractionModern")
    th=5730
    k=log(0.5)/th
@@ -35,11 +42,11 @@ test.TwoPool_C14_equalDecay_ZeroInput_c14=function(){
    R[,1]=c01*exp(-t*log(2)/5730)*log(2)/5730
    R[,2]=c02*exp(-t*log(2)/5730)*log(2)/5730
    Y14=matrix(ncol=2,nrow=length(t))
-   Y14[,1]=0.5*c01*exp(-t*log(2)/2865)
-   Y14[,2]=0.5*c02*exp(-t*log(2)/2865)
+   Y14[,1]=c01*f01*exp(-t*log(2)/2865)
+   Y14[,2]=c02*f02*exp(-t*log(2)/2865)
    F14=matrix(ncol=2,nrow=length(t))
-   F14[,1]=-1000 + 500.0*exp(-t*log(2)/5730)
-   F14[,2]=-1000 + 500.0*exp(-t*log(2)/5730)
+   F14[,1]=1000*f01*exp(-t*log(2)/5730) - 1000
+   F14[,2]=1000*f02*exp(-t*log(2)/5730) - 1000
    mod=GeneralModel_14(
     t,
     A,
@@ -47,6 +54,7 @@ test.TwoPool_C14_equalDecay_ZeroInput_c14=function(){
        c01,
        c02
     ),
+   initialF,
    inputrates,
    Fc,
    k,

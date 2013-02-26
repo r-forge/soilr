@@ -36,6 +36,7 @@
 
 
 \begin{document}
+\SweaveOpts{concordance=TRUE}
 \maketitle
 \SweaveOpts{engine=R,eps=FALSE}
 \SweaveOpts{keep.source=TRUE}
@@ -252,6 +253,7 @@ pf<-function(ks,pass=FALSE){
             time,
             ks,
             C0,
+            F0=c(0,0),
             In=DataI,
             gam=gam,
             xi=xi,
@@ -273,7 +275,8 @@ pf<-function(ks,pass=FALSE){
 % data(C14Atm_NH)
 % indices=(C14Atm_NH$YEAR>=t_start & C14Atm_NH$YEAR < t_end)
 % time=C14Atm_NH$YEAR[indices]
-% C0=c(0.5,0.5) 
+% C0=c(0.5,0.5)
+% F0=c(0,0)
 % 
 % l=length(time)
 % iC=seq(1,l,4)

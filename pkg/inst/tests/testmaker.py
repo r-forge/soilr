@@ -99,6 +99,7 @@ C14example(\
             ]
         ),
         [1],                #c0 =initial c value >>>not<<< c14
+        [1],                #f0 =initial f values >>>not<<< f14atm
         Matrix(1,1,[0]),    #Inputrate
         1.0/2 #c14fraction
     ).write2file()
@@ -110,6 +111,7 @@ C14example(\
             ]
         ),
         [1],                #c0 =initial c value >>>not<<< c14
+        [1],                #f0 =initial f values >>>not<<< f14atm
         Matrix(1,1,[1]),    #constant Inputrate
         1.0/2 #c14fraction
     ).write2file()
@@ -123,6 +125,7 @@ C14example(\
             ]
         ),
         [1],                #c0 =initial c value >>>not<<< c14
+        [1],                #f0 =initial f values >>>not<<< f14atm
         Matrix(1,1,[0]),    #Inputrate
         1.0/2 #c14fraction
     ).write2file()
@@ -135,6 +138,7 @@ C14example(\
             ]
         ),
         [1,2],                #c0 =initial c value >>>not<<< c14
+        [1,2],                #f0 =initial f values >>>not<<< f14atm
         Matrix(2,1,[0,0]),    #Inputrate
         1.0/2 #c14fraction
     ).write2file()
@@ -147,6 +151,7 @@ C14exampleFromDelta14C(\
             ]
         ),
         [1],                #c0 =initial c value >>>not<<< c14
+        [1],                #f0 =initial f value >>>not<<< f14atm
         Matrix(1,1,[0]),    #Inputrate
         1.0/2               #c14fraction
     ).write2file()
@@ -158,6 +163,7 @@ C14exampleFromDelta14C(\
             ]
         ),
         [1],                #c0 =initial c value >>>not<<< c14
+        [1],                #f0 =initial f value >>>not<<< f14atm
         Matrix(1,1,[1]),    #constant Inputrate
         1.0/2               #c14fraction
     ).write2file()
@@ -171,6 +177,7 @@ C14exampleFromDelta14C(\
             ]
         ),
         [1],                #c0 =initial c value >>>not<<< c14
+        [1],                #f0 =initial f values >>>not<<< f14atm
         Matrix(1,1,[0]),    #Inputrate
         1.0/2 #c14fraction
     ).write2file()
@@ -182,7 +189,8 @@ C14exampleFromDelta14C(\
                 0 ,k
             ]
         ),
-        [1,2],                #c0 =initial c value >>>not<<< c14
+        [1,2],                #c0 =initial c value  >>>not<<< c14
+        [1,2],                #f0 =initial f values >>>not<<< f14atm
         Matrix(2,1,[0,0]),    #Inputrate
         1.0/2 #c14fraction
     ).write2file()

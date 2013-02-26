@@ -5,6 +5,7 @@ TwopParallelModel14<-structure(
      (t,			##<< A vector containing the points in time where the solution is sought. It must be specified within the same period for which the Delta 14 C of the atmosphere is provided. The default period in the provided dataset \code{\link{C14Atm_NH}} is 1900-2010.
      ks,	##<< A vector of length 2 containing the decomposition rates for the 2 pools. 
      C0,	##<< A vector of length 2 containing the initial amount of carbon for the 2 pools.
+     F0_Delta14C,  ##<< A vector of length 2 containing the initial amount of the fraction of radiocarbon for the 2 pools as Delta14C values in per mil.
      In,     ##<< A scalar or a data.frame object specifying the amount of litter inputs by time.
      gam,  ##<< A scalar representing the partitioning coefficient, i.e. the proportion from the total amount of inputs that goes to pool 1.
      xi=1,   ##<< A scalar or a data.frame specifying the external (environmental and/or edaphic) effects on decomposition rates. 
@@ -62,7 +63,7 @@ TwopParallelModel14<-structure(
       
       Fc=FcAtm.from.Dataframe(FcAtm,lag,format="Delta14C")
       
-      mod=GeneralModel_14(t,At,ivList=C0,inputFluxes=inputrates,Fc,di=lambda)
+      mod=GeneralModel_14(t,At,ivList=C0,initialValF=SoilR.F0(F0_Delta14C,"Delta14C"),inputFluxes=inputrates,Fc,di=lambda)
       ### A Model Object that can be further queried 
       ##seealso<< \code{\link{TwopSeriesModel14}}, \code{\link{TwopFeedbackModel14}}  
     }
@@ -73,7 +74,7 @@ TwopParallelModel14<-structure(
       years=seq(1901,2009,by=0.5)
       LitterInput=700 
 
-      Ex=TwopParallelModel14(t=years,ks=c(k1=1/2.8, k2=1/35),C0=c(200,5000), In=LitterInput, gam=0.7,FcAtm=C14Atm_NH,lag=2)
+      Ex=TwopParallelModel14(t=years,ks=c(k1=1/2.8, k2=1/35),C0=c(200,5000), F0_Delta14C=c(0,0),In=LitterInput, gam=0.7,FcAtm=C14Atm_NH,lag=2)
       R14m=getF14R(Ex)
       C14m=getF14C(Ex)
       C14t=getF14(Ex)

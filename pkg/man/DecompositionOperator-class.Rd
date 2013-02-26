@@ -8,7 +8,7 @@
 %% \alias{initialize}
 
 \title{decomposition operator }
-\description{#######################################################}
+\description{NA}
 \section{Objects from the Class}{Objects can be created by calls of the form \code{new(DecompositionOperator ...)}}
 \section{Slots}{
   \describe{

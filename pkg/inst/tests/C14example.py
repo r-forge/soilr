@@ -1,13 +1,14 @@
 from Rexample import *
 class C14example(Rexample):
-    def __init__(self,name,matrix,iv,inputrates,c14fraction):
+    def __init__(self,name,matrix,iv,iF,inputrates,c14fraction):
         super(C14example,self).__init__(name,matrix,iv,inputrates)
         self.name=name+"_c14"
         self.c14fraction=c14fraction
         self.trunk="runit.automatic."+name
         self.addanls14()
+        self.iF=iF
 ####################################################################################
-    def addanls14_fromAbsoluteFractionModern(self,AFM):
+    def addanls14_fromAbsoluteFractionModern(self,AFM,F0_AFM):
         m,inputrates,c_sym_strs,n= self.matrix,self.inputrates,self.c_sym_strs,self.n
         th=5730
         k=log(Rational(1,2))/th
@@ -15,7 +16,7 @@ class C14example(Rexample):
         mn=m+k*I
         t= Symbol("t")
         tau= Symbol("tau")
-        self.anls14=(mn*t).exp()*self.c_sym*AFM+integrate((mn*tau).exp()*inputrates*AFM,(tau,0,t))
+        self.anls14=(mn*t).exp()*F0_AFM.multiply_elementwise(Matrix(self.c_sym_strs))+integrate((mn*tau).exp()*inputrates*AFM,(tau,0,t))
 	self.anlsF14=zeros(n,1)
 	# compute ration and convert to Delta14C format
         for j in range(self.n):
@@ -24,17 +25,40 @@ class C14example(Rexample):
     def addanls14(self):
 	self.analyticCandResp()
         AFM=self.c14fraction
-	self.addanls14_fromAbsoluteFractionModern(AFM)
+	F0=self.symbolicF0()
+	self.addanls14_fromAbsoluteFractionModern(AFM,F0)
+        
+####################################################################################
+    def symbolicF0(self):	
+        n=self.n
+        f_sym_strs=[]
+        f_sym=zeros(n,1)
+        symbolprefix="f0"
+        for i in range(n):
+            fs=symbolprefix+str(i+1)
+            f_sym_strs.append(fs)
+        f_syms=symbols(f_sym_strs)
+        self.f_sym_strs=f_sym_strs	
+        #F0=zeros(n)
+        #for i in range(n):
+        #    F0[i,i]=f_syms[i]
+	F0=Matrix(f_syms)
+        
+        return(F0)
 	    
 
 ####################################################################################
     def setUpVars(self):
         pp=super(C14example,self)
         Text=pp.setUpVars()
+        for j in range(self.n):       
+           Text+=(self.shift+self.f_sym_strs[j]+"="+str(self.iF[j])+"\n")
         Text+="\
+   initialF=SoilR.F0("+rlistprint(self.f_sym_strs,self.shift)+",\n format=\"AbsoluteFractionModern\")\n\
    Fc=new(\"FcAtm\",t_start,t_end,function(t){"+str(self.c14fraction)+"},format=\"AbsoluteFractionModern\")\n\
    th=5730\n\
    k=log(0.5)/th\n"
+
         return(Text)
 ####################################################################################
     def sols(self):
@@ -59,8 +83,9 @@ class C14example(Rexample):
    mod=GeneralModel_14(\n\
     t,\n\
     A,\n"\
-        +rlistprint(self.c_sym_strs,self.shift)\
-        +",\n"+self.shift+"inputrates,\n"\
+        +rlistprint(self.c_sym_strs,self.shift)+",\n"\
+        +self.shift+"initialF,\n"\
+        +self.shift+"inputrates,\n"\
         +self.shift+"Fc,\n"\
         +self.shift+"k,\n"\
         +self.shift+"deSolve.lsoda.wrapper\n   )\n\

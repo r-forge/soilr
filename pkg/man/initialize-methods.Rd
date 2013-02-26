@@ -7,6 +7,7 @@
 \alias{initialize,Model-method}
 \alias{initialize,Model_14-method}
 \alias{initialize,NlModel-method}
+\alias{initialize,SoilR.F0-method}
 \alias{initialize,TimeMap-method}
 \title{ ~~ Methods for Function \code{initialize}  ~~}
 \description{
@@ -36,6 +37,10 @@
 }
 
 \item{\code{signature(.Object = "NlModel")}}{
+%%  ~~describe this method here~~
+}
+
+\item{\code{signature(.Object = "SoilR.F0")}}{
 %%  ~~describe this method here~~
 }
 

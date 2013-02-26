@@ -17,6 +17,7 @@
   \describe{
     \item{\code{c14Fraction}:}{Object of class \code{"TimeMap"}}
     \item{\code{c14DecayRate}:}{Object of class \code{"numeric"}}
+    \item{\code{initialValF}:}{Object of class \code{"SoilR.F0"}}
     \item{\code{times}:}{Object of class \code{"numeric"}}
     \item{\code{mat}:}{Object of class \code{"TimeMap"}}
     \item{\code{initialValues}:}{Object of class \code{"numeric"}}

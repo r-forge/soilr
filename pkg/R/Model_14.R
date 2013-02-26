@@ -31,7 +31,8 @@ setClass(# Model_14
     representation=representation(
         #"Model",                          
         c14Fraction="TimeMap",
-        c14DecayRate="numeric"
+        c14DecayRate="numeric",
+        initialValF="SoilR.F0"
     )
    #,
    #prototype=prototype(
@@ -84,6 +85,9 @@ setMethod(
         ,
         initialValues=numeric()
         ,
+        initialValF=new(Class="SoilR.F0",values=c(0),format="Delta14C")
+
+        ,
         inputFluxes= TimeMap.new(
             0,
             1,
@@ -109,6 +113,7 @@ setMethod(
         .Object@times=times
         .Object@mat=mat
         .Object@initialValues=initialValues
+        .Object@initialValF=initialValF
         .Object@inputFluxes=inputFluxes
         .Object@c14Fraction=c14Fraction
         .Object@c14DecayRate=c14DecayRate
@@ -136,8 +141,7 @@ setMethod(
       # add the C14 decay to the matrix which is done by a diagonal matrix which does not vary over time
       # we assume a half life of th=5730 years
       k=object@c14DecayRate
-      m=matrix(ncol=ns,nrow=ns,0)
-      for (i in 1:ns){m[[i,i]]=k}
+      m=diag(rep(k,ns),nrow=ns) # Need to specify the dimension of the matrix otherwise doesn't work for n=1.
       A_C14=function(t){
           Aorg=A(t)
           newA=Aorg+m
@@ -148,6 +152,7 @@ setMethod(
       input=getFunctionDefinition(itm)
       #get the C14 fraction Fctm (which is a subclass of TimeMap  
       Fctm=object@c14Fraction
+      F0=object@initialValF
       # To do the computations we have to convert the atmospheric C14 fraction into 
       # a format that ensures that no negative values occur because this is assumed
       # by the algorithms that will blow up the solution if this assumption is not 
@@ -155,6 +160,8 @@ setMethod(
       # To this end we convert everything else to the "Absolute Fraction Modern" format
       # that ensures positive values
       Fctm=AbsoluteFractionModern(Fctm)
+      F0=AbsoluteFractionModern(F0)
+      
       Fc=getFunctionDefinition(Fctm)
       input_C14=function(t){
           #we compute the C14 fraction of the input
@@ -164,7 +171,9 @@ setMethod(
       #the initial Values have to be adopted also because
       #in the following computation they describe the intial amount of C_14
       #To do so we multiply them with the value of Fc at the begin of the computation 
-      sVmat=Fc(min(object@times))*matrix(object@initialValues,nrow=ns,ncol=1)
+      inivals=getValues(F0)
+      inivalsFormat=getFormat(F0)
+      sVmat=matrix(inivals*object@initialValues,nrow=ns,ncol=1) # We use here the Hadarmard (entry-wise) product instead of matrix multiplication
       Y=solver(object@times,ydot,sVmat,object@solverfunc) 
       ### A matrix. Every column represents a pool and every row a point in time
       return(Y)

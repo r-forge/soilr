@@ -5,6 +5,7 @@ OnepModel14<-structure(
   (t,    	##<< A vector containing the points in time where the solution is sought. It must be specified within the same period for which the Delta 14 C of the atmosphere is provided. The default period in the provided dataset \code{\link{C14Atm_NH}} is 1900-2010.
    k,	##<< A scalar with the decomposition rate of the pool. 
    C0,	##<<  A scalar containing the initial amount of carbon in the pool.
+   F0_Delta14C,  ##<< A scalar containing the initial amount of the radiocarbon fraction in the pool in Delta_14C format.
    In,     ##<< A scalar or a data.frame object specifying the amount of litter inputs by time.
    xi=1,   ##<< A scalar or a data.frame specifying the external (environmental and/or edaphic) effects on decomposition rates. 
    FcAtm,##<< A Data Frame object consisting of  a function describing the fraction of C_14 in per mille. The first column will be assumed to contain the times.
@@ -18,6 +19,9 @@ OnepModel14<-structure(
     t_stop=max(t)
     if(length(k)!=1) stop("k must be a scalar (length == 1)")
     if(length(C0)!=1) stop("initial conditions must be of length = 1")
+    if(length(F0_Delta14C)!=1) stop("initial 13^C fraction must be of length = 1")
+    C0=c(C0)
+    F0_Delta14C=c(F0_Delta14C)
     
     if(length(In)==1) inputFluxes=new("TimeMap",
                                       t_start,
@@ -54,7 +58,7 @@ OnepModel14<-structure(
     
     Fc=FcAtm.from.Dataframe(FcAtm,lag,format="Delta14C")
     
-    mod=GeneralModel_14(t,At,ivList=C0,inputFluxes=inputFluxes,Fc,di=lambda)
+    mod=GeneralModel_14(t,At,ivList=C0,initialValF=SoilR.F0(F0_Delta14C,"Delta14C"),inputFluxes=inputFluxes,Fc,di=lambda)
     ### A Model Object that can be further queried 
     ##seealso<< \code{\link{OnepModel}}, \code{\link{TwopParallelModel14}}, \code{\link{TwopFeedbackModel14}} 
   }
@@ -65,7 +69,7 @@ OnepModel14<-structure(
     years=seq(1901,2009,by=0.5)
     LitterInput=700 
     
-    Ex=OnepModel14(t=years,k=1/10,C0=500, In=LitterInput, FcAtm=C14Atm_NH)
+    Ex=OnepModel14(t=years,k=1/10,C0=500, F0=0,In=LitterInput, FcAtm=C14Atm_NH)
     C14t=getF14(Ex)
     
     plot(C14Atm_NH,type="l",xlab="Year",ylab="Delta 14C (per mil)",xlim=c(1940,2010)) 

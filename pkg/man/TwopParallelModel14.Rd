@@ -3,12 +3,14 @@
 \title{Implementation of a two-pool C14 model with parallel structure}
 \description{This function creates a model for two independent (parallel) pools. 
 It is a wrapper for the more general function \code{\link{GeneralModel_14}} that can handle an arbitrary number of pools.}
-\usage{TwopParallelModel14(t, ks, C0, In, gam, xi = 1, FcAtm, lambda = -0.0001209681, 
-    lag = 0, solver = deSolve.lsoda.wrapper, pass = FALSE)}
+\usage{TwopParallelModel14(t, ks, C0, F0_Delta14C, In, gam, xi = 1, 
+    FcAtm, lambda = -0.0001209681, lag = 0, solver = deSolve.lsoda.wrapper, 
+    pass = FALSE)}
 \arguments{
   \item{t}{A vector containing the points in time where the solution is sought. It must be specified within the same period for which the Delta 14 C of the atmosphere is provided. The default period in the provided dataset \code{\link{C14Atm_NH}} is 1900-2010.}
   \item{ks}{A vector of length 2 containing the decomposition rates for the 2 pools.}
   \item{C0}{A vector of length 2 containing the initial amount of carbon for the 2 pools.}
+  \item{F0_Delta14C}{A vector of length 2 containing the initial amount of the fraction of radiocarbon for the 2 pools as Delta14C values in per mil.}
   \item{In}{A scalar or a data.frame object specifying the amount of litter inputs by time.}
   \item{gam}{A scalar representing the partitioning coefficient, i.e. the proportion from the total amount of inputs that goes to pool 1.}
   \item{xi}{A scalar or a data.frame specifying the external (environmental and/or edaphic) effects on decomposition rates.}
@@ -32,7 +34,7 @@ data(C14Atm_NH)
 years=seq(1901,2009,by=0.5)
 LitterInput=700 
 
-Ex=TwopParallelModel14(t=years,ks=c(k1=1/2.8, k2=1/35),C0=c(200,5000), In=LitterInput, gam=0.7,FcAtm=C14Atm_NH,lag=2)
+Ex=TwopParallelModel14(t=years,ks=c(k1=1/2.8, k2=1/35),C0=c(200,5000), F0_Delta14C=c(0,0),In=LitterInput, gam=0.7,FcAtm=C14Atm_NH,lag=2)
 R14m=getF14R(Ex)
 C14m=getF14C(Ex)
 C14t=getF14(Ex)

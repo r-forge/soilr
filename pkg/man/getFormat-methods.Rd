@@ -2,6 +2,7 @@
 \docType{methods}
 \alias{getFormat-methods}
 \alias{getFormat,FcAtm-method}
+\alias{getFormat,SoilR.F0-method}
 \title{ ~~ Methods for Function \code{getFormat}  ~~}
 \description{
  ~~ Methods for function \code{getFormat}  ~~
@@ -10,6 +11,10 @@
 \describe{
 
 \item{\code{signature(object = "FcAtm")}}{
+%%  ~~describe this method here~~
+}
+
+\item{\code{signature(object = "SoilR.F0")}}{
 %%  ~~describe this method here~~
 }
 }}

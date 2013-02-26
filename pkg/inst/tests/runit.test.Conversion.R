@@ -7,14 +7,17 @@ test.Conversion=function(){
    print(tol)
    timestep=(t_end-t_start)/tn
    t=seq(t_start,t_end,timestep)
+   th=5730
    A=new("DecompositionOperator",t_start,Inf,function(t){matrix(
      nrow=1,
      ncol=1,
      c(
-        -log(2)/5730
+        -log(2)/th
      )
    )})
-   c01=1
+   c0s=c(1)
+   f0_Delta14C=SoilR.F0(1,format="Delta14C")
+   f0_AFM=AbsoluteFractionModern(f0_Delta14C)
    inputrates=new("TimeMap",t_start,t_end,function(t){return(matrix(
      nrow=1,
      ncol=1,
@@ -24,19 +27,14 @@ test.Conversion=function(){
    ))})
    f_D14C=function(t){0.5*t}
    Fc_D14C=new("FcAtm",t_start,t_end,f_D14C,format="Delta14C")
-   Fc_AFM=new("FcAtm",t_start,t_end,function(t){AbsoluteFractionModern_from_Delta14C(f_D14C(t))},format="AbsoluteFractionModern")
-   th=5730
+   Fc_AFM=AbsoluteFractionModern(Fc_D14C)
    k=log(0.5)/th
-   #Y=matrix(ncol=1,nrow=length(t))
-   #Y[,1]=c01*exp(-t*log(2)/5730)
-  # R=matrix(ncol=1,nrow=length(t))
-  # R[,1]=c01*exp(-t*log(2)/5730)*log(2)/5730
+   
    mod_D14C=GeneralModel_14(
     t,
     A,
-    c(
-       c01
-    ),
+    c0s,
+    f0_Delta14C,
    inputrates,
    Fc_D14C,
    k,
@@ -45,9 +43,8 @@ test.Conversion=function(){
    mod_AFM=GeneralModel_14(
     t,
     A,
-    c(
-       c01
-    ),
+    c0s,
+    f0_AFM,
    inputrates,
    Fc_AFM,
    k,

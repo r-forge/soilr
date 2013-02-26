@@ -3,7 +3,7 @@ setGeneric(
     def=function( # convert its argument to a Delta14C representation
     ### Thfunction returns an object of the same type as its imput
     ### this can be a number a matrix or an object of class FcAtm
-    FcAtm ##<< an object that contains data and a formatdescription.  So it can be converted into the AbsoluteFractionModern format if a conversion is implemented.
+    F ##<< an object that contains data and a formatdescription.  So it can be converted into the AbsoluteFractionModern format if a conversion is implemented.
     ){
         standardGeneric("Delta14C")
     }
@@ -22,7 +22,7 @@ setGeneric(
     def=function( # convert its argument to an Absolute Fraction Modern representation
     ### The function returns an object of the same type as its imput
     ### this can be a number a matrix or an object of class FcAtm
-    FcAtm ##<< an object that contains data and a formatdescription.  So it can be converted into the AbsoluteFractionModern format if a conversion is implemented.
+    F ##<< an object that contains data and a formatdescription.  So it can be converted into the AbsoluteFractionModern format if a conversion is implemented.
     ){
         standardGeneric("AbsoluteFractionModern")
     }
@@ -44,6 +44,16 @@ setGeneric(
     object ##<< usually an object of a subclass of TimeMap
     ){
         standardGeneric("getFormat")
+    }
+)
+setGeneric(
+    name="getValues",
+    def=function( # extract numeric values from an object that contains additional informations like format or even units
+    ### The function returns the actaul  number(s) 
+    ### The more detailed information is to be found in the methods		 
+    object ##<< usually an object of a class implemented by soilR e.g. a startvalue for the 14C fraction. 
+    ){
+        standardGeneric("getValues")
     }
 )
 setMethod(

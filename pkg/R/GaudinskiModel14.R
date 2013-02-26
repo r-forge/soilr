@@ -6,6 +6,7 @@ GaudinskiModel14<-structure(
   (t,      ##<< A vector containing the points in time where the solution is sought. It must be specified within the same period for which the Delta 14 C of the atmosphere is provided. The default period in the provided dataset \code{\link{C14Atm_NH}} is 1900-2010.
    ks=c(kr=1/1.5,koi=1/1.5,koeal=1/4,koeah=1/80,kA1=1/3,kA2=1/75,kM=1/110),	##<< A vector of length 7 containing the decomposition rates for the 6 soil pools plus the fine-root pool. 
    C0=c(FR0=390, C10=220, C20=390, C30=1370, C40=90, C50=1800, C60=560),	##<< A vector of length 7 containing the initial amount of carbon for the 6 pools plus the fine-root pool.
+   F0_Delta14C=rep(0,7), ##<< A vector of length 7 containing the initial amount of the radiocarbon fraction for the 7 pools as Delta14C values in per mil.
    LI=150,     ##<< A scalar or a data.frame object specifying the amount of litter inputs by time.
    RI=255,     ##<< A scalar or a data.frame object specifying the amount of root inputs by time.
    xi=1,   ##<< A scalar or a data.frame specifying the external (environmental and/or edaphic) effects on decomposition rates. 
@@ -65,7 +66,7 @@ GaudinskiModel14<-structure(
     
     Fc=FcAtm.from.Dataframe(FcAtm,lag=lag,format="Delta14C")
     
-    mod=GeneralModel_14(t,At,ivList=C0,inputFluxes=inputFluxes,Fc,di=lambda)
+    mod=GeneralModel_14(t,At,ivList=C0,initialValF=SoilR.F0(F0_Delta14C,"Delta14C"),inputFluxes=inputFluxes,Fc,di=lambda)
     ### A Model Object that can be further queried 
     ##seealso<< \code{\link{ThreepParallelModel14}}, \code{\link{ThreepFeedbackModel14}} 
   }

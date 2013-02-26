@@ -25,8 +25,8 @@ Class \code{"\linkS4class{TimeMap}"}, directly.
 }
 \section{Methods}{
   \describe{
-    \item{AbsoluteFractionModern}{\code{signature(FcAtm = "FcAtm")}: ... }
-    \item{Delta14C}{\code{signature(FcAtm = "FcAtm")}: ... }
+    \item{AbsoluteFractionModern}{\code{signature(F = "FcAtm")}: ... }
+    \item{Delta14C}{\code{signature(F = "FcAtm")}: ... }
     \item{getFormat}{\code{signature(object = "FcAtm")}: ... }
     \item{initialize}{\code{signature(.Object = "FcAtm")}: ... }
 	 }

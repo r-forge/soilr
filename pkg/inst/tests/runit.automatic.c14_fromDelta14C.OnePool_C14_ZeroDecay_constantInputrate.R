@@ -23,6 +23,11 @@ test.OnePool_C14_ZeroDecay_constantInputrate_c14_fromDelta14C=function(){
         1
      )
    ))})
+   f01=1
+   initialF=SoilR.F0(    c(
+       f01
+    ),
+ format="Delta14C")
    Fc=new("FcAtm",t_start,t_end,function(t){0.5},format="Delta14C")
    th=5730
    k=log(0.5)/th
@@ -31,15 +36,16 @@ test.OnePool_C14_ZeroDecay_constantInputrate_c14_fromDelta14C=function(){
    R=matrix(ncol=1,nrow=length(t))
    R[,1]=0
    Y14=matrix(ncol=1,nrow=length(t))
-   Y14[,1]=1.0005*c01*exp(-t*log(2)/5730) + 5732.865/log(2) - 5732.865*exp(-t*log(2)/5730)/log(2)
+   Y14[,1]=c01*(0.001*f01 + 1.0)*exp(-t*log(2)/5730) + 5732.865/log(2) - 5732.865*exp(-t*log(2)/5730)/log(2)
    F14=matrix(ncol=1,nrow=length(t))
-   F14[,1]=-1000 + 1000*(1.0005*c01*exp(-t*log(2)/5730) + 5732.865/log(2) - 5732.865*exp(-t*log(2)/5730)/log(2))/(c01 + t)
+   F14[,1]=-1000 + 1000*(c01*(0.001*f01 + 1.0)*exp(-t*log(2)/5730) + 5732.865/log(2) - 5732.865*exp(-t*log(2)/5730)/log(2))/(c01 + t)
    mod=GeneralModel_14(
     t,
     A,
     c(
        c01
     ),
+   initialF,
    inputrates,
    Fc,
    k,

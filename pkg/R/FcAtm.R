@@ -5,12 +5,12 @@ correctnessOfFcAtm=function#check for unreasonable parameters or unsupported for
 )
 {
    res=TRUE
-   supported_formats=supportedFcAtmFormats()
+   supported_formats=supported14CFractionFormats()
    f=object@format
    print(paste("format=",f))
    if (!any(grepl(f,supported_formats))){
       err_str=cat("The required format:",f," describing the atmospheric c_14 fraction is not supported.\n 
-   	     The supported formats are: ",supported_formats,sep=" ")
+   	     The supported formats are: ",supported_formats,". \n",sep="")
       stop(simpleError(err_str))
       return(res)
    }
@@ -53,22 +53,22 @@ setMethod(
    f= "Delta14C",
       signature("FcAtm"),
       definition=function(# convert to Absolute Fraction Normal values  
-	FcAtm ##<< object of class FcAtm containing the values in any format
+	F ##<< object of class FcAtm containing the values in any format
 	){
 	### convert a FcAtm object containing values in any supported format to the appropriate Absolute Fraction Modern values.
-	f=FcAtm@format
+	f=F@format
         targetFormat="Delta14C"
         if (f==targetFormat){
 	   # do nothing
-	   return(FcAtm)
+	   return(F)
 	}
 	if (f=="AbsoluteFractionModern"){
-	 f_afn=FcAtm@map
+	 f_afn=F@map
          f_d14C=function(t){
 	     fd=Delta14C_from_AbsoluteFractionModern(f_afn(t))
 	 return(fd)
 	 }
-	 D14C=FcAtm
+	 D14C=F
 	 D14C@map=f_d14C
 	 D14C@format=targetFormat
 	 return(D14C)
@@ -80,22 +80,22 @@ setMethod(
    f= "AbsoluteFractionModern",
       signature("FcAtm"),
       definition=function(# convert to Absolute Fraction Normal values  
-	FcAtm ##<< object of class FcAtm containing the values in any format
+	F ##<< object of class FcAtm containing the values in any format
 	){
 	### convert a FcAtm object containing values in any supported format to the appropriate Absolute Fraction Modern values.
-	f=FcAtm@format
+	f=F@format
         targetFormat="AbsoluteFractionModern"
         if (f==targetFormat){
 	   # do nothing
-	   return(FcAtm)
+	   return(F)
 	}
 	if (f=="Delta14C"){
-	 f_d14C=FcAtm@map
+	 f_d14C=F@map
          f_afn=function(t){
 	     fprime=AbsoluteFractionModern_from_Delta14C(f_d14C(t))
 	 return(fprime)
 	 }
-	 AFM_tm=FcAtm
+	 AFM_tm=F
 	 AFM_tm@map=f_afn
 	 AFM_tm@format=targetFormat
 	 return(AFM_tm)

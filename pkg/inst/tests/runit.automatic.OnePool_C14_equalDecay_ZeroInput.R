@@ -23,6 +23,11 @@ test.OnePool_C14_equalDecay_ZeroInput_c14=function(){
         0
      )
    ))})
+   f01=1
+   initialF=SoilR.F0(    c(
+       f01
+    ),
+ format="AbsoluteFractionModern")
    Fc=new("FcAtm",t_start,t_end,function(t){0.5},format="AbsoluteFractionModern")
    th=5730
    k=log(0.5)/th
@@ -31,15 +36,16 @@ test.OnePool_C14_equalDecay_ZeroInput_c14=function(){
    R=matrix(ncol=1,nrow=length(t))
    R[,1]=c01*exp(-t*log(2)/5730)*log(2)/5730
    Y14=matrix(ncol=1,nrow=length(t))
-   Y14[,1]=0.5*c01*exp(-t*log(2)/2865)
+   Y14[,1]=c01*f01*exp(-t*log(2)/2865)
    F14=matrix(ncol=1,nrow=length(t))
-   F14[,1]=-1000 + 500.0*exp(-t*log(2)/5730)
+   F14[,1]=1000*f01*exp(-t*log(2)/5730) - 1000
    mod=GeneralModel_14(
     t,
     A,
     c(
        c01
     ),
+   initialF,
    inputrates,
    Fc,
    k,
