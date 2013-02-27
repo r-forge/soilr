@@ -1,4 +1,4 @@
-RespirationCoefficients=function
+RespirationCoefficients=function #helper function to compute respiration coefficients
 ###This function computes the respiration coefficients as function of time for all pools
 ### according to the given matrix A
 (A ##<< A matrix valued function representing the model.

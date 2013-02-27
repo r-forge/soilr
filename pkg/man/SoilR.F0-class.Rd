@@ -2,7 +2,6 @@
 \Rdversion{1.1}
 \docType{class}
 \alias{SoilR.F0-class}
-\alias{SoilR.F0}
 %% \alias{AbsoluteFractionModern}
 %% \alias{Delta14C}
 %% \alias{getFormat}
