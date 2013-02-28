@@ -27,7 +27,7 @@ test.TwoPool_C14_equalDecay_ZeroInput_c14_fromDelta14C=function(){
    ))})
    f01=1
    f02=2
-   initialF=SoilR.F0(    c(
+   initialF=SoilR.F0.new(    c(
        f01,
        f02
     ),

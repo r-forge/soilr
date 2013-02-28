@@ -64,7 +64,7 @@ ThreepFeedbackModel14<-structure(
     
     Fc=FcAtm.from.Dataframe(FcAtm,lag,format="Delta14C")
     
-    mod=GeneralModel_14(t,At,ivList=C0,initialValF=SoilR.F0(F0_Delta14C,"Delta14C"),inputFluxes=inputFluxes,Fc,di=lambda,solver,pass)
+    mod=GeneralModel_14(t,At,ivList=C0,initialValF=SoilR.F0.new(F0_Delta14C,"Delta14C"),inputFluxes=inputFluxes,Fc,di=lambda,solver,pass)
     ### A Model Object that can be further queried 
     ##seealso<<  \code{\link{GeneralModel_14}} \code{\link{ThreepSeriesModel14}}, \code{\link{ThreepParallelModel14}} 
   }

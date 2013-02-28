@@ -46,7 +46,7 @@ GeneralModel_14=structure(function #The most general costructor for class Model1
       ) 
        
       c0=c(100, 100, 100)
-      F0=SoilR.F0(c(0,10,10),"Delta14C")
+      F0=SoilR.F0.new(c(0,10,10),"Delta14C")
       #constant inputrate
       inputFluxes=new(
         "TimeMap",

@@ -57,7 +57,7 @@ TwopSeriesModel14<-structure(
 
     Fc=FcAtm.from.Dataframe(FcAtm,lag,format="Delta14C")
     
-    mod=GeneralModel_14(t,At,ivList=C0,initialValF=SoilR.F0(F0_Delta14C,"Delta14C"),inputFluxes=inputFluxes,Fc,di=lambda)
+    mod=GeneralModel_14(t,At,ivList=C0,initialValF=SoilR.F0.new(F0_Delta14C,"Delta14C"),inputFluxes=inputFluxes,Fc,di=lambda)
     ### A Model Object that can be further queried 
     ##seealso<< \code{\link{TwopParallelModel14}}, \code{\link{TwopFeedbackModel14}} 
   }

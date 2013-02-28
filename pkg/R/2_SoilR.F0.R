@@ -104,7 +104,7 @@ setMethod(
       stop("conversion not implemented for this format")
       }	 
 )
-SoilR.F0=function # creates an object containing the initial values for the 14C fraction needed to create models in SoilR
+SoilR.F0.new=function # creates an object containing the initial values for the 14C fraction needed to create models in SoilR
     ### The function returns an object of class SoilR.F0 which is a building block for any 14C model in SoilR.
     ### The building blocks of a model have to keep iformation about the formats their data are in, because the high level function dealing wiht the models have to know. This function is actually a convienient wrapper for a call to R's standard constructor new, to hide its complexity from the user.
     (
