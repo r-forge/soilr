@@ -13,4 +13,3 @@ setMethod(
         Object <- callNextMethod(.Object,starttime,endtime,map)
      }
 )
-##########################################################

@@ -1,3 +1,44 @@
+#setMethod(
+#   f= "getAccumulatedRelease14",
+#      ### This function integrates the release Flux over time
+#      signature= "Model_14",
+#      definition=function(object){
+#      times=object@times
+#      R=getReleaseFlux14(object)
+#      n=ncol(R)
+#      #transform the array to a list of functions of time by
+#      #intepolating it with splines
+#      if (n==1) {
+#          Rfuns=list(splinefun(times,R))
+#      }
+#      else{
+#        Rfuns=list(splinefun(times,R[,1]))
+#        for (i in 2:n){
+#            Rf=splinefun(times,R[,i])
+#            Rfuns=append(Rfuns,Rf)
+#        }
+#      }
+#      #test=Rfuns[[1]]
+#      #now we can construct the derivative of the respiration as function of time
+#      #as needed by the ode solver
+#      rdot=function(y,t0){
+#           # the simples possible case for an ode solver is that the ode is
+#           # just an integral and does not depend on the value but only on t
+#           # This is the case here
+#           rv=matrix(nrow=n,ncol=1)
+#           for (i in 1:n){
+#               #print(Rfuns[i])
+#               rv[i,1]=Rfuns[[i]](t0)
+#           }
+#           return(rv)
+#      }
+#      sVmat=matrix(0,nrow=n,ncol=1)
+#      Y=solver(object@times,rdot,sVmat,object@solverfunc)
+#      #### A matrix. Every column represents a pool and every row a point in time
+#      return(Y)
+#   }
+#)
+
 correctnessOfModel14=function#check for unreasonable input parameters to Model constructor
 ### The parameters used by the function \code{\link{GeneralModel_14}} in SoilR have a biological meaning, and therefore cannot be arbitrary.
 ### This functions tests some of the obvious constraints of the general model. 
@@ -289,43 +330,3 @@ setMethod(
   }
   )
 
-#setMethod(
-#   f= "getAccumulatedRelease14",
-#      ### This function integrates the release Flux over time
-#      signature= "Model_14",
-#      definition=function(object){
-#      times=object@times
-#      R=getReleaseFlux14(object)
-#      n=ncol(R)
-#      #transform the array to a list of functions of time by
-#      #intepolating it with splines
-#      if (n==1) {
-#          Rfuns=list(splinefun(times,R))
-#      }
-#      else{
-#        Rfuns=list(splinefun(times,R[,1]))
-#        for (i in 2:n){
-#            Rf=splinefun(times,R[,i])
-#            Rfuns=append(Rfuns,Rf)
-#        }
-#      }
-#      #test=Rfuns[[1]]
-#      #now we can construct the derivative of the respiration as function of time
-#      #as needed by the ode solver
-#      rdot=function(y,t0){
-#           # the simples possible case for an ode solver is that the ode is
-#           # just an integral and does not depend on the value but only on t
-#           # This is the case here
-#           rv=matrix(nrow=n,ncol=1)
-#           for (i in 1:n){
-#               #print(Rfuns[i])
-#               rv[i,1]=Rfuns[[i]](t0)
-#           }
-#           return(rv)
-#      }
-#      sVmat=matrix(0,nrow=n,ncol=1)
-#      Y=solver(object@times,rdot,sVmat,object@solverfunc)
-#      #### A matrix. Every column represents a pool and every row a point in time
-#      return(Y)
-#   }
-#)
