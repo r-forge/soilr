@@ -4,4 +4,3 @@ v=$(awk '/^Version/{print $2}' pkg/DESCRIPTION)
 command="R CMD INSTALL SoilR_${v}.tar.gz"
 echo $command
 eval $command
-
