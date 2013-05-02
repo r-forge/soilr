@@ -1,0 +1,8 @@
+linMaker=function(
+	nonLinearPoolOutput,
+	globalSolution,
+	poolSolution)
+	{
+	   function(Y,t){
+	   Y*nonLinearPoolOutput(globalSolution(t),t)/poolSolution(t)}
+}

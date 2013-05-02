@@ -73,10 +73,10 @@ Uncommenting the following code shows all datasets that come with the package.
 <<echo=F,print=FALSE>>=
 require("SoilR")
 @
-%<<echo=true,print=FALSE>>=
-%#library(SoilR)
-%#data(package="SoilR")
-%@
+<<echo=true,print=FALSE>>=
+#library(SoilR)
+#data(package="SoilR")
+@
 We load the following:
 <<echo=true,print=FALSE>>=
 data(CourseExample_R14)
@@ -262,63 +262,62 @@ pf<-function(ks,pass=FALSE){
             pass=pass
     ) 
     Cs=getC(mod)
-    print("pf")
     R14t=getF14R(mod)
     return(data.frame(time=time,R14t=R14t,C1=Cs[,1],C2=Cs[,2]))
 }
 @
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-<<echo=False,print=True>>=
-# this invisible section is used to create a new dataset
- t_end=2008
- t_start=t_end-30
- data(C14Atm_NH)
- indices=(C14Atm_NH$YEAR>=t_start & C14Atm_NH$YEAR < t_end)
- time=C14Atm_NH$YEAR[indices]
- C0=c(0.5,0.5)
- F0=c(0,0)
- 
- l=length(time)
- iC=seq(1,l,4)
- In=rep(0.05,length(iC))
- stdIn=0.05*max(In)
- errIn=rnorm(sd=stdIn,n=length(In))
- DataI <- data.frame(
-     time=time[iC],
-     In  =  In+errIn
-     ,
-     sd=stdIn
- )
- pars=c(k1=-0.3,k2=-0.5)
- Df<-pf(pars)
- #Now we first select a view points, disturb the data and plot it \figref{fig:distdata}. 
- iR14=seq(1,l,8)
- #iR14=c(1,l)
- stdC=0.2*max(Df$C1)
- std14=0.2*max(Df$R14t)
- errR14=rnorm(sd=std14,n=length(iR14))
- errC1=rnorm(sd=stdC,n=length(iC))
- errC2=rnorm(sd=stdC,n=length(iC))
-DataR14 <- data.frame(
-    time=time[iR14],
-    R14t=Df$R14t[iR14]+errR14,
-    sd=std14
-    )
-DataC <- data.frame(
-    time=time[iC],
-    C1  =  Df$C1[iC]+errC1,
-    C2  =  Df$C2[iC]+errC2,
-    sd=stdC
-)
-# #the next line has to be commented out for the real vignette
-# datadir="/home/mm/SoilR/RPackages/SoilR/pkg/data/"
-# save(DataR14,DataC,DataI,file=paste(datadir,"CourseExample_R14",".rda",sep=""),ascii=TRUE)
-# save(DataR14,file=paste(datadir,"DataR14",".rda",sep=""),ascii=TRUE)
-# save(DataC,file=paste(datadir,"DataC",".rda",sep=""),ascii=TRUE)
-# save(DataI,file=paste(datadir,"DataI",".rda",sep=""),ascii=TRUE)
-@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%<<echo=False,print=False>>=
+%# this invisible section is used to create a new dataset
+% t_end=2008
+% t_start=t_end-30
+% data(C14Atm_NH)
+% indices=(C14Atm_NH$YEAR>=t_start & C14Atm_NH$YEAR < t_end)
+% time=C14Atm_NH$YEAR[indices]
+% C0=c(0.5,0.5)
+% F0=c(0,0)
+% 
+% l=length(time)
+% iC=seq(1,l,4)
+% In=rep(0.05,length(iC))
+% stdIn=0.05*max(In)
+% errIn=rnorm(sd=stdIn,n=length(In))
+% DataI <- data.frame(
+%     time=time[iC],
+%     In  =  In+errIn
+%     ,
+%     sd=stdIn
+% )
+% pars=c(k1=-0.3,k2=-0.5)
+% Df=pf(pars)
+% #Now we first select a view points, disturb the data and plot it \figref{fig:distdata}. 
+% iR14=seq(1,l,8)
+% #iR14=c(1,l)
+% stdC=0.2*max(Df$C1)
+% std14=0.2*max(Df$R14t)
+% errR14=rnorm(sd=std14,n=length(iR14))
+% errC1=rnorm(sd=stdC,n=length(iC))
+% errC2=rnorm(sd=stdC,n=length(iC))
+% DataR14 <- data.frame(
+%     time=time[iR14],
+%     R14t=Df$R14t[iR14]+errR14,
+%     sd=std14
+%     )
+% DataC <- data.frame(
+%     time=time[iC],
+%     C1  =  Df$C1[iC]+errC1,
+%     C2  =  Df$C2[iC]+errC2,
+%     sd=stdC
+% )
+% #the next line has to be commented out for the real vignette
+% datadir="/home/mm/SoilR/RPackages/SoilR/pkg/data/"
+% save(DataR14,DataC,DataI,file=paste(datadir,"CourseExample_R14",".rda",sep=""),ascii=TRUE)
+% save(DataR14,file=paste(datadir,"DataR14",".rda",sep=""),ascii=TRUE)
+% save(DataC,file=paste(datadir,"DataC",".rda",sep=""),ascii=TRUE)
+% save(DataI,file=paste(datadir,"DataI",".rda",sep=""),ascii=TRUE)
+%@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 We produce a dataset of arbitrarily chosen parameters $k_1$ and $k_2$  and plot it together with the data:
 \begin{figure}[h]
 \label{fig:distdata3}
@@ -326,8 +325,6 @@ We produce a dataset of arbitrarily chosen parameters $k_1$ and $k_2$  and plot 
 pars=c(k1=-0.1,k2=-0.2)
 Df=pf(pars)
 c1="black"; c2="red";lty1=1;lty2=2
-plot(1:20,1:20)
-print(DataC[,"time"])
 plot(DataC[,"time"],
      DataC[,"C1"],
      col=c1,lty=lty1,
@@ -403,7 +400,7 @@ This expresses the fact that we treat errors of different observables differentl
 @
     \caption{The (error) weighted residuals.}
 \end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\clearpage
 Since we now have a measure for the cost we can use fully \FME \, functionality; e.g. determine how sensitive this cost is to changes in our parameters, which helps us to detect unidentifiable parameters. 
 To do so we  create the sensitivity functions.
@@ -490,45 +487,45 @@ legend("topright",
     lines(Dfinal$time,Dfinal$R14t,lty=lty2,col=c2)
 @
 \end{figure}
-% begin Bayesian part
-Usually we are not only interested in the best fitting parameters, but rather in the distribution of the parameters. We can estimate them with the Monte Carlo Markov Chain method that is also part of \FME.  
-Once again we refer to the \FME 's vignette for details.
-\begin{figure}
-<<echo=true,print=false,fig=true>>=
-    #var0 <- Fit$var_ms_unweighted
-    #cov0 <- summary(Fit)$cov.scaled#*2.4^2/5
-    #p=Fit$par
-    niter=200
-    t1=Sys.time()
-    MCMC  <- modMCMC(f=DfCost,niter=niter,p=Fit$par)
-    t2=Sys.time()
+%% begin Bayesian part
+%Usually we are not only interested in the best fitting parameters, but rather in the distribution of the parameters. We can estimate them with the Monte Carlo Markov Chain method that is also part of \FME.  
+%Once again we refer to the \FME 's vignette for details.
+%\begin{figure}
+%<<echo=true,print=false,fig=true>>=
+%    #var0 <- Fit$var_ms_unweighted
+%    #cov0 <- summary(Fit)$cov.scaled#*2.4^2/5
+%    #p=Fit$par
+%    niter=500
+%    t1=Sys.time()
+%    MCMC  <- modMCMC(f=DfCost,niter=niter,p=Fit$par)
+%    t2=Sys.time()
+%
+%    print(t1-t2)
+%    summary(MCMC)
+%    plot(MCMC, Full = TRUE)
+%@
+%    \caption{The plot shows the accepted values for each parameter. It can be used to identify situations where there is doubt if the collected values represent the equilibrium distribution of the chain}
+%\end{figure}
+%\begin{figure}
+%<<echo=true,print=false,fig=true>>=
+%    sR=sensRange(func=pf, parInput=MCMC$par)
+%    plot(summary(sR)
+%         ,xlab="Years"
+%     )
+%@
+%    \caption{The plot shows the range for the model output based on the estimated 
+%    distribution of the parameters }
+%\end{figure}
+%
+%\begin{figure}
+%<<echo=true,print=false,fig=true>>=
+%    pairs(MCMC, nsample = niter/4)
+%@
+%    \caption{This plot is the analogon of the pairs plot for the sensitivity}  
+%\end{figure}
 
-    print(t1-t2)
-    summary(MCMC)
-    plot(MCMC, Full = TRUE)
-@
-    \caption{The plot shows the accepted values for each parameter. It can be used to identify situations where there is doubt if the collected values represent the equilibrium distribution of the chain}
-\end{figure}
-\begin{figure}
-<<echo=true,print=false,fig=true>>=
-    sR=sensRange(func=pf, parInput=MCMC$par)
-    plot(summary(sR)
-         ,xlab="Years"
-     )
-@
-    \caption{The plot shows the range for the model output based on the estimated 
-    distribution of the parameters }
-\end{figure}
 
-\begin{figure}
-<<echo=true,print=false,fig=true>>=
-    pairs(MCMC, nsample = niter/4)
-@
-    \caption{This plot is the analogon of the pairs plot for the sensitivity}  
-\end{figure}
-
-
-%\clearpage
+\clearpage
 %\bibliographystyle{abbrvnat}
 \bibliography{../../../../../doc/SoilRv1/SoilR.bib}
 \end{document}

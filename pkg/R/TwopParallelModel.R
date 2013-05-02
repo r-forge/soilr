@@ -53,7 +53,7 @@ TwopParallelModel<-structure(
         t_stop,
         function(times){fX(t)*(-1*abs(ks))}
       )
-      res=ParallelModel(t,coeffs,startvalues=C0,inputrates,solver)
+      res=ParallelModel(t,coeffs,startvalues=C0,inputrates,solver,pass=pass)
       ### A Model Object that can be further queried 
       ##seealso<< \code{\link{ThreepParallelModel}} 
     }

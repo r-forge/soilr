@@ -1,9 +1,13 @@
 #!/usr/bin/Rscript
 #library("SoilR")
 source("prolog.R")
+#Res=runTestFile("runit.MeanAge.R")
+Res=runTestFile("runit.NonlinearAtmosphericModel.R")
+#Res=runTestFile("runit.TimeReversedSolution.R")
+#Res=runTestFile("runit.BackwardTransferTime.R")
 #attr(GeneralModel_14,"ex")()
 #Res=runTestFile("runit.test.FcAtm.R")
-Res=runTestFile("runit.test.Conversion.R")
+#Res=runTestFile("runit.test.Conversion.R")
 #Res=runTestFile("runit.test.Model.R")
 #Res=runTestFile("runit.test.Model_14.R")
 #Res=runTestFile("runit.manuell.Manzoni.TwopFeedback.R")
@@ -14,7 +18,7 @@ Res=runTestFile("runit.test.Conversion.R")
 #Res=runTestFile("runit.test.manual.index.R")
 #Res=runTestFile("runit.test.Conversion.R")
 #Res=runTestFile("runit.test.SoilRF0.R")
-#printTextProtocol(Res)
-#ef=getErrors(Res)
-#n=ef$nErr+ef$nFail
-#if (n>0) {stop(1)}
+printTextProtocol(Res)
+ef=getErrors(Res)
+n=ef$nErr+ef$nFail
+if (n>0) {stop(1)}

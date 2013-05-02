@@ -47,7 +47,7 @@ At=new(Class="DecompositionOperator",
 ) 
  
 c0=c(100, 100, 100)
-F0=SoilR.F0(c(0,10,10),"Delta14C")
+F0=SoilR.F0.new(c(0,10,10),"Delta14C")
 #constant inputrate
 inputFluxes=new(
   "TimeMap",

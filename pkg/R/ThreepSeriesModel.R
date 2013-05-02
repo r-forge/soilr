@@ -50,7 +50,7 @@ ThreepSeriesModel<-structure(
             t_end,
             function(t){fX(t)*A}
       )
-      Mod=GeneralModel(t=t,A=Af,ivList=C0,inputFluxes=inputFluxes)
+      Mod=GeneralModel(t=t,A=Af,ivList=C0,inputFluxes=inputFluxes,pass=pass)
      return(Mod)
 ### A Model Object that can be further queried 
       ##seealso<< \code{\link{ThreepParallelModel}}, \code{\link{ThreepFeedbackModel}} 

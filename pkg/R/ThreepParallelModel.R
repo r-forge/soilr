@@ -10,7 +10,8 @@ ThreepParallelModel=structure(
        gam1,   ##<< A scalar representing the partitioning coefficient, i.e. the proportion from the total amount of inputs that goes to pool 1.
        gam2,   ##<< A scalar representing the partitioning coefficient, i.e. the proportion from the total amount of inputs that goes to pool 2.
        xi=1,   ##<< A scalar or a data.frame specifying the external (environmental and/or edaphic) effects on decomposition rates. 
-       solver=deSolve.lsoda.wrapper 	##<< A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.
+       solver=deSolve.lsoda.wrapper, 	##<< A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.
+       pass=FALSE
       )
       {
         t_start=min(t)
@@ -45,7 +46,7 @@ ThreepParallelModel=structure(
       
       coeffs_tm=TimeMap.new(min(t),max(t),function(times){fX(t)*(-1*abs(ks))})  
         
-     res=ParallelModel(t,coeffs_tm,startvalues=C0,inputrates_tm,solver)
+     res=ParallelModel(t,coeffs_tm,startvalues=C0,inputrates_tm,solver,pass=pass)
    ### A  Model Object that can be further queried
    ##seealso<< \code{\link{TwopParallelModel}} and \code{\link{ParallelModel}} 
 }

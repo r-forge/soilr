@@ -13,7 +13,8 @@ GaudinskiModel14<-structure(
    FcAtm,##<< A Data Frame object containing values of atmospheric Delta14C per time. First column must be time values, second column must be Delta14C values in per mil.
    lambda=-0.0001209681, ##<< Radioactive decay constant. By default lambda=-0.0001209681 y^-1 . This has the side effect that all your time related data are treated as if the time unit was year.
    lag=0, ##<< A positive integer representing a time lag for radiocarbon to enter the system. 
-   solver=deSolve.lsoda.wrapper ##<< A function that solves the system of ODEs. This can be \code{\link{euler}} or  any other user provided function with the same interface.
+   solver=deSolve.lsoda.wrapper, ##<< A function that solves the system of ODEs. This can be \code{\link{euler}} or  any other user provided function with the same interface.
+ pass=FALSE  ##<< if TRUE Forces the constructor to create the model even if it is invalid 
    )	
 { 
     t_start=min(t)
@@ -66,7 +67,7 @@ GaudinskiModel14<-structure(
     
     Fc=FcAtm.from.Dataframe(FcAtm,lag=lag,format="Delta14C")
     
-    mod=GeneralModel_14(t,At,ivList=C0,initialValF=SoilR.F0.new(F0_Delta14C,"Delta14C"),inputFluxes=inputFluxes,Fc,di=lambda)
+    mod=GeneralModel_14(t,At,ivList=C0,initialValF=SoilR.F0.new(F0_Delta14C,"Delta14C"),inputFluxes=inputFluxes,Fc,di=lambda,pass=pass)
     ### A Model Object that can be further queried 
     ##seealso<< \code{\link{ThreepParallelModel14}}, \code{\link{ThreepFeedbackModel14}} 
   }

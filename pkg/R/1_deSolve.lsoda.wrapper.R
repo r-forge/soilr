@@ -10,18 +10,20 @@ deSolve.lsoda.wrapper=function(
 	       ){
    
    parms=NULL
-   my.atol <- 1e-6
-   rtol=1e-4
+   #my.atol <- 1e-6
+   #rtol=1e-4
    lsexamp <- function(t, y,parms)
      {
 	yv=cbind(y)
 	YD=ydot(y,t)
 	yd=as.vector(YD)
-       #list(yd,c(massbalance=sum(y))) we could add other output parameter if we are interested
+       #list(yd,c(massbalance=sum(y))) we could add other output parameter if we were interested
        list(yd)
      }
    require(deSolve)
-   out <- lsoda(startValues,t,lsexamp, parms, rtol, atol= my.atol)
+   #out <- lsoda(startValues,t,lsexamp, parms, rtol, atol= my.atol)
+   out <- lsoda(startValues,t,lsexamp)
+   #out <- rk(startValues,t,lsexamp,parms)
       #print(paste("out=",out))
       #print(out)
    # The output of lsoda is unsuiteable for our needs for two reasons
