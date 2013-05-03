@@ -10,6 +10,7 @@ export(
    TimeMap.from.Dataframe,
    TwopParallelModel14,
    getTimeRange,
-   getF14R
+   getF14R,
+   SoilR.F0
 )
 
