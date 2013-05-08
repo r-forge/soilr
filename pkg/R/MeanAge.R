@@ -1,4 +1,10 @@
-MeanAge=function(IdotT,OdotLin,sol,times){
+MeanAge=function# mean age for a general one pool model
+### The function computes the mean age for one pool of a possibly nonlinear model
+(IdotT,	##<< The inputrate as a function of time 
+OdotLin,##<< The outputrate of this pool as a linear operator (a function of y and t)
+sol,	##<< The solution of the nonlinear equation for this pool as a function of time
+times 	##<< A vector containing the points in time where the solution is sought.
+){
 rho=function(a,tk){
 	startTime=tk-a
 	#startVal=IdotT(startTime)
@@ -21,9 +27,16 @@ return(res)
 
 res=sapply(times,E)
 return(res)
+   ### A vector containing the mean age for the specified times
 }
 ########################################################
-MeanAge2=function(IdotT,OdotLin,sol,times){
+MeanAge2=function# mean age for a general one pool model
+### The function computes the mean age for one pool of a possibly nonlinear model
+(IdotT,	##<< The inputrate as a function of time 
+OdotLin,##<< The outputrate of this pool as a linear operator (a function of y and t)
+sol,	##<< The solution of the nonlinear equation for this pool as a function of time
+times 	##<< A vector containing the points in time where the solution is sought.
+){
    require(parallel)
    maxage=max(times)-min(times)
 fineTimes=(seq(sqrt(min(times)),sqrt(max(times)),sqrt(maxage)/10000))^2   
@@ -44,9 +57,16 @@ return(res)
 
 res=mcmapply(E,times,mc.cores=16)
 return(res)
+   ### A vector containing the mean age for the specified times
 }
 ########################################################
-MeanAge3=function(IdotT,OdotLin,sol,times){
+MeanAge3=function# mean age for a general one pool model
+### The function computes the mean age for one pool of a possibly nonlinear model
+(IdotT,	##<< The inputrate as a function of time 
+OdotLin,##<< The outputrate of this pool as a linear operator (a function of y and t)
+sol,	##<< The solution of the nonlinear equation for this pool as a function of time
+times 	##<< A vector containing the points in time where the solution is sought.
+){
    require(parallel)
 so=solver(times,OdotLin,1)
 #we assume that the startvalue is the result of an input in the first timestep
@@ -99,4 +119,5 @@ dev.off()
 #lapply(times,E)
 res=mclapply(times,E,mc.cores=16)
 return(res)
+   ### A vector containing the mean age for the specified times
 }

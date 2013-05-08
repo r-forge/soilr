@@ -1,4 +1,8 @@
-MeanTT=function(OdotLin,times){
+MeanTT=function# mean transit time for a general one pool model
+### The function computes the mean transit time for one pool of a possibly nonlinear model
+(OdotLin,	##<< The outputrate of this pool as a linear operator (a function of y and t)
+times		##<< A vector containing the points in time where the solution is sought.
+){
 
    	 tstart=min(times)
    	 tend=max(times)
@@ -39,10 +43,11 @@ MeanTT=function(OdotLin,times){
    	   col=c(c[1],c[2])
    	 )
    	 #lines(times,impulsiveInputSolution(times),col=c[2],lty=lts[2])
-   	 ## to get the mean age we have to multiply the density with the age
+   	 ## to get the mean transit time we have to multiply the density with the age
    	 ######################################################################
    	 phiTT=function(Y,tt){phiOde(Y,tt)*tt}
    	 mean_TT=solver(times,phiTT,0)
    	 plot(times,mean_TT,col=c[4],lty=lts[1])#,ylim=c(0,1))
 	 return(mean_TT)
+   ### A vector containing the mean transit time for the specified times
    }

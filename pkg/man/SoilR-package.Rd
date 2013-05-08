@@ -7,7 +7,7 @@
 \details{
 \tabular{ll}{Package: \tab SoilR\cr
 Title: \tab Models of Soil Organic Matter Decomposition\cr
-Version: \tab 1.0-5\cr
+Version: \tab 1.0-6\cr
 Date: \tab 2012-03-28\cr
 Author: \tab Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>\cr
 Maintainer: \tab Markus Mueller <mamueller@bgc-jena.mpg.de>\cr

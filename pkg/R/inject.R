@@ -1,1 +1,0 @@
-inject=function(fun,...){fun(...)}

@@ -1,6 +1,11 @@
-vecFuncMaker=function(funcs,arg1,arg2)
+vecFuncMaker=function# creates a vector valued function from the functions for the components
+### The function is a helper to create a vector valued function of two arguments which is very useful to create systems of ode
+(
+funcs,	##<< The list of functions computing the vector components
+arg1,   ##<< The first argument of the component functions
+arg2	##<< The second argument of the component functions
+)
 {
-	#require(parallel)
 	function(arg1,arg2){
 		matrix(byrow=TRUE,
 			nrow=length(funcs),
@@ -10,4 +15,6 @@ vecFuncMaker=function(funcs,arg1,arg2)
 			)
 		)
 	}
+	### A vector valued function with the vector size equal to the number of 
+	### functions in the first argument
 }
