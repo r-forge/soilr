@@ -32,8 +32,8 @@ TwopFeedbackModel14<-structure(
       y=In[,2]  
       inputFlux=function(t0){as.numeric(spline(x,y,xout=t0)[2])}
       inputFluxes=new("TimeMap",
-                      t_start,
-                      t_stop,
+                      min(x),
+                      max(x),
                       function(t){matrix(nrow=2,ncol=1,c(inputFlux(t),0))}
                       )   
     }
@@ -69,7 +69,6 @@ TwopFeedbackModel14<-structure(
   ,
   ex=function(){
     
-    data(C14Atm_NH)
     years=seq(1901,2009,by=0.5)
     LitterInput=700 
     

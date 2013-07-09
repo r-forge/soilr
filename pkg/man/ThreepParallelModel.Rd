@@ -8,7 +8,7 @@
 \arguments{
   \item{t}{A vector containing the points in time where the solution is sought.}
   \item{ks}{A vector of length 3 containing the decomposition rates for the 3 pools.}
-  \item{C0}{A vector of length 2 containing the initial amount of carbon for the 2 pools.}
+  \item{C0}{A vector of length 3 containing the initial amount of carbon for the 3 pools.}
   \item{In}{A scalar or a data.frame object specifying the amount of litter inputs by time.}
   \item{gam1}{A scalar representing the partitioning coefficient, i.e. the proportion from the total amount of inputs that goes to pool 1.}
   \item{gam2}{A scalar representing the partitioning coefficient, i.e. the proportion from the total amount of inputs that goes to pool 2.}

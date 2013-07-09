@@ -7,3 +7,4 @@ Maintainer: Markus Mueller <mamueller@bgc-jena.mpg.de>
 Description: This package contains functions for modeling Soil Organic Matter decomposition in terrestrial ecosystems.
 License: GPL-3
 Depends:deSolve,methods,hash,FME,MASS,lattice
+LazyData: TRUE

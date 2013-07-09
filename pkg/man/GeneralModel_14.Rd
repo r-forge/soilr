@@ -60,7 +60,6 @@ inputFluxes=new(
 # the Absolute Fraction Modern format.
 # This means that all the other data provided are assumed to have the same value
 # This is especially true for the decay constants to be specified later
-data(C14Atm_NH)
 Fc=FcAtm.from.Dataframe(C14Atm_NH,format="Delta14C")
 # add the C14 decay to the matrix which is done by a diagonal matrix which does not vary over time
 # we assume a half life th=5730 years

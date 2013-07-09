@@ -33,7 +33,6 @@ It is a wrapper for the more general function \code{\link{GeneralModel_14}} that
 \seealso{\code{\link{ThreepParallelModel14}}, \code{\link{ThreepFeedbackModel14}} }
 \examples{
 
-data(C14Atm_NH,HarvardForest14CO2)
 years=seq(1901,2010,by=0.5)
 
 Ex=GaudinskiModel14(t=years,ks=c(kr=1/3,koi=1/1.5,koeal=1/4,koeah=1/80,kA1=1/3,kA2=1/75,kM=1/110),FcAtm=C14Atm_NH)

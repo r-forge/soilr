@@ -16,7 +16,6 @@ $^{14}C$  fraction in per mille
   }
 }
 \examples{
-data(C14Atm)
-## maybe str(C14Atm) ; plot(C14Atm) ...
+plot(C14Atm, type="l")
 }
 \keyword{datasets}

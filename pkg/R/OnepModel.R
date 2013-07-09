@@ -24,14 +24,18 @@ OnepModel<-structure(
         )
       }
       if(class(In)=="data.frame"){
+         print("blubberer")
+	 print(class(In))
          x=In[,1]  
+	 print(min(x))
          y=In[,2]  
          inputFlux=splinefun(x,y)
           inputFluxes=TimeMap.new(
-            t_start,
-            t_end,
+            min(x),
+            max(x),
             function(t){matrix(nrow=1,ncol=1,inputFlux(t))}
           )
+	  print(inputFluxes)
         }
       A=-1*abs(matrix(k,1,1))
       

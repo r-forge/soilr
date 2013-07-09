@@ -5,7 +5,7 @@ ThreepParallelModel=structure(
       (
        t,	##<< A vector containing the points in time where the solution is sought.
        ks,  ##<< A vector of length 3 containing the decomposition rates for the 3 pools. 
-       C0,	##<< A vector of length 2 containing the initial amount of carbon for the 2 pools.
+       C0,	##<< A vector of length 3 containing the initial amount of carbon for the 3 pools.
        In,     ##<< A scalar or a data.frame object specifying the amount of litter inputs by time.
        gam1,   ##<< A scalar representing the partitioning coefficient, i.e. the proportion from the total amount of inputs that goes to pool 1.
        gam2,   ##<< A scalar representing the partitioning coefficient, i.e. the proportion from the total amount of inputs that goes to pool 2.
@@ -31,8 +31,8 @@ ThreepParallelModel=structure(
          y=In[,2]  
          inputrate=function(t0){as.numeric(spline(x,y,xout=t0)[2])}
          inputrates_tm=TimeMap.new(
-            t_start,
-            t_end,
+            min(x),
+            max(x),
             function(t){matrix(nrow=3,ncol=1,c(gam1*inputrate(t),gam2*inputrate(t),(1-gam1-gam2)*inputrate(t)))}
          )
         }

@@ -34,7 +34,6 @@ A vector of length 3 containing the initial fraction of radiocarbon for the 3 po
 \seealso{\code{\link{GeneralModel_14}} \code{\link{ThreepSeriesModel14}}, \code{\link{ThreepParallelModel14}} }
 \examples{
 
-data(C14Atm_NH)
 years=seq(1901,2009,by=0.5)
 LitterInput=700 
 

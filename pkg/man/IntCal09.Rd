@@ -19,7 +19,7 @@ Atmospheric radiocarbon data from Reimer et al. (2009). This is the standard age
   }
 }
 \details{
-Deltal.14C is age-corrected as per Stuiver and Polach (1977). All details about the derivation of this dataset are provided in Reimer et al. (2009).
+\code{Deltal.14C} is age-corrected as per Stuiver and Polach (1977). All details about the derivation of this dataset are provided in Reimer et al. (2009).
 }
 
 \source{
@@ -35,7 +35,15 @@ P. Reimer, M.Baillie, E. Bard, A. Bayliss, J. Beck, P. Blackwell, C. Ramsey, C. 
 M. Stuiver and H. A. Polach. 1977. Rerporting of C-14 data. Radiocarbon, 19(3):355 - 363.
 }
 \examples{
-data(IntCal09)
-plot(IntCal09$CAL.BP,IntCal09$Delta.14C,type="l")
+
+par(mfrow=c(2,1))
+plot(IntCal09$CAL.BP,IntCal09$C14.age,type="l",xlab="Calibrated age (years BP)",ylab="Conventional radiocarbon age")
+polygon(x=c(IntCal09$CAL.BP,rev(IntCal09$CAL.BP)),y=c(IntCal09$C14.age+IntCal09$Error,rev(IntCal09$C14.age-IntCal09$Error)),col="gray",border=NA)
+lines(IntCal09$CAL.BP,IntCal09$C14.age)
+
+plot(IntCal09$CAL.BP,IntCal09$Delta.14C,type="l",xlab="Calibrated age (years BP)",ylab=expression(paste(Delta^14,"C (\u2030)")))
+polygon(x=c(IntCal09$CAL.BP,rev(IntCal09$CAL.BP)),y=c(IntCal09$Delta.14C+IntCal09$Sigma,rev(IntCal09$Delta.14C-IntCal09$Sigma)),col="gray",border=NA)
+lines(IntCal09$CAL.BP,IntCal09$Delta.14C)
+par(mfrow=c(1,1))
 }
 \keyword{datasets}

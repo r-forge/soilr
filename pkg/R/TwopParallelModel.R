@@ -28,8 +28,8 @@ TwopParallelModel<-structure(
          y=In[,2]  
          inputrate=function(t0){as.numeric(spline(x,y,xout=t0)[2])}
          inputrates=TimeMap.new(
-            t_start,
-            t_stop,
+            min(x),
+            max(x),
             function(t){
                 matrix(nrow=2,ncol=1,
                     c(

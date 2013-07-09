@@ -30,7 +30,6 @@ It is a wrapper for the more general function \code{\link{GeneralModel_14}} that
 \seealso{\code{\link{TwopParallelModel14}}, \code{\link{TwopFeedbackModel14}} }
 \examples{
 
-data(C14Atm_NH)
 years=seq(1901,2009,by=0.5)
 LitterInput=700 
 

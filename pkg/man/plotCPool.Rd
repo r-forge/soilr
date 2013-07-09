@@ -5,9 +5,9 @@
 \usage{plotCPool(t, mat, col, ...)}
 \arguments{
   \item{t}{A vector containing the time points for plotting.}
-  \item{mat}{A matrix object obtained after a call to \code{\link{getC14}}}
+  \item{mat}{A matrix object obtained after a call to \code{\link{getC}} or \code{\link{getReleaseFlux}}}
   \item{col}{A color palette specifying color lines for each pool (columns of \code{mat}).}
-  \item{\dots}{Other arguments passed to \code{plot}.}
+  \item{\dots}{Other arguments passed to \code{link{plot}}.}
 }
 
 
@@ -18,7 +18,6 @@
 
 
 \examples{
-data(C14Atm_NH)
 years=seq(1901,2009,by=0.5)
 LitterInput=700 
 

@@ -2,9 +2,9 @@ plotCPool<-structure(
   function #Plots the output of \code{\link{getC}} or \code{\link{getReleaseFlux}} for each pool over time
   ### This function produces a plot with the C content or released C for each pool over time. Needs as input a matrix obtained after a call to \code{\link{getC}} or \code{\link{getReleaseFlux}}.
   (t,  ##<< A vector containing the time points for plotting.
-   mat, ##<< A matrix object obtained after a call to \code{\link{getC14}}
+   mat, ##<< A matrix object obtained after a call to \code{\link{getC}} or \code{\link{getReleaseFlux}}
    col,   ##<< A color palette specifying color lines for each pool (columns of \code{mat}).
-   ...    ##<< Other arguments passed to \code{plot}.
+   ...    ##<< Other arguments passed to \code{link{plot}}.
   )
   {
     n=dim(mat)[2]
@@ -15,7 +15,6 @@ plotCPool<-structure(
   }
   ,
   ex=function(){
-    data(C14Atm_NH)
     years=seq(1901,2009,by=0.5)
     LitterInput=700 
     

@@ -59,6 +59,18 @@ if (!any(grepl(f,supported_formats))){
 	     The supported formats are: ",supported_formats,sep="")
    stop(simpleError(err_str))
 }
+t_min=min(object@times)
+t_max=max(object@times)
+tA_min=getTimeRange(atm_c14)["t_min"]
+tA_max=getTimeRange(atm_c14)["t_max"]
+    if (t_min<tA_min) {
+        stop(simpleError("You ordered a timeinterval that starts earlier than the interval your atmospheric 14C fraction is defined for. \n Have look at the timeMap object or the data it is created from")
+        )
+    }
+    if (t_max>tA_max) {
+        stop(simpleError("You ordered a timeinterval that ends later than the interval your  your atmospheric 14C fraction is defined for. \n Have look at the timeMap object or the data it is created from")
+        )
+    }
 # now check the things common to all Model objects 
 res=correctnessOfModel(object)
 }

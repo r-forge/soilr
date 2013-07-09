@@ -18,7 +18,6 @@
 }
 \references{Sierra, C. A., Trumbore, S. E., Davidson, E. A., Frey, S. D., Savage, K. E., and Hopkins, F. M. 2012. Predicting decadal trends and transient responses of radiocarbon storage and fluxes in a temperate forest soil, Biogeosciences Discuss., 9, 2197-2232, doi:10.5194/bgd-9-2197-2012}
 \examples{
-data(HarvardForest14CO2)
 plot(HarvardForest14CO2[,1],HarvardForest14CO2[,2])
 }
 \keyword{datasets}

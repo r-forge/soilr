@@ -29,8 +29,8 @@ ThreepSeriesModel<-structure(
          y=In[,2]  
          inputFlux=splinefun(x,y)
           inputFluxes=TimeMap.new(
-            t_start,
-            t_end,
+            min(x),
+            max(x),
             function(t){matrix(nrow=3,ncol=1,c(inputFlux(t),0,0))}
           )
         }

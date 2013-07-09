@@ -3,8 +3,8 @@
 \docType{class}
 \alias{NlModel-class}
 \alias{NlModel}
-%% \alias{$}
 \alias{[,NlModel}
+%% \alias{$}
 %% \alias{getAccumulatedRelease}
 %% \alias{getC}
 %% \alias{getReleaseFlux}
@@ -29,8 +29,8 @@
 }
 \section{Methods}{
   \describe{
-    \item{$}{\code{signature(x = "NlModel")}: ... }
     \item{[}{\code{signature(x = "NlModel", i = "character", j = "ANY", drop = "ANY")}: ... }
+    \item{$}{\code{signature(x = "NlModel")}: ... }
     \item{getAccumulatedRelease}{\code{signature(object = "NlModel")}: ... }
     \item{getC}{\code{signature(object = "NlModel")}: ... }
     \item{getReleaseFlux}{\code{signature(object = "NlModel")}: ... }

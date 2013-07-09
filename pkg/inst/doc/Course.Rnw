@@ -198,6 +198,8 @@ We start with those that we consider fixed.
 <<echo=true,print=False>>=
 library("SoilR")
 library("FME")
+@
+<<setTime>>=
 t_start=1978
 t_end=2008
 #t_start=t_end-30
@@ -269,18 +271,15 @@ pf<-function(ks,pass=FALSE){
 @
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-<<echo=False,print=True>>=
-# this invisible section is used to create a new dataset
- t_end=2008
- t_start=t_end-30
- data(C14Atm_NH)
- indices=(C14Atm_NH$YEAR>=t_start & C14Atm_NH$YEAR < t_end)
- time=C14Atm_NH$YEAR[indices]
+% this invisible section is used to create a new dataset
+%<<newData echo=False,print=True>>=
+<<c>>=
+<<setTime>>
  C0=c(0.5,0.5)
  F0=c(0,0)
  
  l=length(time)
- iC=seq(1,l,4)
+ iC=c(seq(1,l,4),l)
  In=rep(0.05,length(iC))
  stdIn=0.05*max(In)
  errIn=rnorm(sd=stdIn,n=length(In))
@@ -293,7 +292,7 @@ pf<-function(ks,pass=FALSE){
  pars=c(k1=-0.3,k2=-0.5)
  Df<-pf(pars)
  #Now we first select a view points, disturb the data and plot it \figref{fig:distdata}. 
- iR14=seq(1,l,8)
+ iR14=c(seq(1,l,8),l)
  #iR14=c(1,l)
  stdC=0.2*max(Df$C1)
  std14=0.2*max(Df$R14t)
@@ -312,7 +311,7 @@ DataC <- data.frame(
     sd=stdC
 )
 # #the next line has to be commented out for the real vignette
-# datadir="/home/mm/SoilR/RPackages/SoilR/pkg/data/"
+#datadir="/home/mm/SoilR/RPackages/SoilR/pkg/data/"
 # save(DataR14,DataC,DataI,file=paste(datadir,"CourseExample_R14",".rda",sep=""),ascii=TRUE)
 # save(DataR14,file=paste(datadir,"DataR14",".rda",sep=""),ascii=TRUE)
 # save(DataC,file=paste(datadir,"DataC",".rda",sep=""),ascii=TRUE)

@@ -14,7 +14,6 @@ linesCPool<-structure(
   }
   ,
   ex=function(){
-    data(C14Atm_NH)
     years=seq(1901,2009,by=0.5)
     LitterInput=700 
     

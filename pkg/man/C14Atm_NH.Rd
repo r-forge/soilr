@@ -14,7 +14,6 @@
   }
 }
 \examples{
-data(C14Atm_NH)
 plot(C14Atm_NH,type="l")
 }
 \keyword{datasets}

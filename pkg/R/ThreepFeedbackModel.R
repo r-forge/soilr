@@ -42,13 +42,16 @@ ThreepFeedbackModel<-structure(
       A[3,2]=a32
       A[2,3]=a23
       
-      if(length(xi)==1) fX=function(t){xi}
+      if(length(xi)==1){
+	fX=function(t){xi}
+	Af=TimeMap.new(t_start,t_end,function(t) fX(t)*A)
+	}
       if(class(xi)=="data.frame"){
-        X=xi[,1]
-        Y=xi[,2]
+	X=xi[,1]
+      	Y=xi[,2]
         fX=splinefun(X,Y)
+	Af=TimeMap.new(min(X),max(X),function(t) fX(t)*A)
        }
-      Af=TimeMap.new(t_start,t_end,function(t) fX(t)*A)
       Mod=GeneralModel(t=t,A=Af,ivList=C0,inputFluxes=inputFluxes,solver,pass)
      return(Mod)
 ### A Model Object that can be further queried 

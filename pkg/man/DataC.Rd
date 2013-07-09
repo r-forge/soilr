@@ -20,7 +20,7 @@ An example data set for parameter estimation
 \examples{
 \dontrun{
 library(ggplot2)
-data(CourseExample_R14)
+#data(CourseExample_R14)
 lty1=1
 lty2=2
 c1="pool 1"

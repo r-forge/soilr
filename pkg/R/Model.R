@@ -201,7 +201,7 @@ setMethod(
 )
 ####setGeneric ( # This function 
 ####   name= "getC",
-####   def=function(# access to the C content of the pools 
+####   def=function(# Calculates the C content of the pools 
 ####    ### This function computes the value for C (mass or concentration ) as function of time
 ####	object
 ####	){standardGeneric("getC")}
@@ -233,7 +233,7 @@ setMethod(
 )
 ####setGeneric ( # This function 
 ####   name= "getReleaseFlux",
-####   def=function(# access to the C content of the pools 
+####   def=function(# Calculates the release of C from the pools 
 ####   ### This function computes the overall  carbon release of the given model as funtion of time 
 ####	object
 ####	){standardGeneric("getReleaseFlux")}
@@ -265,7 +265,7 @@ setMethod(
 )
 ####setGeneric ( # This function 
 ####   name= "getAccumulatedRelease",
-####   def=function(# access to the C content of the pools 
+####   def=function(# Calculates the accumulaed release from the pools 
 ####   ### This function computes the overall  carbon release of the given model as funtion of time 
 ####	object
 ####	){standardGeneric("getAccumulatedRelease")}

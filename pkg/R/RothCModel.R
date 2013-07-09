@@ -31,8 +31,8 @@ RothCModel<-structure(
          y=In[,2]  
          inputFlux=splinefun(x,y)
           inputFluxes=TimeMap.new(
-            t_start,
-            t_end,
+            min(x),
+            max(x),
             function(t){matrix(nrow=5,ncol=1,c(inputFlux(t)*(DR/(DR+1)),inputFlux(t)*(1/(DR+1)),0,0,0))}
           )
         }
