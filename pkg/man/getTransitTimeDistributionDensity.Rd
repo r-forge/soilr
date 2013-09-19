@@ -6,7 +6,7 @@ by computing the output (respiration) of the system as a function of time accord
 \usage{getTransitTimeDistributionDensity(object, inputDistribution, 
     times)}
 \arguments{
-  \item{object}{a DecompositionOperator Object}
+  \item{object}{a protoDecompositionOperator Object}
   \item{inputDistribution}{a vector of length equal to the number of pools. The entries are weights. That means that their sume must be equal to one!.}
   \item{times}{the times for which the distribution density is sought}
 }

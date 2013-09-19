@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 plotCPool<-structure(
   function #Plots the output of \code{\link{getC}} or \code{\link{getReleaseFlux}} for each pool over time
   ### This function produces a plot with the C content or released C for each pool over time. Needs as input a matrix obtained after a call to \code{\link{getC}} or \code{\link{getReleaseFlux}}.

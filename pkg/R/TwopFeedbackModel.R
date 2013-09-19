@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 TwopFeedbackModel<-structure(
     function #Implementation of a two pool model with feedback structure
     ### This function creates a model for two pools connected with feedback. It is a wrapper for the more general function \code{\link{GeneralModel}}.

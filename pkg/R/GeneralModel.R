@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 GeneralModel=structure(function #The most general costructor for class Model
 ### The function creates a numerical model  for n arbitrarily connected pools.
 ### It is one of the constructors of class Model                       

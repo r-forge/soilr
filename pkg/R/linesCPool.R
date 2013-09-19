@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 linesCPool<-structure(
   function #Add lines with the output of \code{\link{getC14}}, \code{\link{getC}}, or \code{\link{getReleaseFlux}} to an existing plot
   ### This function adds lines to a plot with the C content, the C release, or Delta 14C value of each pool over time. Needs as input a matrix obtained after a call to \code{\link{getC14}}, \code{\link{getC}}, or \code{\link{getReleaseFlux}}.

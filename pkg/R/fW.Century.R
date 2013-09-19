@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 fW.Century<- structure(
   function #Effects of moisture on decomposition rates according to the CENTURY model
     ### Calculates the effects of precipitation and potential evapotranspiration on decomposition rates.

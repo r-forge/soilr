@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 OnepModel14<-structure(
   function #Implementation of a one-pool C14 model
   ### This function creates a model for one pool. 

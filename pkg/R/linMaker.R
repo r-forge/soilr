@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 linMaker=function# create a linear ode system from a (solved) nonlinear one
 ### The function computes a (time dependent) coefficient from the pool solution and the globa solution
 (

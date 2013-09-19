@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 test.op=function(){
     library(SoilR)
     str <- as.character(?SoilR)

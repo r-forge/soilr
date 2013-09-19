@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 correctnessOfModel=function #check for unreasonable input parameters
 ### The parameters used by the function \code{\link{GeneralModel}} in SoilR have a biological meaning, and therefore cannot be arbitrary.
 ### This functions tests some of the obvious constraints of the general model. 
@@ -98,6 +100,7 @@ setClass(# Model
 )
 
 
+#########################################################
 setMethod(
     f="initialize",
     signature="Model",
@@ -137,7 +140,7 @@ setMethod(
         return(.Object)
     }
 )
-
+#########################################################
 setMethod(
    f= "plot",
       signature(x="Model"),
@@ -147,6 +150,7 @@ setMethod(
       plot(getTimes(x),getC(x)[,1])
    }
 )
+#########################################################
 setMethod(
    f= "print",
       signature(x="Model"),
@@ -157,6 +161,7 @@ setMethod(
       print(getC(x)[,1])
    }
 )
+#########################################################
 setMethod(
    f= "summary",
       signature(object="Model"),
@@ -168,6 +173,7 @@ setMethod(
       print(getC(object)[,1])
    }
 )
+#########################################################
 setMethod(
    f= "show",
       signature(object="Model"),
@@ -178,17 +184,8 @@ setMethod(
       print(getC(object)[,1])
    }
 )
-# now define a new generic function
-####setGeneric (
-####   name= "getTimes",
-####   ### This functions extracts the times argument from an argument of class Model
-####   def=function(object){standardGeneric("getTimes")}
-####
-####)
-##to make sure that it gets not declared elsewhere without an error we do the following
-#lockBinding("countMissing",.GlobalEnv)
 
-#now define a method that implements this for our Class
+#########################################################
 setMethod(
    f= "getTimes",
       signature= "Model",
@@ -199,18 +196,12 @@ setMethod(
       return(times)
    }
 )
-####setGeneric ( # This function 
-####   name= "getC",
-####   def=function(# Calculates the C content of the pools 
-####    ### This function computes the value for C (mass or concentration ) as function of time
-####	object
-####	){standardGeneric("getC")}
-####)
+#########################################################
 setMethod(
    f= "getC",
       signature= "Model",
       definition=function(object){
-      ### This function computes the value for C (mass or concentration ) as function of time
+      ### This function computes the value for C 
       ns=length(object@initialValues)
       Atm=object@mat
       #print(Atm)
@@ -231,13 +222,7 @@ setMethod(
       return(Y)
    }
 )
-####setGeneric ( # This function 
-####   name= "getReleaseFlux",
-####   def=function(# Calculates the release of C from the pools 
-####   ### This function computes the overall  carbon release of the given model as funtion of time 
-####	object
-####	){standardGeneric("getReleaseFlux")}
-####)
+#########################################################
 setMethod(
    f= "getReleaseFlux",
       signature= "Model",
@@ -263,13 +248,7 @@ setMethod(
       return(R)
    }
 )
-####setGeneric ( # This function 
-####   name= "getAccumulatedRelease",
-####   def=function(# Calculates the accumulaed release from the pools 
-####   ### This function computes the overall  carbon release of the given model as funtion of time 
-####	object
-####	){standardGeneric("getAccumulatedRelease")}
-####)
+#########################################################
 setMethod(
    f= "getAccumulatedRelease",
       signature= "Model",
@@ -313,6 +292,7 @@ setMethod(
    }
 )
 # overload the [] operator
+#########################################################
 setMethod("[",signature(x="Model",i="character"), #since [] is a already defined generic the names of the arguments are not arbitrary 
         definition=function(x,i){
             getSingleCol=function(slot_name){
@@ -336,6 +316,7 @@ setMethod("[",signature(x="Model",i="character"), #since [] is a already defined
         }
 )
 # overload the $ operator
+#########################################################
 setMethod("$",signature(x="Model"), #since $ is a already defined generic the names of the arguments are not arbitrary 
         definition=function(x,name){
             return(x[name])

@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 MeanAge=function# mean age for a general one pool model
 ### The function computes the mean age for one pool of a possibly nonlinear model
 (IdotT,	##<< The inputrate as a function of time 

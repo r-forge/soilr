@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 ICBMModel<-structure(
     function #Implementation of the Introductory Carbon Balance Model (ICBM)
     ### This function is an implementation of the Introductory Carbon Balance Model (ICBM).

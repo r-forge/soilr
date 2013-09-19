@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 test.FcAtm=function(){
    tstart=0
    tend=10

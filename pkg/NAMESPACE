@@ -8,7 +8,6 @@ FcAtm.from.Dataframe,
 GaudinskiModel14,
 GeneralModel,
 GeneralModel_14,
-GeneralNlModel,
 ICBMModel,
 OnepModel,
 OnepModel14,
@@ -71,5 +70,6 @@ plot,
 plotC14Pool,
 plotCPool,
 print,
-summary
+summary,
+deSolve.lsoda.wrapper
 )

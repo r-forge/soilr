@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 TwopFeedbackModel14<-structure(
   function #Implementation of a two-pool C14 model with feedback structure
   ### This function creates a model for two pools connected with feedback. 

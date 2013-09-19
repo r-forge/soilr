@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 TwopParallelModel<-structure(
     function #Implementation of a two pool model with parallel structure
     ### This function creates a model for two independent (parallel) pools. 

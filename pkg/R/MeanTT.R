@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 MeanTT=function# mean transit time for a general one pool model
 ### The function computes the mean transit time for one pool of a possibly nonlinear model
 (OdotLin,	##<< The outputrate of this pool as a linear operator (a function of y and t)

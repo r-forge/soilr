@@ -1,40 +1,10 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 
 setClass(# decomposition operator 
     Class="DecompositionOperator",
     contains="TimeMap"     
    )
-setGeneric ( # This function 
-   name= "getTransitTimeDistributionDensity",
-   def=function(# Access to the transit time distribution 
-      ### This function computes the transit time distribution density  for a given time Decomposition Operator if it is time invariant 
-      ### by computing the output (respiration) of the system as a function of time according to an instantaneous input.
-      
-      
-      ##details<<
-      ## The computation is based on the following assumptions which are requirements of the function and checked:
-      ## Let \eqn{O(t)} describe the overall output  flux of the system.
-      ## One can imagine  \eqn{O(t)} as a weighted sum of previous inputs \eqn{I(t-T)}. The weights for 
-      ## this summation are
-      ## described by the transit time distribution density \eqn{\psi(T,t)} where \eqn{T} is the 
-      ## transit time, the time from entry to exit of a particle and \eqn{t} the time of observation.
-      ## This is expressed by the following relation:
-      ##\eqn{O(t)=\int_0^\infty \psi(T,t) I(t-T) dT} which is universally true since everything coming out of the system must have entered at some point.
-      ## In the case of a time invariant decomposition operator and a time invariant input rate \eqn{I(t-T)} the system will eventually reach a stady state where in and outflow are balanced. In this case (which Erikson calles "stationary state" ) also the transit time distribution becomes time invariant: \eqn{\psi(T,t)=\psi(T)}.
-
-      ## For an instantaneous input \eqn{I(t-T)=\delta(t-T)} the transit time distribution density becomes
-      ## equal to the output of the system, the release rate. 
-      ## we can therefore compute the transfer time distribution by applying our Decomposition Operator to an 
-      ## instantaneous input, which is realized by an inputrate of zero and startvalues of one.
-     
-               
-                
-      ##references<< Manzoni, S., G.G. Katul, and A. Porporato. 2009. Analysis of soil carbon transit times and age distributions using network theories.
-                     ## Journal of Geophysical Research-Biogeosciences 114, DOI: 10.1029/2009JG001070.
-                object, ##<< a DecompositionOperator Object 
-                inputDistribution, ##<< a vector of length equal to the number of pools. The entries are weights. That means that their sume must be equal to one!.
-                times ##<< the times for which the distribution density is sought
-	){standardGeneric("getTransitTimeDistributionDensity")}
-)
 setMethod(
    f= "getTransitTimeDistributionDensity",
       signature= "DecompositionOperator",
@@ -55,20 +25,6 @@ setMethod(
       TTD=rowSums(R)
       return(TTD)
    }
-)
-setGeneric ( # This function 
-   name= "getMeanTransitTime",
-   def=function(# Access to the mean transit time 
-      ### This function computes the Expected Value of the transit time 
-      ### by integrating the product of t and the TransitTimeDistributionDensity
-
-     ##references<< Manzoni, S., G.G. Katul, and A. Porporato. 2009. Analysis of soil carbon transit times and age distributions using network theories.
-     ## Journal of Geophysical Research-Biogeosciences 114, DOI: 10.1029/2009JG001070.
-     
-      object,           ##<< a \code{\link{DecompositionOperator}} Object. 
-      inputDistribution ##<< a vector of length equal to the number of pools. The entries are weights, which must sum to 1.
-      
-	){standardGeneric("getMeanTransitTime")}
 )
 setMethod(
    f= "getMeanTransitTime",

@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 fW.Moyano<- structure(
   function #Effects of moisture on decomposition rates according to the function proposed by Moyano et al. (2013)
   ### Calculates the effects of water content on decomposition rates.

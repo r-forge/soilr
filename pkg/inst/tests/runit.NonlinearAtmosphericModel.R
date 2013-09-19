@@ -1,5 +1,6 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 testSolution=function(){
-  pf=function(str){print(paste(str,"=",eval(parse(text=str))))}
   require(parallel)
    k12=0.069565
    k21=0.0136298e-19
@@ -20,7 +21,7 @@ testSolution=function(){
    firstFF=FF[1]
    lastFF=FF[length(FF)]
    minFF=min(FF)
-   pf("minFF")
+   pp("minFF",environment())
    spFF=splinefun(YearsMeasured,FF)
    convfact= 1e12/12.011
    firstApprox=function(times){

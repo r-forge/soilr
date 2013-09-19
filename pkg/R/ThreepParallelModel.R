@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 ThreepParallelModel=structure(
       function #Implementation of a three pool model with parallel structure
         ### The function creates a model for three independent (parallel) pools. It is a wrapper for the more general function

@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 fW.Standcarb<-structure(
   function #Effects of moisture on decomposition rates according to the StandCarb model
     ### Calculates the effects of moisture on decomposition rates according to the StandCarb model.

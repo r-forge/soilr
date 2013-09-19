@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 ThreepParallelModel14<-structure(
   function #Implementation of a three-pool C14 model with parallel structure
   ### This function creates a model for two independent (parallel) pools. 

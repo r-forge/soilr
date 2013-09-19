@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 #setMethod(
 #   f= "getAccumulatedRelease14",
 #      ### This function integrates the release Flux over time
@@ -175,13 +177,6 @@ setMethod(
         return(.Object)
     }
 )
-setGeneric ( # This function 
-   name= "getC14",
-   def=function(# access to the C content of the pools 
-    ### This function computes the value for C (mass or concentration ) as function of time
-	object
-	){standardGeneric("getC14")}
-)
 setMethod(
    f= "getC14",
       signature= "Model_14",
@@ -232,13 +227,6 @@ setMethod(
       return(Y)
    }
 )
-setGeneric ( # compute  \eqn{\frac{^{14}C}{C}}{14C/C} ratio 
-   name= "getF14",
-   def=function(# access to the C content of the pools 
-   ### This function computes the \eqn{\frac{^{14}C}{C}}{14C/C} ratio in the soil as funtion of time 
-	object
-	){standardGeneric("getF14")}
-)
 setMethod(
    f= "getF14",
       signature= "Model_14",
@@ -253,20 +241,6 @@ setMethod(
    }
 )
 
-#setGeneric ( # This function 
-#   name= "getAccumulatedRelease14",
-#   def=function(# access to the C content of the pools 
-#   ### This function computes the overall  14C  release of the given model as funtion of time 
-#	object
-#	){standardGeneric("getAccumulatedRelease14")}
-#)
-setGeneric ( # This function 
-   name= "getReleaseFlux14",
-   def=function(# access to the C content of the pools 
-   ### This function computes the \eqn{^{14}C}{14C} release of the given model as funtion of time 
-	object
-	){standardGeneric("getReleaseFlux14")}
-)
 setMethod(
    f= "getReleaseFlux14",
       signature= "Model_14",
@@ -300,13 +274,6 @@ setMethod(
 
 
 #Added by C. Sierra, 28/4/2012
-setGeneric ( # This function 
-  name= "getF14R",
-  def=function(# access to the C release flux from the pools 
-    ### This function computes the \eqn{\frac{^{14}C}{C}}{14C/C} ratio of the released C as funtion of time 
-    object
-    ){standardGeneric("getF14R")}
-  )
 setMethod(
   f= "getF14R",
   signature= "Model_14",
@@ -320,13 +287,6 @@ setMethod(
     ### A matrix. Every column represents a pool and every row a point in time
     return(fr)
   }
-  )
-setGeneric ( # This function 
-  name= "getF14C",
-  def=function(# access to the C release flux from the pools 
-    ### This function computes the \eqn{\frac{^{14}C}{C}}{14C/C} ratio of the released C as funtion of time 
-    object
-    ){standardGeneric("getF14C")}
   )
 setMethod(
   f= "getF14C",

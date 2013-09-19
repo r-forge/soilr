@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 OnepModel<-structure(
     function #Implementation of a one pool model 
     ### This function creates a model for one pool. It is a wrapper for the more general function \code{\link{GeneralModel}}.

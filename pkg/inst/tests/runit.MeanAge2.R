@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 test.MeanAge2=function(){
    pf=function(str){print(paste(str,"=",eval(parse(text=str))))}
    # we consider a model with input and outputrates as functions of time

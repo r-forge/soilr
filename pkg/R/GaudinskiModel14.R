@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 GaudinskiModel14<-structure(
   function #Implementation of a the six-pool C14 model proposed by Gaudinski et al. 2000
   ### This function creates a model as described in Gaudinski et al. 2000. 

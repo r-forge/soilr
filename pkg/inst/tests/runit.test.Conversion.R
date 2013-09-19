@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 test.Conversion=function(){
    require(RUnit)
    t_start=0

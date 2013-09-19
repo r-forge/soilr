@@ -39,8 +39,8 @@ lines(Hua2013$NHZone2$Year.AD,Hua2013$NHZone2$mean.Delta14C,col=2)
 lines(Hua2013$NHZone3$Year.AD,Hua2013$NHZone3$mean.Delta14C,col=3)
 lines(Hua2013$SHZone12$Year.AD,Hua2013$SHZone12$mean.Delta14C,col=4)
 lines(Hua2013$SHZone3$Year.AD,Hua2013$SHZone3$mean.Delta14C,col=5)
-legend("topright",c("Norther hemisphere zone 1", "Norther hemisphere zone 2", "Norther hemisphere zone 3",
-                    "Southern hemisphere zones 1 and 2", "Southern Hemispher zone 3"),lty=1,col=1:5,bty="n")
+legend("topright",c("Northern hemisphere zone 1", "Northern hemisphere zone 2", "Northern hemisphere zone 3",
+                    "Southern hemisphere zones 1 and 2", "Southern hemisphere zone 3"),lty=1,col=1:5,bty="n")
 
 }
 \keyword{datasets}

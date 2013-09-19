@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 fT.LandT<-structure(
   function #Effects of temperature on decomposition rates according to a function proposed by Lloyd and Taylor (1994)
     ### Calculates the effects of temperature on decomposition rates according to a function proposed by Lloyd and Taylor (1994).

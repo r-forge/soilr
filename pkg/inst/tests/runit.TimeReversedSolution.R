@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 test.TimeReversedSolution=function(){
    k=-0.05
    ydot=function(Y,t){k*Y}

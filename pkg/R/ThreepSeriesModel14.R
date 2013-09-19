@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 ThreepSeriesModel14<-structure(
   function #Implementation of a three-pool C14 model with series structure
   ### This function creates a model for three pools connected in series. 

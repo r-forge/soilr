@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 plotC14Pool<-structure(
   function #Plots the output of \code{\link{getC14}} for each pool over time
   ### This function produces a plot with the Delta14C in the atmosphere and the Delta14C of each pool obtained after a call to \code{\link{getC14}}.

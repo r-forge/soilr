@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 test.SoilR.F0=function(){
    # the first two objects can be created because the formats are supported
    obj1=SoilR.F0.new(c(0,0),"Delta14C")

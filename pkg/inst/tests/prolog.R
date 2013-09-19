@@ -1,4 +1,6 @@
 #!/usr/bin/Rscript
+# vim:set ff=unix expandtab ts=2 sw=2:
+source("testhelpers.R")
 library("RUnit")
 library("deSolve")
 load("../../data/C14Atm_NH.rda")

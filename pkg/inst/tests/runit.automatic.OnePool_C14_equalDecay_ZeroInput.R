@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 # This test function is automatically produced by the python script:/home/mm/SoilR/RPackages/SoilR/pkg/inst/tests/Rexample.py
 test.OnePool_C14_equalDecay_ZeroInput_c14=function(){
    require(RUnit)

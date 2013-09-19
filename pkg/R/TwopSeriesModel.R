@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 TwopSeriesModel<-structure(
     function #Implementation of a two pool model with series structure
     ### This function creates a model for two pools connected in series. It is a wrapper for the more general function \code{\link{GeneralModel}}.

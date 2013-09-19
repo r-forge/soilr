@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 test.check.pass=function(){
 	#source all the files in the R directory 
 	prefix="../../R/"
@@ -120,37 +122,67 @@ test.check.pass=function(){
         k=log(0.5)/th #note that k is negative and has the unit y^-1
         l=passCaller(call("GeneralModel_14",t_fault,At,c0,F0,inputFluxes,Fc,k),l)
 	###########################################################################################################
-	t_start=0 
-      	t_end=10 
-      	tn=50
-      	timestep=(t_end-t_start)/tn 
-      	t=seq(t_start,t_end,timestep) 
-	## create an alternative time vector to provoke an exception 
-	t_fault=seq(t_start-10,t_end,timestep) 
-      	n=3
-      	k1=0.04
-      	k2=1e4
-      	k3=3e7
-      	dC=new("TimeMap",
-      	  t_start,
-      	  t_end,
-      	  function(t,y){
-      	      yd1 <- -k1 * y[1] + k2 * y[2]*y[3]
-      	      yd2 <- -yd1
-      	      yd3 <- k3 * y[2]^2
-      	      return(matrix(nrow=3,ncol=1,c(yd1,yd2,yd3)))
-      	  }
+        # create the operator for a two pool serial model
+        # according to our new general definition
+        # 
+        t_start=0
+        t_end=10
+        tn=3e1
+        timestep=(t_end-t_start)/tn
+        t=seq(t_start,t_end,timestep)
+	      ## create an alternative time vector to provoke an exception 
+	      t_fault=seq(t_start-10,t_end,timestep) 
+        nr=2
+        # define the transfer functions for the model
+        # we could compile them to a matrix valued
+        # Function of C and t since they will be 
+        # applied in a linear way on the output vector.
+        # but we rather store them in an indexed list 
+        # (as a sparse matrix) which also has some 
+        # implementational benefits because the single
+        # functions are easier to retrieve from the operator
+        # if needed.
+        alpha=list()
+        alpha[["1_to_2"]]=function(C,t){
+          1#all stuff is transmitted
+        }
 
-      	) 
-      	
-      	c0=c(0.5, 0.5, 0.5)
-      	#constant inputrate
-      	inputFluxes=TimeMap.new(
-      	  t_start,
-      	  t_end,
-      	  function(t0){matrix(nrow=n,ncol=1,c(0.0,0,0))}
-      	) 
-      	l=passCaller(call("GeneralNlModel",t_fault,dC,c0,inputFluxes),l)
+
+        k1=3/5
+        k2=3/5
+        f=function(C,t){
+          # in this case the application of f can be expressed by a matrix multiplication
+          # f(C,t)=N C
+          # furthermorde the matrix N is actually completely linear and even constant
+          N=matrix( 
+             nrow=nr,
+             ncol=nr,
+             c(
+                k1,    0,  
+                0  ,  k2  
+             )
+          )
+          # so we can write f(C,t)  as a Matrix product
+          # note however that we could anything we like with the components
+          # of C here. 
+          # The only thing to take care of is that we release a vector of the same
+          # size as C
+          return(N%*%C)
+        }
+        fac=2e2
+        
+        inputrates=new("TimeMap",t_start,t_end,function(t){return(matrix(
+          nrow=nr,
+          rep(
+            c(
+              2*fac,  0*fac
+            ),
+            length(t)
+          )
+        ))})
+        c0= c( fac, 0 )
+        A=new("TransportDecompositionOperator",t_start,t_end,nr,alpha,f)
+      	l=passCaller(call("GeneralNlModel",t_fault,A,c0,inputrates),l)
 	
 	###########################################################################################################
         times=seq(0,20,by=0.1)
