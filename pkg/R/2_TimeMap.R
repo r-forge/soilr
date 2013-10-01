@@ -40,7 +40,11 @@ setMethod(
 setMethod(
     f="as.character",
     signature="TimeMap",
-    definition=function(x,...){
+    definition=function#convert TimeMap Objects to something printable.
+    ### This method is needed to print a TimeMap object.
+    (x, ##<<An Object of class time map
+     ...
+     ){
         return(
             paste( class(x),
                   "(\n starttime=",

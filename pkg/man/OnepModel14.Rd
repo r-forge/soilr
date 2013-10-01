@@ -1,8 +1,7 @@
 \name{OnepModel14}
 \alias{OnepModel14}
 \title{Implementation of a one-pool C14 model}
-\description{This function creates a model for one pool. 
-It is a wrapper for the more general function \code{\link{GeneralModel_14}} that can handle an arbitrary number of pools.}
+\description{This function creates a model for one pool. It is a wrapper for the more general function \code{\link{GeneralModel_14}}. }
 \usage{OnepModel14(t, k, C0, F0_Delta14C, In, xi = 1, FcAtm, lambda = -0.0001209681, 
     lag = 0, solver = deSolve.lsoda.wrapper, pass = FALSE)}
 \arguments{

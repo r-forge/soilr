@@ -253,7 +253,6 @@ setMethod(
    f= "getAccumulatedRelease",
       signature= "Model",
       definition=function(object){
-      ### This function integrates the release Flux over time
       times=object@times
       R=getReleaseFlux(object)
       n=ncol(R)
@@ -285,7 +284,6 @@ setMethod(
       }
       sVmat=matrix(0,nrow=n,ncol=1)
       Y=solver(object@times,rdot,sVmat,object@solverfunc)
-      #### A matrix. Every column represents a pool and every row a point in time
       f=function(i){paste("AccumulatedRelease",i,sep="")}
       #colnames(Y)=sapply((1:ncol(Y)),f)
       return(Y)

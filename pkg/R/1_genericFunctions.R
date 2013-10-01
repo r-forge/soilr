@@ -13,9 +13,10 @@ setGeneric(
 setGeneric(
     name="Delta14C_from_AbsoluteFractionModern",
     def=function( # convert its argument from an Absolute Fraction Modern to a Delta14C representation
-    ### Thfunction returns an object of the same type as its imput
+    ### The function returns an object of the same type as its imput
     ### this can be a number a matrix 
-    AbsoluteFractionModern){
+    AbsoluteFractionModern ##<< an object
+    ){
         standardGeneric("Delta14C_from_AbsoluteFractionModern")
     }
 )
@@ -75,7 +76,6 @@ setMethod(
       definition=function(# convert Absolute Fraction Normal values to Delta14C values 
 	AbsoluteFractionModern ##<< numeric containing the values in Absolute Fraction Modern format
 	){
-	### convert a number matrix of vector containing Absolute Fraction Modern values to the appropriate Delta14C  .
 	D14C=(AbsoluteFractionModern-1)*1000
 	return(D14C)
 	}
@@ -101,7 +101,6 @@ setMethod(
       definition=function(# convert Absolute Fraction Normal values to Delta14C values 
 	AbsoluteFractionModern ##<< numeric containing the values in Absolute Fraction Modern format
 	){
-	### convert a number matrix of vector containing Absolute Fraction Modern values to the appropriate Delta14C  .
 	D14C=matrix(
 	    nrow=nrow(AbsoluteFractionModern),
 	    ncol=ncol(AbsoluteFractionModern),
@@ -119,7 +118,7 @@ setGeneric ( # This function
      ##references<< Manzoni, S., G.G. Katul, and A. Porporato. 2009. Analysis of soil carbon transit times and age distributions using network theories.
      ## Journal of Geophysical Research-Biogeosciences 114, DOI: 10.1029/2009JG001070.
      
-      object,           ##<< a \code{\link{protoDecompositionOperator}} Object. 
+      object,           ##<< a DecompositionOperator Object. 
       inputDistribution ##<< a vector of length equal to the number of pools. The entries are weights, which must sum to 1.
       
 	){standardGeneric("getMeanTransitTime")}
@@ -230,7 +229,7 @@ setGeneric ( # This function
 	  ## \code{\link{TwopSeriesModel}}, \code{\link{TwopFeedbackModel}}, etc.
    }
 )
-setGeneric ( # This function 
+setGeneric ( 
    name= "getAccumulatedRelease",
    def=function(# Calculates the accumulated carbon release from the pools as a function of time
    ### This function computes the accumulated carbon release of the given model as funtion of time 

@@ -16,6 +16,8 @@ $^{14}C$  fraction in per mille
   }
 }
 \examples{
-plot(C14Atm, type="l")
+#Notice that C14Atm is a shorter version of C14Atm_NH
+plot(C14Atm_NH,type="l")
+lines(C14Atm,col=2)
 }
 \keyword{datasets}

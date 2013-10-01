@@ -22,7 +22,9 @@ setMethod(
 setMethod(
     f="as.character",
     signature="MCSim",
-    definition=function(x,...){
+    definition=function#convert Objects of this class to something printable.
+    (x, ##<< An object of class MCSim
+     ...){
         return(
             paste( class(x), sep="")
         )
@@ -33,7 +35,10 @@ setMethod(
 setMethod(
     f="plot",
     signature="MCSim",
-      definition=function(x,...){
+      definition=function# Summary plot of the result of MCSim run
+      ### This method plots all the results computed with the Monte Carlo simulation
+     (x, ##<< An object of class MCSim
+      ...){
       resnames=names(x@tasklist)
       l=computeResults(x)
       
@@ -82,7 +87,7 @@ setMethod("[[",
     function (x, i, j, ...) 
     {
       if (i=="tasklist"){
-        x@tasklist=value
+        value=x@tasklist
         return(value)
       }else{
         stop(paste("MCSim has no property  ",i,".",sep=""))
@@ -261,8 +266,6 @@ setMethod(
                       Destination=particleSets[[targetKey]],
                       p_inject)
             		    particleSets[[targetKey]] <- l[["Destination"]]
-                    #pe(quote(targetKey),environment())
-                    #pe(quote(particleSets[[targetKey]]),environment())
                     
                     # update dataframe of particles still in the pool
             		    particleSets[[leaveKey(i)]] <- l[["UpdatedSource"]]

@@ -5,7 +5,7 @@
 by integrating the product of t and the TransitTimeDistributionDensity}
 \usage{getMeanTransitTime(object, inputDistribution)}
 \arguments{
-  \item{object}{a \code{\link{protoDecompositionOperator}} Object.}
+  \item{object}{a DecompositionOperator Object.}
   \item{inputDistribution}{a vector of length equal to the number of pools. The entries are weights, which must sum to 1.}
 }
 

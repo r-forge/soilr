@@ -5,7 +5,7 @@
 Northern Hemisphere atmospheric radiocarbon for the pre-bomb period
 }
 \description{
-Atmospheric radiocarbon data from Reimer et al. (2009). This is the standard age calibration curve, which also gives the Delta14C value of atmospheric CO2. 
+Northern Hemisphere atmospheric radiocarbon calibration curve for the period 0 to 50,000 yr BP. 
 }
 \usage{data(IntCal09)}
 \format{
@@ -14,8 +14,8 @@ Atmospheric radiocarbon data from Reimer et al. (2009). This is the standard age
     \item{\code{CAL.BP}}{Calibrated age in years Before Present (BP).}
     \item{\code{C14.age}}{C14 age in years BP.}
     \item{\code{Error}}{Error estimate for \code{C14.age}.}
-    \item{\code{Delta.14C}}{Delta14C value in per mil.}
-    \item{\code{Sigma}}{Standard deviation of \code{Delta14.C} in per mil.}
+    \item{\code{Delta.14C}}{Delta.14C value in per mil.}
+    \item{\code{Sigma}}{Standard deviation of \code{Delta.14C} in per mil.}
   }
 }
 \details{
@@ -37,11 +37,9 @@ M. Stuiver and H. A. Polach. 1977. Rerporting of C-14 data. Radiocarbon, 19(3):3
 \examples{
 
 par(mfrow=c(2,1))
-plot(IntCal09$CAL.BP,IntCal09$C14.age,type="l",xlab="Calibrated age (years BP)",ylab="Conventional radiocarbon age")
 polygon(x=c(IntCal09$CAL.BP,rev(IntCal09$CAL.BP)),y=c(IntCal09$C14.age+IntCal09$Error,rev(IntCal09$C14.age-IntCal09$Error)),col="gray",border=NA)
 lines(IntCal09$CAL.BP,IntCal09$C14.age)
 
-plot(IntCal09$CAL.BP,IntCal09$Delta.14C,type="l",xlab="Calibrated age (years BP)",ylab=expression(paste(Delta^14,"C (\u2030)")))
 polygon(x=c(IntCal09$CAL.BP,rev(IntCal09$CAL.BP)),y=c(IntCal09$Delta.14C+IntCal09$Sigma,rev(IntCal09$Delta.14C-IntCal09$Sigma)),col="gray",border=NA)
 lines(IntCal09$CAL.BP,IntCal09$Delta.14C)
 par(mfrow=c(1,1))

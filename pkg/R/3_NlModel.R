@@ -221,7 +221,6 @@ setMethod(
       #pp("t",environment())
       DepComp=object@DepComp
       alpha=getTransferCoefficients(DepComp)
-      pe(quote(names(alpha)),environment())
       if(length(names(alpha))==1){
         all_tr=matrix(ncol=1,mapply(alpha[[1]],(1:length(t))))
         colnames(all_tr)=names(alpha)
@@ -302,75 +301,6 @@ setMethod(
    }
 )
 #################################################
-setMethod(
-   f= "getReleaseFlux",
-      signature= "NlModel",
-      definition=function(object){
-      C=getC(object)
-      #print("dim(C)=")
-      #print(dim(C))
-      times=object@times
-      Atm=object@mat
-      A=getFunctionDefinition(Atm)
-      n=length(object@initialValues)
-      #print(n)
-      rfunc=RespirationCoefficients(A)
-      #rfunc is vector valued function of time
-      if (n==1) { r=matrix(ncol=n,sapply(times,rfunc))}
-      else {r=t(sapply(times,rfunc))}
-      #print("dim(r)=")
-      #print(dim(r))
-      R=r*C
-      ### A matrix. Every column represents a pool and every row a point in time
-      f=function(i){paste("ReleaseFlux",i,sep="")}
-      #colnames(R)=sapply((1:ncol(R)),f)
-      return(R)
-   }
-)
-#################################################
-setMethod(
-   f= "getAccumulatedRelease",
-      signature= "NlModel",
-      definition=function(object){
-      ### This function integrates the release Flux over time
-      times=object@times
-      R=getReleaseFlux(object)
-      n=ncol(R)
-      #transform the array to a list of functions of time by
-      #intepolating it with splines
-      if (n==1) {
-          Rfuns=list(splinefun(times,R))
-      }
-      else{
-        Rfuns=list(splinefun(times,R[,1]))
-        for (i in 2:n){
-            Rf=splinefun(times,R[,i])
-            Rfuns=append(Rfuns,Rf)
-        }
-      }
-      #test=Rfuns[[1]]
-      #now we can construct the derivative of the respiration as function of time
-      #as needed by the ode solver
-      rdot=function(y,t0){
-           # the simples possible case for an ode solver is that the ode is
-           # just an integral and does not depend on the value but only on t
-           # This is the case here
-           rv=matrix(nrow=n,ncol=1)
-           for (i in 1:n){
-               #print(Rfuns[i])
-               rv[i,1]=Rfuns[[i]](t0)
-           }
-           return(rv)
-      }
-      sVmat=matrix(0,nrow=n,ncol=1)
-      Y=solver(object@times,rdot,sVmat,object@solverfunc)
-      #### A matrix. Every column represents a pool and every row a point in time
-      f=function(i){paste("AccumulatedRelease",i,sep="")}
-      #colnames(Y)=sapply((1:ncol(Y)),f)
-      return(Y)
-   }
-)
-#################################################
 # overload the [] operator
 setMethod("[",signature(x="NlModel",i="character"), #since [] is a already defined generic the names of the arguments are not arbitrary 
         definition=function(x,i){
@@ -379,8 +309,8 @@ setMethod("[",signature(x="NlModel",i="character"), #since [] is a already defin
                 #print(paste(sep="",">",slot_name,"<"))
                 if(slot_name=="times"){ res=getTimes(x)}
                 if(slot_name=="C"){ res=getC(x)}
-                if(slot_name=="ReleaseFlux"){ res=getReleaseFlux(x)}
-                if(slot_name=="AccumulatedRelease"){ res=getAccumulatedRelease(x)}
+                #if(slot_name=="ReleaseFlux"){ res=getReleaseFlux(x)}
+                #if(slot_name=="AccumulatedRelease"){ res=getAccumulatedRelease(x)}
                 #if(res==""){stop(paste("The slot",slot_name,"is not defined"))}
                 return(res)
             }

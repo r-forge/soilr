@@ -14,9 +14,6 @@
 %%  ~~describe this method here~~
 }
 
-\item{\code{signature(x = "NlModel")}}{
-%%  ~~describe this method here~~
-}
 }}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

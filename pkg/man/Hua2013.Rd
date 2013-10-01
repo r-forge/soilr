@@ -16,8 +16,6 @@ Atmospheric radiocarbon for the period 1950-2010 reported by Hua et al. (2013) f
   on the following 5 variables.
   \describe{
     \item{\code{Year.AD}}{Year AD}
-    \item{\code{mean.Delta14C}}{mean value of atmospheric radiocarbon reported as Delta14C}
-    \item{\code{sd.Delta14C}}{standard deviation of atmospheric radiocarbon reported as Delta14C}
     \item{\code{mean.F14C}}{mean value of atmospheric radiocarbon reported as fraction modern F14C}
     \item{\code{sd.F14}}{standard deviation of atmospheric radiocarbon reported as fraction modern F14C}
   }
@@ -33,14 +31,13 @@ Hua Q., M. Barbetti, A. Z. Rakowski. 2013. Atmospheric radiocarbon for the perio
 }
 \examples{
 
-plot(Hua2013$NHZone1$Year.AD, Hua2013$NHZone1$mean.Delta14C, type="l",
-      xlab="Year AD",ylab=expression(paste(Delta^14,"C (\u2030)")))
+plot(Hua2013$NHZone1$Year.AD, Hua2013$NHZone1$mean.Delta14C, type="l",xlab="Year AD",ylab=expression(paste(Delta^14,"C (\u2030)")))
 lines(Hua2013$NHZone2$Year.AD,Hua2013$NHZone2$mean.Delta14C,col=2)
 lines(Hua2013$NHZone3$Year.AD,Hua2013$NHZone3$mean.Delta14C,col=3)
 lines(Hua2013$SHZone12$Year.AD,Hua2013$SHZone12$mean.Delta14C,col=4)
 lines(Hua2013$SHZone3$Year.AD,Hua2013$SHZone3$mean.Delta14C,col=5)
-legend("topright",c("Northern hemisphere zone 1", "Northern hemisphere zone 2", "Northern hemisphere zone 3",
-                    "Southern hemisphere zones 1 and 2", "Southern hemisphere zone 3"),lty=1,col=1:5,bty="n")
+legend("topright",c("Norther hemisphere zone 1", "Norther hemisphere zone 2", "Norther hemisphere zone 3",
+                    "Southern hemisphere zones 1 and 2", "Southern Hemispher zone 3"),lty=1,col=1:5,bty="n")
 
 }
 \keyword{datasets}

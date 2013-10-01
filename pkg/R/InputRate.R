@@ -42,7 +42,10 @@ setMethod(
 setMethod(
     f="as.character",
     signature="InputRate",
-    definition=function(x,...){
+    definition=function#convert InputRate Objects to something printable.
+    (x, ##<< An object of class InputRate
+     ...
+     ){
         return(
             paste( class(x),
                   "(\n starttime=",
