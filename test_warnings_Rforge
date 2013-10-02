@@ -1,0 +1,18 @@
+#!/bin/bash
+es=0
+echo "this is $0"
+cf="SoilR.Rcheck/00check.log"
+nw=$(grep -c warning $cf)
+echo $nw
+if [ $nw -gt 0 ]
+  then 
+  echo "#################################"
+  echo "###### There were warnings.######"
+  echo "#################################"
+  echo ""
+  echo "the output of R CMD check --as-cran:"
+  cat $cf
+  es=1
+fi
+
+exit $es
