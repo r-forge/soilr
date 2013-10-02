@@ -14,6 +14,8 @@ fT.Daycent2<-structure(
     ,
     ex=function(){
       Temperature=0:50
-      plot(Temperature,fT.Daycent2(Temperature),type="l",ylab="f(T) (unitless)",main="Effects of temperature on decomposition rates according to the DAYCENT model")
+      plot(Temperature,fT.Daycent2(Temperature),type="l",
+           ylab="f(T) (unitless)",
+           main="Effects of temperature on decomposition rates according to the DAYCENT model")
     }
 )

@@ -115,7 +115,6 @@ setMethod(
     signature="MCSim",
     definition=function(object){
     ### This method creates a particle simulator 
-      require("parallel")
             tcn="time"				#name of time column
             extractColumn=function(df,colname){df[,colname]}
             reduce2singledf=function(l){

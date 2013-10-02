@@ -59,9 +59,19 @@ OnepModel14<-structure(
     
     Fc=FcAtm.from.Dataframe(FcAtm,lag,format="Delta14C")
     
-    mod=GeneralModel_14(t,At,ivList=C0,initialValF=SoilR.F0.new(F0_Delta14C,"Delta14C"),inputFluxes=inputFluxes,Fc,di=lambda,pass=pass)
+    mod=GeneralModel_14(
+      t,
+      At,
+      ivList=C0,
+      initialValF=SoilR.F0.new(F0_Delta14C,"Delta14C"),
+      inputFluxes=inputFluxes,
+      Fc,
+      di=lambda,
+      pass=pass
+    )
     ### A Model Object that can be further queried 
-    ##seealso<< \code{\link{OnepModel}}, \code{\link{TwopParallelModel14}}, \code{\link{TwopFeedbackModel14}} 
+    ##seealso<< \code{\link{OnepModel}}, \code{\link{TwopParallelModel14}}, 
+    ##\code{\link{TwopFeedbackModel14}} 
   }
   ,
   ex=function(){
@@ -74,7 +84,14 @@ OnepModel14<-structure(
     
     plot(C14Atm_NH,type="l",xlab="Year",ylab="Delta 14C (per mil)",xlim=c(1940,2010)) 
     lines(years, C14t[,1], col=4)
-    legend("topright",c("Delta 14C Atmosphere", "Delta 14C in SOM"),lty=c(1,1),col=c(1,4),lwd=c(1,1),bty="n")
+    legend(
+      "topright",
+      c("Delta 14C Atmosphere", "Delta 14C in SOM"),
+      lty=c(1,1),
+      col=c(1,4),
+      lwd=c(1,1),
+      bty="n"
+    )
     
   }
-  )
+)

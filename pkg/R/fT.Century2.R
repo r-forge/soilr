@@ -16,6 +16,8 @@ fT.Century2<-structure(
     ,
     ex=function(){
       Temperature=0:50
-      plot(Temperature,fT.Century2(Temperature),type="l",ylab="f(T) (unitless)",main="Effects of temperature on decomposition rates according to the Century model")
+      plot(Temperature,fT.Century2(Temperature),type="l",
+           ylab="f(T) (unitless)",
+           main="Effects of temperature on decomposition rates according to the Century model")
     }
 )

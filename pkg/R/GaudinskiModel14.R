@@ -69,7 +69,15 @@ GaudinskiModel14<-structure(
     
     Fc=FcAtm.from.Dataframe(FcAtm,lag=lag,format="Delta14C")
     
-    mod=GeneralModel_14(t,At,ivList=C0,initialValF=SoilR.F0.new(F0_Delta14C,"Delta14C"),inputFluxes=inputFluxes,Fc,di=lambda,pass=pass)
+    mod=GeneralModel_14(t,
+      At,
+      ivList=C0,
+      initialValF=SoilR.F0.new(F0_Delta14C,"Delta14C"),
+      inputFluxes=inputFluxes,
+      Fc,
+      di=lambda,
+      pass=pass
+    )
     ### A Model Object that can be further queried 
     ##seealso<< \code{\link{ThreepParallelModel14}}, \code{\link{ThreepFeedbackModel14}} 
   }
@@ -78,20 +86,45 @@ GaudinskiModel14<-structure(
     
     years=seq(1901,2010,by=0.5)
     
-    Ex=GaudinskiModel14(t=years,ks=c(kr=1/3,koi=1/1.5,koeal=1/4,koeah=1/80,kA1=1/3,kA2=1/75,kM=1/110),FcAtm=C14Atm_NH)
+    Ex=GaudinskiModel14(
+      t=years,
+      ks=c(kr=1/3, koi=1/1.5, koeal=1/4, koeah=1/80, kA1=1/3, kA2=1/75, kM=1/110),
+      FcAtm=C14Atm_NH
+    )
     R14m=getF14R(Ex)
     C14m=getF14C(Ex)
         
-    plot(C14Atm_NH,type="l",xlab="Year",ylab=expression(paste(Delta^14,"C ","(\u2030)")),xlim=c(1940,2010)) 
+    plot(
+      C14Atm_NH,
+      type="l",
+      xlab="Year",
+      ylab=expression(paste(Delta^14,"C ","(\u2030)")),
+      xlim=c(1940,2010)
+    ) 
     lines(years,C14m,col=4)
     points(HarvardForest14CO2[1:11,1],HarvardForest14CO2[1:11,2],pch=19,cex=0.5)
     points(HarvardForest14CO2[12:173,1],HarvardForest14CO2[12:173,2],pch=19,col=2,cex=0.5)
     points(HarvardForest14CO2[158,1],HarvardForest14CO2[158,2],pch=19,cex=0.5)
     lines(years,R14m,col=2)
-    legend("topright",c("Delta 14C Atmosphere","Delta 14C SOM", "Delta 14C Respired"),lty=c(1,1,1), col=c(1,4,2),bty="n")
-    ## We now show how to bypass soilR s parameter sanity check if nacessary (e.g in for parameter estimation ) in functions
+    legend(
+      "topright",
+      c("Delta 14C Atmosphere",
+         "Delta 14C SOM", 
+         "Delta 14C Respired"
+      ),
+      lty=c(1,1,1), 
+      col=c(1,4,2),
+      bty="n"
+    )
+    ## We now show how to bypass soilR s parameter sanity check if nacessary 
+    ## (e.g in for parameter estimation ) in functions
     ## wchich might call it with unreasonable parameters
     years=seq(1800,2010,by=0.5)
-    Ex=GaudinskiModel14(t=years,ks=c(kr=1/3,koi=1/1.5,koeal=1/4,koeah=1/80,kA1=1/3,kA2=1/75,kM=1/110),FcAtm=C14Atm_NH,pass=TRUE)
+    Ex=GaudinskiModel14(
+      t=years,
+      ks=c(kr=1/3,koi=1/1.5,koeal=1/4,koeah=1/80,kA1=1/3,kA2=1/75,kM=1/110),
+      FcAtm=C14Atm_NH,
+      pass=TRUE
+   )
   }
   )

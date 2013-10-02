@@ -22,7 +22,6 @@ deSolve.lsoda.wrapper=function(
        #list(yd,c(massbalance=sum(y))) we could add other output parameter if we were interested
        list(yd)
      }
-   require(deSolve)
    #out <- lsoda(startValues,t,lsexamp, parms, rtol, atol= my.atol)
    out <- lsoda(startValues,t,lsexamp)
    #out <- rk(startValues,t,lsexamp,parms)

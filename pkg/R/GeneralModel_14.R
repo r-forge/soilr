@@ -118,13 +118,30 @@ GeneralModel_14=structure(function #The most general costructor for class Model1
     
       #now compute the release flux
          Rt=getReleaseFlux(mod)
-         plot(t,Rt[,1],type="l",lty=lt1,col=col1,ylab="C Release Flux (arbitrary units)",xlab="Time",ylim=c(0,50)) 
+         plot(
+           t,
+           Rt[,1],
+           type="l",
+           lty=lt1,
+           col=col1,
+           ylab="C Release Flux (arbitrary units)",
+           xlab="Time",
+           ylim=c(0,50)
+         ) 
          lines(t,Rt[,2],lt2,type="l",lty=lt2,col=col2) 
          lines(t,Rt[,3],type="l",lty=lt3,col=col3) 
          legend("topleft",c("RF1","RF2","RF3"),lty=c(lt1,lt2,lt3),col=c(col1,col2,col3))
          #now compute the c14 release flux
          R14t=getReleaseFlux14(mod)/1000
-         plot(t,R14t[,1],type="l",lty=lt1,col=col1,ylab="C14 Release Flux (arbitrary units)",xlab="Time") 
+         plot(
+           t,
+           R14t[,1],
+           type="l",
+           lty=lt1,
+           col=col1,
+           ylab="C14 Release Flux (arbitrary units)",
+           xlab="Time"
+         ) 
          lines(t,R14t[,2],lt2,type="l",lty=lt2,col=col2) 
          lines(t,R14t[,3],type="l",lty=lt3,col=col3) 
          legend("topleft",c(
@@ -139,7 +156,13 @@ GeneralModel_14=structure(function #The most general costructor for class Model1
       plot(C14Atm_NH, type="l",xlim=c(1960,2010),col=4)
       lines(t,C14m) 
       lines(t,R14m,col=2) 
-      legend("topright",c("Atmosphere","Mean SOM-14C","Mean Release 14C"),lty=rep(1,3),col=c(4,1,2),bty="n")
+      legend(
+        "topright",
+        c("Atmosphere","Mean SOM-14C","Mean Release 14C"),
+        lty=rep(1,3),
+        col=c(4,1,2),
+        bty="n"
+      )
       
       par(mfrow=c(1,1))
 

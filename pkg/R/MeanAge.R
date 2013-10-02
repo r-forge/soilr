@@ -39,7 +39,6 @@ OdotLin,##<< The outputrate of this pool as a linear operator (a function of y a
 sol,	##<< The solution of the nonlinear equation for this pool as a function of time
 times 	##<< A vector containing the points in time where the solution is sought.
 ){
-   require(parallel)
    maxage=max(times)-min(times)
 fineTimes=(seq(sqrt(min(times)),sqrt(max(times)),sqrt(maxage)/10000))^2   
 #fineTimes=seq(min(times),max(times),maxage/100000)   
@@ -69,7 +68,6 @@ OdotLin,##<< The outputrate of this pool as a linear operator (a function of y a
 sol,	##<< The solution of the nonlinear equation for this pool as a function of time
 times 	##<< A vector containing the points in time where the solution is sought.
 ){
-   require(parallel)
 so=solver(times,OdotLin,1)
 #we assume that the startvalue is the result of an input in the first timestep
 # first we compute the value of the solution at the first time

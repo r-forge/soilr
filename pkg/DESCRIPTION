@@ -6,5 +6,5 @@ Author: Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bg
 Maintainer: Markus Mueller <mamueller@bgc-jena.mpg.de>
 Description: This package contains functions for modeling Soil Organic Matter decomposition in terrestrial ecosystems.
 License: GPL-3
-Depends:deSolve,methods,hash,FME,MASS,lattice
+Depends:deSolve,methods,hash,FME,MASS,lattice,parallel
 LazyData: TRUE

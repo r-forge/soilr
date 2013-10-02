@@ -6,7 +6,8 @@ ParallelModel=structure(function
 ### but can also be used independently.
 (times,		##<< A vector containing the points in time where the solution is sought.
  coeffs_tm,	##<< A TimeMap object consisting of a vector valued function containing the decay rates for the n pools as function of time and the time range where this function is valid. The length of the vector is equal to the number of pools.
- startvalues,	##<< A vector containing the initial amount of carbon for the n pools. The length of this vector is equal to the number of pools and thus equal to the length of k. This is checked by the function.
+ startvalues,	##<< A vector containing the initial amount of carbon for the n pools. 
+ ##<<The length of this vector is equal to the number of pools and thus equal to the length of k. This is checked by the function.
  inputrates, ##<< A TimeMap object consisting of a vector valued function describing the inputs to the pools as funtions of time \code{\link{TimeMap.new}}
  solverfunc =deSolve.lsoda.wrapper,    ##<< The function used to actually solve the ODE system. This can be \code{\link{deSolve.lsoda.wrapper}} or any other user provided function with the same interface. 
   pass=FALSE  ##<< if TRUE forces the constructor to create the model even if it is invalid 

@@ -28,7 +28,6 @@ Northern Hemisphere atmospheric radiocarbon calibration curve for the period 0 t
   }
 }
 \references{
-
 P. Reimer, M.Baillie, E. Bard, A. Bayliss, J. Beck, P. Blackwell, C. Ramsey, C. Buck, G. Burr, R. Edwards, et al. 2009. IntCal09 and Marine09 radiocarbon age calibration curves, 0 - 50,000 years cal bp. Radiocarbon, 51(4):1111 - 1150.
 
 
@@ -37,10 +36,14 @@ M. Stuiver and H. A. Polach. 1977. Rerporting of C-14 data. Radiocarbon, 19(3):3
 \examples{
 
 par(mfrow=c(2,1))
-polygon(x=c(IntCal09$CAL.BP,rev(IntCal09$CAL.BP)),y=c(IntCal09$C14.age+IntCal09$Error,rev(IntCal09$C14.age-IntCal09$Error)),col="gray",border=NA)
+polygon(x=c(IntCal09$CAL.BP,rev(IntCal09$CAL.BP)),
+	y=c(IntCal09$C14.age+IntCal09$Error,rev(IntCal09$C14.age-IntCal09$Error)),
+	col="gray",border=NA)
 lines(IntCal09$CAL.BP,IntCal09$C14.age)
 
-polygon(x=c(IntCal09$CAL.BP,rev(IntCal09$CAL.BP)),y=c(IntCal09$Delta.14C+IntCal09$Sigma,rev(IntCal09$Delta.14C-IntCal09$Sigma)),col="gray",border=NA)
+polygon(x=c(IntCal09$CAL.BP,rev(IntCal09$CAL.BP)),
+	y=c(IntCal09$Delta.14C+IntCal09$Sigma,rev(IntCal09$Delta.14C-IntCal09$Sigma)),
+	col="gray",border=NA)
 lines(IntCal09$CAL.BP,IntCal09$Delta.14C)
 par(mfrow=c(1,1))
 }

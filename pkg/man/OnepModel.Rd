@@ -37,10 +37,31 @@ Ct=getC(Ex)
 Rt=getReleaseFlux(Ex)
 Rc=getAccumulatedRelease(Ex)
 
-plot(t,Ct,type="l",ylab="Carbon stocks (arbitrary units)",xlab="Time (arbitrary units)",lwd=2) 
+plot(
+  t,
+  Ct,
+  type="l",
+  ylab="Carbon stocks (arbitrary units)",
+  xlab="Time (arbitrary units)",
+  lwd=2
+) 
 
-plot(t,Rt,type="l",ylab="Carbon released (arbitrary units)",xlab="Time (arbitrary units)",lwd=2) 
+plot(
+  t,
+  Rt,
+  type="l",
+  ylab="Carbon released (arbitrary units)",
+  xlab="Time (arbitrary units)",
+  lwd=2
+) 
 
-plot(t,Rc,type="l",ylab="Cummulative carbon released (arbitrary units)",xlab="Time (arbitrary units)",lwd=2) 
+plot(
+  t,
+  Rc,
+  type="l",
+  ylab="Cummulative carbon released (arbitrary units)",
+  xlab="Time (arbitrary units)",
+  lwd=2
+) 
 
 }
