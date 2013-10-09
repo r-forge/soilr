@@ -9,6 +9,9 @@
 \section{Methods}{
 \describe{
 
+\item{\code{signature(object = "Model_14")}}{
+%%  ~~describe this method here~~
+}
 }}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

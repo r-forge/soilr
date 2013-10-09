@@ -4,7 +4,7 @@
 \alias{Model-class}
 \alias{Model}
 %% \alias{$}
-\alias{[,Model}
+\alias{[,Model-method}
 %% \alias{getAccumulatedRelease}
 %% \alias{getC}
 %% \alias{getReleaseFlux}
@@ -30,7 +30,7 @@
 \section{Methods}{
   \describe{
     \item{$}{\code{signature(x = "Model")}: ... }
-    \item{[}{\code{signature(x = "Model", i = "character", j = "ANY", drop = "ANY")}: ... }
+    \item{[}{\code{signature(x = "Model", i = "character")}: ... }
     \item{getAccumulatedRelease}{\code{signature(object = "Model")}: ... }
     \item{getC}{\code{signature(object = "Model")}: ... }
     \item{getReleaseFlux}{\code{signature(object = "Model")}: ... }

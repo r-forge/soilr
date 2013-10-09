@@ -12,7 +12,8 @@ Date: \tab 2013-09-31\cr
 Author: \tab Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>\cr
 Maintainer: \tab Markus Mueller <mamueller@bgc-jena.mpg.de>\cr
 License: \tab GPL-3\cr
-Depends: \tab deSolve,methods,hash,FME,MASS,lattice,parallel\cr
+Depends: \tab deSolve,methods\cr
+Suggests: \tab FME,lattice,MASS\cr
 LazyData: \tab TRUE\cr}
 }
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}

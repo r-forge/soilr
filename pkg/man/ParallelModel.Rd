@@ -5,7 +5,8 @@
 It is used by the convinient wrapper functions \code{\link{TwopParallelModel}} and \code{\link{ThreepParallelModel}}
 but can also be used independently.}
 \usage{ParallelModel(times, coeffs_tm, startvalues, 
-inputrates, solverfunc = deSolve.lsoda.wrapper, pass = FALSE)}
+inputrates, solverfunc = deSolve.lsoda.wrapper, 
+    pass = FALSE)}
 \arguments{
   \item{times}{A vector containing the points in time where the solution is sought.}
   \item{coeffs_tm}{A TimeMap object consisting of a vector valued function containing the decay rates for the n pools as function of time and the time range where this function is valid. The length of the vector is equal to the number of pools.}

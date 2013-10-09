@@ -1,8 +1,8 @@
 \name{[-methods}
 \docType{methods}
 \alias{[-methods}
-\alias{[,Model,character,ANY,ANY-method}
-\alias{[,NlModel,character,ANY,ANY-method}
+\alias{[,Model,character-method}
+\alias{[,NlModel,character-method}
 \title{ ~~ Methods for Function \code{[}  ~~}
 \description{
  ~~ Methods for function \code{[}  ~~
@@ -10,7 +10,7 @@
 \section{Methods}{
 \describe{
 
-\item{\code{signature(x = "Model", i = "character", j = "ANY", drop = "ANY")}}{
+\item{\code{signature(x = "Model", i = "character")}}{
 %%  ~~describe this method here~~
 }
 

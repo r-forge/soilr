@@ -54,6 +54,9 @@ Measurements of evolved CO$_2$ from incubation experiments provide useful data f
 
 <<>>=
 library(SoilR)
+library(FME)
+library(MASS)
+library(lattice)
 BorealCO2=subset(eCO2, subset=Sample=="AK_T25", select=-Sample)
 names(BorealCO2)<-c("time","eCO2","eCO2sd")
 @
