@@ -5,15 +5,15 @@
 \alias{getC,NlModel-method}
 \title{ ~~ Methods for Function \code{getC}  ~~}
 \description{
- ~~ Methods for function \code{getC}  ~~
+ ~~ Methods for function \code{getC} ~~
 }
 \section{Methods}{
-\describe{
+  \describe{
+    \item{\code{signature(object = "Model")}}{
+      \code{\link{getC_method__Model}}  
+    }
 
-\item{\code{signature(object = "Model")}}{
-%%  ~~describe this method here~~
+  }
 }
-
-}}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

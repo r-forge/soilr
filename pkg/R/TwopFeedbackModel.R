@@ -46,7 +46,7 @@ TwopFeedbackModel<-structure(
         Y=xi[,2]
         fX=function(t){as.numeric(spline(X,Y,xout=t)[2])}
        }
-      Af=TimeMap.new(
+      Af=new("LinearDecompositionOperator",
         t_start,
         t_end,
         function(t){fX(t)*A}

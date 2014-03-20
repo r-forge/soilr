@@ -20,14 +20,14 @@ OnepModel14<-structure(
     t_stop=max(t)
     if(length(k)!=1) stop("k must be a scalar (length == 1)")
     if(length(C0)!=1) stop("initial conditions must be of length = 1")
-    if(length(F0_Delta14C)!=1) stop("initial 13^C fraction must be of length = 1")
+    if(length(F0_Delta14C)!=1) stop("initial 14C fraction must be of length = 1")
     C0=c(C0)
     F0_Delta14C=c(F0_Delta14C)
     
-    if(length(In)==1) inputFluxes=new("TimeMap",
+    if(length(In)==1) inputFluxes=TemporaryInputFlux(
+                                      function(t){matrix(nrow=1,ncol=1,In)},
                                       t_start,
-                                      t_stop,
-                                      function(t){matrix(nrow=1,ncol=1,In)}
+                                      t_stop
                                       )
     if(class(In)=="data.frame"){
       x=In[,1]  
@@ -49,7 +49,7 @@ OnepModel14<-structure(
     
     A=-abs(matrix(k,1,1))
     
-    At=new(Class="DecompositionOperator",
+    At=new(Class="LinearDecompositionOperator",
            t_start,
            t_stop,
            function(t){
@@ -63,7 +63,7 @@ OnepModel14<-structure(
       t,
       At,
       ivList=C0,
-      initialValF=SoilR.F0.new(F0_Delta14C,"Delta14C"),
+      initialValF=SoilR.F0(F0_Delta14C,"Delta14C"),
       inputFluxes=inputFluxes,
       Fc,
       di=lambda,

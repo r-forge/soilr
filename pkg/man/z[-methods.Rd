@@ -5,15 +5,15 @@
 \alias{[,NlModel,character-method}
 \title{ ~~ Methods for Function \code{[}  ~~}
 \description{
- ~~ Methods for function \code{[}  ~~
+ ~~ Methods for function \code{[} ~~
 }
 \section{Methods}{
-\describe{
+  \describe{
+    \item{\code{signature(x = "Model", i = "character")}}{
+      \code{\link{[_method__Model_character}}  
+    }
 
-\item{\code{signature(x = "Model", i = "character")}}{
-%%  ~~describe this method here~~
+  }
 }
-
-}}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

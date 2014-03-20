@@ -5,15 +5,15 @@
 \alias{getTimes,NlModel-method}
 \title{ ~~ Methods for Function \code{getTimes}  ~~}
 \description{
- ~~ Methods for function \code{getTimes}  ~~
+ ~~ Methods for function \code{getTimes} ~~
 }
 \section{Methods}{
-\describe{
+  \describe{
+    \item{\code{signature(object = "Model")}}{
+      \code{\link{getTimes_method__Model}}  
+    }
 
-\item{\code{signature(object = "Model")}}{
-%%  ~~describe this method here~~
+  }
 }
-
-}}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

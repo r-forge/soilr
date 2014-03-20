@@ -63,9 +63,9 @@ setMethod(
    f= "AbsoluteFractionModern_from_Delta14C",
       signature("numeric"),
       definition=function(# convert from Delta14C to Absolute Fraction Normal values  
+	### convert a number or vector containing Delta14C values to the appropriate Absolute Fraction Modern values .
 	delta14C ##<< numeric containing the values in Delta14C format
 	){
-	### convert a number matrix of vector containing Delta14C values to the appropriate Absolute Fraction Modern values .
 	fprime=(delta14C/1000)+1
 	return(fprime)
 	}
@@ -73,7 +73,8 @@ setMethod(
 setMethod(
    f= "Delta14C_from_AbsoluteFractionModern",
       signature("numeric"),
-      definition=function(# convert Absolute Fraction Normal values to Delta14C values 
+      definition=function(# convert to Delta14C format
+      ### This method produces Delta14C values from   Absolute Fraction Normal values
 	AbsoluteFractionModern ##<< numeric containing the values in Absolute Fraction Modern format
 	){
 	D14C=(AbsoluteFractionModern-1)*1000
@@ -83,10 +84,11 @@ setMethod(
 setMethod(
    f= "AbsoluteFractionModern_from_Delta14C",
       signature("matrix"),
-      definition=function(# convert from Delta14C to Absolute Fraction Normal values  
-	delta14C ##<< numeric containing the values in Delta14C format
+      definition=function #convert from Delta14C to Absolute Fraction Normal values  
+ ### This method produces a matrix of Delta14C values from  a Matrix of  Absolute Fraction Normal values.
+	(
+   delta14C ##<< a Matrix containing the values in Delta14C format
 	){
-	### convert a number matrix of vector containing Delta14C values to the appropriate Absolute Fraction Modern values .
 	fprime=matrix(
 	    nrow=nrow(delta14C),
 	    ncol=ncol(delta14C),
@@ -99,6 +101,7 @@ setMethod(
    f= "Delta14C_from_AbsoluteFractionModern",
       signature("matrix"),
       definition=function(# convert Absolute Fraction Normal values to Delta14C values 
+      ### This method produces a matrix of  Delta14C values from a matrix of Absolute Fraction Normal values.
 	AbsoluteFractionModern ##<< numeric containing the values in Absolute Fraction Modern format
 	){
 	D14C=matrix(
@@ -186,7 +189,7 @@ setGeneric ( # This function
    }
    
 )
-setGeneric ( # This function 
+setGeneric ( 
    name= "getC",
    def=function(# Calculates the C content of the pools 
     ### This function computes the carbon content of the pools as function of time
@@ -281,7 +284,7 @@ setGeneric ( # This function
 setGeneric(
     name="getTimeRange",
     def=function(object){
-    ### The function returns the time range of the given TimeMap object. 
+    ### The function returns the time range of the given object. 
         standardGeneric("getTimeRange")
     }
 )
@@ -362,5 +365,79 @@ setGeneric(
     name="getTransferCoefficients",
     def=function(object,as.closures=F){
         standardGeneric("getTransferCoefficients")
+    }
+)
+setGeneric(
+    name="TemporaryInputFlux",
+    def=function # generic constructor
+    ### create a TemporaryInputFlux object from different sources
+    (map,starttime,endtime,lag)
+    {
+        standardGeneric("TemporaryInputFlux")
+    }
+)
+setGeneric(
+    name="DecompositionOperator",
+    def=function # generic constructor and converter 
+    ### If the argument is already of a subclass of class DecompositionOperator 
+    ### the function returns the unchanged object.
+    ### Ohterwise it creates an object of a subclass of DecompositionOperator.
+    ### Note that the actual class of the output depends on the argument.
+    ### For examples please look at the methods of this function.
+    (object)
+    {
+    ### create a DecompositonOperator from different sources
+        standardGeneric("DecompositionOperator")
+    }
+)
+setGeneric(
+    name="InputFlux",
+    def=function # generic constructor and converter 
+    ### If the argument is already of a subclass of class InputFlux
+    ### the function returns the unchanged object.
+    ### Ohterwise it creates an object of a subclass of InputFlux
+    ### Note that the actual class of the output depends on the argument.
+    ### For examples please look at the methods of this function.
+    (object)
+    {
+    ### create a DecompositonOperator from different sources
+        standardGeneric("InputFlux")
+    }
+)
+setGeneric(
+    name="ConstantDecompositionOperator",
+    def=function # generic constructor
+    ### create a ConstantDecompositonOperator from different sources
+    ### Have a look at the methods to see what kind of input is supported. 
+    (mat)
+    {
+        standardGeneric("ConstantDecompositionOperator")
+    }
+)
+setGeneric(
+    name="LinearDecompositionOperator",
+    def=function # generic constructor
+    ### create a LinearDecompositonOperator from different sources.
+    ### Have a look at the methods to see what kind of input is supported. 
+    (map,starttime,endtime,lag=0)
+    {
+        standardGeneric("LinearDecompositionOperator")
+    }
+)
+setGeneric(
+    name="GeneralModel",
+    #def=function(t,A,ivList,inputFluxes,solverfunc=deSolve.lsoda.wrapper,pass=FALSE){
+    def=function # a general constructor 
+    ### create a Model object from different sources
+    (t,A,ivList,inputFluxes,...){
+        standardGeneric("GeneralModel")
+    }
+)
+setGeneric(
+    name="Model",
+    def=function # a general costructor 
+    (t,A,ivList,inputFluxes,...){
+    ### create a Model object from different sources
+        standardGeneric("Model")
     }
 )

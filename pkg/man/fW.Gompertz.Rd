@@ -2,8 +2,7 @@
 \alias{fW.Gompertz}
 \title{Effects of moisture on decomposition rates according to the Gompertz function}
 \description{Calculates the effects of water content on decomposition rates.}
-\usage{fW.Gompertz(theta, a = 0.824, b = 0.308)}
-\arguments{
+\usage{fW.Gompertz(theta, a = 0.824, b = 0.308)}\arguments{
   \item{theta}{A scalar or vector containing values of volumetric soil water content.}
   \item{a}{Empirical parameter}
   \item{b}{Empirical parameter}

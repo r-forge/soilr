@@ -3,8 +3,7 @@
 \title{Effects of moisture on decomposition rates according to the StandCarb model}
 \description{Calculates the effects of moisture on decomposition rates according to the StandCarb model.}
 \usage{fW.Standcarb(Moist, MatricShape = 5, MatricLag = 0, MoistMin = 30, 
-    MoistMax = 350, DiffuseShape = 15, DiffuseLag = 4)}
-\arguments{
+    MoistMax = 350, DiffuseShape = 15, DiffuseLag = 4)}\arguments{
   \item{Moist}{A scalar or vector containing values of moisture content of a litter or soil pool (\%).}
   \item{MatricShape}{A scalar that determines when matric limit is reduced to the point that decay can begin to occur.}
   \item{MatricLag}{A scalar used to offset the curve to the left or right.}

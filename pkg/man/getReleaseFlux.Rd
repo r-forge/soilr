@@ -2,8 +2,7 @@
 \alias{getReleaseFlux}
 \title{Calculates the release of C from each pool}
 \description{This function computes carbon release from each pool of the given model as funtion of time }
-\usage{getReleaseFlux(object)}
-\arguments{
+\usage{getReleaseFlux(object)}\arguments{
   \item{object}{An object of class Model or Model14 created by a call to \code{\link{GeneralModel}} or other model creating functions.}
 }
 \details{This function takes a Model object, which represents a system of ODEs of the form 

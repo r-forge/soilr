@@ -10,7 +10,7 @@ test.Conversion=function(){
    timestep=(t_end-t_start)/tn
    t=seq(t_start,t_end,timestep)
    th=5730
-   A=new("DecompositionOperator",t_start,Inf,function(t){matrix(
+   A=new("LinearDecompositionOperator",t_start,Inf,function(t){matrix(
      nrow=1,
      ncol=1,
      c(
@@ -18,7 +18,7 @@ test.Conversion=function(){
      )
    )})
    c0s=c(1)
-   f0_Delta14C=SoilR.F0.new(1,format="Delta14C")
+   f0_Delta14C=SoilR.F0(1,format="Delta14C")
    f0_AFM=AbsoluteFractionModern(f0_Delta14C)
    inputrates=new("TimeMap",t_start,t_end,function(t){return(matrix(
      nrow=1,

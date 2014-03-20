@@ -19,7 +19,8 @@ correctnessOfFcAtm=function#check for unreasonable parameters or unsupported for
 }
 
 ##############################################################################################
-setClass(# A special form of TimeMap containing the atmospheric C14 fraction and the format it is provided in. 
+setClass(# Objects containing the atmospheric 14C fraction and the format it is provided in. 
+    ### Objects of this class contain a time dependent function describing the Atmospheric \eqn{^{14}C}{14C} fraction and a format description, that allows to use the numeric valuest to be interpreted correctly in subsequent computations.
     Class="FcAtm",
     contains="TimeMap",
     representation=representation(

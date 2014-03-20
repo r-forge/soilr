@@ -2,8 +2,7 @@
 \alias{fW.Moyano}
 \title{Effects of moisture on decomposition rates according to the function proposed by Moyano et al. (2013)}
 \description{Calculates the effects of water content on decomposition rates.}
-\usage{fW.Moyano(theta, a = 3.11, b = 2.42)}
-\arguments{
+\usage{fW.Moyano(theta, a = 3.11, b = 2.42)}\arguments{
   \item{theta}{A scalar or vector containing values of volumetric soil water content.}
   \item{a}{Empirical parameter}
   \item{b}{Empirical parameter}

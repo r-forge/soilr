@@ -2,8 +2,7 @@
 \alias{getFunctionDefinition}
 \title{getFunctionDefinition}
 \description{extract the function definition (the R-function) from the argument}
-\usage{getFunctionDefinition(object)}
-\arguments{
+\usage{getFunctionDefinition(object)}\arguments{
   \item{object}{
 }
 }

@@ -3,8 +3,7 @@
 \title{Implementation of a one-pool C14 model}
 \description{This function creates a model for one pool. It is a wrapper for the more general function \code{\link{GeneralModel_14}}. }
 \usage{OnepModel14(t, k, C0, F0_Delta14C, In, xi = 1, FcAtm, lambda = -0.0001209681, 
-    lag = 0, solver = deSolve.lsoda.wrapper, pass = FALSE)}
-\arguments{
+    lag = 0, solver = deSolve.lsoda.wrapper, pass = FALSE)}\arguments{
   \item{t}{A vector containing the points in time where the solution is sought. It must be specified within the same period for which the Delta 14 C of the atmosphere is provided. The default period in the provided dataset \code{\link{C14Atm_NH}} is 1900-2010.}
   \item{k}{A scalar with the decomposition rate of the pool.}
   \item{C0}{A scalar containing the initial amount of carbon in the pool.}

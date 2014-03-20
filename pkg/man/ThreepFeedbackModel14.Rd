@@ -5,8 +5,7 @@
 It is a wrapper for the more general function \code{\link{GeneralModel_14}} that can handle an arbitrary number of pools with arbitrary connection. \code{\link{GeneralModel_14}} can also handle input data in different formats, while this function requires its input as Delta14C. Look at it as an example how to use the more powerful tool \code{\link{GeneralModel_14}} or as a shortcut for a standard task! }
 \usage{ThreepFeedbackModel14(t, ks, C0, F0_Delta14C, In, a21, a12, a32, 
     a23, xi = 1, FcAtm, lambda = -0.0001209681, lag = 0, solver = deSolve.lsoda.wrapper, 
-    pass = FALSE)}
-\arguments{
+    pass = FALSE)}\arguments{
   \item{t}{A vector containing the points in time where the solution is sought. It must be specified within the same period for which the Delta 14 C of the atmosphere is provided. The default period in the provided dataset \code{\link{C14Atm_NH}} is 1900-2010.}
   \item{ks}{A vector of length 3 containing the decomposition rates for the 3 pools.}
   \item{C0}{A vector of length 3 containing the initial amount of carbon for the 3 pools.}
@@ -37,6 +36,10 @@ A vector of length 3 containing the initial fraction of radiocarbon for the 3 po
 years=seq(1901,2009,by=0.5)
 LitterInput=100
 k1=1/2; k2=1/10; k3=1/50
+a21=0.9*k1
+a12=0.4*k2
+a32=0.4*k2
+a23=0.7*k3
 
 Feedback=ThreepFeedbackModel14(
   t=years,
@@ -44,10 +47,10 @@ Feedback=ThreepFeedbackModel14(
   C0=c(100,500,1000),
   F0_Delta14C=c(0,0,0),
   In=LitterInput,
-  a21=0.2*k1,
-  a12=0.2*k2,
-  a32=0.1*k2,
-  a23=0.2*k3,
+  a21=a21,
+  a12=a12,
+  a32=a32,
+  a23=a23,
   FcAtm=C14Atm_NH
 )
 F.R14m=getF14R(Feedback)
@@ -56,12 +59,12 @@ F.C14t=getF14(Feedback)
 
 Series=ThreepSeriesModel14(
   t=years,
-  ks=c(k1=1/2, k2=1/35, k3=1/100),
+  ks=c(k1=k1, k2=k2, k3=k3),
   C0=c(100,500,1000),
   F0_Delta14C=c(0,0,0),
   In=LitterInput,
-  a21=0.2*k1,
-  a32=0.1*k2,
+  a21=a21,
+  a32=a32,
   FcAtm=C14Atm_NH
 )
 S.R14m=getF14R(Series)
@@ -70,7 +73,7 @@ S.C14t=getF14(Series)
 
 Parallel=ThreepParallelModel14(
   t=years,
-  ks=c(k1=1/2, k2=1/35, k3=1/100),
+  ks=c(k1=k1, k2=k2, k3=k3),
   C0=c(100,500,1000),
   F0_Delta14C=c(0,0,0),
   In=LitterInput,
@@ -142,4 +145,5 @@ legend("topright",c("Atmosphere","Bulk SOM", "Respired C"),
 
 
 par(mfrow=c(1,1))
+
 }

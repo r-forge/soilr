@@ -19,10 +19,10 @@ OnepModel<-structure(
       C0=c(C0)
       
       if(length(In)==1){
-          inputFluxes=TimeMap.new(
+          inputFluxes=TemporaryInputFlux(
+            function(t){matrix(nrow=1,ncol=1,In)},
             t_start,
-            t_end,
-            function(t){matrix(nrow=1,ncol=1,In)}
+            t_end
         )
       }
       if(class(In)=="data.frame"){
@@ -47,7 +47,7 @@ OnepModel<-structure(
       Y=xi[,2]
       fX=splinefun(X,Y)
       }
-      Af=TimeMap.new(
+      Af=new("LinearDecompositionOperator",
         t_start,
         t_end,
         function(t){fX(t)*A}

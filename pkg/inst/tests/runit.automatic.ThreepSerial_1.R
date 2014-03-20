@@ -1,5 +1,3 @@
-#
-# vim:set ff=unix expandtab ts=2 sw=2:
 # This test function is automatically produced by the python script:/home/mm/SoilR/RPackages/SoilR/pkg/inst/tests/Rexample.py
 test.ThreepSerial_1=function(){
    require(RUnit)
@@ -10,7 +8,7 @@ test.ThreepSerial_1=function(){
    print(tol)
    timestep=(t_end-t_start)/tn
    t=seq(t_start,t_end,timestep)
-   A=new("DecompositionOperator",t_start,Inf,function(t){matrix(
+   A=new("ConstantDecompositionOperator",matrix(
      nrow=3,
      ncol=3,
      c(
@@ -18,7 +16,7 @@ test.ThreepSerial_1=function(){
         0,  -1/3,  1/6,  
         0,  0,  -1
      )
-   )})
+   ))
    c01=3
    c02=2
    c03=1

@@ -4,14 +4,15 @@
 \alias{getF14R,Model_14-method}
 \title{ ~~ Methods for Function \code{getF14R}  ~~}
 \description{
- ~~ Methods for function \code{getF14R}  ~~
+ ~~ Methods for function \code{getF14R} ~~
 }
 \section{Methods}{
-\describe{
+  \describe{
+    \item{\code{signature(object = "Model_14")}}{
+      \code{\link{getF14R_method__Model_14}}  
+    }
 
-\item{\code{signature(object = "Model_14")}}{
-%%  ~~describe this method here~~
+  }
 }
-}}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

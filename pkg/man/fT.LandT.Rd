@@ -2,8 +2,7 @@
 \alias{fT.LandT}
 \title{Effects of temperature on decomposition rates according to a function proposed by Lloyd and Taylor (1994)}
 \description{Calculates the effects of temperature on decomposition rates according to a function proposed by Lloyd and Taylor (1994).}
-\usage{fT.LandT(Temp)}
-\arguments{
+\usage{fT.LandT(Temp)}\arguments{
   \item{Temp}{A scalar or vector containing values of soil temperature for which the effects on decomposition rates are calculated}
 }
 

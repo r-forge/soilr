@@ -2,8 +2,7 @@
 \alias{fW.Daycent2}
 \title{#Effects of moisture on decomposition rates according to the DAYCENT model}
 \description{Calculates the effects of volumetric water content on decomposition rates according to the Daycent/Century models.}
-\usage{fW.Daycent2(W, WP = 0, FC = 100)}
-\arguments{
+\usage{fW.Daycent2(W, WP = 0, FC = 100)}\arguments{
   \item{W}{A scalar or vector of volumetric water content in percentage.}
   \item{WP}{A scalar representing the wilting point in percentage.}
   \item{FC}{A scalar representing the field capacity in percentage.}

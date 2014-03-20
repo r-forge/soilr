@@ -3,8 +3,7 @@
 \title{Implementation of a two pool model with series structure}
 \description{This function creates a model for two pools connected in series. It is a wrapper for the more general function \code{\link{GeneralModel}}.}
 \usage{TwopSeriesModel(t, ks, a21, C0, In, xi = 1, solver = deSolve.lsoda.wrapper, 
-    pass = FALSE)}
-\arguments{
+    pass = FALSE)}\arguments{
   \item{t}{A vector containing the points in time where the solution is sought.}
   \item{ks}{A vector of length 2 with the values of the decomposition rate for pools 1 and 2.}
   \item{a21}{A scalar with the value of the transfer rate from pool 1 to pool 2.}

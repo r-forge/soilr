@@ -2,8 +2,7 @@
 \alias{getAccumulatedRelease}
 \title{Calculates the accumulated carbon release from the pools as a function of time}
 \description{This function computes the accumulated carbon release of the given model as funtion of time }
-\usage{getAccumulatedRelease(object)}
-\arguments{
+\usage{getAccumulatedRelease(object)}\arguments{
   \item{object}{An object of class Model or Model14 created by a call to \code{\link{GeneralModel}} or other model creating functions.}
 }
 \details{This function takes a Model object, calculates the release flux as specified by \code{\link{getReleaseFlux}}, 

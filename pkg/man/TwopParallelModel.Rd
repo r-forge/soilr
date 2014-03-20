@@ -4,8 +4,7 @@
 \description{This function creates a model for two independent (parallel) pools. 
 It is a wrapper for the more general function \code{\link{ParallelModel}} that can handle an arbitrary number of pools.}
 \usage{TwopParallelModel(t, ks, C0, In, gam, xi = 1, solver = deSolve.lsoda.wrapper, 
-    pass = FALSE)}
-\arguments{
+    pass = FALSE)}\arguments{
   \item{t}{A vector containing the points in time where the solution is sought.}
   \item{ks}{A vector of length 2 containing the decomposition rates for the 2 pools.}
   \item{C0}{A vector of length 2 containing the initial amount of carbon for the 2 pools.}

@@ -15,21 +15,32 @@ return(obj)
 ### defines a (time dependent) mapping including the function definition and the ### domain where the function is well define.  This can be used to avoid interpolations out of range when mixing different time dependent data sets
 setClass(
    Class="TimeMap",
-   representation=representation(
-	starttime="numeric"
-    ,
-	endtime="numeric"
-    ,
-    map="function"
-    ,
-    lag="numeric"
+   #contains="UnlimitedTimeMap",
+   slots=list(
+      map="function"
+      ,
+      lag="numeric"
+      ,
+      starttime="numeric"
+      ,
+      endtime="numeric"
    )
 )
+##########################################################################
 setMethod(
     f="initialize",
     signature="TimeMap",
-    definition=function(.Object,starttime=numeric(),endtime=numeric(),map=function(t){t},lag=0){
-    #cat("-initializer at work-\n")
+    definition=function #initialize called by (new)
+    ### This is the standard constructor for objects of this class
+    ### It is called by statements of the form 
+    ### \code{new("TimeMap",start,end,f,lag)}
+    (.Object,
+    starttime=numeric(),
+    endtime=numeric(),
+    map=function(t){t},
+    lag=0
+    ){
+    #cat("- initializer of Class Time Map at work - \n")
     .Object@starttime=starttime
     .Object@endtime=endtime
     .Object@map=map
@@ -37,10 +48,11 @@ setMethod(
     return(.Object)
     }
 )
+##########################################################################
 setMethod(
     f="as.character",
     signature="TimeMap",
-    definition=function#convert TimeMap Objects to something printable.
+    definition=function #convert TimeMap Objects to something printable.
     ### This method is needed to print a TimeMap object.
     (x, ##<<An Object of class time map
      ...
@@ -57,23 +69,35 @@ setMethod(
         )
     }
 )    
+##########################################################################
 setMethod(
     f="getTimeRange",
     signature="TimeMap",
-    definition=function(object){
-        return(
-               c("t_min"=object@starttime,"t_max"=object@endtime))
+    definition=function # ask for the boundaries of the underlying time interval
+    ### The method returns the time range of the given object 
+    ### It is probably mostly used internally to make sure that 
+    ### time dependent functions retrieved from data are not
+    ### used outside the interval where they are valid. 
+    
+    (object ##<< An object of class TimeMap or one that inherits from TimeMap
+    ){
+        return( c("t_min"=object@starttime,"t_max"=object@endtime))
+        ### a vector of length two \code{ c(t_min,t_max) }
+        ### containing start and end time of the time interval 
+        ### for which the TimeMap object has been defined.
     }
 )
+###########################################################################
 setMethod(
     f="getFunctionDefinition",
     signature="TimeMap",
     definition=function(object){
-    ### extract the function definition (the R-function) from the TimeMap 
+    ### extract the function definition (the R-function) 
         return(object@map)
     }
 )
 
+##########################################################################
 TimeMap.from.Dataframe=function
 ### This function is another constructor of the class TimeMap.
 (dframe, ##<<A data frame containing exactly two columns:
@@ -96,3 +120,29 @@ return(obj)
 ### An object of class TimeMap that contains the interpolation function and the limits of the time range where the function is valid. Note that the limits change according to the time lag
 ### this serves as a saveguard for Model which thus can check that all involved functions of time are actually defined for the times of interest  
 }
+#########################################################
+setMethod(
+      f="LinearDecompositionOperator",
+      signature=c(map="TimeMap",starttime="missing",endtime="missing",lag="missing"),
+      definition=function # create a LinearDecompositionOperator from a TimeMap
+      ### The method is used internally to convert TimeMap objects to LinearDecompositionOperator where the use of TimeMap is now deprecated.
+      (map){
+      starttime=map@starttime
+      endtime=map@endtime
+      map=map@map
+      return(new("LinearDecompositionOperator",starttime,endtime,map))
+     }
+     )
+#########################################################
+setMethod(
+      f="TemporaryInputFlux",
+      signature=c("TimeMap","missing","missing","missing"),
+      definition=function # convert to TemporaryInputFlux
+      ### The method is used internally to convert TimeMap objects to TemporaryInputFlux objects, since the use of TimeMap objects is now deprecated.
+      (map){
+      starttime=map@starttime
+      endtime=map@endtime
+      map=map@map
+      return(new("TemporaryInputFlux",starttime,endtime,map))
+     }
+     )

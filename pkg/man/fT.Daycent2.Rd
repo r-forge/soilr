@@ -2,8 +2,7 @@
 \alias{fT.Daycent2}
 \title{Effects of temperature on decomposition rates according to the DAYCENT model}
 \description{Calculates the effects of temperature on decomposition rates according to the Daycent/Century models.}
-\usage{fT.Daycent2(Temp)}
-\arguments{
+\usage{fT.Daycent2(Temp)}\arguments{
   \item{Temp}{A scalar or vector containing values of soil temperature for which the effects on decomposition rates are calculated.}
 }
 

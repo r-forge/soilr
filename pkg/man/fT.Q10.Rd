@@ -2,10 +2,10 @@
 \alias{fT.Q10}
 \title{Effects of temperature on decomposition rates according to a Q10 function}
 \description{Calculates the effects of temperature on decomposition rates according to a Q10 function.}
-\usage{fT.Q10(Temp, a = 1, Q10 = 2)}
-\arguments{
+\usage{fT.Q10(Temp, k_ref = 1, T_ref = 10, Q10 = 2)}\arguments{
   \item{Temp}{A scalar or vector containing values of temperature for which the effects on decomposition rates are calculated.}
-  \item{a}{A scalar.}
+  \item{k_ref}{A scalar representing the value of the decomposition rate at a reference temperature vaule.}
+  \item{T_ref}{A scalar representing the reference temperature.}
   \item{Q10}{A scalar. Temperature coefficient Q10.}
 }
 

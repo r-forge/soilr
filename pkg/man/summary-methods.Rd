@@ -6,19 +6,15 @@
 \alias{summary,NlModel-method}
 \title{ ~~ Methods for Function \code{summary}  ~~}
 \description{
- ~~ Methods for function \code{summary}  ~~
+ ~~ Methods for function \code{summary} ~~
 }
 \section{Methods}{
-\describe{
+  \describe{
+    \item{\code{signature(object = "Model")}}{
+      \code{\link{summary_method__Model}}  
+    }
 
-\item{\code{signature(object = "ANY")}}{
-%%  ~~describe this method here~~
+  }
 }
-
-\item{\code{signature(object = "Model")}}{
-%%  ~~describe this method here~~
-}
-
-}}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

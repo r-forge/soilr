@@ -5,8 +5,7 @@
 of matrices in the definition of the derivative. 
 To use lsoda we have to convert our vectors to lists, define tolerances and so on.
 This function does this for us , so we don't need to bother about it.}
-\usage{deSolve.lsoda.wrapper(t, ydot, startValues)}
-\arguments{
+\usage{deSolve.lsoda.wrapper(t, ydot, startValues)}\arguments{
   \item{t}{A row vector containing the points in time where the solution is sought.}
   \item{ydot}{The function of y and t that computes the derivative for a given
 point in time and a column vector y.}

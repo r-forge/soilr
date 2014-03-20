@@ -4,11 +4,8 @@
 \alias{getDecompositionOperator,NlModel-method}
 \title{ ~~ Methods for Function \code{getDecompositionOperator}  ~~}
 \description{
- ~~ Methods for function \code{getDecompositionOperator}  ~~
+ All methods for function \code{getDecompositionOperator} are intended for internal use inside the package only. 
 }
-\section{Methods}{
-\describe{
 
-}}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

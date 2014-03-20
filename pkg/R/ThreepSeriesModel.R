@@ -47,7 +47,7 @@ ThreepSeriesModel<-structure(
         Y=xi[,2]
         fX=splinefun(X,Y)
        }
-      Af=TimeMap.new(
+      Af=new("LinearDecompositionOperator",
             t_start,
             t_end,
             function(t){fX(t)*A}

@@ -6,19 +6,15 @@
 \alias{print,NlModel-method}
 \title{ ~~ Methods for Function \code{print}  ~~}
 \description{
- ~~ Methods for function \code{print}  ~~
+ ~~ Methods for function \code{print} ~~
 }
 \section{Methods}{
-\describe{
+  \describe{
+    \item{\code{signature(x = "Model")}}{
+      \code{\link{print_method__Model}}  
+    }
 
-\item{\code{signature(x = "ANY")}}{
-%%  ~~describe this method here~~
+  }
 }
-
-\item{\code{signature(x = "Model")}}{
-%%  ~~describe this method here~~
-}
-
-}}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

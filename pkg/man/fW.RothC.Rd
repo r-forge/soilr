@@ -2,8 +2,7 @@
 \alias{fW.RothC}
 \title{Effects of moisture on decomposition rates according to the RothC model}
 \description{Calculates the effects of moisture (precipitation and pan evaporation) on decomposition rates according to the RothC model.}
-\usage{fW.RothC(P, E, S.Thick = 23, pClay = 23.4, pE = 0.75, bare = FALSE)}
-\arguments{
+\usage{fW.RothC(P, E, S.Thick = 23, pClay = 23.4, pE = 0.75, bare = FALSE)}\arguments{
   \item{P}{A vector with monthly precipitation (mm).}
   \item{E}{A vector with same length with open pan evaporation or evapotranspiration (mm).}
   \item{S.Thick}{Soil thickness in cm. Default for Rothamsted is 23 cm.}

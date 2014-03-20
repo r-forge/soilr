@@ -3,8 +3,7 @@
 \title{convert its argument to an Absolute Fraction Modern representation}
 \description{The function returns an object of the same type as its imput
 this can be a number a matrix }
-\usage{AbsoluteFractionModern_from_Delta14C(delta14C)}
-\arguments{
+\usage{AbsoluteFractionModern_from_Delta14C(delta14C)}\arguments{
   \item{delta14C}{
 }
 }

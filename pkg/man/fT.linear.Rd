@@ -2,8 +2,7 @@
 \alias{fT.linear}
 \title{Effects of temperature on decomposition rates according to a linear model}
 \description{Calculates the effects of temperature on decomposition rates according to a linear model.}
-\usage{fT.linear(Temp, a = 0.198306, b = 0.036337)}
-\arguments{
+\usage{fT.linear(Temp, a = 0.198306, b = 0.036337)}\arguments{
   \item{Temp}{A scalar or vector containing values of temperature for which the effects on decomposition rates are calculated.}
   \item{a}{A scalar defining the intercept of the linear function.}
   \item{b}{A scalar defining the slope of the linear function.}

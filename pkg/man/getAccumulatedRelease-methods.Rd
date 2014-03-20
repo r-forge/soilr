@@ -4,14 +4,15 @@
 \alias{getAccumulatedRelease,Model-method}
 \title{ ~~ Methods for Function \code{getAccumulatedRelease}  ~~}
 \description{
- ~~ Methods for function \code{getAccumulatedRelease}  ~~
+ ~~ Methods for function \code{getAccumulatedRelease} ~~
 }
 \section{Methods}{
-\describe{
+  \describe{
+    \item{\code{signature(object = "Model")}}{
+      \code{\link{getAccumulatedRelease_method__Model}}  
+    }
 
-\item{\code{signature(object = "Model")}}{
-%%  ~~describe this method here~~
+  }
 }
-}}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

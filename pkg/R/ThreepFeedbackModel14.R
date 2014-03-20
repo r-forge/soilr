@@ -56,7 +56,7 @@ ThreepFeedbackModel14<-structure(
     A[3,2]=a32
     A[2,3]=a23
     
-    At=new(Class="DecompositionOperator",
+    At=new(Class="LinearDecompositionOperator",
            t_start,
            t_stop,
            function(t){
@@ -66,16 +66,20 @@ ThreepFeedbackModel14<-structure(
     
     Fc=FcAtm.from.Dataframe(FcAtm,lag,format="Delta14C")
     
-    mod=GeneralModel_14(t,At,ivList=C0,initialValF=SoilR.F0.new(F0_Delta14C,"Delta14C"),inputFluxes=inputFluxes,Fc,di=lambda,solver,pass)
+    mod=GeneralModel_14(t,At,ivList=C0,initialValF=SoilR.F0(F0_Delta14C,"Delta14C"),inputFluxes=inputFluxes,Fc,di=lambda,solver,pass)
     ### A Model Object that can be further queried 
     ##seealso<<  \code{\link{GeneralModel_14}} \code{\link{ThreepSeriesModel14}}, \code{\link{ThreepParallelModel14}} 
   }
   ,
   ex=function(){
-    
+
     years=seq(1901,2009,by=0.5)
     LitterInput=100
     k1=1/2; k2=1/10; k3=1/50
+    a21=0.9*k1
+    a12=0.4*k2
+    a32=0.4*k2
+    a23=0.7*k3
     
     Feedback=ThreepFeedbackModel14(
       t=years,
@@ -83,10 +87,10 @@ ThreepFeedbackModel14<-structure(
       C0=c(100,500,1000),
       F0_Delta14C=c(0,0,0),
       In=LitterInput,
-      a21=0.2*k1,
-      a12=0.2*k2,
-      a32=0.1*k2,
-      a23=0.2*k3,
+      a21=a21,
+      a12=a12,
+      a32=a32,
+      a23=a23,
       FcAtm=C14Atm_NH
     )
     F.R14m=getF14R(Feedback)
@@ -95,12 +99,12 @@ ThreepFeedbackModel14<-structure(
     
     Series=ThreepSeriesModel14(
       t=years,
-      ks=c(k1=1/2, k2=1/35, k3=1/100),
+      ks=c(k1=k1, k2=k2, k3=k3),
       C0=c(100,500,1000),
       F0_Delta14C=c(0,0,0),
       In=LitterInput,
-      a21=0.2*k1,
-      a32=0.1*k2,
+      a21=a21,
+      a32=a32,
       FcAtm=C14Atm_NH
     )
     S.R14m=getF14R(Series)
@@ -109,7 +113,7 @@ ThreepFeedbackModel14<-structure(
     
     Parallel=ThreepParallelModel14(
       t=years,
-      ks=c(k1=1/2, k2=1/35, k3=1/100),
+      ks=c(k1=k1, k2=k2, k3=k3),
       C0=c(100,500,1000),
       F0_Delta14C=c(0,0,0),
       In=LitterInput,
@@ -163,7 +167,7 @@ ThreepFeedbackModel14<-structure(
     lines(years,S.R14m,col=2)
     legend("topright",c("Atmosphere","Bulk SOM", "Respired C"),
            lty=c(1,1,1), col=c(1,4,2),bty="n")
-
+    
     plot(C14Atm_NH,type="l",xlab="Year",
          ylab=expression(paste(Delta^14,"C ","(\u2030)")),xlim=c(1940,2010)) 
     lines(years, F.C14t[,1], col=4)
@@ -181,5 +185,6 @@ ThreepFeedbackModel14<-structure(
     
     
     par(mfrow=c(1,1))
+    
   }
   )

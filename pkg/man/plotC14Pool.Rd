@@ -2,8 +2,7 @@
 \alias{plotC14Pool}
 \title{Plots the output of \code{\link{getC14}} for each pool over time}
 \description{This function produces a plot with the Delta14C in the atmosphere and the Delta14C of each pool obtained after a call to \code{\link{getC14}}.}
-\usage{plotC14Pool(t, mat, FcAtm, col, ...)}
-\arguments{
+\usage{plotC14Pool(t, mat, FcAtm, col, ...)}\arguments{
   \item{t}{A vector containing the time points for plotting.}
   \item{mat}{A matrix object obtained after a call to \code{\link{getC14}}}
   \item{FcAtm}{A Data Frame object containing values of atmospheric Delta14C per time. First column must be time values, second column must be Delta14C values in per mil.}

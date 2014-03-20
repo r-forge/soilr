@@ -5,12 +5,8 @@
 \alias{getFormat,SoilR.F0-method}
 \title{ ~~ Methods for Function \code{getFormat}  ~~}
 \description{
- ~~ Methods for function \code{getFormat}  ~~
+ All methods for function \code{getFormat} are intended for internal use inside the package only. 
 }
-\section{Methods}{
-\describe{
 
-
-}}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

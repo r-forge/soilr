@@ -50,7 +50,7 @@ ThreepParallelModel14<-structure(
     }
     
     
-    At=new(Class="DecompositionOperator",
+    At=new(Class="LinearDecompositionOperator",
            t_start,
            t_stop,
            function(t){
@@ -60,7 +60,7 @@ ThreepParallelModel14<-structure(
     
     Fc=FcAtm.from.Dataframe(FcAtm,lag,format="Delta14C")
     
-    mod=GeneralModel_14(t,At,ivList=C0,initialValF=SoilR.F0.new(F0_Delta14C,"Delta14C"),
+    mod=GeneralModel_14(t,At,ivList=C0,initialValF=SoilR.F0(F0_Delta14C,"Delta14C"),
                         inputFluxes=inputrates,Fc,di=lambda,pass=pass)
     ### A Model Object that can be further queried 
     ##seealso<< \code{\link{TwopSeriesModel14}}, \code{\link{TwopFeedbackModel14}}  

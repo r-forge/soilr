@@ -1,19 +1,11 @@
 \name{$-methods}
 \docType{methods}
 \alias{$-methods}
-\alias{$,Model-method}
 \alias{$,NlModel-method}
 \title{ ~~ Methods for Function \code{$}  ~~}
 \description{
- ~~ Methods for function \code{$}  ~~
-}
-\section{Methods}{
-\describe{
-
-\item{\code{signature(x = "Model")}}{
-%%  ~~describe this method here~~
+ All methods for function \code{$} are intended for internal use inside the package only. 
 }
 
-}}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

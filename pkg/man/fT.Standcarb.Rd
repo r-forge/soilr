@@ -2,8 +2,7 @@
 \alias{fT.Standcarb}
 \title{effects of temperature on decomposition rates according to the StandCarb model}
 \description{Calculates the effects of temperature on decomposition rates according to the StandCarb model.}
-\usage{fT.Standcarb(Temp, Topt = 45, Tlag = 4, Tshape = 15, Q10 = 2)}
-\arguments{
+\usage{fT.Standcarb(Temp, Topt = 45, Tlag = 4, Tshape = 15, Q10 = 2)}\arguments{
   \item{Temp}{A scalar or vector containing values of temperature for which the effects on decomposition rates are calculated.}
   \item{Topt}{A scalar representing the optimum temperature for decomposition.}
   \item{Tlag}{A scalar that determines the shape of the response curve.}

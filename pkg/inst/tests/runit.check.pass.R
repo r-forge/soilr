@@ -60,7 +60,7 @@ test.check.pass=function(){
 	## create an alternative time vector to provoke an exception 
 	t_fault=seq(t_start-10,t_end,timestep) 
         n=3
-        At=new("TimeMap",
+        At=new("LinearDecompositionOperator",
         t_start,
         t_end,
         function(t0){
@@ -88,7 +88,7 @@ test.check.pass=function(){
         t=seq(t_start,t_end,timestep) 
         t_fault=seq(t_start-10,t_end,timestep) 
         n=3
-        At=new(Class="DecompositionOperator",
+        At=new(Class="LinearDecompositionOperator",
           t_start,
           t_end,
           function(t0){
@@ -101,7 +101,7 @@ test.check.pass=function(){
         ) 
          
         c0=c(100, 100, 100)
-        F0=SoilR.F0.new(c(0,10,10),"Delta14C")
+        F0=SoilR.F0(c(0,10,10),"Delta14C")
         #constant inputrate
         inputFluxes=new(
           "TimeMap",
@@ -344,6 +344,21 @@ test.check.pass=function(){
     	LitterInput=data.frame(years,rep(700,length(years)))
     	l=passCaller(call("TwopSeriesModel14",t=years_fault,ks=c(k1=1/2.8, k2=1/35),C0=c(200,5000), F0_Delta14C=c(0,0),In=LitterInput, a21=0.1,FcAtm=C14Atm_NH),l)
 	############################################################################################################
+      years=seq(0,50,0.1) 
+      years_fault=seq(0,60,0.1) 
+      C0=rep(100,7)
+    	xi=data.frame(years,rep(1,length(years)))
+    	l=passCaller(call("YassoModel",t=years_fault,C0=C0,xi=xi),l)
+  
+	############################################################################################################
+      years=seq(0,50,0.1) 
+      years_fault=seq(0,60,0.1) 
+      C0=rep(100,5)
+      In=0
+    	LitterInput=data.frame(years,rep(In,length(years)))
+    	l=passCaller(call("Yasso07Model",t=years_fault,C0=C0,In=LitterInput),l)
+  
+	############################################################################################################
 	print(setdiff(Xpass,l))
-	if (length((setdiff(Xpass,l)))!=0){stop("not all functions using the pass argument have been tested")}
+	if (length((setdiff(Xpass,l)))!=0){stop(paste("not all functions using the pass argument have been tested",setdiff(Xpass,l)))}
 }

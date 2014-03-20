@@ -5,12 +5,8 @@
 \alias{AbsoluteFractionModern,SoilR.F0-method}
 \title{ ~~ Methods for Function \code{AbsoluteFractionModern}  ~~}
 \description{
- ~~ Methods for function \code{AbsoluteFractionModern}  ~~
+ All methods for function \code{AbsoluteFractionModern} are intended for internal use inside the package only. 
 }
-\section{Methods}{
-\describe{
 
-
-}}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

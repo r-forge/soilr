@@ -2,8 +2,7 @@
 \alias{fW.Candy}
 \title{Effects of moisture on decomposition rates according to the Candy model}
 \description{Calculates the effects of water content and pore volume on decomposition rates.}
-\usage{fW.Candy(theta, PV)}
-\arguments{
+\usage{fW.Candy(theta, PV)}\arguments{
   \item{theta}{A scalar or vector containing values of volumetric soil water content.}
   \item{PV}{A scalar or vector containing values of pore volume.}
 }

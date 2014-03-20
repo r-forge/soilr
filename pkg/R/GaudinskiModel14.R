@@ -59,7 +59,7 @@ GaudinskiModel14<-structure(
     A[4,1]=ks[1]*(35/(35+190+30))
     A[5,1]=ks[1]*(30/(35+190+30))  
     
-    At=new(Class="DecompositionOperator",
+    At=new(Class="LinearDecompositionOperator",
            t_start,
            t_stop,
            function(t){
@@ -72,7 +72,7 @@ GaudinskiModel14<-structure(
     mod=GeneralModel_14(t,
       At,
       ivList=C0,
-      initialValF=SoilR.F0.new(F0_Delta14C,"Delta14C"),
+      initialValF=SoilR.F0(F0_Delta14C,"Delta14C"),
       inputFluxes=inputFluxes,
       Fc,
       di=lambda,

@@ -1,5 +1,3 @@
-#
-# vim:set ff=unix expandtab ts=2 sw=2:
 # This test function is automatically produced by the python script:/home/mm/SoilR/RPackages/SoilR/pkg/inst/tests/Rexample.py
 test.OnePool_C14_ZeroDecay_Zero_c14=function(){
    require(RUnit)
@@ -10,13 +8,13 @@ test.OnePool_C14_ZeroDecay_Zero_c14=function(){
    print(tol)
    timestep=(t_end-t_start)/tn
    t=seq(t_start,t_end,timestep)
-   A=new("DecompositionOperator",t_start,Inf,function(t){matrix(
+   A=new("ConstantDecompositionOperator",matrix(
      nrow=1,
      ncol=1,
      c(
         0
      )
-   )})
+   ))
    c01=1
    inputrates=new("TimeMap",t_start,t_end,function(t){return(matrix(
      nrow=1,
@@ -26,7 +24,7 @@ test.OnePool_C14_ZeroDecay_Zero_c14=function(){
      )
    ))})
    f01=1
-   initialF=SoilR.F0.new(    c(
+   initialF=SoilR.F0(    c(
        f01
     ),
  format="AbsoluteFractionModern")

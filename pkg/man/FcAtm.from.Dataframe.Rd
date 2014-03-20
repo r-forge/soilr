@@ -3,8 +3,7 @@
 \title{FcAtm from Dataframe}
 \description{This function is another constructor of the class FcAtm}
 \usage{FcAtm.from.Dataframe(dframe, lag = 0, interpolation = splinefun, 
-    format)}
-\arguments{
+    format)}\arguments{
   \item{dframe}{A data frame containing exactly two columns:
 the first one is interpreted as time
 the secon one is interpreted as atmospheric C14 fraction in the format mentioned}

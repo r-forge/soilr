@@ -2,8 +2,7 @@
 \alias{fW.Skopp}
 \title{Effects of moisture on decomposition rates according to the function proposed by Skopp et al. 1990}
 \description{Calculates the effects of relative soil water content on decomposition rates.}
-\usage{fW.Skopp(rwc, alpha = 2, beta = 2, f = 1.3, g = 0.8)}
-\arguments{
+\usage{fW.Skopp(rwc, alpha = 2, beta = 2, f = 1.3, g = 0.8)}\arguments{
   \item{rwc}{relative water content}
   \item{alpha}{Empirical parameter}
   \item{beta}{Empirical parameter}

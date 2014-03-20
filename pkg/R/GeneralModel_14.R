@@ -7,7 +7,7 @@ GeneralModel_14=structure(function #The most general costructor for class Model1
 ### versatile interface to produce instances of class Model14. 
 
 (t,	##<< A vector containing the points in time where the solution is sought.
- A,	##<< A DecompositionOperator object consisting of  a matrix valued function describing the whole model decay rates for the n pools, connection and feedback coefficients as functions of time and a time range for which this function is valid. The size of the quadtratic matric must be equal to the number of pools. The time range must cover the times given in the first argument. 
+ A,	##<< A LinearDecompositionOperator object consisting of  a matrix valued function describing the whole model decay rates for the n pools, connection and feedback coefficients as functions of time and a time range for which this function is valid. The size of the quadtratic matric must be equal to the number of pools. The time range must cover the times given in the first argument. 
  ivList,##<< A vector containing the initial amount of carbon for the n pools. The length of this vector is equal to the number of pools and thus equal to the length of k. This is checked by an internal function.
  initialValF, ##<< An object of class SoilR.F0 containing a vector with the initial values of the radiocarbon fraction for each pool and a format string describing in which format the values are given.
  inputFluxes, ##<< A TimeMap object consisting of a vector valued function describing the inputs to the pools as funtions of time \code{\link{TimeMap.new}}.
@@ -26,7 +26,7 @@ GeneralModel_14=structure(function #The most general costructor for class Model1
    obj=new(Class="Model_14",t,A,ivList, initialValF,inputFluxes,Fc,di,solverfunc,pass=pass)
    return(obj)
    ### A model object that can be further queried. 
-   ##seealso<< \code{\link{Model}} 
+   ##seealso<< \code{\link{Model-class}} 
 }
 ,ex=function(){
       t_start=1960
@@ -35,7 +35,7 @@ GeneralModel_14=structure(function #The most general costructor for class Model1
       timestep=(t_end-t_start)/tn 
       t=seq(t_start,t_end,timestep) 
       n=3
-      At=new(Class="DecompositionOperator",
+      At=new(Class="LinearDecompositionOperator",
         t_start,
         t_end,
         function(t0){
@@ -48,7 +48,7 @@ GeneralModel_14=structure(function #The most general costructor for class Model1
       ) 
        
       c0=c(100, 100, 100)
-      F0=SoilR.F0.new(c(0,10,10),"Delta14C")
+      F0=SoilR.F0(c(0,10,10),"Delta14C")
       #constant inputrate
       inputFluxes=new(
         "TimeMap",

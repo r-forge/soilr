@@ -5,18 +5,18 @@
 \alias{AbsoluteFractionModern_from_Delta14C,numeric-method}
 \title{ ~~ Methods for Function \code{AbsoluteFractionModern_from_Delta14C}  ~~}
 \description{
- ~~ Methods for function \code{AbsoluteFractionModern_from_Delta14C}  ~~
+ ~~ Methods for function \code{AbsoluteFractionModern_from_Delta14C} ~~
 }
 \section{Methods}{
-\describe{
+  \describe{
+    \item{\code{signature(delta14C = "matrix")}}{
+      \code{\link{AbsoluteFractionModern_from_Delta14C_method__matrix}}  
+    }
+    \item{\code{signature(delta14C = "numeric")}}{
+      \code{\link{AbsoluteFractionModern_from_Delta14C_method__numeric}}  
+    }
 
-\item{\code{signature(delta14C = "matrix")}}{
-%%  ~~describe this method here~~
+  }
 }
-
-\item{\code{signature(delta14C = "numeric")}}{
-%%  ~~describe this method here~~
-}
-}}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

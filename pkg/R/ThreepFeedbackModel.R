@@ -46,13 +46,13 @@ ThreepFeedbackModel<-structure(
       
       if(length(xi)==1){
 	fX=function(t){xi}
-	Af=TimeMap.new(t_start,t_end,function(t) fX(t)*A)
+	Af=new("LinearDecompositionOperator",t_start,t_end,function(t) fX(t)*A)
 	}
       if(class(xi)=="data.frame"){
 	X=xi[,1]
       	Y=xi[,2]
         fX=splinefun(X,Y)
-	Af=TimeMap.new(min(X),max(X),function(t) fX(t)*A)
+	Af=new("LinearDecompositionOperator",min(X),max(X),function(t) fX(t)*A)
        }
       Mod=GeneralModel(t=t,A=Af,ivList=C0,inputFluxes=inputFluxes,solver,pass)
      return(Mod)

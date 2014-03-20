@@ -2,8 +2,7 @@
 \alias{fW.Century}
 \title{Effects of moisture on decomposition rates according to the CENTURY model}
 \description{Calculates the effects of precipitation and potential evapotranspiration on decomposition rates.}
-\usage{fW.Century(PPT, PET)}
-\arguments{
+\usage{fW.Century(PPT, PET)}\arguments{
   \item{PPT}{A scalar or vector containing values of monthly precipitation.}
   \item{PET}{A scalar or vector containing values of potential evapotranspiration.}
 }

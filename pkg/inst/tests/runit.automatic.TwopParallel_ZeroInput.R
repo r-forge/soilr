@@ -1,5 +1,3 @@
-#
-# vim:set ff=unix expandtab ts=2 sw=2:
 # This test function is automatically produced by the python script:/home/mm/SoilR/RPackages/SoilR/pkg/inst/tests/Rexample.py
 test.TwopParallel_ZeroInput=function(){
    require(RUnit)
@@ -10,14 +8,14 @@ test.TwopParallel_ZeroInput=function(){
    print(tol)
    timestep=(t_end-t_start)/tn
    t=seq(t_start,t_end,timestep)
-   A=new("DecompositionOperator",t_start,Inf,function(t){matrix(
+   A=new("ConstantDecompositionOperator",matrix(
      nrow=2,
      ncol=2,
      c(
         -1/20,  0,  
         0,  -1/30
      )
-   )})
+   ))
    c01=3
    c02=2
    inputrates=new("TimeMap",t_start,t_end,function(t){return(matrix(

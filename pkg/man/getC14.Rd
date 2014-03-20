@@ -2,8 +2,7 @@
 \alias{getC14}
 \title{access to the C content of the pools }
 \description{This function computes the value for C (mass or concentration ) as function of time}
-\usage{getC14(object)}
-\arguments{
+\usage{getC14(object)}\arguments{
   \item{object}{
 }
 }

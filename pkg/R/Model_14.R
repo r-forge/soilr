@@ -88,60 +88,38 @@ setClass(# Model_14
         c14Fraction="TimeMap",
         c14DecayRate="numeric",
         initialValF="SoilR.F0"
-    )
-   #,
-   #prototype=prototype(
-   #     times=c(0,1),
-   #     mat=TimeMap.new(
-   #         0,
-   #         1,
-   #         function(t){
-   #             return(matrix(nrow=1,ncol=1,1))
-   #         }
-   #     ) 
-   #     ,
-   #     initialValues=numeric()
-   #     ,
-   #     inputFluxes= TimeMap.new(
-   #         0,
-   #         1,
-   #         function(t){
-   #             return(matrix(nrow=1,ncol=1,1))
-   #         }
-   #     )
-   #     ,
-   #     c14Fraction=TimeMap.new(
-   #         0,
-   #         1,
-   #         function(t){
-   #             return(matrix(nrow=1,ncol=1,1))
-   #         }
-   #     )
-   #     ,
-   #     c14DecayRate=0
-   #     ,
-   #     solverfunc=deSolve.lsoda.wrapper
-   #  )
-    , validity=correctnessOfModel14 #set the validating function
+    ) , 
+    validity=correctnessOfModel14 #set the validating function
 )
 setMethod(
     f="initialize",
-    signature="Model_14",
-    definition=function(
-        .Object,
-        times=c(0,1),
-        mat=TimeMap.new(
-                0,
-                1,
-                function(t){
-                    return(matrix(nrow=1,ncol=1,0))
-                }
-        ) 
+    signature=c("Model_14"),
+    definition=function #An internal constructor for \code{Model_14} objects not recommended to be used directly in user code.
+    ### This method implements R's initialize generic for objects of class \code{Model_14} and is not intended as part of the public interface to SoilR. It may change in the future as the classes implementing SoilR may.
+    ### It is called whenever a new object of this class is created by a call to \code{new} with the first argument \code{Model_14}.
+    ### It performs some sanity checks of its arguments and in case those tests pass returns an object of class \code{Model_14} 
+    ### The checks can be turned off.( see arguments)
+
+    ##details<<  Due to the mechanism of S4 object initialization (package "methods")
+    ## \code{new} always calls \code{initialize}. 
+    ## (see the help pages for initialize and initialize-methods for details)  
+    
+    ## All other constructors of class \code{Model_14} have to call \code{new("Model_14,..) at some point and thus call this method indirectly. 
+    ## Accordingly this method is the place to perform checks all objects of class \code{Model_14} should pass.
+    ## Some of those checks are explained in the examples below.
+    ## In some (rare) circumstances it might be necessary to override the checks and force the object to be created 
+    ## although it does not seem meaningfull to the internal sanity checks. 
+    ## You can use the "pass" argument to enforce this.
+    (
+        .Object,              ##<< the Model_14 object itself
+        times=c(0,1),         ##<< The points in time where the solution is sought 
+        mat=new("ConstantDecompositionOperator",     
+                    matrix(nrow=1,ncol=1,0)
+        )                     ##<< A decomposition Operator of some kind 
         ,
         initialValues=numeric()
         ,
-        initialValF=new(Class="SoilR.F0",values=c(0),format="Delta14C")
-
+        initialValF=new(Class="SoilR.F0",values=c(0),format="Delta14C")      ##<< An object of class SoilR.F0 containing a vector with the initial values of the radiocarbon fraction for each pool and a format string describing in which format the values are given.
         ,
         inputFluxes= TimeMap.new(
             0,
@@ -149,7 +127,7 @@ setMethod(
             function(t){
                 return(matrix(nrow=1,ncol=1,1))
             }
-        )
+        ) ##<< A TimeMap object consisting of a vector valued function describing the inputs to the pools as funtions of time \code{\link{TimeMap-class}}.
         ,
         c14Fraction=TimeMap.new(
             0,
@@ -157,7 +135,7 @@ setMethod(
             function(t){
                 return(matrix(nrow=1,ncol=1,1))
             }
-        )
+        )   ##<< A TimeMap object consisting of  a function describing the fraction of C_14 in per mille.
         ,
         c14DecayRate=0
         ,
@@ -165,14 +143,10 @@ setMethod(
         ,
         pass=FALSE
      ){
-        .Object@times=times
-        .Object@mat=mat
-        .Object@initialValues=initialValues
+        .Object <- callNextMethod(.Object,times,mat,initialValues,inputFluxes,solverfunc,pass=pass)
         .Object@initialValF=initialValF
-        .Object@inputFluxes=inputFluxes
         .Object@c14Fraction=c14Fraction
         .Object@c14DecayRate=c14DecayRate
-        .Object@solverfunc=solverfunc
         if (pass==FALSE) validObject(.Object) #call of the ispector if not explicitly disabled
         return(.Object)
     }
@@ -181,7 +155,7 @@ setMethod(
    f= "getC14",
       signature= "Model_14",
       definition=function(object){
-      ### This function computes the value for C (mass or concentration ) as function of time
+      ### This function computes the value for \eqn{^{14}C}{14C} (mass or concentration ) as function of time
       ns=length(object@initialValues)
       #get the coefficient matrix TimeMap 
       Atm=object@mat
@@ -230,40 +204,47 @@ setMethod(
 setMethod(
    f= "getF14",
       signature= "Model_14",
-      definition=function(object){
-      C=getC(object) ### we use the C14 here
+      definition=function #radiocarbon
+      ### Calculates the radiocarbon fraction for each pool at each time step.
+      ### 
+      (object){
+      C=getC(object) ### we use the C here
       C14=getC14(object) ### we use the C14 here
       fr=C14/C
-      # since the result is always in AbsoluteFractionModern wie have to convert it to Delta14C
+      ##<< description  since the result is always in AbsoluteFractionModern we have to convert it to Delta14C
       fr=Delta14C_from_AbsoluteFractionModern(fr)
       return(fr)
-      ### A matrix. Every column represents a pool and every row a point in time
+      ### A matrix of dimension n x m; i.e. n time steps as rows and m pools as columns.
    }
 )
-
 setMethod(
    f= "getReleaseFlux14",
       signature= "Model_14",
-      definition=function(object){
-      C=getC14(object) ### we use the C14 here
-      #print("dim(C)=")
-      #print(dim(C))
+      definition=function # 14C respiration rate for all pools 
+      ### 
+      ### The function computes the \eqn{^{14}C}{14C} release flux ( mass per time ) for all pools.
+      ### Note that the respiration coefficients for \eqn{^{14}C}{14C} 
+      ### do not change in comparison to the total C case.
+      ### The fraction of \eqn{^{14}C}{14C} lost by respiration 
+      ### is not greater for \eqn{^{14}C}{14C} 
+      ### although the decay is faster due to the contribution of radioactivity.
+      (
+        object ##<< an object of class Model_14
+      )
+      {
+      C14=getC14(object) ### we use the C14 here
       times=object@times
       Atm=object@mat
       A=getFunctionDefinition(Atm)
       n=length(object@initialValues)
       #print(n)
-      ### note that the respiration coefficients for 14C do not change in comparison 
-      ### to the total C case
-      ### The fraction of 14C lost by respiration is not greater for 14C 
-      ### although the decay is faster due to the contribution of radioactivity
       rfunc=RespirationCoefficients(A)
       #rfunc is vector valued function of time
       if (n==1) { r=matrix(ncol=n,sapply(times,rfunc))}
       else {r=t(sapply(times,rfunc))}
       #print("dim(r)=")
       #print(dim(r))
-      R=r*C
+      R=r*C14
       # now compute the sum of every row
       
 
@@ -277,21 +258,33 @@ setMethod(
 setMethod(
   f= "getF14R",
   signature= "Model_14",
-  definition=function(object){
+  definition=function # average radiocarbon fraction weighted by carbonrelease 
+    ### Calculates the average radiocarbon fraction weighted by the amount of carbon release at each time step. 
+    (
+     object ##<< an object of class  Model_14
+
+     ){
     R=getReleaseFlux(object) ### we use the C14 here
     R14=getReleaseFlux14(object) ### we use the C14 here
     fr=rowSums(R14)/rowSums(R)
-    # since the result is always in AbsoluteFractionModern wie have to convert it to Delta14C
+    ##description<<  \eqn{\overline{F_R}=\frac{\sum_{i=1}^{n}{^{14}R_i}}{\sum_{i=1}^{n}{R_i}}}{(14R_1(t)+...+14R_n(t)) )/(R_1(t)+...R_n(t)))}
+    ##description<< Where \eqn{^{14}R_i(t)}{14R_i(t)} is the time dependent release of \eqn{^{14}C}{14C} of pool \eqn{i} and \eqn{R_i(t)}{R_i(t)} the release of all carbon isotops of pool \eqn{i}.   
+    ##description<< Since the result is always in Absolute Fraction Modern format wie have to convert it to Delta14C
     fr=Delta14C_from_AbsoluteFractionModern(fr)
     #print(dim(C))
-    ### A matrix. Every column represents a pool and every row a point in time
     return(fr)
+    ### A vector  of length n with the value of \eqn{\overline{F_R}}{FR} for each time step.
   }
   )
 setMethod(
   f= "getF14C",
   signature= "Model_14",
-  definition=function(object){
+  definition=function# read access to the models F14C variable 
+  ### The model was created with a F14C object to describe the atmospheric 14C content. This method serves to investigate those settings from the model.
+  (
+  object
+  ### a Model_14 object
+  ){
     C=getC(object) ### we use the C14 here
     C14=getC14(object) ### we use the C14 here
     fr=rowSums(C14)/rowSums(C)

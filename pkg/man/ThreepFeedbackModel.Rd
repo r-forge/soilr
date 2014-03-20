@@ -3,8 +3,7 @@
 \title{Implementation of a three pool model with feedback structure}
 \description{This function creates a model for three pools connected with feedback. It is a wrapper for the more general function \code{\link{GeneralModel}}.}
 \usage{ThreepFeedbackModel(t, ks, a21, a12, a32, a23, C0, In, xi = 1, 
-    solver = deSolve.lsoda.wrapper, pass = FALSE)}
-\arguments{
+    solver = deSolve.lsoda.wrapper, pass = FALSE)}\arguments{
   \item{t}{A vector containing the points in time where the solution is sought.}
   \item{ks}{A vector of lenght 3 containing the values of the decomposition rates for pools 1, 2, and 3.}
   \item{a21}{A scalar with the value of the transfer rate from pool 1 to pool 2.}

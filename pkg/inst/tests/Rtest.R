@@ -1,13 +1,29 @@
 #!/usr/bin/Rscript
 # vim:set ff=unix expandtab ts=2 sw=2:
 source("prolog.R")
+tfr  <- "^runit\\..*\\.R"
+#fl <- list.files(pattern=tfr)
+#for (fn in fl){
+#  print(fn)
+#  source(fn)
+#}
 alltests <- defineTestSuite(
    name="allTests",
    dirs=".",
-   testFileRegexp = "^runit.ThreepFeedback_MCSim.R",
-  # testFileRegexp = "^runit.check.pass.R",
-   #testFileRegexp = "^runit.testNumberOfPools+\\.[rR]",
-   testFuncRegexp = "^test.+",
+   testFileRegexp = tfr,
+   
+   #testFuncRegexp = "^test.TwopSerial_linear_vs_nonlinear"
+   #"^test.FourpSerial_1"
+   #"test.TwopParallel_ZeroInput"
+   #"^test.TwopFeedback"
+   #"^test.TimeMapInterface"
+   #"^test.LowVerticalRatesPaper" 
+   #"^test.check.pass"
+   #"ptest.ModelOperators"
+   #"test.ParallelModel"
+   #"test.TwopSerial_linear_vs_nonlinear"
+   #"test.SoilRPaper1"
+   "test.FourpSerial_1"
 )
 
 testResult <- runTestSuite(alltests)

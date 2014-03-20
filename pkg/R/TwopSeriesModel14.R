@@ -23,7 +23,7 @@ TwopSeriesModel14<-structure(
     if(length(ks)!=2) stop("ks must be of length = 2")
     if(length(C0)!=2) stop("the vector with initial conditions must be of length = 2")
     
-    if(length(In)==1) inputFluxes=new("InputFlux",
+    if(length(In)==1) inputFluxes=new("TemporaryInputFlux",
                                      t_start,
                                      t_stop,
                                      function(t){matrix(nrow=2,ncol=1,c(In,0))}
@@ -32,7 +32,7 @@ TwopSeriesModel14<-structure(
       x=In[,1]  
       y=In[,2]  
       inputFlux=function(t0){as.numeric(spline(x,y,xout=t0)[2])}
-      inputFluxes=new("InputFlux",
+      inputFluxes=new("TemporaryInputFlux",
                      min(x),
                      max(x),
                      function(t){matrix(nrow=2,ncol=1,c(inputFlux(t),0))}
@@ -49,7 +49,7 @@ TwopSeriesModel14<-structure(
     A=-abs(diag(ks))
     A[2,1]=a21
     
-    At=new(Class="DecompositionOperator",
+    At=new(Class="LinearDecompositionOperator",
            t_start,
            t_stop,
            function(t){
@@ -59,7 +59,7 @@ TwopSeriesModel14<-structure(
 
     Fc=FcAtm.from.Dataframe(FcAtm,lag,format="Delta14C")
     
-    mod=GeneralModel_14(t,At,ivList=C0,initialValF=SoilR.F0.new(F0_Delta14C,"Delta14C"),inputFluxes=inputFluxes,Fc,di=lambda,pass=pass)
+    mod=GeneralModel_14(t,At,ivList=C0,initialValF=SoilR.F0(F0_Delta14C,"Delta14C"),inputFluxes=inputFluxes,Fc,di=lambda,pass=pass)
     ### A Model Object that can be further queried 
     ##seealso<< \code{\link{TwopParallelModel14}}, \code{\link{TwopFeedbackModel14}} 
   }

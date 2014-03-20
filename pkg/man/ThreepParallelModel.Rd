@@ -3,9 +3,9 @@
 \title{Implementation of a three pool model with parallel structure}
 \description{The function creates a model for three independent (parallel) pools. It is a wrapper for the more general function
 \code{\link{ParallelModel}} that can handle an arbitrary number of pools.}
-\usage{ThreepParallelModel(t, ks, C0, In, gam1, gam2, xi = 1, solver = deSolve.lsoda.wrapper, 
-    pass = FALSE)}
-\arguments{
+\usage{ThreepParallelModel(t,
+ ks, C0, In, gam1, gam2, xi = 1, solver = deSolve.lsoda.wrapper, 
+    pass = FALSE)}\arguments{
   \item{t}{A vector containing the points in time where the solution is sought.}
   \item{ks}{A vector of length 3 containing the decomposition rates for the 3 pools.}
   \item{C0}{A vector of length 3 containing the initial amount of carbon for the 3 pools.}

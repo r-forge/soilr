@@ -2,8 +2,7 @@
 \alias{getTimes}
 \title{extract the times argumen}
 \description{This functions extracts the times argument from an argument of class NlModel}
-\usage{getTimes(object)}
-\arguments{
+\usage{getTimes(object)}\arguments{
   \item{object}{
 }
 }

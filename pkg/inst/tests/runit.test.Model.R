@@ -25,14 +25,20 @@ test.ThreepSeriesModel=function(){
 test.ParallelModel=function(){
   attr(ParallelModel,"ex")()
 }
-test.GeneralModel=function(){
-  attr(GeneralModel,"ex")()
-}
+#test.GeneralModel=function(){
+#  attr(GeneralModel,"ex")()
+#}
 test.ICBMModel=function(){
   attr(ICBMModel,"ex")()
 }
 test.RothCModel=function(){
   attr(RothCModel,"ex")()
+}
+test.Yasso07Model=function(){
+  attr(Yasso07Model,"ex")()
+}
+test.YassoModel=function(){
+  attr(YassoModel,"ex")()
 }
 test.correctnessOfModel.impossibleCoefficients=function(){
    t_start=0 
@@ -173,7 +179,7 @@ test.correctnessOfModel.correctModel=function(){
    tn=50
    timestep=(t_end-t_start)/tn 
    t=seq(t_start,t_end,timestep) 
-   A=TimeMap.new(
+   A=new("LinearDecompositionOperator",
     t_start,
     t_end,
     function(times){matrix(nrow=3,ncol=3,byrow=TRUE,

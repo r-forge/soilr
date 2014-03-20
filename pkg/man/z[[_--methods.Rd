@@ -4,8 +4,8 @@
 \alias{[[<-,MCSim-method}
 \title{ ~~ Methods for Function \code{[[<-}  ~~}
 \description{
- ~~ Methods for function \code{[[<-}  ~~
- No methods for exported classes, only for internal use.
+ All methods for function \code{[[<-} are intended for internal use inside the package only. 
 }
+
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

@@ -23,7 +23,7 @@ class C14exampleFromDelta14C(C14example):
         for j in range(self.n):       
            Text+=(self.shift+self.f_sym_strs[j]+"="+str(self.iF[j])+"\n")
         Text+="\
-   initialF=SoilR.F0.new("+rlistprint(self.f_sym_strs,self.shift)+",\n format=\"Delta14C\")\n\
+   initialF=SoilR.F0("+rlistprint(self.f_sym_strs,self.shift)+",\n format=\"Delta14C\")\n\
    Fc=new(\"FcAtm\",t_start,t_end,function(t){"+str(self.c14fraction_Delta14C)+"},format=\"Delta14C\")\n\
    th=5730\n\
    k=log(0.5)/th\n"

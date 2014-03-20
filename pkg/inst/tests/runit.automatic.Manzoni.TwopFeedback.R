@@ -1,5 +1,3 @@
-#
-# vim:set ff=unix expandtab ts=2 sw=2:
 # This test function is automatically produced by the python script:/home/mm/SoilR/RPackages/SoilR/pkg/inst/tests/Rexample.py
 test.TwopFeedback=function(){
    require(RUnit)
@@ -16,14 +14,14 @@ test.TwopFeedback=function(){
    print(tol)
    timestep=(t_end-t_start)/tn
    t=seq(t_start,t_end,timestep)
-   A=new("DecompositionOperator",t_start,Inf,function(t){matrix(
+   A=new("ConstantDecompositionOperator",matrix(
      nrow=2,
      ncol=2,
      c(
         -k1,  k1*(-r + 1),  
         f*k2,  -k2
      )
-   )})
+   ))
    inputrates=new("TimeMap",t_start,t_end,function(t){return(matrix(
      nrow=2,
      ncol=1,

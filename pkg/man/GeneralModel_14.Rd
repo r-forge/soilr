@@ -6,10 +6,9 @@ It is one of the constructors of class Model14 which is a subclass of Model
 It will be used by some more specialized wrapper functions like for instance but can also be used directly. It is in fact the most
 versatile interface to produce instances of class Model14. }
 \usage{GeneralModel_14(t, A, ivList, initialValF, inputFluxes, Fc, di = -0.0001209681, 
-    solverfunc = deSolve.lsoda.wrapper, pass = FALSE)}
-\arguments{
+    solverfunc = deSolve.lsoda.wrapper, pass = FALSE)}\arguments{
   \item{t}{A vector containing the points in time where the solution is sought.}
-  \item{A}{A DecompositionOperator object consisting of  a matrix valued function describing the whole model decay rates for the n pools, connection and feedback coefficients as functions of time and a time range for which this function is valid. The size of the quadtratic matric must be equal to the number of pools. The time range must cover the times given in the first argument.}
+  \item{A}{A LinearDecompositionOperator object consisting of  a matrix valued function describing the whole model decay rates for the n pools, connection and feedback coefficients as functions of time and a time range for which this function is valid. The size of the quadtratic matric must be equal to the number of pools. The time range must cover the times given in the first argument.}
   \item{ivList}{A vector containing the initial amount of carbon for the n pools. The length of this vector is equal to the number of pools and thus equal to the length of k. This is checked by an internal function.}
   \item{initialValF}{An object of class SoilR.F0 containing a vector with the initial values of the radiocarbon fraction for each pool and a format string describing in which format the values are given.}
   \item{inputFluxes}{A TimeMap object consisting of a vector valued function describing the inputs to the pools as funtions of time \code{\link{TimeMap.new}}.}
@@ -26,7 +25,7 @@ versatile interface to produce instances of class Model14. }
 
 
 
-\seealso{\code{\link{Model}} }
+\seealso{\code{\link{Model-class}} }
 \examples{
 t_start=1960
 t_end=2010
@@ -34,7 +33,7 @@ tn=220
 timestep=(t_end-t_start)/tn 
 t=seq(t_start,t_end,timestep) 
 n=3
-At=new(Class="DecompositionOperator",
+At=new(Class="LinearDecompositionOperator",
   t_start,
   t_end,
   function(t0){
@@ -47,7 +46,7 @@ At=new(Class="DecompositionOperator",
 ) 
  
 c0=c(100, 100, 100)
-F0=SoilR.F0.new(c(0,10,10),"Delta14C")
+F0=SoilR.F0(c(0,10,10),"Delta14C")
 #constant inputrate
 inputFluxes=new(
   "TimeMap",

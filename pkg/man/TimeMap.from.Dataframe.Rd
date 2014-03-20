@@ -2,8 +2,7 @@
 \alias{TimeMap.from.Dataframe}
 \title{TimeMap from Dataframe}
 \description{This function is another constructor of the class TimeMap.}
-\usage{TimeMap.from.Dataframe(dframe, lag = 0, interpolation = splinefun)}
-\arguments{
+\usage{TimeMap.from.Dataframe(dframe, lag = 0, interpolation = splinefun)}\arguments{
   \item{dframe}{A data frame containing exactly two columns:
 the first one is interpreted as time}
   \item{lag}{a scalar describing the time lag. Positive Values shift the argument of the interpolation function forward in time. (retard its effect)}

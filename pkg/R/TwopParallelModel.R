@@ -53,7 +53,7 @@ TwopParallelModel<-structure(
       coeffs=TimeMap.new(
         t_start,
         t_stop,
-        function(times){fX(t)*(-1*abs(ks))}
+        function(t){fX(t)*(-1*abs(ks))}
       )
       res=ParallelModel(t,coeffs,startvalues=C0,inputrates,solver,pass=pass)
       ### A Model Object that can be further queried 

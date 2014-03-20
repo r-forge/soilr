@@ -3,8 +3,7 @@
 \title{Implementation of a one pool model }
 \description{This function creates a model for one pool. It is a wrapper for the more general function \code{\link{GeneralModel}}.}
 \usage{OnepModel(t, k, C0, In, xi = 1, solver = deSolve.lsoda.wrapper, 
-    pass = FALSE)}
-\arguments{
+    pass = FALSE)}\arguments{
   \item{t}{A vector containing the points in time where the solution is sought.}
   \item{k}{A scalar with the decomposition rate of the pool.}
   \item{C0}{A scalar containing the initial amount of carbon in the pool.}

@@ -3,8 +3,7 @@
 \title{Effects of moisture on decomposition rates according to the DAYCENT model}
 \description{Calculates the effects of Soil Water Content on decomposition rates according to the Daycent Model.}
 \usage{fW.Daycent1(swc, a = 0.6, b = 1.27, c = 0.0012, d = 2.84, partd = 2.65, 
-    bulkd = 1, width = 1)}
-\arguments{
+    bulkd = 1, width = 1)}\arguments{
   \item{swc}{A scalar or vector with soil water content of a soil layer (cm).}
   \item{a}{Empirical coefficient. For fine textured soils a = 0.6. For coarse textured soils a = 0.55.}
   \item{b}{Empirical coefficient. For fine textured soils b = 1.27. For coarse textured soils b = 1.70.}
