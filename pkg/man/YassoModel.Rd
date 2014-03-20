@@ -23,7 +23,8 @@
 \value{A Model Object that can be further queried }
 \references{Liski, J., Palosuo, T., Peltoniemi, M., and Sievanen, R. (2005).
 Carbon and decomposition model Yasso for forest soils. Ecological Modelling, 189:168-182.}
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
 
 
 

@@ -10,7 +10,8 @@ The building blocks of a model have to keep iformation about the formats their d
 
 \value{An object of class SoilR.F0 that contains data and a format description that can later be used to convert the data into other formats if the conversion is implemented.}
 
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
 
 
 

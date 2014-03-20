@@ -16,7 +16,8 @@
 \value{A data frame with limitation due to water potential (MatricLimit), limitation due to oxygen diffusion (DiffuseLimit), and the overall limitation of moisture on decomposition rates (MoistDecayIndex).}
 \references{Harmon, M. E., and J. B. Domingo (2001), A users guide to STANDCARB version 2.0: 
 A model to simulate carbon stores in forest stands. Oregon State University, Corvallis.}
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
 
 
 

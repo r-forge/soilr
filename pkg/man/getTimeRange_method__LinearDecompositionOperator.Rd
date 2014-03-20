@@ -14,7 +14,8 @@ used outside the interval where they are valid. }
 containing start and end time of the time interval 
 for which the TimeMap object has been defined.}
 
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
 
 
 

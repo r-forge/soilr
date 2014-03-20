@@ -11,7 +11,8 @@ Since the result is always in Absolute Fraction Modern format wie have to conver
 
 \value{A vector  of length n with the value of \eqn{\overline{F_R}}{FR} for each time step.}
 
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
 
 
 

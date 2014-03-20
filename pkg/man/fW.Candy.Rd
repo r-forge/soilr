@@ -11,7 +11,8 @@
 \references{J. Bauer, M. Herbst, J.A. Huisman, L. Weiherm\"uller, H. Vereecken. 2008.
 Sensitivity of simulated soil heterotrophic respiration to temperature and moisture reduction functions.
 Geoderma, Volume 145, Issues 1-2, 15 May 2008, Pages 17-27.}
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
 
 
 

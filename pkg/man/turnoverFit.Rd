@@ -17,7 +17,8 @@ sample assuming a one pool model and annual litter inputs. }
 If the turnover time is relatively short (< 50 yrs), it is safe to assume C0=0 because the soil will reach steady state within the simulation time. However, for longer turnover times it is recommended to use a value of C0 close to the steady state value.  }
 \value{A scalar with the value of the turnover time that minimizes the difference between the prediction of a one pool model and the observed radiocarbon value.}
 
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
 
 
 

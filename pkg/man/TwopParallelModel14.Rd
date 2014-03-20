@@ -22,7 +22,8 @@ It is a wrapper for the more general function \code{\link{GeneralModel_14}} that
 
 \value{A Model Object that can be further queried }
 
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
 
 
 

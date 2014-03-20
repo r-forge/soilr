@@ -13,7 +13,8 @@
 \value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
 \references{Harmon, M. E., and J. B. Domingo (2001), A users guide to STANDCARB version 2.0: 
 A model to simulate carbon stores in forest stands. Oregon State University, Corvallis.}
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
 
 
 

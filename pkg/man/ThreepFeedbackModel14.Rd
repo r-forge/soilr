@@ -26,7 +26,8 @@ A vector of length 3 containing the initial fraction of radiocarbon for the 3 po
 
 \value{A Model Object that can be further queried }
 
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
 
 
 

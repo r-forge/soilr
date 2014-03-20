@@ -12,7 +12,8 @@ NA
 	 }
 }
 \author{
- Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de> 
+ Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de> 
 }
 \examples{
 showClass("DecompositionOperator")

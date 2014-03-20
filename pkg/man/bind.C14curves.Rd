@@ -10,7 +10,8 @@
 
 \value{A \code{data.frame} with 3 columns: years in AD or BP, the atmospheric Delta14C value, the standard deviation of the Delta14C value.}
 
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
 
 
 

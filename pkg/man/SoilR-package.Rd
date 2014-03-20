@@ -3,20 +3,23 @@
 \alias{SoilR}
 \docType{package}
 \title{Models of Soil Organic Matter Decomposition}
-\description{This package contains functions for modeling Soil Organic Matter decomposition in terrestrial ecosystems.}
+\description{This package contains functions for modeling Soil Organic
+Matter decomposition in terrestrial ecosystems.}
 \details{
 \tabular{ll}{Package: \tab SoilR\cr
 Title: \tab Models of Soil Organic Matter Decomposition\cr
-Version: \tab 1.1-0\cr
-Date: \tab 2013-09-31\cr
-Author: \tab Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>\cr
+Version: \tab 1.1-11\cr
+Date: \tab 2014-03-20\cr
+Author: \tab Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>\cr
 Maintainer: \tab Markus Mueller <mamueller@bgc-jena.mpg.de>\cr
 License: \tab GPL-3\cr
 Depends: \tab deSolve,methods,parallel,RUnit\cr
 Suggests: \tab FME,lattice,MASS\cr
 LazyData: \tab TRUE\cr}
 }
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
 
 \keyword{ package }
 

@@ -10,7 +10,8 @@ and integrates numerically the release flux up to each time step \code{t}.}
 \value{A n x m matrix of cummulative release fluxes with m columns representing the number of pools, and n rows representing the time step as specified by the argument
 \code{t} in \code{\link{GeneralModel}} or other model creating function.}
 
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
 
 
 

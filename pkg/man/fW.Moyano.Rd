@@ -12,7 +12,8 @@
 \references{F. E. Moyano, S. Manzoni, C. Chenu. 2013
 Responses of soil heterotrophic respiration to moisture availability: An exploration of processes and models. 
 Soil Biology and Biochemistry, Volume 59, April 2013, Pages 72-85}
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
 
 
 

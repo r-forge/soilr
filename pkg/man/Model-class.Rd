@@ -30,7 +30,8 @@ serves as a fence to the interface of SoilR functions. So that later implementat
 	 }
 }
 \author{
- Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de> 
+ Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de> 
 }
 \examples{
 showClass("Model")
