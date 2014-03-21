@@ -55,12 +55,15 @@ Measurements of evolved CO$_2$ from incubation experiments provide useful data f
 \begin{Schunk}
 \begin{Sinput}
 > library(SoilR)
+> library(FME)
+> library(MASS)
+> library(lattice)
 > BorealCO2=subset(eCO2, subset=Sample=="AK_T25", select=-Sample)
 > names(BorealCO2)<-c("time","eCO2","eCO2sd")
 \end{Sinput}
 \end{Schunk}
 
-We can plot the data with the command
+#We can plot the data with the command
 
 \begin{figure}
   \centering
@@ -127,6 +130,1120 @@ This function returns an object of class {\tt modCost}, which can be further use
 > eCO2fit=modFit(f=eCO2cost,p=inipars,method="Marq",
 +                upper=c(Inf,Inf,1,1,1),lower=c(0,0,0,0,0))
 \end{Sinput}
+\begin{Soutput}
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+\end{Soutput}
 \end{Schunk}
 
 The best set of parameter values found by the function can be obtained by typing
@@ -136,7 +1253,7 @@ The best set of parameter values found by the function can be obtained by typing
 \end{Sinput}
 \begin{Soutput}
        k1        k2   alpha21   alpha12     gamma 
-0.1799294 0.4815381 0.9937621 0.5177585 0.9950779 
+0.1826949 0.4754156 0.9930036 0.5219279 0.9944090 
 \end{Soutput}
 \end{Schunk}
 
@@ -146,6 +1263,10 @@ These set of parameters can be used now to run the model again and plot the obta
 \begin{Sinput}
 > fitmod=eCO2func(eCO2fit$par)
 \end{Sinput}
+\begin{Soutput}
+-Model initializer at work-
+[1] "afterCast"
+\end{Soutput}
 \end{Schunk}
 
 \begin{figure}
@@ -174,14 +1295,14 @@ The results of the MCMC procedure can be obtained with the function {\tt summary
 > summary(eCO2mcmc)
 \end{Sinput}
 \begin{Soutput}
-            k1        k2    alpha21    alpha12     gamma   var_eCO2
-mean 0.3128170 0.4971326 0.94732916 0.62801704 0.8477731 0.15583308
-sd   0.1227969 0.2453470 0.03077625 0.08324479 0.1348638 0.06324126
-min  0.1117341 0.1455876 0.74486976 0.31650829 0.3859728 0.07435534
-max  0.5930198 0.9145219 0.99426024 0.84044406 0.9968812 0.41269848
-q025 0.2356621 0.2814004 0.93177507 0.55997054 0.7778901 0.11656881
-q050 0.2497727 0.4636183 0.95590342 0.63802337 0.8528886 0.14059906
-q075 0.4296240 0.6478047 0.97183805 0.68693668 0.9657912 0.18606006
+             k1        k2    alpha21    alpha12      gamma   var_eCO2
+mean 0.24647057 0.5526983 0.93958270 0.60288028 0.96842044 0.14446209
+sd   0.09321275 0.1403706 0.04245736 0.09432338 0.03186018 0.04627964
+min  0.11618686 0.3432897 0.81296499 0.43866149 0.86941903 0.06330373
+max  0.48829040 0.9219726 0.99838307 0.84799761 0.99944783 0.32921470
+q025 0.15811902 0.4416845 0.91272362 0.52192789 0.94616708 0.11025244
+q050 0.22747075 0.5578479 0.92789545 0.63676005 0.98422374 0.13723098
+q075 0.35020646 0.6556318 0.98086903 0.65243259 0.99335550 0.16819880
 \end{Soutput}
 \end{Schunk}
 
@@ -206,6 +1327,204 @@ For model prediction, it is also possible to use \FME \, and function {\tt sensR
 \begin{Schunk}
 \begin{Sinput}
 > predRange=sensRange(func=eCO2func, parInput=eCO2mcmc$par)
+\end{Sinput}
+\begin{Soutput}
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+-Model initializer at work-
+[1] "afterCast"
+\end{Soutput}
+\begin{Sinput}
 > plot(summary(predRange),ylim=c(0,9),xlab="Days",
 +      ylab="Evolved CO2 (mg C g-1 C)",main="")
 > points(BorealCO2)
@@ -259,10 +1578,10 @@ To create the vector of input fluxes we need to create a new object of class {\t
 
 \begin{Schunk}
 \begin{Sinput}
-> inputFluxes=new("InputFlux",
-+                 t_start,
-+                 t_end,
-+                 function(t0){matrix(nrow=3,ncol=1,c(270,150,0))}
+> inputFluxes=TemporaryInputFlux(
++ 	function(t0){matrix(nrow=3,ncol=1,c(270,150,0))},
++ 	t_start,
++ 	t_end
 + )
 \end{Sinput}
 \end{Schunk}
@@ -324,22 +1643,22 @@ The obtained posterior distributions of the parameters can now be assessed graph
 
 
 \clearpage
-\section*{Acknowledgements}
-We would like to thank Nicole Gimbel for performing the laboratory incubation study. Susan E. Trumbore provided the radiocarbon data for Harvard Forest and gave important support and insights for the development of this project. Funding from the Max Planck Society. 
-
-\begin{thebibliography}{9}
-\bibitem[Schadel et al.(2013)]{Schadel} Sch{\"a}del, C., Y.~Luo, R.~David~Evans, S.~Fei, and S.~Schaeffer.
-\newblock Separating soil {CO$_2$} efflux into {C}-pool-specific decay rates
-  via inverse analysis of soil incubation data. {\it Oecologia} \newblock 171: 721--732.
-
-\bibitem[Sierra et al.(2012)]{SierraGMD} Sierra, C.A., M.~M\"uller, and S.~E. Trumbore. 2012. \newblock Models of soil organic matter decomposition: the {SoilR} package, version 1.0. \newblock {\em Geosci. Model Dev.}, 5: 1045--1060.
-
-\bibitem[Sierra et al.(2012)]{SierraBG} Sierra, C.A., S.~E. Trumbore, E.~A. Davidson, S.~D. Frey, K.~E. Savage, and  F.~M. Hopkins. 2012.
-\newblock Predicting decadal trends and transient responses of radiocarbon storage and fluxes in a temperate forest soil.
-\newblock {\em Biogeosciences}, 9: 3013--3028.
-
-\bibitem[Soetaert \& Petzoldt(2010)]{Soetaert} Soetaert K. and T.~Petzoldt. 2010. \newblock Inverse modelling, sensitivity and monte carlo analysis in R using   package FME. \newblock {\em Journal of Statistical Software}, 33: 1--28.
-
-\end{thebibliography}
-
-\end{document}
+%\section*{Acknowledgements}
+%We would like to thank Nicole Gimbel for performing the laboratory incubation study. Susan E. Trumbore provided the radiocarbon data for Harvard Forest and gave important support and insights for the development of this project. Funding from the Max Planck Society. 
+%
+%\begin{thebibliography}{9}
+%\bibitem[Schadel et al.(2013)]{Schadel} Sch{\"a}del, C., Y.~Luo, R.~David~Evans, S.~Fei, and S.~Schaeffer.
+%\newblock Separating soil {CO$_2$} efflux into {C}-pool-specific decay rates
+%  via inverse analysis of soil incubation data. {\it Oecologia} \newblock 171: 721--732.
+%
+%\bibitem[Sierra et al.(2012)]{SierraGMD} Sierra, C.A., M.~M\"uller, and S.~E. Trumbore. 2012. \newblock Models of soil organic matter decomposition: the {SoilR} package, version 1.0. \newblock {\em Geosci. Model Dev.}, 5: 1045--1060.
+%
+%\bibitem[Sierra et al.(2012)]{SierraBG} Sierra, C.A., S.~E. Trumbore, E.~A. Davidson, S.~D. Frey, K.~E. Savage, and  F.~M. Hopkins. 2012.
+%\newblock Predicting decadal trends and transient responses of radiocarbon storage and fluxes in a temperate forest soil.
+%\newblock {\em Biogeosciences}, 9: 3013--3028.
+%
+%\bibitem[Soetaert \& Petzoldt(2010)]{Soetaert} Soetaert K. and T.~Petzoldt. 2010. \newblock Inverse modelling, sensitivity and monte carlo analysis in R using   package FME. \newblock {\em Journal of Statistical Software}, 33: 1--28.
+%
+%\end{thebibliography}
+%
+%\end{document}
