@@ -16,9 +16,9 @@ print(getTimeRange(inputFluxes))
 
 
 # Construct a less explicit example of a TimeMap  with an object 
-# of class # LinearDecompositionOperator which is subclass of TimeMap
+# of class # BoundLinDecompOp which is subclass of TimeMap
 n=3
-At=new("LinearDecompositionOperator",
+At=new("BoundLinDecompOp",
   t_start,
   t_end,
   function(t0){

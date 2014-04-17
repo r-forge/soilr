@@ -30,7 +30,7 @@ class Manzoniexample(Rexample):
    print(tol)\n\
    timestep=(t_end-t_start)/tn\n\
    t=seq(t_start,t_end,timestep)\n\
-   A=new(\"ConstantDecompositionOperator\","+rmatrixprint(self.matrix,self.shift)+")\n"
+   A=new(\"ConstLinDecompOp\","+rmatrixprint(self.matrix,self.shift)+")\n"
 
         Text+="\
    inputrates=new(\"TimeMap\",t_start,t_end,function(t){return("+rmatrixprint(self.inputrates,self.shift)+")})\n"

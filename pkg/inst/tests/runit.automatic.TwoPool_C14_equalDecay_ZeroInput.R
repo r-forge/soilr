@@ -8,7 +8,7 @@ test.TwoPool_C14_equalDecay_ZeroInput_c14=function(){
    print(tol)
    timestep=(t_end-t_start)/tn
    t=seq(t_start,t_end,timestep)
-   A=new("ConstantDecompositionOperator",matrix(
+   A=new("ConstLinDecompOp",matrix(
      nrow=2,
      ncol=2,
      c(
@@ -27,12 +27,12 @@ test.TwoPool_C14_equalDecay_ZeroInput_c14=function(){
    ))})
    f01=1
    f02=2
-   initialF=SoilR.F0(    c(
+   initialF=ConstFc(    c(
        f01,
        f02
     ),
  format="AbsoluteFractionModern")
-   Fc=new("FcAtm",t_start,t_end,function(t){0.5},format="AbsoluteFractionModern")
+   Fc=BoundFc(function(t){0.5},t_start,t_end,format="AbsoluteFractionModern")
    th=5730
    k=log(0.5)/th
    Y=matrix(ncol=2,nrow=length(t))
@@ -48,17 +48,17 @@ test.TwoPool_C14_equalDecay_ZeroInput_c14=function(){
    F14[,1]=1000*f01*exp(-t*log(2)/5730) - 1000
    F14[,2]=1000*f02*exp(-t*log(2)/5730) - 1000
    mod=GeneralModel_14(
-    t,
-    A,
-    c(
+    t=t,
+    A=A,
+ivList=    c(
        c01,
        c02
     ),
-   initialF,
-   inputrates,
-   Fc,
-   k,
-   deSolve.lsoda.wrapper
+initialValF=   initialF,
+inputFluxes=   inputrates,
+inputFc=   Fc,
+di=   k,
+solverfunc=   deSolve.lsoda.wrapper
    )
    Y14ode=getC14(mod) 
    F14ode=getF14(mod) 

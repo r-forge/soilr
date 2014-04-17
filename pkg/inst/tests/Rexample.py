@@ -59,7 +59,7 @@ class Rexample(object):
    print(tol)\n\
    timestep=(t_end-t_start)/tn\n\
    t=seq(t_start,t_end,timestep)\n\
-   A=new(\"ConstantDecompositionOperator\","+rmatrixprint(self.matrix,self.shift)+")\n"
+   A=new(\"ConstLinDecompOp\","+rmatrixprint(self.matrix,self.shift)+")\n"
         
         for j in range(self.n):       
            Text+=(self.shift+self.c_sym_strs[j]+"="+str(self.ck[j])+"\n")

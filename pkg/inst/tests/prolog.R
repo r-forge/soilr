@@ -1,5 +1,18 @@
 #!/usr/bin/Rscript
 # vim:set ff=unix expandtab ts=2 sw=2:
+# extend Runit to check warnings
+checkWarning <- function(expr,silent=TRUE) {
+    checkTrue(
+    inherits(
+       tryCatch(
+         eval(expr, envir = parent.frame()), 
+         silent = silent,
+         warning=function(w){w}
+       ),
+       "warning"
+    ),
+        "Warning not generated as expected\n")
+}             
 library("RUnit")
 library("deSolve")
 library("parallel")

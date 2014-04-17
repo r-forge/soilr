@@ -8,7 +8,7 @@ test.ThreepSerial_2=function(){
    print(tol)
    timestep=(t_end-t_start)/tn
    t=seq(t_start,t_end,timestep)
-   A=new("ConstantDecompositionOperator",matrix(
+   A=new("ConstLinDecompOp",matrix(
      nrow=3,
      ncol=3,
      c(

@@ -21,7 +21,7 @@ ParallelModel=structure(function
     A=function(t){diag(x=coeffs(t))}
     tstart=getTimeRange(coeffs_tm)[[1]]
     tend=getTimeRange(coeffs_tm)[[2]]
-    A_tm=new("LinearDecompositionOperator",tstart,tend,A)
+    A_tm=new("BoundLinDecompOp",tstart,tend,A)
     obj=new(Class="Model",times,A_tm,startvalues,inputrates,solverfunc,pass)
 ### a model object
 }
@@ -34,7 +34,7 @@ ParallelModel=structure(function
       k=TimeMap.new(t_start,t_end,function(times){c(-0.5,-0.2,-0.3)})
       c0=c(1, 2, 3)
       #constant inputrates
-      inputrates=TemporaryInputFlux(
+      inputrates=BoundInFlux(
           function(t){matrix(nrow=3,ncol=1,c(1,1,1))},
           t_start,
           t_end

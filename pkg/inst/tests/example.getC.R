@@ -6,7 +6,7 @@
   
   #Create two models with same arguments but calling two different model creation functions
   Cmodel=OnepModel(t,k,C0,In)
-  C14model=OnepModel14(t,k,C0,In,F0=0,FcAtm=IntCal09)
+  C14model=OnepModel14(t,k,C0,In,F0=0,inputFc=IntCal09)
   
   #getC can extract the amount of C from these two type of models
   Ctmodel=getC(Cmodel)

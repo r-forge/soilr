@@ -3,6 +3,7 @@
 OnepModel<-structure(
     function #Implementation of a one pool model 
     ### This function creates a model for one pool. It is a wrapper for the more general function \code{\link{GeneralModel}}.
+    ##references<< Sierra, C.A., M. Mueller, S.E. Trumbore. 2012. Models of soil organic matter decomposition: the SoilR package version 1.0. Geoscientific Model Development 5, 1045-1060.
      (t,  		##<< A vector containing the points in time where the solution is sought.
       k,	##<< A scalar with the decomposition rate of the pool. 
       C0,	##<< A scalar containing the initial amount of carbon in the pool.
@@ -19,7 +20,7 @@ OnepModel<-structure(
       C0=c(C0)
       
       if(length(In)==1){
-          inputFluxes=TemporaryInputFlux(
+          inputFluxes=BoundInFlux(
             function(t){matrix(nrow=1,ncol=1,In)},
             t_start,
             t_end
@@ -47,7 +48,7 @@ OnepModel<-structure(
       Y=xi[,2]
       fX=splinefun(X,Y)
       }
-      Af=new("LinearDecompositionOperator",
+      Af=new("BoundLinDecompOp",
         t_start,
         t_end,
         function(t){fX(t)*A}

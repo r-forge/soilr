@@ -2,7 +2,7 @@
 # vim:set ff=unix expandtab ts=2 sw=2:
 bind.C14curves<-structure(
      function # Binding of pre- and post-bomb Delta14C curves
-     ### Takes a pre- and a post-bomb curve, binds them together, and reports back either in years BP or AD.
+     ### This function takes a pre- and a post-bomb curve, binds them together, and reports the results back either in years BP or AD.
      (prebomb, ##<< A pre-bomb radiocarbon dataset. They could be either \code{\link{IntCal09}} or \code{\link{IntCal13}}.
       postbomb, ##<< A post-bomb radiocarbon dataset. They could be any of the datasets in \code{\link{Hua2013}}.
       time.scale ##<< A character indicating whether to report the results in years before present \code{BP} or anno domini \code{AD}.

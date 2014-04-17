@@ -103,7 +103,7 @@ test.correctnessOfModel.impossibleTimeRanges=function(){
     )
    
    checkException(new("Model",t,A,c(0,0,0),I),mess)
-   #now we do the same to the InputFluxes(t) while A(t) is correct 
+   #now we do the same to the InFluxes(t) while A(t) is correct 
    A=TimeMap.new(
       t_start,
       t_end,
@@ -150,7 +150,7 @@ test.correctnessOfModel.impossibleTimeRanges=function(){
       }
     )
    checkException(new("Model",t,A,c(0,0,0),I),mess)
-   #now we do the same to the InputFluxes(t) while A(t) is correct 
+   #now we do the same to the InFluxes(t) while A(t) is correct 
    A=TimeMap.new(
       t_start,
       t_end,
@@ -179,7 +179,7 @@ test.correctnessOfModel.correctModel=function(){
    tn=50
    timestep=(t_end-t_start)/tn 
    t=seq(t_start,t_end,timestep) 
-   A=new("LinearDecompositionOperator",
+   A=new("BoundLinDecompOp",
     t_start,
     t_end,
     function(times){matrix(nrow=3,ncol=3,byrow=TRUE,

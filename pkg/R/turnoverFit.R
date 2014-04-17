@@ -19,24 +19,24 @@ turnoverFit=structure(
           if(length(obsyr) != 1) stop("obsyr must be a numeric value of length 1")
           if(length(C0) != 1) stop("C0 must be a numeric value of length 1")
      
-          if(Zone=="NHZone1") FcAtm=bind.C14curves(prebomb=IntCal13,postbomb=Hua2013$NHZone1,time.scale="AD")
+          if(Zone=="NHZone1") inputFc=bind.C14curves(prebomb=IntCal13,postbomb=Hua2013$NHZone1,time.scale="AD")
      
-          if(Zone=="NHZone2") FcAtm=bind.C14curves(prebomb=IntCal13,postbomb=Hua2013$NHZone2,time.scale="AD")
+          if(Zone=="NHZone2") inputFc=bind.C14curves(prebomb=IntCal13,postbomb=Hua2013$NHZone2,time.scale="AD")
 
-          if(Zone=="NHZone3") FcAtm=bind.C14curves(prebomb=IntCal13,postbomb=Hua2013$NHZone3,time.scale="AD")
+          if(Zone=="NHZone3") inputFc=bind.C14curves(prebomb=IntCal13,postbomb=Hua2013$NHZone3,time.scale="AD")
 
-          if(Zone=="SHZone12") FcAtm=bind.C14curves(prebomb=IntCal13,postbomb=Hua2013$SHZone12,time.scale="AD")
+          if(Zone=="SHZone12") inputFc=bind.C14curves(prebomb=IntCal13,postbomb=Hua2013$SHZone12,time.scale="AD")
 
-          if(Zone=="SHZone3") FcAtm=bind.C14curves(prebomb=IntCal13,postbomb=Hua2013$SHZone3,time.scale="AD")
+          if(Zone=="SHZone3") inputFc=bind.C14curves(prebomb=IntCal13,postbomb=Hua2013$SHZone3,time.scale="AD")
 
                #else(stop("Radiocarbon atmospheric zones must be: NHZone1, NHZone2, NHZone3, SHZone12, or SHZone3."))
      
-          if(obsyr > tail(FcAtm,1)$Year.AD) stop("The observed C14 datum must be from a year within the atmospheric radiocarbon period of the Hua et al (2012) dataset.")
+          if(obsyr > tail(inputFc,1)$Year.AD) stop("The observed C14 datum must be from a year within the atmospheric radiocarbon period of the Hua et al (2012) dataset.")
      
-          years=seq(yr0,tail(FcAtm,1)$Year.AD,by=0.1)
+          years=seq(yr0,tail(inputFc,1)$Year.AD,by=0.1)
           C14cost=function(k){
-               tmp=OnepModel14(t=years,k=k,C0=C0,F0_Delta14C=FcAtm[which(FcAtm[,1]==yr0),2],
-                               In=In,FcAtm=FcAtm)
+               tmp=OnepModel14(t=years,k=k,C0=C0,F0_Delta14C=inputFc[which(inputFc[,1]==yr0),2],
+                               In=In,inputFc=inputFc)
                C14t=getF14(tmp)
                predC14=C14t[which(years==round(obsyr,1))]
                res=(obsC14-predC14)^2
@@ -46,15 +46,15 @@ turnoverFit=structure(
           kest2=optimize(C14cost,interval=c(1/5000,1/30))$minimum
           
           if(plot==TRUE){
-               pred1=OnepModel14(t=years,k=kest1,C0=C0,F0_Delta14C=FcAtm[which(FcAtm[,1]==yr0),2],
-                                In=In,FcAtm=FcAtm)
-               pred2=OnepModel14(t=years,k=kest2,C0=C0,F0_Delta14C=FcAtm[which(FcAtm[,1]==yr0),2],
-                                 In=In,FcAtm=FcAtm)
+               pred1=OnepModel14(t=years,k=kest1,C0=C0,F0_Delta14C=inputFc[which(inputFc[,1]==yr0),2],
+                                In=In,inputFc=inputFc)
+               pred2=OnepModel14(t=years,k=kest2,C0=C0,F0_Delta14C=inputFc[which(inputFc[,1]==yr0),2],
+                                 In=In,inputFc=inputFc)
                C14test1=getF14(pred1)
                C14test2=getF14(pred2)
                
                par(mfrow=c(2,1),mar=c(4,5,1,1))
-               plot(FcAtm[,1:2],type="l",xlim=c(1900,2010), xlab="Year AD",ylab=expression(paste(Delta^14,"C ","(\u2030)")))
+               plot(inputFc[,1:2],type="l",xlim=c(1900,2010), xlab="Year AD",ylab=expression(paste(Delta^14,"C ","(\u2030)")))
                points(obsyr,obsC14,pch=19)
                lines(years,C14test1,col=2)
                lines(years,C14test2,col=4)

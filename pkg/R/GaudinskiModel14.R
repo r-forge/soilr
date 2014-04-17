@@ -12,7 +12,7 @@ GaudinskiModel14<-structure(
    LI=150,     ##<< A scalar or a data.frame object specifying the amount of litter inputs by time.
    RI=255,     ##<< A scalar or a data.frame object specifying the amount of root inputs by time.
    xi=1,   ##<< A scalar or a data.frame specifying the external (environmental and/or edaphic) effects on decomposition rates. 
-   FcAtm,##<< A Data Frame object containing values of atmospheric Delta14C per time. First column must be time values, second column must be Delta14C values in per mil.
+   inputFc,##<< A Data Frame object containing values of atmospheric Delta14C per time. First column must be time values, second column must be Delta14C values in per mil.
    lambda=-0.0001209681, ##<< Radioactive decay constant. By default lambda=-0.0001209681 y^-1 . This has the side effect that all your time related data are treated as if the time unit was year.
    lag=0, ##<< A positive integer representing a time lag for radiocarbon to enter the system. 
    solver=deSolve.lsoda.wrapper, ##<< A function that solves the system of ODEs. This can be \code{\link{euler}} or  any other user provided function with the same interface.
@@ -59,7 +59,7 @@ GaudinskiModel14<-structure(
     A[4,1]=ks[1]*(35/(35+190+30))
     A[5,1]=ks[1]*(30/(35+190+30))  
     
-    At=new(Class="LinearDecompositionOperator",
+    At=new(Class="BoundLinDecompOp",
            t_start,
            t_stop,
            function(t){
@@ -67,14 +67,14 @@ GaudinskiModel14<-structure(
            }
            ) 
     
-    Fc=FcAtm.from.Dataframe(FcAtm,lag=lag,format="Delta14C")
+    Fc=BoundFc(inputFc,lag=lag,format="Delta14C")
     
     mod=GeneralModel_14(t,
       At,
       ivList=C0,
-      initialValF=SoilR.F0(F0_Delta14C,"Delta14C"),
+      initialValF=ConstFc(F0_Delta14C,"Delta14C"),
       inputFluxes=inputFluxes,
-      Fc,
+      inputFc=Fc,
       di=lambda,
       pass=pass
     )
@@ -89,7 +89,7 @@ GaudinskiModel14<-structure(
     Ex=GaudinskiModel14(
       t=years,
       ks=c(kr=1/3, koi=1/1.5, koeal=1/4, koeah=1/80, kA1=1/3, kA2=1/75, kM=1/110),
-      FcAtm=C14Atm_NH
+      inputFc=C14Atm_NH
     )
     R14m=getF14R(Ex)
     C14m=getF14C(Ex)
@@ -123,7 +123,7 @@ GaudinskiModel14<-structure(
     Ex=GaudinskiModel14(
       t=years,
       ks=c(kr=1/3,koi=1/1.5,koeal=1/4,koeah=1/80,kA1=1/3,kA2=1/75,kM=1/110),
-      FcAtm=C14Atm_NH,
+      inputFc=C14Atm_NH,
       pass=TRUE
    )
   }

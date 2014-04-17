@@ -15,7 +15,7 @@ require(RUnit)
 	t=seq(t_start,t_end,timestep) 
 	## some Decomposition Operator
 	n=3
-	At=new(Class="LinearDecompositionOperator",
+	At=new(Class="BoundLinDecompOp",
 	  t_start,
 	  t_end,
 	  function(t0){
@@ -31,7 +31,7 @@ require(RUnit)
 	
 	## Atmospheric C_14
 	
-	F0=SoilR.F0(c(0,10,10),"Delta14C")
+	F0=ConstFc(c(0,10,10),"Delta14C")
 	
 	## constant inputrate
 	inputFluxes=new(
@@ -45,7 +45,7 @@ require(RUnit)
 	# the Absolute Fraction Modern format.
 	# This means that all the other data provided are assumed to have the same value
 	# This is especially true for the decay constants to be specified later
-	Fc=FcAtm.from.Dataframe(C14Atm_NH,format="Delta14C")
+	Fc=BoundFc(C14Atm_NH,format="Delta14C")
 	# add the C14 decay to the matrix which is done by a diagonal 
 	# matrix which does not vary over time
 	# we assume a half life th=5730 years

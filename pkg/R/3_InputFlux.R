@@ -1,33 +1,33 @@
 #
 # vim:set ff=unix expandtab ts=2 sw=2:
 setClass(
-   Class="InputFlux",
+   Class="InFlux",
    contains="VIRTUAL"
 )
 setMethod(
-  f="InputFlux",
+  f="InFlux",
   signature(object="TimeMap"),
-  def=function #create a TemporaryInputFlux from a TimeMap object
+  def=function #create a BoundInFlux from a TimeMap object
   ### The method is used to ensure backward compatibility with the now deprecated
   ### TimeMap class.
-  ### The resulting TemporaryInputFlux is created by a call to
-  ### the constructor TemporaryInputFlux(object) of that class.
+  ### The resulting BoundInFlux is created by a call to
+  ### the constructor BoundInFlux(object) of that class.
   (object)
   {
-    TemporaryInputFlux(object)
+    BoundInFlux(object)
   }
 
 )
 setMethod(
-  f="InputFlux",
-  signature=signature(object="InputFlux"),
+  f="InFlux",
+  signature=signature(object="InFlux"),
   def=function # pass through constructor
   ### This method handles the case that no actual construction is necessary since
-  ### the argument is already of a subclass of InputFlux 
+  ### the argument is already of a subclass of InFlux 
   ##<<details This is useful to simplify argument handling of functions which rely on 
-  ##<<details the presence of some kind of an InputFlux 
+  ##<<details the presence of some kind of an InFlux 
   ##<<details Due to this method those functions can 
-  ##<<details call InputFlux(something) without having to check if 
+  ##<<details call InFlux(something) without having to check if 
   ##<<details it is necessary.
   (object){
     object

@@ -1,19 +1,19 @@
 #
 # vim:set ff=unix expandtab ts=2 sw=2:
-correctnessOfDecompositionOperator=function(object)
+correctnessOfDecompOp=function(object)
   A=object@mat
   
 setClass(# constant decomposition operator 
-    Class="ConstantDecompositionOperator",
-    contains="DecompositionOperator",
+    Class="ConstLinDecompOp",
+    contains="DecompOp",
     slots=list( mat="matrix")
 )
 setMethod(
      f="initialize",
-     signature="ConstantDecompositionOperator",
+     signature="ConstLinDecompOp",
      definition=function #internal constructor 
      ### This mehtod is intendet to be used internally. It may change in the future.
-     ### For user code it is recommended to use one of the generic constructor \code{ConstantDecompositionOperator} instead.
+     ### For user code it is recommended to use one of the generic constructor \code{ConstLinDecompOp} instead.
      (.Object,mat=matrix())
      {
         .Object@mat=mat
@@ -22,22 +22,22 @@ setMethod(
 )
 ############################constructors####################
 setMethod(
-      f="ConstantDecompositionOperator",
+      f="ConstLinDecompOp",
       ### 
       signature=c(mat="matrix"),
       definition=function # construct from matric
-      ### This method creates a ConstantDecompositionOperator from a matrix
+      ### This method creates a ConstLinDecompOp from a matrix
       ### The operator is assumed to act on the vector of carbon stocks
       ### by multiplication of the (time invariant) matrix from the left.
       (mat){
-      return(new("ConstantDecompositionOperator",mat=mat))
+      return(new("ConstLinDecompOp",mat=mat))
      }
 )
 
 ############################methods####################
 setMethod(
     f="getFunctionDefinition",
-    signature="ConstantDecompositionOperator",
+    signature="ConstLinDecompOp",
     definition=function # creates a constant timedependent function and returns it
       ### The method creates a timedependent function from the existing matrix describing the operator 
     (object){
@@ -46,9 +46,9 @@ setMethod(
 )
 setMethod(
     f="getTimeRange",
-    signature="ConstantDecompositionOperator",
+    signature="ConstLinDecompOp",
     definition=function # return an (infinite) time range since the operator is constant
-    ### some functions dealing with DecompositionOperators in general rely on this
+    ### some functions dealing with DecompOps in general rely on this
     ### so we have to implement it even though the timerange is always the same: (-inf,inf)
     (object)
     {
@@ -56,63 +56,41 @@ setMethod(
     }
 )
 setMethod(
-      f="LinearDecompositionOperator",
-      signature=c(map="ConstantDecompositionOperator"),
-      definition=function # convert a ConstantDecompositionOperator to a LinearDecompositionOperator
-      ### The method creates a LinearDecompositionOperator consisting of a constant time dependent function 
+      f="BoundLinDecompOp",
+      signature=c(map="ConstLinDecompOp"),
+      definition=function # convert a ConstLinDecompOp to a BoundLinDecompOp
+      ### The method creates a BoundLinDecompOp consisting of a constant time dependent function 
       ### and the limits of its domain (starttime and endtime) set to -Inf and Inf respectively
       (map){
       f=getFunctionDefinition(map)
-      return(new("LinearDecompositionOperator",starttime=-Inf,endtime=Inf,map=f))
+      return(new("BoundLinDecompOp",starttime=-Inf,endtime=Inf,map=f))
      }
 )
 setMethod(
   f= "getMeanTransitTime",
-    signature= "ConstantDecompositionOperator",
+    signature= "ConstLinDecompOp",
     definition=function #compute the mean transit time 
-      ### the description is incomplete
+      ### This method computes the mean transit time for the linear time invariant system 
+      ### that can be constructed from the given operator and input distribution.
+      ### 
+      ### It relies on the mehtod \code{getTransitTimeDistributionDensity} using the same arguments.
+      ##details<< To compute the mean transit time for the distribution we have to compute the integral
+      ## \deqn{
+      ## \bar{T} = \int_0^\infty T \cdot S_r\left( \frac{\vec{I}}{I},0,T\right)\; dT
+      ## }
+      ## for the numerically computed density.
+      ## To avoid issues with numerical integration  we dont use \eqn{\infty}{\infty} as upper limit but cut off the integragion interval prematurely.
+      ## For this purpose we calculate a maximum response time of the system as \cite{Lasaga}
+      ## \deqn{
+      ## \tau_{cycle} = \frac{1}{|\min(\lambda_i)|}
+      ## }
+      ##  where \eqn{\lambda_i}{\lambda_i} are non-zero eigenvalues of the matrix 
+      ## \eqn{{\bf A}}{{\bf A}}. 
+      ##references<< 
+      ## Lasaga, A.: The kinetic treatment of geochemical cycles, Geochimica et
+      ## Cosmochimica Acta, 44, 815 -- 828, doi{10.1016/0016-7037(80)90263-X}, 1980.
       (object,inputDistribution){
 
-      # we create function that receives a vector of times 
-      # computes the TransitTimeDistribution at these points 
-      # which will be choosen by the integrate function 
-      # then we multiply it with t
-      #integrand <- function(times){
-      #  # we set the initial values to the value provided by the inputdistribution
-      #  o=order(times)
-      #  ot=times[o]
-      #  ttd=getTransitTimeDistributionDensity(object,inputDistribution,ot)
-      #  ores=(ttd*ot) 
-      #  #to invert the permutation we compute the permutation of the permutation 
-      #  oo=order(o)
-      #  res=ores[oo]
-      #  #res=ttd[oo]
-      #  return(res)
-      #}
-
-      #t_end=23.9
-      #pdf(file="meantest.pdf",paper="a4")
-      #t_step=t_end/10000
-      #t=seq(0,t_end,t_step)
-      #  plot(t,integrand(t),type="l",lty=2,col=1,ylab="Concentrations",xlab="Time")
-      #dev.off()
-      
-      #The integrate function of R does simply not work precisely in this example
-      #meanTime=integrate(integrand,0,Inf,subdivisions=1000000)[["value"]] 
-      #we therefor build a replacement using the fact that the transit time distriution density 
-      #will vanish for large values
-      #what large means actually depends on the matrix and has to be estimated
-      # note that this large value must still be in the time range where the Operator is defined which is the reason that the domain often has to be set to infinite values
-
-      # we do this iteratively. We start with an estimate of 2000 years
-      # then for a number of points in time between 0 and 2000 years 
-      # we compute the inverse of the absolute value of the smallest 
-      # eigenvalue of the time dependent matrix describing the decomposition.
-      # this is done by function spectralNorm.
-      # This is a rough estimate for the half life of the whole system.
-      # While it is bigger than our start estimate we will have to increase the 
-      # length of the time interval.
-      # 
       f=getFunctionDefinition(object)
       g=function(t){spectralNorm(f(t))}
       t_max=function(t_end){
@@ -156,9 +134,50 @@ setMethod(
 )
 setMethod(
    f= "getTransitTimeDistributionDensity",
-      signature= "ConstantDecompositionOperator",
-      definition=function #compute the TransitTimeDistributionDensity
-      ### the description is incomplete
+      signature= "ConstLinDecompOp",
+      definition=function #compute the TransitTimeDistributionDensity 
+      ### This mehtod computes the probability density of the transit time of the linear time invariant system
+      ### that can be constructed from the given operator and input distribution.
+      ##details<< In a forthcoming paper \cite{SoilRv1.2} 
+      ## we derive the algorithm used in this implementation
+      ## under the assumption of steady conditions having prevailed infinitely.
+      ## We arrive at a formulation well known from the literature about 
+      ## time invariant linlear systems, cited e.g. in \cite{ManzoniJGR}.\cr
+      ## The somehow amazing result is that the weight of the transit time density \eqn{\psi(T)}{\psi(T)} 
+      ## for a \emph{transit time} \eqn{T}{T} 
+      ## for the steady state system is identical to the output \eqn{O(T)}{O(T)} 
+      ## observed at time \eqn{T}{T} of a \emph{different} system which started with a normalized impulsive input 
+      ## \eqn{\frac{\vec{I}}{I}}{\frac{\vec{I}}{I}} at time 
+      ## \eqn{T=0}{T=0},
+      ## where \eqn{I=\sum_{k=1}^m i_k} is the cumulative input flux to all pools.
+      ## \cr
+      ## This fact simpliefies the computation considerably.
+      ## Translated into the language of an ode solver an impulsive input becomes a start vector \eqn{\frac{\vec{I}}{I}}{\frac{\vec{I}}{I}} 
+      ## at time \eqn{T=0}{T=0} 
+      ## and \eqn{O(T)}{O(T)} the respiration related to the solution of the initial value problem 
+      ## observed at time \eqn{T}{T}. 
+      ## \deqn{
+      ## \psi(T)=S_r \left( \frac{\vec{I}}{I},0,T\right)
+      ## }{}
+      ## Note that from the perspective of the ode solver \eqn{S_r}{S_r} depends on the decomposition operator and the distribution of the input among the pools only.
+      ## It is therefor possible to implement the transit time distribution as a function of the decomposition operator and the fixed input flux distribution.
+      ## To insure steady state conditions the decomposition operator is not allowed to be a true function of time.
+      ## We therefor implement the method only for the subclass 
+      ## \code{ConstLinDecompOp} 
+      ## \cr Remark:\cr
+      ## The decision to implement this method for \code{transitTimeDensity} especially for 
+      ## objects of class \code{ConstLinDecompOp}
+      ## reflects the fact that an arbitrary  model in SoilR is by no means bound to end up in steady state. To insure this we would have to ignore the input part of a user created model which would be confusing. 
+      ## \cr Remark:\cr
+      ## In future versions of SoilR it will be possible to compute a dynamic, time dependent transit time distribution 
+      ## for objects of class \code{ Model}
+      ## with a time argument specifying for which time the distribution is sought. 
+      ## The steady state results computed here could than be reproduced 
+      ## with the user responsible for providing a model actually reaching it. 
+      ##references<<
+      ##  Manzoni, S., Katul, G.~G., and Porporato, A.: Analysis of soil carbon transit
+      ##  times and age distributions using network theories, J. Geophys. Res., 114,
+      ##  
       (object,inputDistribution,times){
       # we set the initial values to the value provided by the inputdistribution
       sVmat=inputDistribution

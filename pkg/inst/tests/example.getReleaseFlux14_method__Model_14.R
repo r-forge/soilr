@@ -9,7 +9,7 @@ Ex=TwopParallelModel14(
         F0_Delta14C=c(0,0),
 	In=LitterInput, 
 	gam=0.7,
-	FcAtm=C14Atm_NH,
+	inputFc=C14Atm_NH,
 	lag=2
 )
 

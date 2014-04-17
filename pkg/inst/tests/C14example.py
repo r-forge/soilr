@@ -54,8 +54,8 @@ class C14example(Rexample):
         for j in range(self.n):       
            Text+=(self.shift+self.f_sym_strs[j]+"="+str(self.iF[j])+"\n")
         Text+="\
-   initialF=SoilR.F0("+rlistprint(self.f_sym_strs,self.shift)+",\n format=\"AbsoluteFractionModern\")\n\
-   Fc=new(\"FcAtm\",t_start,t_end,function(t){"+str(self.c14fraction)+"},format=\"AbsoluteFractionModern\")\n\
+   initialF=ConstFc("+rlistprint(self.f_sym_strs,self.shift)+",\n format=\"AbsoluteFractionModern\")\n\
+   Fc=BoundFc(function(t){"+str(self.c14fraction)+"},t_start,t_end,format=\"AbsoluteFractionModern\")\n\
    th=5730\n\
    k=log(0.5)/th\n"
 
@@ -81,14 +81,14 @@ class C14example(Rexample):
     def setUpModel(self):
         Text="\
    mod=GeneralModel_14(\n\
-    t,\n\
-    A,\n"\
-        +rlistprint(self.c_sym_strs,self.shift)+",\n"\
-        +self.shift+"initialF,\n"\
-        +self.shift+"inputrates,\n"\
-        +self.shift+"Fc,\n"\
-        +self.shift+"k,\n"\
-        +self.shift+"deSolve.lsoda.wrapper\n   )\n\
+    t=t,\n\
+    A=A,\n"\
+       "ivList=" +rlistprint(self.c_sym_strs,self.shift)+",\n"\
+        "initialValF="+self.shift+"initialF,\n"\
+        "inputFluxes="+self.shift+"inputrates,\n"\
+        "inputFc="+self.shift+"Fc,\n"\
+        "di="+self.shift+"k,\n"\
+        "solverfunc="+self.shift+"deSolve.lsoda.wrapper\n   )\n\
    Y14ode=getC14(mod) \n\
    F14ode=getF14(mod) \n\
    Yode=getC(mod) \n\

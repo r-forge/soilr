@@ -3,6 +3,7 @@
 TwopFeedbackModel<-structure(
     function #Implementation of a two pool model with feedback structure
     ### This function creates a model for two pools connected with feedback. It is a wrapper for the more general function \code{\link{GeneralModel}}.
+    ##references<< Sierra, C.A., M. Mueller, S.E. Trumbore. 2012. Models of soil organic matter decomposition: the SoilR package version 1.0. Geoscientific Model Development 5, 1045-1060.
      (t,    	##<< A vector containing the points in time where the solution is sought.
       ks,	##<< A vector of length 2 with the values of the decomposition rate for pools 1 and 2. 
       a21, ##<< A scalar with the value of the transfer rate from pool 1 to pool 2.
@@ -46,7 +47,7 @@ TwopFeedbackModel<-structure(
         Y=xi[,2]
         fX=function(t){as.numeric(spline(X,Y,xout=t)[2])}
        }
-      Af=new("LinearDecompositionOperator",
+      Af=new("BoundLinDecompOp",
         t_start,
         t_end,
         function(t){fX(t)*A}

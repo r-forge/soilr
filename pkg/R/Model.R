@@ -13,7 +13,7 @@ correctnessOfModel=function #check for unreasonable input parameters
     times=object@times
     Atm=object@mat
     ivList=object@initialValues
-    InputFluxes=object@inputFluxes
+    InFluxes=object@inputFluxes
     #first we check the dimensions
     A=getFunctionDefinition(Atm)
     na=nrow(A(0))
@@ -31,8 +31,8 @@ correctnessOfModel=function #check for unreasonable input parameters
      
     tA_min=getTimeRange(Atm)["t_min"]
     tA_max=getTimeRange(Atm)["t_max"]
-    tI_min=getTimeRange(InputFluxes)["t_min"]
-    tI_max=getTimeRange(InputFluxes)["t_max"]
+    tI_min=getTimeRange(InFluxes)["t_min"]
+    tI_max=getTimeRange(InFluxes)["t_max"]
     t_min=min(times)
     t_max=max(times)
     haveALook="Have look at the object containing  A(t) or the data it is created from"
@@ -60,7 +60,7 @@ correctnessOfModel=function #check for unreasonable input parameters
         stop(
           simpleError(
             paste(
-              "You ordered a timeinterval that starts earlier than the interval your function I(t) (InputFluxes) is defined for. \n ",
+              "You ordered a timeinterval that starts earlier than the interval your function I(t) (InFluxes) is defined for. \n ",
               haveALook
             )
           )
@@ -70,7 +70,7 @@ correctnessOfModel=function #check for unreasonable input parameters
         stop(
           simpleError(
             paste(
-              "You ordered a timeinterval that ends later than the interval your function I(t) (InputFluxes) is defined for. \n ",
+              "You ordered a timeinterval that ends later than the interval your function I(t) (InFluxes) is defined for. \n ",
               haveALook
             )
           )
@@ -89,12 +89,12 @@ setClass(# Model
    representation=representation(
         times="numeric"
         ,
-        mat="DecompositionOperator"
+        mat="DecompOp"
         #mat="TimeMap"
         ,
         initialValues="numeric"
         ,
-        inputFluxes="InputFlux"
+        inputFluxes="InFlux"
         ,
         solverfunc="function"
    ) , 
@@ -102,34 +102,7 @@ setClass(# Model
 )
 
 
-#########################################################
-setMethod(f="Model",
-  signature=c(
-    "numeric",
-    "ANY",
-    "numeric"#,
-    #"ANY"
-  ),
-  definition=function #general  constructor for class Model
-  ### This method tries to create a Model object from any combination of arguments 
-  ### that can be converted into  the required set of building blocks for a model
-  ### for n arbitrarily connected pools.
-  
-  (t,			##<< A vector containing the points in time where the solution is sought.
-   A,			##<< something that can be converted to any of the available DecompositionOperator classes
-   ivList,		##<< A vector containing the initial amount of carbon for the n pools. The length of this vector is equal to the number of pools and thus equal to the length of k. This is checked by an internal  function. 
-   inputFluxes, ##<<  something that can be converted to any of the available InputFlux classes
-   solverfunc=deSolve.lsoda.wrapper,		##<< The function used by to actually solve the ODE system. This can be \code{\link{deSolve.lsoda.wrapper}} or any other user provided function with the same interface. 
-   pass=FALSE  ##<< Forces the constructor to create the model even if it is invalid 
-   )
-  {
-     obj=new(Class="Model",t,DecompositionOperator(A),ivList,InputFlux(inputFluxes),solverfunc,pass)
-     return(obj)
-     ### A model object that can be further queried. 
-     ##seealso<< \code{\link{TwopParallelModel}}, \code{\link{TwopSeriesModel}}, \code{\link{TwopFeedbackModel}} 
-  }
-)
-#########################################################
+#------------------------------------------------------------------------------------
 setMethod(
     f="initialize",
     signature="Model",
@@ -154,17 +127,13 @@ setMethod(
     (
         .Object,
         times=c(0,1),
-        mat=new("LinearDecompositionOperator", 
-                0,
-                1,
-                function(t){
-                    return(matrix(nrow=1,ncol=1,0))
-                }
-        ) 
+        mat=new("ConstLinDecompOp",     
+                    matrix(nrow=1,ncol=1,0)
+        )                     ##<< A decomposition Operator of some kind 
         ,
         initialValues=numeric()
         ,
-        inputFluxes= TemporaryInputFlux.new(
+        inputFluxes= BoundInFlux.new(
             0,
             1,
             function(t){
@@ -176,35 +145,19 @@ setMethod(
         ,
         pass=FALSE
         ){
-        cat("-Model initializer at work-\n")
          if (class(mat)=="TimeMap"){
-          warning(
-            "The use of object of class TimeMap is deprecated.
-            At the moment we cast TimeMap objects to the new class LinearDecompositionOperator.
-            which replaces TimeMap as class of the Decomposition Operator argument 
-            To get rid of this warning adapt your code to use a LinearDecompositionOperator instead of a TimeMap.
-            You can als use an object of class ConstantDecompositionOperator.
-            Other classes may be implemented in the future." 
-            )
+          warning(TimeMapWarningOperators())
             # cast
-            mat <- LinearDecompositionOperator(mat)
+            mat <- BoundLinDecompOp(mat)
          }
         .Object@times=times
         .Object@mat=mat
         .Object@initialValues=initialValues
          if (class(inputFluxes)=="TimeMap"){
-          warning(
-            "The use of object of class TimeMap is deprecated for the InputFluxes argument.
-            At the moment we cast TimeMap objects to the new class TemporaryInputFlux
-            which replaces TimeMap as input to this function.
-            To get rid of this warning adapt your code to use TemporaryInputFlux yourself instead of TimeMap.
-            Other classes describing InputFluxes may be implemented in the future as need be." 
-            )
+          warning(TimeMapWarningInFluxes())
             # cast
-          print("afterWarning")
-            inputFluxes<- TemporaryInputFlux(inputFluxes)
+            inputFluxes<- BoundInFlux(inputFluxes)
           }
-          print("afterCast")
         .Object@inputFluxes=inputFluxes
         .Object@solverfunc=solverfunc
         #if (pass==FALSE) validObject(.Object) #call of the ispector if not explicitly disabled
@@ -213,7 +166,34 @@ setMethod(
         ### an Object of class Model
     }
 )
-#########################################################
+#------------------------------------------------------------------------------------
+setMethod(f="Model",
+  signature=c(
+    "numeric",
+    "ANY",
+    "numeric"#,
+    #"ANY"
+  ),
+  definition=function #general  constructor for class Model
+  ### This method tries to create a Model object from any combination of arguments 
+  ### that can be converted into  the required set of building blocks for a model
+  ### for n arbitrarily connected pools.
+  
+  (t,			##<< A vector containing the points in time where the solution is sought.
+   A,			##<< something that can be converted to any of the available DecompOp classes
+   ivList,		##<< A vector containing the initial amount of carbon for the n pools. The length of this vector is equal to the number of pools and thus equal to the length of k. This is checked by an internal  function. 
+   inputFluxes, ##<<  something that can be converted to any of the available InFlux classes
+   solverfunc=deSolve.lsoda.wrapper,		##<< The function used by to actually solve the ODE system. This can be \code{\link{deSolve.lsoda.wrapper}} or any other user provided function with the same interface. 
+   pass=FALSE  ##<< Forces the constructor to create the model even if it is invalid 
+   )
+  {
+     obj=new(Class="Model",t,DecompOp(A),ivList,InFlux(inputFluxes),solverfunc,pass)
+     return(obj)
+     ### A model object that can be further queried. 
+     ##seealso<< \code{\link{TwopParallelModel}}, \code{\link{TwopSeriesModel}}, \code{\link{TwopFeedbackModel}} 
+  }
+)
+#------------------------------------------------------------------------------------
 setMethod(
    f= "plot",
       signature(x="Model"),
@@ -223,7 +203,7 @@ setMethod(
       plot(getTimes(x),getC(x)[,1])
    }
 )
-#########################################################
+#------------------------------------------------------------------------------------
 setMethod(
    f= "print",
       signature(x="Model"),
@@ -234,7 +214,7 @@ setMethod(
       print(getC(x)[,1])
    }
 )
-#########################################################
+#------------------------------------------------------------------------------------
 setMethod(
    f= "summary",
       signature(object="Model"),
@@ -246,7 +226,7 @@ setMethod(
       print(getC(object)[,1])
    }
 )
-#########################################################
+#------------------------------------------------------------------------------------
 setMethod(
    f= "show",
       signature(object="Model"),
@@ -258,7 +238,7 @@ setMethod(
    }
 )
 
-#########################################################
+#------------------------------------------------------------------------------------
 setMethod(
    f= "getTimes",
       signature= "Model",
@@ -269,7 +249,7 @@ setMethod(
       return(times)
    }
 )
-#########################################################
+#------------------------------------------------------------------------------------
 setMethod(
    f= "getC",
       signature= "Model",
@@ -296,7 +276,7 @@ setMethod(
       return(Y)
    }
 )
-#########################################################
+#------------------------------------------------------------------------------------
 setMethod(
    f= "getReleaseFlux",
       signature= "Model",
@@ -322,7 +302,7 @@ setMethod(
       ### A matrix. Every column represents a pool and every row a point in time
    }
 )
-#########################################################
+#------------------------------------------------------------------------------------
 setMethod(
    f= "getAccumulatedRelease",
       signature= "Model",
@@ -368,7 +348,7 @@ setMethod(
    }
 )
 ## overload the [] operator
-#########################################################
+#------------------------------------------------------------------------------------
 getSingleCol=function(x,slot_name){
     res=""
     #print(paste(sep="",">",slot_name,"<"))
@@ -395,7 +375,7 @@ setMethod("[",signature(x="Model",i="character"), #since [] is a already defined
         }
 )
 ## overload the [[ operator
-##########################################################
+#------------------------------------------------------------------------------------
 #setMethod("[[",signature(x="Model"), #since [[ is a already defined generic the names of the arguments are not arbitrary 
 #        definition=function #overloads the $ operator 
 #        ### The operator internally calls one of the methods getC,getReleaseFlux,getAccumulatedRelease or getTimes
@@ -405,6 +385,6 @@ setMethod("[",signature(x="Model",i="character"), #since [] is a already defined
 #        }
 #)
 #
-#########################################################
+#------------------------------------------------------------------------------------
 # do not  overload the $ operator since it is used in R5 classes as method send
 

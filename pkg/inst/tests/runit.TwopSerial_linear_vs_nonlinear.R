@@ -14,7 +14,7 @@ test.TwopSerial_linear_vs_nonlinear=function(){
   k2=1/3
   a21=1/9
   nr=2
-  A=new("ConstantDecompositionOperator",
+  A=new("ConstLinDecompOp",
     matrix(
       byrow=TRUE,                                                           
       nrow=nr,

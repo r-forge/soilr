@@ -159,7 +159,7 @@ setMethod(#
             	}
             	#####################################################################
               mod=object@model
-              op=getDecompositionOperator(mod)
+              op=getDecompOp(mod)
               times=getTimes(mod)
             	nt=length(times)			#number of timesteps 
             	st=times[[1]]					#Starttime
@@ -168,7 +168,7 @@ setMethod(#
               Os =getOutputFluxes(mod,as.closures=TRUE)
               Tr=getTransferCoefficients(mod,as.closures=TRUE)
               ntr=names(Tr)
-              vI=getFunctionDefinition(getInputFluxes(mod))
+              vI=getFunctionDefinition(getInFluxes(mod))
               
               # initialize dataframes for particle stock and output for every pool
               nop=getNumberOfPools(mod)
@@ -289,7 +289,6 @@ setMethod(#
             #numberOfProcessors=1
             dfl=mclapply(rep(simParams,numberOfProcessors),singleThreadParticleSimulator,mc.cores=numberOfProcessors)
             cr=reduce2singledf(dfl)
-            #print(cr)
       return(list(tcn=tcn,cr=cr))
   }
 )

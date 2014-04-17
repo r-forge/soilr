@@ -61,21 +61,21 @@ GeneralNlModel=structure(function #Use this function to create objects of class 
   #################################################################################
   # we check if we can reproduce the linear decomposition operator from the
   # nonlinear one
-  Tr=getTransferMatrix(Anl) #this is a function of C and t
-  
-          
-  #################################################################################
-  # build the two models (linear and nonlinear)
+#  Tr=getTransferMatrix(Anl) #this is a function of C and t
+#  
+#          
+#  #################################################################################
+#  # build the two models (linear and nonlinear)
 #  mod=GeneralModel( t, A,iv, inputrates, deSolve.lsoda.wrapper) 
-  modnl=GeneralNlModel( t, Anl, iv, inputrates, deSolve.lsoda.wrapper)
-
-   Ynonlin=getC(modnl) 
-  lt1=2
-  lt2=4
-    plot(t,Ynonlin[,1],type="l",lty=lt1,col=1,
-      ylab="Concentrations",xlab="Time",ylim=c(min(Ynonlin),max(Ynonlin)))
-    lines(t,Ynonlin[,2],type="l",lty=lt2,col=2)
-    legend("topleft",c("Pool 1", "Pool 2"),lty=c(lt1,lt2),col=c(1,2))
+#  modnl=GeneralNlModel( t, Anl, iv, inputrates, deSolve.lsoda.wrapper)
+#
+#   Ynonlin=getC(modnl) 
+#  lt1=2
+#  lt2=4
+#    plot(t,Ynonlin[,1],type="l",lty=lt1,col=1,
+#      ylab="Concentrations",xlab="Time",ylim=c(min(Ynonlin),max(Ynonlin)))
+#    lines(t,Ynonlin[,2],type="l",lty=lt2,col=2)
+#    legend("topleft",c("Pool 1", "Pool 2"),lty=c(lt1,lt2),col=c(1,2))
 
 }       
 )

@@ -4,6 +4,7 @@ TwopParallelModel<-structure(
     function #Implementation of a two pool model with parallel structure
     ### This function creates a model for two independent (parallel) pools. 
     ### It is a wrapper for the more general function \code{\link{ParallelModel}} that can handle an arbitrary number of pools.
+    ##references<< Sierra, C.A., M. Mueller, S.E. Trumbore. 2012. Models of soil organic matter decomposition: the SoilR package version 1.0. Geoscientific Model Development 5, 1045-1060.
      (t,			##<< A vector containing the points in time where the solution is sought.
      ks,	##<< A vector of length 2 containing the decomposition rates for the 2 pools. 
      C0,	##<< A vector of length 2 containing the initial amount of carbon for the 2 pools.

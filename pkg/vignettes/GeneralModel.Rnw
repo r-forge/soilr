@@ -115,7 +115,7 @@ inconsistent model.
 <<>>=
 n=3;
 t_start=1;t_end=2
-At=new("LinearDecompositionOperator",
+At=new("BoundLinDecompOp",
   t_start,
   t_end,
   function(t0){
@@ -315,7 +315,7 @@ A_0=matrix(nrow=n,ncol=n,byrow=TRUE,
      0.1, -0.7,    0,   
      0,    1/2,   -0.5)
 )
-A_t=new("LinearDecompositionOperator",
+A_t=new("BoundLinDecompOp",
   t_start,
   t_end,
   function(t0){xi(t0)*A_0}

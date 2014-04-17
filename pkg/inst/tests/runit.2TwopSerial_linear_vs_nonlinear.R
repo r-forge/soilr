@@ -14,7 +14,7 @@ test.TwopSerial_linear_vs_nonlinear=function(){
   k2=1/3
   a21=1/9
   nr=2
-  A=new("ConstantDecompositionOperator",matrix(
+  A=new("ConstLinDecompOp",matrix(
     byrow=TRUE,                                                           
     nrow=nr,
     ncol=nr,
@@ -55,7 +55,7 @@ test.TwopSerial_linear_vs_nonlinear=function(){
   c01=3
   c02=2
   iv=c(c01,c02)
-  inputrates=TemporaryInputFlux(
+  inputrates=BoundInFlux(
     function(t){return(matrix(
       nrow=nr,
       ncol=1,

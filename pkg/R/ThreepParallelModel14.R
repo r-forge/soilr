@@ -12,7 +12,7 @@ ThreepParallelModel14<-structure(
    gam1,  ##<< A scalar representing the partitioning coefficient, i.e. the proportion from the total amount of inputs that goes to pool 1.
    gam2,  ##<< A scalar representing the partitioning coefficient, i.e. the proportion from the total amount of inputs that goes to pool 2.
    xi=1,   ##<< A scalar or a data.frame specifying the external (environmental and/or edaphic) effects on decomposition rates. 
-   FcAtm,##<< A Data Frame object containing values of atmospheric Delta14C per time. First column must be time values, second column must be Delta14C values in per mil.
+   inputFc,##<< A Data Frame object containing values of atmospheric Delta14C per time. First column must be time values, second column must be Delta14C values in per mil.
    lambda=-0.0001209681, ##<< Radioactive decay constant. By default lambda=-0.0001209681 y^-1 . This has the side effect that all your time related data are treated as if the time unit was year.
    lag=0, ##<< A positive scalar representing a time lag for radiocarbon to enter the system. 
    solver=deSolve.lsoda.wrapper, ##<< A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.
@@ -50,7 +50,7 @@ ThreepParallelModel14<-structure(
     }
     
     
-    At=new(Class="LinearDecompositionOperator",
+    At=new(Class="BoundLinDecompOp",
            t_start,
            t_stop,
            function(t){
@@ -58,9 +58,9 @@ ThreepParallelModel14<-structure(
            }
            ) 
     
-    Fc=FcAtm.from.Dataframe(FcAtm,lag,format="Delta14C")
+    Fc=BoundFc(inputFc,lag=lag,format="Delta14C")
     
-    mod=GeneralModel_14(t,At,ivList=C0,initialValF=SoilR.F0(F0_Delta14C,"Delta14C"),
+    mod=GeneralModel_14(t,At,ivList=C0,initialValF=ConstFc(F0_Delta14C,"Delta14C"),
                         inputFluxes=inputrates,Fc,di=lambda,pass=pass)
     ### A Model Object that can be further queried 
     ##seealso<< \code{\link{TwopSeriesModel14}}, \code{\link{TwopFeedbackModel14}}  
@@ -79,7 +79,7 @@ ThreepParallelModel14<-structure(
       In=LitterInput,
       gam1=0.7,
       gam2=0.1,
-      FcAtm=C14Atm_NH,
+      inputFc=C14Atm_NH,
       lag=2
     )
     R14m=getF14R(Ex)

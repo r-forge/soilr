@@ -13,19 +13,19 @@ correctnessOfNlModel=function
     times=object@times
     Atm=object@DepComp
     ivList=object@initialValues
-    InputFluxes=object@inputFluxes
+    InFluxes=object@inputFluxes
     res=TRUE
      
-    tI_min=getTimeRange(InputFluxes)["t_min"]
-    tI_max=getTimeRange(InputFluxes)["t_max"]
+    tI_min=getTimeRange(InFluxes)["t_min"]
+    tI_max=getTimeRange(InFluxes)["t_max"]
     t_min=min(times)
     t_max=max(times)
     if (t_min<tI_min) {
-        stop(simpleError("You ordered a timeinterval that starts earlier than the interval your function I(t) (InputFluxes) is defined for. \n Have look at the timeMap object of I(t) or the data it is created from")
+        stop(simpleError("You ordered a timeinterval that starts earlier than the interval your function I(t) (InFluxes) is defined for. \n Have look at the timeMap object of I(t) or the data it is created from")
         )
     }
     if (t_max>tI_max) {
-        stop(simpleError("You ordered a timeinterval that ends later than the interval your function I(t) (InputFluxes) is defined for. \n Have look at the timeMap object of I(t) or the data it is created from")
+        stop(simpleError("You ordered a timeinterval that ends later than the interval your function I(t) (InFluxes) is defined for. \n Have look at the timeMap object of I(t) or the data it is created from")
         )
     }
     print("tests passed")
@@ -45,7 +45,7 @@ setClass(# NlModel
         ,
         initialValues="numeric"
         ,
-        inputFluxes="TemporaryInputFlux"
+        inputFluxes="BoundInFlux"
         ,
         solverfunc="function"
    )
@@ -73,7 +73,7 @@ setMethod(
         ,
         initialValues=numeric()
         ,
-        inputFluxes= TemporaryInputFlux(
+        inputFluxes= BoundInFlux(
             function(t){
                 return(matrix(nrow=1,ncol=1,1))
             },
@@ -91,13 +91,13 @@ setMethod(
          if (class(inputFluxes)=="TimeMap"){
           warning(
             "The use of object of class TimeMap for the inputFlux argument is deprecated.
-            At the moment we cast TimeMap objects to the new class TemporaryInputFlux
+            At the moment we cast TimeMap objects to the new class BoundInFlux
             which replaces TimeMap as class of the the inputFlux argument.
-            To get rid of this warning adapt your code to use a TemporaryInputFlux instead of a TimeMap.
+            To get rid of this warning adapt your code to use a BoundInFlux instead of a TimeMap.
             Other classes may be implemented in the future." 
             )
             # cast
-            inputFluxes<- TemporaryInputFlux(inputFluxes)
+            inputFluxes<- BoundInFlux(inputFluxes)
          }
         .Object@initialValues=initialValues
         .Object@inputFluxes=inputFluxes
@@ -110,7 +110,7 @@ setMethod(
 
 #################################################
 setMethod(
-   f= "getInputFluxes",
+   f= "getInFluxes",
    signature(object="NlModel"),
    definition=function(object){
        return(object@inputFluxes)
@@ -172,7 +172,7 @@ setMethod(
 )
 #################################################
 setMethod(
-   f= "getDecompositionOperator",
+   f= "getDecompOp",
       signature= "NlModel",
       definition=function(object){
       ### This method creates a particle simulator 

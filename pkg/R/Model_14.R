@@ -52,8 +52,8 @@ correctnessOfModel14=function#check for unreasonable input parameters to Model c
 # first check the Model14 specific issues
 supported_formats=c("Delta14C","AbsoluteFractionModern")
 atm_c14=object@c14Fraction
-if (class(atm_c14)!="FcAtm"){
-   stop(simpleError("The object describing the atmospheric c_14 fraction must be of class FcAtm. This is a subclass of TimeMap additionally containing information about the format in which the values are given"))
+if (class(atm_c14)!="BoundFc"){
+   stop(simpleError("The object describing the atmospheric c_14 fraction must be of class BoundFc. This is a subclass of TimeMap additionally containing information about the format in which the values are given"))
 }
 f=atm_c14@format
 if (!any(grepl(f,supported_formats))){
@@ -77,7 +77,7 @@ tA_max=getTimeRange(atm_c14)["t_max"]
 res=correctnessOfModel(object)
 }
 
-##########################################################
+#------------------------------------------------------------------------------------
 
     ### defines a representation of a 14C model
 setClass(# Model_14
@@ -85,12 +85,13 @@ setClass(# Model_14
     contains="Model",
     representation=representation(
         #"Model",                          
-        c14Fraction="TimeMap",
+        c14Fraction="BoundFc",
         c14DecayRate="numeric",
-        initialValF="SoilR.F0"
+        initialValF="ConstFc"
     ) , 
     validity=correctnessOfModel14 #set the validating function
 )
+#-------------------------------Constructors -----------------------------------------------------
 setMethod(
     f="initialize",
     signature=c("Model_14"),
@@ -105,7 +106,7 @@ setMethod(
     ## (see the help pages for initialize and initialize-methods for details)  
     
     ## All other constructors of class \code{Model_14} have to call \code{new("Model_14,..) at some point and thus call this method indirectly. 
-    ## Accordingly this method is the place to perform checks all objects of class \code{Model_14} should pass.
+    ## Accordingly this method is the place to perform those checks \emph{all} objects of class \code{Model_14} should pass.
     ## Some of those checks are explained in the examples below.
     ## In some (rare) circumstances it might be necessary to override the checks and force the object to be created 
     ## although it does not seem meaningfull to the internal sanity checks. 
@@ -113,29 +114,29 @@ setMethod(
     (
         .Object,              ##<< the Model_14 object itself
         times=c(0,1),         ##<< The points in time where the solution is sought 
-        mat=new("ConstantDecompositionOperator",     
+        mat=new("ConstLinDecompOp",     
                     matrix(nrow=1,ncol=1,0)
         )                     ##<< A decomposition Operator of some kind 
         ,
         initialValues=numeric()
         ,
-        initialValF=new(Class="SoilR.F0",values=c(0),format="Delta14C")      ##<< An object of class SoilR.F0 containing a vector with the initial values of the radiocarbon fraction for each pool and a format string describing in which format the values are given.
+        initialValF=new(Class="ConstFc",values=c(0),format="Delta14C")      ##<< An object of class ConstFc containing a vector with the initial values of the radiocarbon fraction for each pool and a format string describing in which format the values are given.
         ,
-        inputFluxes= TimeMap.new(
+        inputFluxes= BoundInFlux.new(
             0,
             1,
             function(t){
                 return(matrix(nrow=1,ncol=1,1))
             }
-        ) ##<< A TimeMap object consisting of a vector valued function describing the inputs to the pools as funtions of time \code{\link{TimeMap-class}}.
+        )
         ,
-        c14Fraction=TimeMap.new(
-            0,
-            1,
+        c14Fraction=BoundFc(
             function(t){
                 return(matrix(nrow=1,ncol=1,1))
-            }
-        )   ##<< A TimeMap object consisting of  a function describing the fraction of C_14 in per mille.
+            },
+            0,
+            1
+        )   ##<< A BoundFc object consisting of  a function describing the fraction of C_14 in per mille.
         ,
         c14DecayRate=0
         ,
@@ -145,12 +146,54 @@ setMethod(
      ){
         .Object <- callNextMethod(.Object,times,mat,initialValues,inputFluxes,solverfunc,pass=pass)
         .Object@initialValF=initialValF
+
         .Object@c14Fraction=c14Fraction
+         if (class(mat)=="TimeMap"){
+          warning(TimeMapWarningBoundFc())
+            # cast
+            c14Fraction <- BoundFc(c14Fraction)
+         }
         .Object@c14DecayRate=c14DecayRate
         if (pass==FALSE) validObject(.Object) #call of the ispector if not explicitly disabled
         return(.Object)
     }
 )
+#------------------------------------------------------------------------------------
+setMethod(f="Model_14",
+  signature=c(
+    t="numeric",
+    A="ANY",
+    ivList="numeric",
+    initialValF="ANY",
+    inputFluxes="ANY",
+    inputFc="ANY",
+    c14DecayRate="numeric",
+    solverfunc="function",
+    pass="logical"
+  ),
+  definition=function #general  constructor for class Model_14
+  ### This method tries to create an object from any combination of arguments 
+  ### that can be converted into  the required set of building blocks for the Model_14
+  ### for n arbitrarily connected pools.
+  
+  (t,			##<< A vector containing the points in time where the solution is sought.
+   A,			##<< something that can be converted to any of the available DecompositionOperator classes
+   ivList,		##<< A vector containing the initial amount of carbon for the n pools. The length of this vector is equal to the number of pools and thus equal to the length of k. This is checked by an internal  function. 
+   initialValF, ##<< An object of class ConstFc containing a vector with the initial values of the radiocarbon fraction for each pool and a format string describing in which format the values are given.
+   inputFluxes, ##<<  something that can be converted to any of the available InFlux classes
+   inputFc,##<< An object describing the fraction of C_14 in per mille (different formats are possible)
+   c14DecayRate,## << the rate at which C_14 decays radioactivly. If you don't provide a value here we assume the following value: k=-0.0001209681 y^-1 . This has the side effect that all your time related data are treated as if the time unit was year. Thus beside time itself it also  affects decay rates the inputrates and the output 
+   solverfunc=deSolve.lsoda.wrapper,		##<< The function used by to actually solve the ODE system. This can be \code{\link{deSolve.lsoda.wrapper}} or any other user provided function with the same interface. 
+   pass=FALSE  ##<< Forces the constructor to create the model even if it is invalid 
+   )
+  {
+     obj=new(Class="Model_14",t,DecompOp(A),ivList, initialValF,InFlux(inputFluxes),inputFc,c14DecayRate=c14DecayRate,solverfunc=solverfunc,pass=pass)
+     return(obj)
+     ### A model object that can be further queried. 
+     ##seealso<< \code{\link{TwopParallelModel}}, \code{\link{TwopSeriesModel}}, \code{\link{TwopFeedbackModel}} 
+  }
+)
+#------------------------------------------------------------------------------------
 setMethod(
    f= "getC14",
       signature= "Model_14",
@@ -172,7 +215,7 @@ setMethod(
       #get the Inputrate TimeMap 
       itm=object@inputFluxes
       input=getFunctionDefinition(itm)
-      #get the C14 fraction Fctm (which is a subclass of TimeMap  
+      #get the C14 fraction 
       Fctm=object@c14Fraction
       F0=object@initialValF
       # To do the computations we have to convert the atmospheric C14 fraction into 

@@ -5,6 +5,7 @@ RothCModel<-structure(
     ### This function implements the RothC model of Jenkinson et al. It is a wrapper for the more general function \code{\link{GeneralModel}}.
     ##references<< Jenkinson, D. S., S. P. S. Andrew, J. M. Lynch, M. J. Goss, and P. B. Tinker. 1990. The Turnover of Organic Carbon and Nitrogen in Soil. 
     ##Philosophical Transactions: Biological Sciences 329:361-368.
+    ##Sierra, C.A., M. Mueller, S.E. Trumbore. 2012. Models of soil organic matter decomposition: the SoilR package version 1.0. Geoscientific Model Development 5, 1045-1060.
     (t,      ##<< A vector containing the points in time where the solution is sought.
       ks=c(k.DPM=10,k.RPM=0.3,k.BIO=0.66,k.HUM=0.02,k.IOM=0),	##<< A vector of lenght 5 containing the values of the decomposition rates for the different pools
       C0=c(0,0,0,0,2.7),	##<< A vector of length 5 containing the initial amount of carbon for the 5 pools.
@@ -56,7 +57,7 @@ RothCModel<-structure(
         Y=xi[,2]
         fX=splinefun(X,Y)
        }
-      Af=new("LinearDecompositionOperator",
+      Af=new("BoundLinDecompOp",
             t_start,
             t_end,
             function(t){fX(t)*A}

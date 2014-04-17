@@ -5,10 +5,10 @@ test.TimeMapInterface <- function(){
   classNames=c(
     "TimeMap",
     "TransportDecompositionOperator",
-    "LinearDecompositionOperator",
-    "ConstantDecompositionOperator",
-    "TemporaryInputFlux",
-    "FcAtm")
+    "BoundLinDecompOp",
+    "ConstLinDecompOp",
+    "BoundInFlux",
+    "BoundFc")
   methodNames=c(
     "getTimeRange",
     "getFunctionDefinition"

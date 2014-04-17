@@ -12,7 +12,7 @@ test.op=function(){
    timestep=(t_end-t_start)/tn
    t=seq(t_start,t_end,timestep)
    A=new(
-      "ConstantDecompositionOperator",
+      "ConstLinDecompOp",
       matrix(
           nrow=1,
           ncol=1,

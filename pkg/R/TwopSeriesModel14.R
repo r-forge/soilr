@@ -11,7 +11,7 @@ TwopSeriesModel14<-structure(
    In,     ##<< A scalar or a data.frame object specifying the amount of litter inputs by time.
    a21,  ##<< A scalar with the value of the transfer rate from pool 1 to pool 2.
    xi=1,   ##<< A scalar or a data.frame specifying the external (environmental and/or edaphic) effects on decomposition rates. 
-   FcAtm,##<< A Data Frame object containing values of atmospheric Delta14C per time. First column must be time values, second column must be Delta14C values in per mil.
+   inputFc,##<< A Data Frame object containing values of atmospheric Delta14C per time. First column must be time values, second column must be Delta14C values in per mil.
    lambda=-0.0001209681, ##<< Radioactive decay constant. By default lambda=-0.0001209681 y^-1 . This has the side effect that all your time related data are treated as if the time unit was year.
    lag=0, ##<< A (positive) scalar representing a time lag for radiocarbon to enter the system. 
    solver=deSolve.lsoda.wrapper, ##<< A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.
@@ -23,7 +23,7 @@ TwopSeriesModel14<-structure(
     if(length(ks)!=2) stop("ks must be of length = 2")
     if(length(C0)!=2) stop("the vector with initial conditions must be of length = 2")
     
-    if(length(In)==1) inputFluxes=new("TemporaryInputFlux",
+    if(length(In)==1) inputFluxes=new("BoundInFlux",
                                      t_start,
                                      t_stop,
                                      function(t){matrix(nrow=2,ncol=1,c(In,0))}
@@ -32,7 +32,7 @@ TwopSeriesModel14<-structure(
       x=In[,1]  
       y=In[,2]  
       inputFlux=function(t0){as.numeric(spline(x,y,xout=t0)[2])}
-      inputFluxes=new("TemporaryInputFlux",
+      inputFluxes=new("BoundInFlux",
                      min(x),
                      max(x),
                      function(t){matrix(nrow=2,ncol=1,c(inputFlux(t),0))}
@@ -49,7 +49,7 @@ TwopSeriesModel14<-structure(
     A=-abs(diag(ks))
     A[2,1]=a21
     
-    At=new(Class="LinearDecompositionOperator",
+    At=new(Class="BoundLinDecompOp",
            t_start,
            t_stop,
            function(t){
@@ -57,9 +57,9 @@ TwopSeriesModel14<-structure(
            }
            ) 
 
-    Fc=FcAtm.from.Dataframe(FcAtm,lag,format="Delta14C")
+    Fc=BoundFc(inputFc,lag=lag,format="Delta14C")
     
-    mod=GeneralModel_14(t,At,ivList=C0,initialValF=SoilR.F0(F0_Delta14C,"Delta14C"),inputFluxes=inputFluxes,Fc,di=lambda,pass=pass)
+    mod=GeneralModel_14(t,At,ivList=C0,initialValF=ConstFc(F0_Delta14C,"Delta14C"),inputFluxes=inputFluxes,Fc,di=lambda,pass=pass)
     ### A Model Object that can be further queried 
     ##seealso<< \code{\link{TwopParallelModel14}}, \code{\link{TwopFeedbackModel14}} 
   }
@@ -71,7 +71,7 @@ TwopSeriesModel14<-structure(
     
     Ex=TwopSeriesModel14(t=years,ks=c(k1=1/2.8, k2=1/35),
                          C0=c(200,5000), F0_Delta14C=c(0,0),
-                         In=LitterInput, a21=0.1,FcAtm=C14Atm_NH)
+                         In=LitterInput, a21=0.1,inputFc=C14Atm_NH)
     R14m=getF14R(Ex)
     C14m=getF14C(Ex)
     C14t=getF14(Ex)
