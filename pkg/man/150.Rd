@@ -1,36 +1,18 @@
-\name{getFunctionDefinition-methods}
-\docType{methods}
-\alias{getFunctionDefinition-methods}
-\alias{getFunctionDefinition,BoundFc-method}
-\alias{getFunctionDefinition,BoundInFlux-method}
-\alias{getFunctionDefinition,BoundLinDecompOp-method}
-\alias{getFunctionDefinition,ConstLinDecompOp-method}
-\alias{getFunctionDefinition,DecompositionOperator-method}
-\alias{getFunctionDefinition,TimeMap-method}
-\alias{getFunctionDefinition,TransportDecompositionOperator-method}
-\title{ ~~ Methods for Function \code{getFunctionDefinition}  ~~}
-\description{
- ~~ Methods for function \code{getFunctionDefinition} ~~
+\name{getF14R}
+\alias{getF14R}
+\title{Calculates the average radiocarbon fraction weighted by the amount of carbon release}
+\description{This function calculates the average radiocarbon fraction weighted by the amount of carbon release at each time step.}
+\usage{getF14R(object)}\arguments{
+  \item{object}{
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "BoundFc")}}{
-      \code{\link{getFunctionDefinition_method__BoundFc}}  
-    }
-    \item{\code{signature(object = "BoundLinDecompOp")}}{
-      \code{\link{getFunctionDefinition_method__BoundLinDecompOp}}  
-    }
-    \item{\code{signature(object = "ConstLinDecompOp")}}{
-      \code{\link{getFunctionDefinition_method__ConstLinDecompOp}}  
-    }
-    \item{\code{signature(object = "DecompositionOperator")}}{
-      \code{\link{getFunctionDefinition_method__DecompositionOperator}}  
-    }
-    \item{\code{signature(object = "TimeMap")}}{
-      \code{\link{getFunctionDefinition_method__TimeMap}}  
-    }
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

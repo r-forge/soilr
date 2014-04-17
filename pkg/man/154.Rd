@@ -1,10 +1,9 @@
-\name{getFunctionDefinition_method__ConstLinDecompOp}
-\alias{getFunctionDefinition_method__ConstLinDecompOp}
-\title{creates a constant timedependent function and returns it}
-\description{The method creates a timedependent function from the existing matrix describing the operator }
+\name{getFormat_method__BoundFc}
+\alias{getFormat_method__BoundFc}
+\title{extract the format string}
+\description{the function just yields the format as a string}
 \arguments{
-  \item{object}{
-}
+  \item{object}{object of class BoundFc containing imformation about the format that could be Delta14C or AFM (Absolute Fraction Modern) for instance}
 }
 
 

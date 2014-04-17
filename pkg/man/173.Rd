@@ -1,18 +1,18 @@
-\name{getTimeRange}
-\alias{getTimeRange}
-\title{getTimeRange}
-\description{This function returns the time range of the given object. }
-\usage{getTimeRange(object)}\arguments{
-  \item{object}{
+\name{getReleaseFlux14-methods}
+\docType{methods}
+\alias{getReleaseFlux14-methods}
+\alias{getReleaseFlux14,Model_14-method}
+\title{ ~~ Methods for Function \code{getReleaseFlux14}  ~~}
+\description{
+ ~~ Methods for function \code{getReleaseFlux14} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "Model_14")}}{
+      \code{\link{getReleaseFlux14_method__Model_14}}  
+    }
+
+  }
 }
-
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

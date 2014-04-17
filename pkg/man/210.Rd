@@ -1,11 +1,20 @@
-\name{[[-methods}
+\name{summary-methods}
 \docType{methods}
-\alias{[[-methods}
-\alias{[[,MCSim-method}
-\title{ ~~ Methods for Function \code{[[}  ~~}
+\alias{summary-methods}
+\alias{summary,ANY-method}
+\alias{summary,Model-method}
+\alias{summary,NlModel-method}
+\title{ ~~ Methods for Function \code{summary}  ~~}
 \description{
- All methods for function \code{[[} are intended for internal use inside the package only. 
+ ~~ Methods for function \code{summary} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "Model")}}{
+      \code{\link{summary_method__Model}}  
+    }
 
+  }
+}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

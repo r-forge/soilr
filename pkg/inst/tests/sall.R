@@ -3,8 +3,8 @@
 source("prolog.R")
 alltests <- defineTestSuite(
    name="allTests",
-   dirs=c("."),
-   #dirs=c(".","protected"),
+   #dirs=c("."),
+   dirs=c(".","protected"),
    testFileRegexp = "^runit.+\\.[rR]",
    testFuncRegexp = "^test.+",
    rngKind = "Marsaglia-Multicarry",

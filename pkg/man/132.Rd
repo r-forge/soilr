@@ -1,57 +1,39 @@
-\name{getC}
-\alias{getC}
-\title{Calculates the C content of the pools }
-\description{This function computes the carbon content of the pools as function of time}
-\usage{getC(object, as.closures = F)}\arguments{
-  \item{object}{An object of class Model or Model14 created by a call to \code{\link{GeneralModel}} or other model creating functions.}
-  \item{as.closures}{if set to TRUE instead of a matrix a list of functions will be returned.}
+\name{fW.Standcarb}
+\alias{fW.Standcarb}
+\title{Effects of moisture on decomposition rates according to the StandCarb model}
+\description{Calculates the effects of moisture on decomposition rates according to the StandCarb model.}
+\usage{fW.Standcarb(Moist, MatricShape = 5, MatricLag = 0, MoistMin = 30, 
+    MoistMax = 350, DiffuseShape = 15, DiffuseLag = 4)}\arguments{
+  \item{Moist}{A scalar or vector containing values of moisture content of a litter or soil pool (\%).}
+  \item{MatricShape}{A scalar that determines when matric limit is reduced to the point that decay can begin to occur.}
+  \item{MatricLag}{A scalar used to offset the curve to the left or right.}
+  \item{MoistMin}{A scalar determining the minimum moisture content.}
+  \item{MoistMax}{A scalar determining the maximum moisture content without diffusion limitations.}
+  \item{DiffuseShape}{A scalar that determines the range of moisture contents where diffusion is not limiting.}
+  \item{DiffuseLag}{A scalar used to shift the point when moisture begins to limit diffusion.}
 }
-\details{This function takes a Model object, which represents a system of ODEs of the form 
-\deqn{\frac{d \mathbf{C}(t)}{dt} = \mathbf{I}(t) + \mathbf{A}(t) \mathbf{C}(t)}{dC(t)/dt = I(t) + A(t)C(t)} 
-and solves the system for \eqn{\mathbf{C}(t)}{C(t)}. The numerical solver used can be specified in \code{\link{GeneralModel}}.}
-\value{A matrix with m columns representing the number of pools, and n rows representing the time step as specified by the argument
-\code{t} in \code{\link{GeneralModel}} or other model creating function.}
 
+\value{A data frame with limitation due to water potential (MatricLimit), limitation due to oxygen diffusion (DiffuseLimit), and the overall limitation of moisture on decomposition rates (MoistDecayIndex).}
+\references{Harmon, M. E., and J. B. Domingo (2001), A users guide to STANDCARB version 2.0: 
+A model to simulate carbon stores in forest stands. Oregon State University, Corvallis.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
 
 
-\seealso{See examples in \code{\link{GeneralModel}}, \code{\link{GeneralModel_14}}, \code{\link{TwopParallelModel}}, 
-\code{\link{TwopSeriesModel}}, \code{\link{TwopFeedbackModel}}, etc.}
-\examples{# This test function produces the example for testing the function getC
-  t=seq(0,10,by=0.1) 
-  k=0.8
-  C0=100
-  In = 30
-  
-  #Create two models with same arguments but calling two different model creation functions
-  Cmodel=OnepModel(t,k,C0,In)
-  C14model=OnepModel14(t,k,C0,In,F0=0,inputFc=IntCal09)
-  
-  #getC can extract the amount of C from these two type of models
-  Ctmodel=getC(Cmodel)
-  Ctmodel14=getC(C14model)
-  
-  #The output is identical because parameter values are the same
-  plot(t,Ctmodel,type="l")
-  lines(t,Ctmodel14,col=2,lty=2,lwd=2)
-  legend("topright",c("OnepModel output","OnepModel14 output"),col=1:2,lty=1:2,bty="n")
-# This test function produces the example for testing the function getC
-  t=seq(0,10,by=0.1) 
-  k=0.8
-  C0=100
-  In = 30
-  
-  #Create two models with same arguments but calling two different model creation functions
-  Cmodel=OnepModel(t,k,C0,In)
-  C14model=OnepModel14(t,k,C0,In,F0=0,FcAtm=IntCal09)
-  
-  #getC can extract the amount of C from these two type of models
-  Ctmodel=getC(Cmodel)
-  Ctmodel14=getC(C14model)
-  
-  #The output is identical because parameter values are the same
-  plot(t,Ctmodel,type="l")
-  lines(t,Ctmodel14,col=2,lty=2,lwd=2)
-  legend("topright",c("OnepModel output","OnepModel14 output"),col=1:2,lty=1:2,bty="n")}
+
+\examples{
+MC=0:500
+DeadFoliage=fW.Standcarb(MC)
+DeadBranch=fW.Standcarb(MC,MoistMax=200)
+DeadWood=fW.Standcarb(MC,MoistMax=150)
+StableSoil=fW.Standcarb(MC,MoistMin=15,MoistMax=100)
+plot(MC,DeadFoliage$MoistDecayIndex,type="l",xlab="Moisture Content (\%)",
+     ylab="f(W) (unitless)",
+     main="Effects of moisture on decomposition rates according to the StandCarb model")
+lines(MC,DeadBranch$MoistDecayIndex,col=4)
+lines(MC,DeadWood$MoistDecayIndex,col=3)
+lines(MC,StableSoil$MoistDecayIndex,col=2)
+legend("topright",c("Dead Foliage","Dead Branch","Dead Wood","Stable Soil"),
+       lty=c(1,1,1),col=c(1,4,3,2),bty="n")
+}

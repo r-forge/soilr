@@ -1,8 +1,8 @@
-\name{getFunctionDefinition_method__TimeMap}
-\alias{getFunctionDefinition_method__TimeMap}
-\title{getFunctionDefinition method  TimeMap}
-\description{extract the function definition (the R-function) }
-\arguments{
+\name{getFunctionDefinition}
+\alias{getFunctionDefinition}
+\title{getFunctionDefinition}
+\description{Extracts the function definition (the R-function) from the argument}
+\usage{getFunctionDefinition(object)}\arguments{
   \item{object}{
 }
 }

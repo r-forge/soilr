@@ -1,52 +1,57 @@
-\name{IntCal09}
-\alias{IntCal09}
+\name{Hua2013}
+\alias{Hua2013}
 \docType{data}
 \title{
-Northern Hemisphere atmospheric radiocarbon for the pre-bomb period
+Atmospheric radiocarbon for the period 1950-2010 from Hua et al. (2013)
 }
 \description{
-Northern Hemisphere atmospheric radiocarbon calibration curve for the period 0 to 50,000 yr BP. 
+Atmospheric radiocarbon for the period 1950-2010 reported by Hua et al. (2013) for 5 atmospheric zones.
 }
-\usage{data(IntCal09)}
+\usage{data(Hua2013)}
 \format{
-  A data frame with 3522 observations on the following 5 variables.
+  A \link{list} containing 5 data frames, each representing an atmospheric zone. The zones are: 
+  NHZone1: northern hemisphere zone 1, NHZone2: northern hemisphere zone 2,
+  NHZone3: northern hemisphere zone 3, SHZone12: southern hemisphere zones 1 and 2, 
+  SHZone3: southern hemisphere zone 3. Each data frame contains a variable number of observations 
+  on the following 5 variables.
   \describe{
-    \item{\code{CAL.BP}}{Calibrated age in years Before Present (BP).}
-    \item{\code{C14.age}}{C14 age in years BP.}
-    \item{\code{Error}}{Error estimate for \code{C14.age}.}
-    \item{\code{Delta.14C}}{Delta.14C value in per mil.}
-    \item{\code{Sigma}}{Standard deviation of \code{Delta.14C} in per mil.}
+    \item{\code{Year.AD}}{Year AD}
+    \item{\code{mean.Delta14C}}{mean value of atmospheric radiocarbon reported as Delta14C}
+    \item{\code{sd.Delta14C}}{standard deviation of atmospheric radiocarbon reported as Delta14C}
+    \item{\code{mean.F14C}}{mean value of atmospheric radiocarbon reported as fraction modern F14C}
+    \item{\code{sd.F14}}{standard deviation of atmospheric radiocarbon reported as fraction modern F14C}
   }
 }
 \details{
-\code{Deltal.14C} is age-corrected as per Stuiver and Polach (1977). All details about the derivation of this dataset are provided in Reimer et al. (2009).
+This dataset corresponds to Table S3 from Hua et al. (2013). For additional details see the original publication.
 }
-
 \source{
-\url{
-  http://www.radiocarbon.org/IntCal09%20files/intcal09.14c
-  }
+\url{https://journals.uair.arizona.edu/index.php/radiocarbon/article/view/16177}
 }
 \references{
-P. Reimer, M.Baillie, E. Bard, A. Bayliss, J. Beck, P. Blackwell, C. Ramsey, C. Buck, G. Burr, R. Edwards, et al. 2009. IntCal09 and Marine09 radiocarbon age calibration curves, 0 - 50,000 years cal bp. Radiocarbon, 51(4):1111 - 1150.
-
-
-M. Stuiver and H. A. Polach. 1977. Rerporting of C-14 data. Radiocarbon, 19(3):355 - 363.
+Hua Q., M. Barbetti, A. Z. Rakowski. 2013. Atmospheric radiocarbon for the period 1950-2010. Radiocarbon 55(4):2059-2072.
 }
 \examples{
 
-par(mfrow=c(2,1))
-plot(IntCal09$CAL.BP, IntCal09$C14.age, type="l")
-polygon(x=c(IntCal09$CAL.BP,rev(IntCal09$CAL.BP)),
-	y=c(IntCal09$C14.age+IntCal09$Error,rev(IntCal09$C14.age-IntCal09$Error)),
-	col="gray",border=NA)
-lines(IntCal09$CAL.BP,IntCal09$C14.age)
+plot(Hua2013$NHZone1$Year.AD, Hua2013$NHZone1$mean.Delta14C, 
+     type="l",xlab="Year AD",ylab=expression(paste(Delta^14,"C (\u2030)")))
+lines(Hua2013$NHZone2$Year.AD,Hua2013$NHZone2$mean.Delta14C,col=2)
+lines(Hua2013$NHZone3$Year.AD,Hua2013$NHZone3$mean.Delta14C,col=3)
+lines(Hua2013$SHZone12$Year.AD,Hua2013$SHZone12$mean.Delta14C,col=4)
+lines(Hua2013$SHZone3$Year.AD,Hua2013$SHZone3$mean.Delta14C,col=5)
+legend(
+	"topright",
+	c(
+		"Norther hemisphere zone 1",
+		"Norther hemisphere zone 2",
+		"Norther hemisphere zone 3",
+                "Southern hemisphere zones 1 and 2",
+		"Southern Hemispher zone 3"
+	),
+	lty=1,
+	col=1:5,
+	bty="n"
+)
 
-plot(IntCal09$CAL.BP,IntCal09$Delta.14C,type="l")
-polygon(x=c(IntCal09$CAL.BP,rev(IntCal09$CAL.BP)),
-	y=c(IntCal09$Delta.14C+IntCal09$Sigma,rev(IntCal09$Delta.14C-IntCal09$Sigma)),
-	col="gray",border=NA)
-lines(IntCal09$CAL.BP,IntCal09$Delta.14C)
-par(mfrow=c(1,1))
 }
 \keyword{datasets}

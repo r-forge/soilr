@@ -42,21 +42,39 @@ setMethod(
 #---------------------------------------------------------------------
 setMethod(
       f="BoundLinDecompOp",
-      ### 
       signature=c(map="function",starttime="numeric",endtime="numeric",lag="numeric"),
-      definition=function # a constructor for a single function without limits  
-      ### This method creates a BoundLinDecompOp from a timedependent function and a lag only
+      definition=function # a constructor 
+      ### This method creates a BoundLinDecompOp from a timedependent function and its domain 
       (
-        map,
-        starttime,
-        endtime,
-        lag=0
+        map, ##<<a function
+        starttime,##<< the begin of the time domain
+        endtime,##<< the end of the time domain
+        lag ##<< lag time
       ){
-      return(new("BoundLinDecompOp",starttime=starttime,endtime=endtime,map=map))
+      return(new("BoundLinDecompOp",starttime=starttime,endtime=endtime,map=map,lag=lag))
     }
 )
 #---------------------------------------------------------------------
-#There should be an new Class LinDecompOp (without Bound ) for this 
+setMethod(
+      f="BoundLinDecompOp",
+      signature=c(
+        map="function",
+        starttime="numeric",
+        endtime="numeric",
+        lag="missing"
+        ),
+      definition=function # a constructor 
+      ### This method creates a BoundLinDecompOp from a timedependent function and its domain 
+      (
+        map,
+        starttime,
+        endtime
+      ){
+      return(new("BoundLinDecompOp",starttime=starttime,endtime=endtime,map=map,lag=0))
+    }
+)
+#---------------------------------------------------------------------
+#There will be a new Class LinDecompOp (without Bound ) for this 
 #setMethod(
 #      f="BoundLinDecompOp",
 #      ### 

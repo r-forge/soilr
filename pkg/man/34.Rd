@@ -1,20 +1,18 @@
-\name{ConstLinDecompOp_method__matrix}
-\alias{ConstLinDecompOp_method__matrix}
-\title{construct from matric}
-\description{This method creates a ConstLinDecompOp from a matrix
-The operator is assumed to act on the vector of carbon stocks
-by multiplication of the (time invariant) matrix from the left.}
-\arguments{
-  \item{mat}{
+\name{ConstLinDecompOp-methods}
+\docType{methods}
+\alias{ConstLinDecompOp-methods}
+\alias{ConstLinDecompOp,matrix-method}
+\title{ ~~ Methods for Function \code{ConstLinDecompOp}  ~~}
+\description{
+ ~~ Methods for function \code{ConstLinDecompOp} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(mat = "matrix")}}{
+      \code{\link{ConstLinDecompOp_method__matrix}}  
+    }
+
+  }
 }
-
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

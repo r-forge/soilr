@@ -1,18 +1,18 @@
-\name{getF14C-methods}
-\docType{methods}
-\alias{getF14C-methods}
-\alias{getF14C,Model_14-method}
-\title{ ~~ Methods for Function \code{getF14C}  ~~}
-\description{
- ~~ Methods for function \code{getF14C} ~~
+\name{getC_method__Model}
+\alias{getC_method__Model}
+\title{getC method  Model}
+\description{This function computes the value for C for each time and pool. }
+\arguments{
+  \item{object}{
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "Model_14")}}{
-      \code{\link{getF14C_method__Model_14}}  
-    }
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

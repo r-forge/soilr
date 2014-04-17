@@ -1,23 +1,22 @@
-\name{C14Atm}
-\alias{C14Atm}
-\docType{data}
-\title{
-$^{14}C$  fraction in per mille 
+\name{BoundLinDecompOp_method__function_numeric_numeric_missing}
+\alias{BoundLinDecompOp_method__function_numeric_numeric_missing}
+\title{a constructor }
+\description{This method creates a BoundLinDecompOp from a timedependent function and its domain }
+\arguments{
+  \item{map}{
 }
-\description{
-    The usually used data set for the atmospheric value of the $^{14}C$  fraction in per mille
+  \item{starttime}{
 }
-\usage{data(C14Atm)}
-\format{
-  A data frame with 108 observations on the following 2 variables.
-  \describe{
-    \item{\code{V1}}{a numeric vector}
-    \item{\code{V2}}{a numeric vector}
-  }
+  \item{endtime}{
 }
-\examples{
-#Notice that C14Atm is a shorter version of C14Atm_NH
-plot(C14Atm_NH,type="l")
-lines(C14Atm,col=2)
 }
-\keyword{datasets}
+
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

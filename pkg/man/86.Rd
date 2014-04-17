@@ -1,18 +1,18 @@
-\name{TwopFeedbackModel}
-\alias{TwopFeedbackModel}
-\title{Implementation of a two pool model with feedback structure}
-\description{This function creates a model for two pools connected with feedback. It is a wrapper for the more general function \code{\link{GeneralModel}}.}
-\usage{TwopFeedbackModel(t, ks, a21, a12, C0, In, xi = 1, solver = deSolve.lsoda.wrapper, 
+\name{ThreepSeriesModel}
+\alias{ThreepSeriesModel}
+\title{Implementation of a three pool model with series structure}
+\description{This function creates a model for three pools connected in series. It is a wrapper for the more general function \code{\link{GeneralModel}}.}
+\usage{ThreepSeriesModel(t, ks, a21, a32, C0, In, xi = 1, solver = deSolve.lsoda.wrapper, 
     pass = FALSE)}\arguments{
   \item{t}{A vector containing the points in time where the solution is sought.}
-  \item{ks}{A vector of length 2 with the values of the decomposition rate for pools 1 and 2.}
+  \item{ks}{A vector of lenght 3 containing the values of the decomposition rates for pools 1, 2, and 3.}
   \item{a21}{A scalar with the value of the transfer rate from pool 1 to pool 2.}
-  \item{a12}{A scalar with the value of the transfer rate from pool 2 to pool 1.}
-  \item{C0}{A vector of length 2 containing the initial amount of carbon for the 2 pools.}
-  \item{In}{A data.frame object specifying the amount of litter inputs by time.}
+  \item{a32}{A scalar with the value of the transfer rate from pool 2 to pool 3.}
+  \item{C0}{A vector of length 3 containing the initial amount of carbon for the 3 pools.}
+  \item{In}{A scalar or data.frame object specifying the amount of litter inputs by time.}
   \item{xi}{A scalar or data.frame object specifying the external (environmental and/or edaphic) effects on decomposition rates.}
   \item{solver}{A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.}
-  \item{pass}{if TRUE forces the constructor to create the model even if it is invalid}
+  \item{pass}{if TRUE Forces the constructor to create the model even if it is invalid}
 }
 
 \value{A Model Object that can be further queried }
@@ -22,48 +22,59 @@
 
 
 
-\seealso{\code{\link{TwopParallelModel}}, \code{\link{TwopSeriesModel}} }
+\seealso{\code{\link{ThreepParallelModel}}, \code{\link{ThreepFeedbackModel}} }
 \examples{
+t_start=0 
+t_end=10 
+tn=50
+timestep=(t_end-t_start)/tn 
+t=seq(t_start,t_end,timestep) 
+ks=c(k1=0.8,k2=0.4,k3=0.2)
+C0=c(C10=100,C20=150, C30=50)
+In = 50
 
-#This example show the difference between the three types of two-pool models  
-times=seq(0,20,by=0.1)
-ks=c(k1=0.8,k2=0.00605)
-C0=c(C10=5,C20=5)
-  
-Temp=rnorm(times,15,2)
-WC=runif(times,10,20)
-TempEffect=data.frame(times,fT=fT.Daycent1(Temp))
-MoistEffect=data.frame(times, fW=fW.Daycent2(WC)[2])
+Ex1=ThreepSeriesModel(t=t,ks=ks,a21=0.5,a32=0.2,C0=C0,In=In,xi=fT.Q10(15))
+Ct=getC(Ex1)
+Rt=getReleaseFlux(Ex1)
 
-Inmean=1
-InRand=data.frame(times,Random.inputs=rnorm(length(times),Inmean,0.2))
-InSin=data.frame(times,Inmean+0.5*sin(times*pi*2))
-      
-Parallel=TwopParallelModel(t=times,ks=ks,C0=C0,In=Inmean,gam=0.9,
-                           xi=(fT.Daycent1(15)*fW.Demeter(15)))
-Series=TwopSeriesModel(t=times,ks=ks,a21=0.2*ks[1],C0=C0,In=InSin,
-                       xi=(fT.Daycent1(15)*fW.Demeter(15)))
-Feedback=TwopFeedbackModel(t=times,ks=ks,a21=0.2*ks[1],a12=0.5*ks[2],C0=C0,
-                           In=InRand,xi=MoistEffect)
+plot(t,rowSums(Ct),type="l",ylab="Carbon stocks (arbitrary units)",
+     xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Ct[1,]))) 
+lines(t,Ct[,1],col=2)
+lines(t,Ct[,2],col=4)
+lines(t,Ct[,3],col=3)
+legend("topright",c("Total C","C in pool 1", "C in pool 2","C in pool 3"),
+       lty=c(1,1,1,1),col=c(1,2,4,3),lwd=c(2,1,1,1),bty="n")
 
-CtP=getC(Parallel)
-CtS=getC(Series)
-CtF=getC(Feedback)
+plot(t,rowSums(Rt),type="l",ylab="Carbon released (arbitrary units)",
+     xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Rt[1,]))) 
+lines(t,Rt[,1],col=2)
+lines(t,Rt[,2],col=4)
+lines(t,Rt[,3],col=3)
+legend("topright",c("Total C release","C release from pool 1",
+                    "C release from pool 2","C release from pool 3"),
+       lty=c(1,1,1,1),col=c(1,2,4,3),lwd=c(2,1,1,1),bty="n")
 
-RtP=getReleaseFlux(Parallel)
-RtS=getReleaseFlux(Series)
-RtF=getReleaseFlux(Feedback)
+Inr=data.frame(t,Random.inputs=rnorm(length(t),50,10))
+plot(Inr,type="l")
 
-par(mfrow=c(2,1),mar=c(4,4,1,1))
-plot(times,rowSums(CtP),type="l",ylim=c(0,20),ylab="Carbon stocks (arbitrary units)",xlab=" ")
-lines(times,rowSums(CtS),col=2)
-lines(times,rowSums(CtF),col=3)
-legend("topleft",c("Two-pool Parallel","Two-pool Series","Two-pool Feedback"),
-       lty=c(1,1,1),col=c(1,2,3),bty="n")
-      
-plot(times,rowSums(RtP),type="l",ylim=c(0,3),ylab="Carbon release (arbitrary units)", xlab="Time")
-lines(times,rowSums(RtS),col=2)
-lines(times,rowSums(RtF),col=3)
-par(mfrow=c(1,1))
+Ex2=ThreepSeriesModel(t=t,ks=ks,a21=0.5,a32=0.2,C0=C0,In=Inr)
+Ctr=getC(Ex2)
+Rtr=getReleaseFlux(Ex2)
 
+plot(t,rowSums(Ctr),type="l",ylab="Carbon stocks (arbitrary units)",
+     xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Ctr[1,]))) 
+lines(t,Ctr[,1],col=2)
+lines(t,Ctr[,2],col=4)
+lines(t,Ctr[,3],col=3)
+legend("topright",c("Total C","C in pool 1", "C in pool 2","C in pool 3"),
+       lty=c(1,1,1,1),col=c(1,2,4,3),lwd=c(2,1,1,1),bty="n")
+
+plot(t,rowSums(Rtr),type="l",ylab="Carbon released (arbitrary units)",
+     xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Rtr[1,]))) 
+lines(t,Rtr[,1],col=2)
+lines(t,Rtr[,2],col=4)
+lines(t,Rtr[,3],col=3)
+legend("topright",c("Total C release","C release from pool 1",
+                    "C release from pool 2","C release from pool 3"),
+       lty=c(1,1,1,1),col=c(1,2,4,3),lwd=c(2,1,1,1),bty="n")
 }

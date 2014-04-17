@@ -1,52 +1,83 @@
-\name{IntCal13}
-\alias{IntCal13}
-\docType{data}
-\title{
-Atmospheric radiocarbon for the 0-50,000 yr BP period
-}
-\description{
-Atmospheric radiocarbon calibration curve for the period 0 to 50,000 yr BP. This is the most recent update to the internationally agreed calibration curve and superseds \code{\link{IntCal09}}.
-}
-\usage{data(IntCal13)}
-\format{
-  A data frame with 5140 observations on the following 5 variables.
-  \describe{
-    \item{\code{CAL.BP}}{Calibrated age in years Before Present (BP).}
-    \item{\code{C14.age}}{C14 age in years BP.}
-    \item{\code{Error}}{Error estimate for \code{C14.age}.}
-    \item{\code{Delta.14C}}{Delta.14C value in per mil.}
-    \item{\code{Sigma}}{Standard deviation of \code{Delta.14C} in per mil.}
-  }
-}
-\details{
-\code{Deltal.14C} is age-corrected as per Stuiver and Polach (1977). All details about the derivation of this dataset are provided in Reimer et al. (2013).
+\name{ICBMModel}
+\alias{ICBMModel}
+\title{Implementation of the Introductory Carbon Balance Model (ICBM)}
+\description{This function is an implementation of the Introductory Carbon Balance Model (ICBM).
+This is simply a two pool model connected in series.}
+\usage{ICBMModel(t, ks = c(k1 = 0.8, k2 = 0.00605), h = 0.13, r = 1.32, 
+    c0 = c(Y0 = 0.3, O0 = 3.96), In = 0, solver = deSolve.lsoda.wrapper, 
+    pass = FALSE)}\arguments{
+  \item{t}{A vector containing the points in time where the solution is sougth.}
+  \item{ks}{A vector of length 2 with the decomposition rates for the young and the old pool.}
+  \item{h}{Humufication coefficient (transfer rate from young to old pool).}
+  \item{r}{External (environmental or edaphic) factor.}
+  \item{c0}{A vector of length 2 with the initial value of carbon stocks in the young and old pool.}
+  \item{In}{Mean annual carbon input to the soil.}
+  \item{solver}{A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.}
+  \item{pass}{if TRUE forces the constructor to create the model even if it is invalid}
 }
 
-\source{
-\url{
-  http://www.radiocarbon.org/IntCal13%20files/intcal13.14c
-  }
-}
-\references{
-Reimer PJ, Bard E, Bayliss A, Beck JW, Blackwell PG, Bronk Ramsey C, Buck CE,
-Cheng H, Edwards RL, Friedrich M, Grootes PM, Guilderson TP, Haflidason H, 
-Hajdas I, Hatte C, Heaton TJ, Hogg AG, Hughen KA, Kaiser KF, Kromer B, 
-Manning SW, Niu M, Reimer RW, Richards DA, Scott EM, Southon JR, Turney CSM,
-van der Plicht J. 2013. IntCal13 and MARINE13 radiocarbon age calibration curves 0-50000 years calBP. Radiocarbon 55(4): 1869-1887. DOI: 10.2458/azu_js_rc.55.16947
+
+\references{Andren, O. and T. Katterer. 1997. ICBM: The Introductory Carbon Balance Model 
+for Exploration of Soil Carbon Balances. Ecological Applications 7:1226-1236.}
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
 
 
-M. Stuiver and H. A. Polach. 1977. Rerporting of C-14 data. Radiocarbon, 19(3):355 - 363.
-}
+
+\seealso{\code{\link{TwopSeriesModel}} }
 \examples{
+# This example reproduces the simulations 
+# presented in Table 1 of Andren and Katterer (1997).
+# First, the model is run for different values of the 
+# parameters representing different field experiments. 
+times=seq(0,20,by=0.1)
+Bare=ICBMModel(t=times) #Bare fallow
+pNpS=ICBMModel(t=times, h=0.125, r=1,    c0=c(0.3,4.11),  In=0.19+0.095) #+N +Straw
+mNpS=ICBMModel(t=times, h=0.125, r=1.22, c0=c(0.3, 4.05), In=0.19+0.058) #-N +Straw
+mNmS=ICBMModel(t=times, h=0.125, r=1.17, c0=c(0.3, 3.99), In=0.057) #-N -Straw
+pNmS=ICBMModel(t=times, h=0.125, r=1.07, c0=c(0.3, 4.02), In=0.091) #+N -Straw
+FM=ICBMModel(t=times, h=0.250, r=1.10, c0=c(0.3, 3.99), In=0.19+0.082) #Manure
+SwS=ICBMModel(t=times, h=0.340, r=0.97, c0=c(0.3, 4.14), In=0.19+0.106) #Sewage Sludge
+SS=ICBMModel(t=times, h=0.125, r=1.00, c0=c(0.25, 4.16), In=0.2)  #Steady State
 
+#The amount of carbon for each simulation is recovered with the function getC
+CtBare=getC(Bare)
+CtpNpS=getC(pNpS)
+CtmNpS=getC(mNpS)
+CtmNmS=getC(mNmS)
+CtpNmS=getC(pNmS)
+CtFM=getC(FM)
+CtSwS=getC(SwS)
+CtSS=getC(SS)
 
-     plot(IntCal13$CAL.BP,IntCal13$C14.age-IntCal13$Error,type="l",col=2,
-          xlab="cal BP",ylab="14C BP")
-     lines(IntCal13$CAL.BP,IntCal13$C14.age+IntCal13$Error,col=2)
-
-     plot(IntCal13$CAL.BP,IntCal13$Delta.14C+IntCal13$Sigma,type="l",col=2,
-          xlab="cal BP",ylab="Delta14C")
-     lines(IntCal13$CAL.BP,IntCal13$Delta.14C-IntCal13$Sigma,col=2)
-
+#This plot reproduces Figure 1 in Andren and Katterer (1997)
+plot(times,
+  rowSums(CtBare),
+  type="l",
+  ylim=c(0,8),
+  xlim=c(0,20),
+  ylab="Topsoil carbon mass (kg m-2)",
+  xlab="Time (years)"
+)
+lines(times,rowSums(CtpNpS),lty=2)
+lines(times,rowSums(CtmNpS),lty=3)
+lines(times,rowSums(CtmNmS),lty=4)
+lines(times,rowSums(CtpNmS),lwd=2)
+lines(times,rowSums(CtFM),lty=2,lwd=2)
+lines(times,rowSums(CtSwS),lty=3,lwd=2)
+#lines(times,rowSums(CtSS),lty=4,lwd=2)
+legend("topleft",
+  c("Bare fallow",
+    "+N +Straw",
+    "-N +Straw",
+    "-N -Straw",
+    "+N -Straw",
+    "Manure",
+   "Sludge"
+  ),
+  lty=c(1,2,3,4,1,2,3),
+  lwd=c(1,1,1,1,2,2,2),
+  bty="n"
+)
+ 
 }
-\keyword{datasets}

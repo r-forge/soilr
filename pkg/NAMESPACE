@@ -80,7 +80,9 @@ Yasso07Model,
 bind.C14curves,
 ConstLinDecompOp,
 BoundLinDecompOp,
-BoundFc
+BoundFc,
+Model,
+Model_14
 )
 exportClasses(
 Model,
@@ -89,6 +91,7 @@ TimeMap,
 ConstLinDecompOp,
 BoundLinDecompOp,
 DecompositionOperator,
+DecompOp,
 BoundFc
 )
 exportMethods(

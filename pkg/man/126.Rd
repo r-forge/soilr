@@ -1,18 +1,16 @@
-\name{fW.Skopp}
-\alias{fW.Skopp}
-\title{Effects of moisture on decomposition rates according to the function proposed by Skopp et al. 1990}
-\description{Calculates the effects of relative soil water content on decomposition rates.}
-\usage{fW.Skopp(rwc, alpha = 2, beta = 2, f = 1.3, g = 0.8)}\arguments{
-  \item{rwc}{relative water content}
-  \item{alpha}{Empirical parameter}
-  \item{beta}{Empirical parameter}
-  \item{f}{Empirical parameter}
-  \item{g}{Empirical parameter}
+\name{fW.Daycent2}
+\alias{fW.Daycent2}
+\title{Effects of moisture on decomposition rates according to the DAYCENT model}
+\description{Calculates the effects of volumetric water content on decomposition rates according to the Daycent/Century models.}
+\usage{fW.Daycent2(W, WP = 0, FC = 100)}\arguments{
+  \item{W}{A scalar or vector of volumetric water content in percentage.}
+  \item{WP}{A scalar representing the wilting point in percentage.}
+  \item{FC}{A scalar representing the field capacity in percentage.}
 }
 
-
-\references{J. Skopp, M. D. Jawson, and J. W. Doran. 1990.
-Steady-state aerobic microbial activity as a function of soil water content. Soil Sci. Soc. Am. J., 54(6):1619-1625}
+\value{A data frame with values of relative water content (RWC) and the effects of RWC on decomposition rates (fRWC).}
+\references{Del Grosso, S. J., W. J. Parton, A. R. Mosier, E. A. Holland, E. Pendall, D. S. Schimel, and D. S. Ojima (2005), 
+Modeling soil CO2 emissions from ecosystems, Biogeochemistry, 73(1), 71-91.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -20,8 +18,7 @@ Steady-state aerobic microbial activity as a function of soil water content. Soi
 
 
 \examples{
-th=seq(0,1,0.01)
-xi=fW.Skopp(rwc=th)
-plot(th,xi,type="l",main="Effects of soil water content on decomposition rates",
-     xlab="Relative water content",ylab=expression(xi))
+W=10:90
+fW=fW.Daycent2(W,WP=10,FC=90)
+plot(fW,type="l",ylim=c(0,6)) #This plot reproduces Figure 1b, in del Grosso et al. (2005)
 }

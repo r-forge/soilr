@@ -1,16 +1,14 @@
-\name{fT.linear}
-\alias{fT.linear}
-\title{Effects of temperature on decomposition rates according to a linear model}
-\description{Calculates the effects of temperature on decomposition rates according to a linear model.}
-\usage{fT.linear(Temp, a = 0.198306, b = 0.036337)}\arguments{
-  \item{Temp}{A scalar or vector containing values of temperature for which the effects on decomposition rates are calculated.}
-  \item{a}{A scalar defining the intercept of the linear function.}
-  \item{b}{A scalar defining the slope of the linear function.}
+\name{fT.KB}
+\alias{fT.KB}
+\title{Effects of temperature on decomposition rates according to a model proposed by M. Kirschbaum (1995)}
+\description{Calculates the effects of temperature on decomposition rates according to a model proposed by Kirschbaum (1995).}
+\usage{fT.KB(Temp)}\arguments{
+  \item{Temp}{a scalar or vector containing values of soil temperature for which the effects on decomposition rates are calculated}
 }
 
 \value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
-\references{Adair, E. C., W. J. Parton, S. J. D. Grosso, W. L. Silver, M. E. Harmon, S. A. Hall, I. C. Burke, and S. C. Hart. 2008. 
-Simple three-pool model accurately describes patterns of long-term litter decomposition in diverse climates. Global Change Biology 14:2636-2660.}
+\references{Kirschbaum, M. U. F. (1995), The temperature dependence of soil organic matter decomposition,
+and the effect of global warming on soil organic C storage, Soil Biology and Biochemistry, 27(6), 753-760.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -19,6 +17,6 @@ Simple three-pool model accurately describes patterns of long-term litter decomp
 
 \examples{
 Temperature=0:50
-plot(Temperature,fT.linear(Temperature),type="l",ylab="f(T) (unitless)", 
-     main="Effects of temperature on decomposition rates according to a linear function")
+plot(Temperature,fT.KB(Temperature),type="l",ylab="f(T) (unitless)", 
+     main="Effects of temperature on decomposition rates according to the Kirschbaum function")
 }

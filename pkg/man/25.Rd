@@ -1,9 +1,16 @@
-\name{BoundLinDecompOp_method__TimeMap_missing_missing_missing}
-\alias{BoundLinDecompOp_method__TimeMap_missing_missing_missing}
-\title{create a BoundLinDecompOp from a TimeMap}
-\description{The method is used internally to convert TimeMap objects to BoundLinDecompOp where the use of TimeMap is now deprecated.}
-\arguments{
+\name{BoundLinDecompOp}
+\alias{BoundLinDecompOp}
+\title{Generic constructor}
+\description{Creates a LinearDecompositonOperator from different sources.
+Please look at the methods to see what kind of input is supported. }
+\usage{BoundLinDecompOp(map, starttime, endtime, lag)}\arguments{
   \item{map}{
+}
+  \item{starttime}{
+}
+  \item{endtime}{
+}
+  \item{lag}{
 }
 }
 

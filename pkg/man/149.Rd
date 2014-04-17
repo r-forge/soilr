@@ -1,17 +1,18 @@
-\name{getFormat_method__BoundFc}
-\alias{getFormat_method__BoundFc}
-\title{extract the format string}
-\description{the function just yields the format as a string}
-\arguments{
-  \item{object}{object of class BoundFc containing imformation about the format that could be Delta14C or AFM (Absolute Fraction Modern) for instance}
+\name{getF14R-methods}
+\docType{methods}
+\alias{getF14R-methods}
+\alias{getF14R,Model_14-method}
+\title{ ~~ Methods for Function \code{getF14R}  ~~}
+\description{
+ ~~ Methods for function \code{getF14R} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "Model_14")}}{
+      \code{\link{getF14R_method__Model_14}}  
+    }
 
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+  }
+}
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

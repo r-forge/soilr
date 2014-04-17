@@ -1,19 +1,24 @@
-\name{ConstFc}
-\alias{ConstFc}
-\title{creates an object containing the initial values for the 14C fraction needed to create models in SoilR}
-\description{The function returns an object of class ConstFc which is a building block for any 14C model in SoilR.
-The building blocks of a model have to keep iformation about the formats their data are in, because the high level function dealing wiht the models have to know. This function is actually a convienient wrapper for a call to R's standard constructor new, to hide its complexity from the user.}
-\usage{ConstFc(values = c(0), format = "Delta14C")}\arguments{
-  \item{values}{a numeric vector}
-  \item{format}{a character string describing the format e.g. "Delta14C"}
+\name{C14Atm}
+\alias{C14Atm}
+\docType{data}
+\title{
+Atmospheric 14C fraction
 }
-
-\value{An object of class ConstFc that contains data and a format description that can later be used to convert the data into other formats if the conversion is implemented.}
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\description{
+    Atmospheric 14C fraction in units of Delta14C for the bomb period in the northern hemisphere. 
+}
+\usage{data(C14Atm)}
+\format{
+  A data frame with 108 observations on the following 2 variables.
+  \describe{
+    \item{\code{V1}}{a numeric vector}
+    \item{\code{V2}}{a numeric vector}
+  }
+}
+\note{This function will be deprecated soon. Please use \link{C14Atm_NH} or \link{Hua2013} instead.}
+\examples{
+#Notice that C14Atm is a shorter version of C14Atm_NH
+plot(C14Atm_NH,type="l")
+lines(C14Atm,col=2)
+}
+\keyword{datasets}

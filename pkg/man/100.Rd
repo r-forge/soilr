@@ -1,49 +1,46 @@
-\name{bacwaveModel}
-\alias{bacwaveModel}
-\title{Implementation of the microbial model Bacwave (bacterial waves)}
-\description{This function implements the microbial model Bacwave (bacterial waves), a two-pool model with a bacterial and a substrate pool. It is a special case of the general nonlinear model.}
-\usage{bacwaveModel(t, umax = 0.063, ks = 3, theta = 0.23, Dmax = 0.26, 
-    kd = 14.5, kr = 0.4, Y = 0.44, ival = c(S0 = 0.5, X0 = 1.5), 
-    BGF = 0.15, ExuM = 8, ExuT = 0.8)}\arguments{
-  \item{t}{vector of times (in hours) to calculate a solution.}
-  \item{umax}{a scalar representing the maximal relative growth rate of bacteria (hr-1)}
-  \item{ks}{a scalar representing the substrate constant for growth (ug C /ml soil solution)}
-  \item{theta}{a scalar representing soil water content (ml solution/cm3 soil)}
-  \item{Dmax}{a scalar representing the maximal relative death rate of bacteria (hr-1)}
-  \item{kd}{a scalar representing the substrate constant for death of bacteria (ug C/ml soil solution)}
-  \item{kr}{a scalar representing the fraction of death biomass recycling to substrate (unitless)}
-  \item{Y}{a scalar representing the yield coefficient for bacteria (ug C/ugC)}
-  \item{ival}{a vector of length 2 with the initial values for the substrate and the bacterial pools (ug C/cm3)}
-  \item{BGF}{a scalar representing the constant background flux of substrate (ug C/cm3 soil/hr)}
-  \item{ExuM}{a scalar representing the maximal exudation rate (ug C/(hr cm3 soil))}
-  \item{ExuT}{a scalar representing the  time constant for exudation, responsible for duration of exudation (1/hr).}
+\name{YassoModel}
+\alias{YassoModel}
+\title{Implementation of the Yasso model.}
+\description{This function creates a model for seven pools as described in Liski et al. (2005). Model not yet implemented due to lack of data in original publication: values of vector p not completely described in paper. 0.1 was assumed. }
+\usage{YassoModel(t, ks = c(a_fwl = 0.54, a_cwl = 0.03, k_ext = 0.48, 
+    k_cel = 0.3, k_lig = 0.22, k_hum1 = 0.012, k_hum2 = 0.0012), 
+    p = c(fwl_ext = 0.1, cwl_ext = 0.1, fwl_cel = 0.1, cwl_cel = 0.1, 
+        fwl_lig = 0.1, cwl_lig = 0.1, pext = 0.05, pcel = 0.24, 
+        plig = 0.77, phum1 = 0.51), C0, In = c(u_fwl = 0.0758, 
+        u_cwl = 0.0866, u_nwl_cnwl_ext = 0.251 * 0.3, u_nwl_cnwl_cel = 0.251 * 
+            0.3, u_nwl_cnwl_lig = 0.251 * 0.3, 0, 0), xi = 1, 
+    solver = deSolve.lsoda.wrapper, pass = FALSE)}\arguments{
+  \item{t}{A vector containing the points in time where the solution is sought.}
+  \item{ks}{A vector of lenght 7 containing the values of the exposure and decomposition rates for each pool.}
+  \item{p}{A vector of containing transfer coefficients among different pools.}
+  \item{C0}{A vector containing the initial amount of carbon for the 7 pools. The length of this vector must be 7.}
+  \item{In}{A vector of constatn litter inputs.}
+  \item{xi}{A scalar or data.frame object specifying the external (environmental and/or edaphic) effects on decomposition rates.}
+  \item{solver}{A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.}
+  \item{pass}{if TRUE forces the constructor to create the model even if it is invalid}
 }
-\details{This implementation containts default parameters presented in Zelenev et al. (2000). It produces nonlinear damped oscillations in the form of a stable focus.}
-\value{An object of class NlModel that can be further queried.}
-\references{Zelenev, V.V., A.H.C. van Bruggen, A.M. Semenov. 2000. ``BACWAVE,'' a spatial-temporal model for traveling waves of bacterial populations
-in response to a moving carbon source in soil. Microbail Ecology 40: 260-272.}
+
+\value{A Model Object that can be further queried }
+\references{Liski, J., Palosuo, T., Peltoniemi, M., and Sievanen, R. (2005).
+Carbon and decomposition model Yasso for forest soils. Ecological Modelling, 189:168-182.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
 
 
-
+\seealso{\code{\link{ThreepParallelModel}}, \code{\link{ThreepSeriesModel}}}
 \examples{
-  
-hours=seq(0,800,0.1)
+years=seq(0,500,0.5) 
+C0=rep(100,7)
 
-#Run the model with default parameter values
-bcmodel=bacwaveModel(t=hours)
-Cpools=getC(bcmodel)
+Ex1=YassoModel(t=years,C0=C0)
+Ct=getC(Ex1)
+Rt=getReleaseFlux(Ex1)
 
-#Time solution
-matplot(hours,Cpools,type="l",ylab="Concentrations",xlab="Hours",lty=1,ylim=c(0,max(Cpools)*1.2))
-legend("topleft",c("Substrate", "Microbial biomass"),lty=1,col=c(1,2),bty="n")
+plotCPool(years,Ct,col=1:7,xlab="years",ylab="C pool",ylim=c(0,200))
+legend("topright",c("fwl","cwl","ext","cel","lig","hum1","hum2"),lty=1,col=1:7,bty="n")
 
-#State-space diagram
-plot(Cpools[,2],Cpools[,1],type="l",ylab="Substrate",xlab="Microbial biomass")
-
-#Microbial biomass over time
-plot(hours,Cpools[,2],type="l",col=2,xlab="Hours",ylab="Microbial biomass")
+plotCPool(years,Rt,col=1:7,xlab="years",ylab="Respiration",ylim=c(0,50))
+legend("topright",c("fwl","cwl","ext","cel","lig","hum1","hum2"),lty=1,col=1:7,bty="n")
 
 }

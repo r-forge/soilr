@@ -1,17 +1,15 @@
-\name{fT.Century1}
-\alias{fT.Century1}
-\title{Effects of temperature on decomposition rates according the the CENTURY model}
-\description{Calculates the effects of temperature on decomposition rates according to the CENTURY model.}
-\usage{fT.Century1(Temp, Tmax = 45, Topt = 35)}\arguments{
-  \item{Temp}{A scalar or vector containing values of temperature for which the effects on decomposition rates are calculated.}
-  \item{Tmax}{A scalar defining the maximum temperature in degrees C.}
-  \item{Topt}{A scalar defining the optimum temperature for the decomposition process in degrees C.}
+\name{bind.C14curves}
+\alias{bind.C14curves}
+\title{Binding of pre- and post-bomb Delta14C curves}
+\description{This function takes a pre- and a post-bomb curve, binds them together, and reports the results back either in years BP or AD.}
+\usage{bind.C14curves(prebomb, postbomb, time.scale)}\arguments{
+  \item{prebomb}{A pre-bomb radiocarbon dataset. They could be either \code{\link{IntCal09}} or \code{\link{IntCal13}}.}
+  \item{postbomb}{A post-bomb radiocarbon dataset. They could be any of the datasets in \code{\link{Hua2013}}.}
+  \item{time.scale}{A character indicating whether to report the results in years before present \code{BP} or anno domini \code{AD}.}
 }
 
-\value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
-\references{Burke, I. C., J. P. Kaye, S. P. Bird, S. A. Hall, R. L. McCulley, and G. L. Sommerville. 2003. 
-Evaluating and testing models of terrestrial biogeochemistry: the role of temperature in controlling decomposition. 
-Pages 235-253 in C. D. Canham, J. J. Cole, and W. K. Lauenroth, editors. Models in ecosystem science. Princeton University Press, Princeton.}
+\value{A \code{data.frame} with 3 columns: years in AD or BP, the atmospheric Delta14C value, the standard deviation of the Delta14C value.}
+
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -19,7 +17,16 @@ Pages 235-253 in C. D. Canham, J. J. Cole, and W. K. Lauenroth, editors. Models 
 
 
 \examples{
-Temperature=0:50
-plot(Temperature,fT.Century1(Temperature),type="l",ylab="f(T) (unitless)",
-     main="Effects of temperature on decomposition rates according to the Century model")
+#Bind the IntCal13 dataset and Hua2013 for the NH Zone 1
+bp=bind.C14curves(prebomb=IntCal13,postbomb=Hua2013$NHZone1,time.scale="BP")
+
+plot(bp[,1:2],type="l")
+plot(bp[,1:2],type="l",xlim=c(-100,100))
+
+#Report results in years AD
+ad=bind.C14curves(prebomb=IntCal13,postbomb=Hua2013$NHZone1,time.scale="AD")
+
+plot(ad[,1:2],type="l")
+plot(ad[,1:2],type="l",xlim=c(0,2010))
+abline(v=1950,lty=2)
 }

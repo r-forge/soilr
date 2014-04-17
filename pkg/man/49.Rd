@@ -1,174 +1,78 @@
-\name{GeneralModel_14}
-\alias{GeneralModel_14}
-\title{A general constructor }
-\description{Creates a Model object from different sources}
-\usage{GeneralModel_14(t, A, ivList, initialValF, inputFluxes, inputFc, 
-    Fc, di = -0.0001209681, lambda = -0.0001209681, solverfunc = deSolve.lsoda.wrapper, 
-    pass = FALSE, ...)}\arguments{
-  \item{t}{
-}
-  \item{A}{
-}
-  \item{ivList}{
-}
-  \item{initialValF}{
-}
-  \item{inputFluxes}{
-}
-  \item{inputFc}{
-}
-  \item{Fc}{
-}
-  \item{di}{
-}
-  \item{lambda}{
-}
-  \item{solverfunc}{The function used by to actually solve the ODE system. This can be \code{\link{deSolve.lsoda.wrapper}} or any other user provided function with the same interface.}
+\name{GaudinskiModel14}
+\alias{GaudinskiModel14}
+\title{Implementation of a the six-pool C14 model proposed by Gaudinski et al. 2000}
+\description{This function creates a model as described in Gaudinski et al. 2000. 
+It is a wrapper for the more general function \code{\link{GeneralModel_14}} that can handle an arbitrary number of pools.}
+\usage{GaudinskiModel14(t, ks = c(kr = 1/1.5, koi = 1/1.5, koeal = 1/4, 
+    koeah = 1/80, kA1 = 1/3, kA2 = 1/75, kM = 1/110), C0 = c(FR0 = 390, 
+    C10 = 220, C20 = 390, C30 = 1370, C40 = 90, C50 = 1800, C60 = 560), 
+    F0_Delta14C = rep(0, 7), LI = 150, RI = 255, xi = 1, inputFc, 
+    lambda = -0.0001209681, lag = 0, solver = deSolve.lsoda.wrapper, 
+    pass = FALSE)}\arguments{
+  \item{t}{A vector containing the points in time where the solution is sought. It must be specified within the same period for which the Delta 14 C of the atmosphere is provided. The default period in the provided dataset \code{\link{C14Atm_NH}} is 1900-2010.}
+  \item{ks}{A vector of length 7 containing the decomposition rates for the 6 soil pools plus the fine-root pool.}
+  \item{C0}{A vector of length 7 containing the initial amount of carbon for the 6 pools plus the fine-root pool.}
+  \item{F0_Delta14C}{A vector of length 7 containing the initial amount of the radiocarbon fraction for the 7 pools as Delta14C values in per mil.}
+  \item{LI}{A scalar or a data.frame object specifying the amount of litter inputs by time.}
+  \item{RI}{A scalar or a data.frame object specifying the amount of root inputs by time.}
+  \item{xi}{A scalar or a data.frame specifying the external (environmental and/or edaphic) effects on decomposition rates.}
+  \item{inputFc}{A Data Frame object containing values of atmospheric Delta14C per time. First column must be time values, second column must be Delta14C values in per mil.}
+  \item{lambda}{Radioactive decay constant. By default lambda=-0.0001209681 y^-1 . This has the side effect that all your time related data are treated as if the time unit was year.}
+  \item{lag}{A positive integer representing a time lag for radiocarbon to enter the system.}
+  \item{solver}{A function that solves the system of ODEs. This can be \code{\link{euler}} or  any other user provided function with the same interface.}
   \item{pass}{if TRUE Forces the constructor to create the model even if it is invalid}
-  \item{\dots}{
-}
 }
 
-
-
+\value{A Model Object that can be further queried }
+\references{Gaudinski JB, Trumbore SE, Davidson EA, Zheng S (2000) Soil carbon cycling in a temperate forest: radiocarbon-based estimates of residence times, sequestration rates and partitioning fluxes. Biogeochemistry 51: 33-69}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
 
 
-
-\examples{t_start=1960
-t_end=2010
-tn=220
-timestep=(t_end-t_start)/tn 
-t=seq(t_start,t_end,timestep) 
-n=3
-At=new(Class="BoundLinDecompOp",
-  t_start,
-  t_end,
-  function(t0){
-        matrix(nrow=n,ncol=n,byrow=TRUE,
-          c(-1,    0.1,    0, 
-             0.5  , -0.4,    0,   
-             0,    0.2,   -0.1)
-        )
-  }
-) 
+\seealso{\code{\link{ThreepParallelModel14}}, \code{\link{ThreepFeedbackModel14}} }
+\examples{
  
-c0=c(100, 100, 100)
-F0=ConstFc(c(0,10,10),"Delta14C")
-#constant inputrate
-inputFluxes=new(
-  "TimeMap",
-  t_start,
-  t_end,
-  function(t0){matrix(nrow=n,ncol=1,c(10,10,10))}
-) 
-# we have a dataframe representing the C_14 fraction 
-# note that the time unit is in years and the fraction is given in
-# the Absolute Fraction Modern format.
-# This means that all the other data provided are assumed to have the same value
-# This is especially true for the decay constants to be specified later
-inputFc=BoundFc(C14Atm_NH,format="Delta14C")
-# add the C14 decay to the matrix which is done by a diagonal matrix which does not vary over time
-# we assume a half life th=5730 years
-th=5730
-k=log(0.5)/th #note that k is negative and has the unit y^-1
-
-mod=GeneralModel_14(t=t,A=At,ivList=c0,initialValF=F0,inputFluxes=inputFluxes,inputFc=inputFc,di=k)
-#start plots
-par(mfrow=c(3,2))
-   lt1=1;  lt2=2; lt3=3 
-   col1=1;  col2=2; col3=3
-   # plot the C and C14 curves
-   Ct=getC(mod)
-   plot(t,Ct[,1],type="l",lty=lt1,col=col1, ylim=c(0,200),
-        ylab="C stocks (arbitrary units)",xlab="Time") 
-   lines(t,Ct[,2],type="l",lty=lt2,col=col2) 
-   lines(t,Ct[,3],type="l",lty=lt3,col=col3,lwd=2) 
-   legend(
-      "topright",
-      c("C in pool 1",
-        "C in pool 2",
-        "C in pool 3"
-      ),
-      lty=c(lt1,lt2,lt3),
-      col=c(col1,col2,col3)
-   )
-   C14t=getC14(mod)
-   plot(t,C14t[,1]/1000,type="l",lty=lt1,col=col1, ylim=c(0,100),
-        ylab="14C stocks (arbitrary units)",xlab="Time") 
-   lines(t,C14t[,2]/1000,type="l",lty=lt2,col=col2) 
-   lines(t,C14t[,3]/1000,type="l",lty=lt3,col=col3) 
-   legend(
-      "topright",
-      c("14C in pool 1",
-        "14C in pool 2",
-        "14C in pool 3"
-      ),
-      lty=c(lt1,lt2,lt3),
-      col=c(col1,col2,col3)
-   )
-   #now plot the C14 Fraction in the atmosphere and compute the C14/C fraction of in the Soil 
-
-   FC14=getF14(mod)
-   plot(C14Atm_NH, type="l",xlim=c(1960,2010))
-   lines(t,FC14[,1],lty=lt1,col=col1) 
-   lines(t,FC14[,2],lt2,type="l",lty=lt2,col=col2) 
-   lines(t,FC14[,3],type="l",lty=lt3,col=col3) 
-   legend("topleft",c(
-                      expression(F[1]),
-                      expression(F[2]),
-                      expression(F[3])
-                    )
-   ,lty=c(lt1,lt2,lt3),col=c(col1,col2,col3))
-
-
-#now compute the release flux
-   Rt=getReleaseFlux(mod)
-   plot(
-     t,
-     Rt[,1],
-     type="l",
-     lty=lt1,
-     col=col1,
-     ylab="C Release Flux (arbitrary units)",
-     xlab="Time",
-     ylim=c(0,50)
-   ) 
-   lines(t,Rt[,2],lt2,type="l",lty=lt2,col=col2) 
-   lines(t,Rt[,3],type="l",lty=lt3,col=col3) 
-   legend("topleft",c("RF1","RF2","RF3"),lty=c(lt1,lt2,lt3),col=c(col1,col2,col3))
-   #now compute the c14 release flux
-   R14t=getReleaseFlux14(mod)/1000
-   plot(
-     t,
-     R14t[,1],
-     type="l",
-     lty=lt1,
-     col=col1,
-     ylab="C14 Release Flux (arbitrary units)",
-     xlab="Time"
-   ) 
-   lines(t,R14t[,2],lt2,type="l",lty=lt2,col=col2) 
-   lines(t,R14t[,3],type="l",lty=lt3,col=col3) 
-   legend("topleft",c(
-                      expression(RF[14]^1),
-                      expression(RF[14]^2),
-                      expression(RF[14]^3)
-                    )
-   ,lty=c(lt1,lt2,lt3),col=c(col1,col2,col3))
-
-R14m=getF14R(mod)
-C14m=getF14C(mod)
-plot(C14Atm_NH, type="l",xlim=c(1960,2010),col=4)
-lines(t,C14m) 
-lines(t,R14m,col=2) 
-legend(
-  "topright",
-  c("Atmosphere","Mean SOM-14C","Mean Release 14C"),
-  lty=rep(1,3),
-  col=c(4,1,2),
-  bty="n"
+ years=seq(1901,2010,by=0.5)
+ 
+ Ex=GaudinskiModel14(
+   t=years,
+   ks=c(kr=1/3, koi=1/1.5, koeal=1/4, koeah=1/80, kA1=1/3, kA2=1/75, kM=1/110),
+   inputFc=C14Atm_NH
+ )
+ R14m=getF14R(Ex)
+ C14m=getF14C(Ex)
+     
+ plot(
+   C14Atm_NH,
+   type="l",
+   xlab="Year",
+   ylab=expression(paste(Delta^14,"C ","(\u2030)")),
+   xlim=c(1940,2010)
+ ) 
+ lines(years,C14m,col=4)
+ points(HarvardForest14CO2[1:11,1],HarvardForest14CO2[1:11,2],pch=19,cex=0.5)
+ points(HarvardForest14CO2[12:173,1],HarvardForest14CO2[12:173,2],pch=19,col=2,cex=0.5)
+ points(HarvardForest14CO2[158,1],HarvardForest14CO2[158,2],pch=19,cex=0.5)
+ lines(years,R14m,col=2)
+ legend(
+   "topright",
+   c("Delta 14C Atmosphere",
+      "Delta 14C SOM", 
+      "Delta 14C Respired"
+   ),
+   lty=c(1,1,1), 
+   col=c(1,4,2),
+   bty="n"
+ )
+ ## We now show how to bypass soilR s parameter sanity check if nacessary 
+ ## (e.g in for parameter estimation ) in functions
+ ## wchich might call it with unreasonable parameters
+ years=seq(1800,2010,by=0.5)
+ Ex=GaudinskiModel14(
+   t=years,
+   ks=c(kr=1/3,koi=1/1.5,koeal=1/4,koeah=1/80,kA1=1/3,kA2=1/75,kM=1/110),
+   inputFc=C14Atm_NH,
+   pass=TRUE
 )
-par(mfrow=c(1,1))}
+}

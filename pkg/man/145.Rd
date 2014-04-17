@@ -1,8 +1,8 @@
-\name{getF14R}
-\alias{getF14R}
-\title{Calculates the average radiocarbon fraction weighted by the amount of carbon release}
-\description{This function calculates the average radiocarbon fraction weighted by the amount of carbon release at each time step.}
-\usage{getF14R(object)}\arguments{
+\name{getF14}
+\alias{getF14}
+\title{Calculates the 14C fraction of all pools}
+\description{This function computes the radiocarbon fraction for all pools as funtion of time.}
+\usage{getF14(object)}\arguments{
   \item{object}{
 }
 }

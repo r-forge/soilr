@@ -1,19 +1,17 @@
-\name{getFormat-methods}
-\docType{methods}
-\alias{getFormat-methods}
-\alias{getFormat,BoundFc-method}
-\alias{getFormat,ConstFc-method}
-\title{ ~~ Methods for Function \code{getFormat}  ~~}
-\description{
- ~~ Methods for function \code{getFormat} ~~
+\name{getF14C_method__Model_14}
+\alias{getF14C_method__Model_14}
+\title{read access to the models F14C variable }
+\description{The model was created with a F14C object to describe the atmospheric 14C content. This method serves to investigate those settings from the model.}
+\arguments{
+  \item{object}{a Model_14 object}
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "BoundFc")}}{
-      \code{\link{getFormat_method__BoundFc}}  
-    }
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

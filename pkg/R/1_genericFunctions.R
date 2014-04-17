@@ -443,7 +443,13 @@ setGeneric(
     name="BoundInFlux",
     def=function # generic constructor
     ### create a BoundInFlux object from different sources
-    (map,starttime,endtime,lag)
+    (
+      map,
+      starttime,
+      endtime,
+      lag,
+      interpolation
+     )
     {
         standardGeneric("BoundInFlux")
     }
@@ -491,7 +497,7 @@ setGeneric(
     def=function # Generic constructor
     ### Creates a LinearDecompositonOperator from different sources.
     ### Please look at the methods to see what kind of input is supported. 
-    (map,starttime,endtime,lag=0)
+    (map,starttime,endtime,lag)
     {
         standardGeneric("BoundLinDecompOp")
     }

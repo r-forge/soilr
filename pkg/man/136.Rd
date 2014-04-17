@@ -1,18 +1,19 @@
-\name{getC_method__Model}
-\alias{getC_method__Model}
-\title{getC method  Model}
-\description{This function computes the value for C for each time and pool. }
-\arguments{
-  \item{object}{
+\name{getC-methods}
+\docType{methods}
+\alias{getC-methods}
+\alias{getC,Model-method}
+\alias{getC,NlModel-method}
+\title{ ~~ Methods for Function \code{getC}  ~~}
+\description{
+ ~~ Methods for function \code{getC} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "Model")}}{
+      \code{\link{getC_method__Model}}  
+    }
+
+  }
 }
-
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

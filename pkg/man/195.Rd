@@ -1,9 +1,10 @@
-\name{initialize_method__TimeMap}
-\alias{initialize_method__TimeMap}
+\name{initialize_method__BoundLinDecompOp}
+\alias{initialize_method__BoundLinDecompOp}
 \title{initialize called by (new)}
-\description{This is the standard constructor for objects of this class
-It is called by statements of the form 
-\code{new("TimeMap",start,end,f,lag)}}
+\description{This is the internal constructor for objects of this class
+It is called by statements of the form new("..) 
+which in turn is called by all other constructors 
+which may have more convienient interfaces}
 \arguments{
   \item{.Object}{
 }

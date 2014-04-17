@@ -1,12 +1,23 @@
-\name{getTransferCoefficients-methods}
-\docType{methods}
-\alias{getTransferCoefficients-methods}
-\alias{getTransferCoefficients,NlModel-method}
-\alias{getTransferCoefficients,TransportDecompositionOperator-method}
-\title{ ~~ Methods for Function \code{getTransferCoefficients}  ~~}
-\description{
- All methods for function \code{getTransferCoefficients} are intended for internal use inside the package only. 
+\name{getTimeRange_method__DecompositionOperator}
+\alias{getTimeRange_method__DecompositionOperator}
+\title{ask for the boundaries of the underlying time interval}
+\description{The method returns the time range of the given object 
+It is ( probably mostly ) used internally to make sure that 
+time dependent functions retrieved from data are not
+used outside the interval where they are valid. }
+\arguments{
+  \item{object}{
+}
 }
 
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+\value{a vector of length two \code{ c(t_min,t_max) }
+containing start and end time of the time interval 
+for which the object has been defined.}
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

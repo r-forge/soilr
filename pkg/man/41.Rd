@@ -1,10 +1,11 @@
-\name{Delta14C_from_AbsoluteFractionModern}
-\alias{Delta14C_from_AbsoluteFractionModern}
-\title{Converts its argument from an Absolute Fraction Modern to a Delta14C representation}
-\description{The function returns an object of the same type as its input,
-which can be a number or a matrix. }
-\usage{Delta14C_from_AbsoluteFractionModern(AbsoluteFractionModern)}\arguments{
-  \item{AbsoluteFractionModern}{A numeric object}
+\name{DecompOp_method__matrix}
+\alias{DecompOp_method__matrix}
+\title{creates a ConstanDecompOp from a matrix}
+\description{The resulting operator is creted by a call to the constructor of class
+ConstLinDecompOp}
+\arguments{
+  \item{object}{
+}
 }
 
 

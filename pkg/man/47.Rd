@@ -1,18 +1,9 @@
-\name{GeneralModel}
-\alias{GeneralModel}
-\title{A general constructor }
-\description{Creates a Model object from different sources}
-\usage{GeneralModel(t, A, ivList, inputFluxes, ...)}\arguments{
-  \item{t}{
-}
-  \item{A}{
-}
-  \item{ivList}{
-}
-  \item{inputFluxes}{
-}
-  \item{\dots}{
-}
+\name{Delta14C_from_AbsoluteFractionModern_method__numeric}
+\alias{Delta14C_from_AbsoluteFractionModern_method__numeric}
+\title{Converts to Delta14C format}
+\description{This method produces Delta14C values from Absolute Fraction Modern}
+\arguments{
+  \item{AbsoluteFractionModern}{A numeric object containing the values in Absolute Fraction Modern format}
 }
 
 

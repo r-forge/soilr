@@ -1,18 +1,18 @@
-\name{getMeanTransitTime-methods}
-\docType{methods}
-\alias{getMeanTransitTime-methods}
-\alias{getMeanTransitTime,ConstLinDecompOp-method}
-\title{ ~~ Methods for Function \code{getMeanTransitTime}  ~~}
-\description{
- ~~ Methods for function \code{getMeanTransitTime} ~~
+\name{getFunctionDefinition_method__ConstLinDecompOp}
+\alias{getFunctionDefinition_method__ConstLinDecompOp}
+\title{creates a constant timedependent function and returns it}
+\description{The method creates a timedependent function from the existing matrix describing the operator }
+\arguments{
+  \item{object}{
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "ConstLinDecompOp")}}{
-      \code{\link{getMeanTransitTime_method__ConstLinDecompOp}}  
-    }
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

@@ -1,17 +1,16 @@
-\name{fW.Century}
-\alias{fW.Century}
-\title{Effects of moisture on decomposition rates according to the CENTURY model}
-\description{Calculates the effects of precipitation and potential evapotranspiration on decomposition rates.}
-\usage{fW.Century(PPT, PET)}\arguments{
-  \item{PPT}{A scalar or vector containing values of monthly precipitation.}
-  \item{PET}{A scalar or vector containing values of potential evapotranspiration.}
+\name{fT.Q10}
+\alias{fT.Q10}
+\title{Effects of temperature on decomposition rates according to a Q10 function}
+\description{Calculates the effects of temperature on decomposition rates according to the modified Van't Hoff function (Q10 function).}
+\usage{fT.Q10(Temp, k_ref = 1, T_ref = 10, Q10 = 2)}\arguments{
+  \item{Temp}{A scalar or vector containing values of temperature for which the effects on decomposition rates are calculated.}
+  \item{k_ref}{A scalar representing the value of the decomposition rate at a reference temperature vaule.}
+  \item{T_ref}{A scalar representing the reference temperature.}
+  \item{Q10}{A scalar. Temperature coefficient Q10.}
 }
 
-\value{A scalar or a vector containing the effects of precipitation and potential evapotranspiration on decomposition rates (unitless).}
-\references{Adair, E. C., W. J. Parton, S. J. D. Grosso, W. L. Silver, M. E. Harmon, S. A. Hall, I. C. Burke, and S. C. Hart (2008), 
-Simple three-pool model accurately describes patterns of long-term litter decomposition in diverse climates, Global Change Biology, 14(11), 2636-2660.
-\code{\\} Parton, W. J., J. A. Morgan, R. H. Kelly, and D. S. Ojima (2001), Modeling soil C responses to environmental change in grassland systems, 
-in The potential of U.S. grazing lands to sequester carbon and mitigate the greenhouse effect, edited by R. F. Follett, J. M. Kimble and R. Lal, pp. 371-398, Lewis Publishers, Boca Raton.}
+\value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
+
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -19,10 +18,10 @@ in The potential of U.S. grazing lands to sequester carbon and mitigate the gree
 
 
 \examples{
-PPT=seq(0,1500,by=10)
-PET=rep(1500,length(PPT))
-PPT.PET=fW.Century(PPT,PET)
-plot(PPT/PET,PPT.PET, 
-     ylab="f(PPT, PET) (unitless)", 
-     main="Effects of precipitation and potential evapotranspiration on decomposition rates")
+Temperature=0:50
+plot(Temperature,fT.Q10(Temperature),type="l",ylab="f(T) (unitless)", 
+     main="Effects of temperature on decomposition rates according to a Q10 function")
+lines(Temperature, fT.Q10(Temperature,Q10=2.2),col=2)
+lines(Temperature, fT.Q10(Temperature,Q10=1.4),col=4)
+legend("topleft",c("Q10 = 2", "Q10 = 2.2", "Q10 = 1.4"),lty=c(1,1,1),col=c(1,2,4),bty="n")
 }

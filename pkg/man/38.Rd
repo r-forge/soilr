@@ -1,34 +1,26 @@
-\name{DecompositionOperator-class}
-\Rdversion{1.1}
-\docType{class}
-\alias{DecompositionOperator-class}
-\title{Class \code{"DecompositionOperator"}}
+\name{DecompOp-methods}
+\docType{methods}
+\alias{DecompOp-methods}
+\alias{DecompOp,DecompOp-method}
+\alias{DecompOp,TimeMap-method}
+\alias{DecompOp,matrix-method}
+\title{ ~~ Methods for Function \code{DecompOp}  ~~}
 \description{
-NA
-}
-\section{Slots}{
-  \describe{
-    \item{\code{map}:}{Object of class \code{"function"} ~~ }
-    \item{\code{lag}:}{Object of class \code{"numeric"} ~~ }
-    \item{\code{starttime}:}{Object of class \code{"numeric"} ~~ }
-    \item{\code{endtime}:}{Object of class \code{"numeric"} ~~ }
-  }
-}
-\section{Extends}{
-Class \code{"\linkS4class{DecompOp}"}, directly.
+ ~~ Methods for function \code{DecompOp} ~~
 }
 \section{Methods}{
   \describe{
-    \item{getFunctionDefinition}{\code{signature(object = "DecompositionOperator")}: ... }
-    \item{getTimeRange}{\code{signature(object = "DecompositionOperator")}: ... }
-    \item{initialize}{\code{signature(.Object = "DecompositionOperator")}: ... }
-	 }
+    \item{\code{signature(object = "DecompOp")}}{
+      \code{\link{DecompOp_method__DecompOp}}  
+    }
+    \item{\code{signature(object = "TimeMap")}}{
+      \code{\link{DecompOp_method__TimeMap}}  
+    }
+    \item{\code{signature(object = "matrix")}}{
+      \code{\link{DecompOp_method__matrix}}  
+    }
+
+  }
 }
-\author{
- Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de> 
-}
-\examples{
-showClass("DecompositionOperator")
-}
-\keyword{classes}
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

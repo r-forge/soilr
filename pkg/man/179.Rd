@@ -1,19 +1,23 @@
-\name{getTimes-methods}
-\docType{methods}
-\alias{getTimes-methods}
-\alias{getTimes,Model-method}
-\alias{getTimes,NlModel-method}
-\title{ ~~ Methods for Function \code{getTimes}  ~~}
-\description{
- ~~ Methods for function \code{getTimes} ~~
+\name{getTimeRange_method__BoundFc}
+\alias{getTimeRange_method__BoundFc}
+\title{ask for the boundaries of the underlying time interval}
+\description{The method returns the time range of the given object 
+It is ( probably mostly ) used internally to make sure that 
+time dependent functions retrieved from data are not
+used outside the interval where they are valid. }
+\arguments{
+  \item{object}{
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "Model")}}{
-      \code{\link{getTimes_method__Model}}  
-    }
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+\value{a vector of length two \code{ c(t_min,t_max) }
+containing start and end time of the time interval 
+for which the object has been defined.}
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

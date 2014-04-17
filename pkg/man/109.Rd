@@ -1,22 +1,23 @@
-\name{fT.Daycent1}
-\alias{fT.Daycent1}
-\title{Effects of temperature on decomposition rates according to the DAYCENT model}
-\description{Calculates the effects of temperature on decomposition rates according to the DAYCENT model.}
-\usage{fT.Daycent1(Temp)}\arguments{
-  \item{Temp}{A scalar or vector containing values of soil temperature for which the effects on decomposition rates are calculated}
+\name{deSolve.lsoda.wrapper}
+\alias{deSolve.lsoda.wrapper}
+\title{deSolve lsoda wrapper}
+\description{The function serves as a wrapper for lsoda using a much simpler interface which allows the use 
+of matrices in the definition of the derivative. 
+To use lsoda we have to convert our vectors to lists, define tolerances and so on.
+This function does this for us , so we don't need to bother about it.}
+\usage{deSolve.lsoda.wrapper(t, ydot, startValues)}\arguments{
+  \item{t}{A row vector containing the points in time where the solution is sought.}
+  \item{ydot}{The function of y and t that computes the derivative for a given
+point in time and a column vector y.}
+  \item{startValues}{A column vector with the starting values.}
 }
 
-\value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
-\references{Kelly, R. H., W. J. Parton, M. D. Hartman, L. K. Stretch, D. S. Ojima, and D. S. Schimel (2000), 
-Intra-annual and interannual variability of ecosystem processes in shortgrass steppe, J. Geophys. Res., 105.}
+\value{A matrix. Every column represents a pool and every row a point in time}
+
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
 
 
 
-\examples{
-Temperature=0:50
-plot(Temperature,fT.Daycent1(Temperature),type="l",ylab="f(T) (unitless)", 
-     main="Effects of temperature on decomposition rates according to the DAYCENT model")
-}
+

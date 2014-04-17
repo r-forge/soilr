@@ -1,9 +1,19 @@
-\name{plot_method__Model}
-\alias{plot_method__Model}
-\title{plot method  Model}
-\description{This function is a stub}
+\name{initialize_method__TimeMap}
+\alias{initialize_method__TimeMap}
+\title{initialize called by (new)}
+\description{This is the standard constructor for objects of this class
+It is called by statements of the form 
+\code{new("TimeMap",start,end,f,lag)}}
 \arguments{
-  \item{x}{
+  \item{.Object}{
+}
+  \item{starttime}{
+}
+  \item{endtime}{
+}
+  \item{map}{
+}
+  \item{lag}{
 }
 }
 

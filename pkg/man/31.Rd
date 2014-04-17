@@ -1,34 +1,19 @@
-\name{ConstLinDecompOp-class}
-\Rdversion{1.1}
-\docType{class}
-\alias{ConstLinDecompOp-class}
-\title{Class \code{"ConstLinDecompOp"}}
+\name{C14Atm_NH}
+\alias{C14Atm_NH}
+\docType{data}
+\title{Post-bomb atmospheric 14C fraction}
 \description{
-NA
+    Atmospheric 14C concentrations for the post-bomb period expressed as Delta 14C in per mile. This dataset contains a combination of observations from locations in Europe and North America. It is representative for the Northern Hemisphere. 
 }
-\section{Slots}{
+\usage{data(C14Atm_NH)}
+\format{
+  A data frame with 111 observations on the following 2 variables.
   \describe{
-    \item{\code{mat}:}{Object of class \code{"matrix"} ~~ }
+    \item{\code{YEAR}}{a numeric vector with year of measurement.}
+    \item{\code{Atmosphere}}{a numeric vector with the Delta 14 value of atmospheric CO2 in per mil.}
   }
 }
-\section{Extends}{
-Class \code{"\linkS4class{DecompOp}"}, directly.
-}
-\section{Methods}{
-  \describe{
-    \item{BoundLinDecompOp}{\code{signature(map = "ConstLinDecompOp", starttime = "ANY", endtime = "ANY", lag = "ANY")}: ... }
-    \item{getFunctionDefinition}{\code{signature(object = "ConstLinDecompOp")}: ... }
-    \item{getMeanTransitTime}{\code{signature(object = "ConstLinDecompOp")}: ... }
-    \item{getTimeRange}{\code{signature(object = "ConstLinDecompOp")}: ... }
-    \item{getTransitTimeDistributionDensity}{\code{signature(object = "ConstLinDecompOp")}: ... }
-    \item{initialize}{\code{signature(.Object = "ConstLinDecompOp")}: ... }
-	 }
-}
-\author{
- Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de> 
-}
 \examples{
-showClass("ConstLinDecompOp")
+plot(C14Atm_NH,type="l")
 }
-\keyword{classes}
+\keyword{datasets}

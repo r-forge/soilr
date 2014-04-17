@@ -28,7 +28,7 @@ alltests <- defineTestSuite(
    #"test.BoundFc"
    #"test.ThreepFeedbackModel14|test.ThreepParallelModel14|test.ThreepSeriesModel14|test.TwopFeedbackModel14|test.TwopParallelModel14|test.TwopSeriesModel14"
    #"test.LowVerticalRatesPaper|test.ModelInit|test.SoilRPaper1"
-   "test.LowVerticalRatesPaper"#|test.ModelInit|test.SoilRPaper1"
+   "test.LowVerticalRatesPaper|test.SoilRPaper1"
    #"test.Deprecation"
    #"test.GaudinskiModel14"
    #"test.MC"

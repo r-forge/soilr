@@ -1,19 +1,18 @@
-\name{[-methods}
-\docType{methods}
-\alias{[-methods}
-\alias{[,Model,character-method}
-\alias{[,NlModel,character-method}
-\title{ ~~ Methods for Function \code{[}  ~~}
-\description{
- ~~ Methods for function \code{[} ~~
+\name{show_method__Model}
+\alias{show_method__Model}
+\title{show method  Model}
+\description{This function is a stub}
+\arguments{
+  \item{object}{
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(x = "Model", i = "character")}}{
-      \code{\link{[_method__Model_character}}  
-    }
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

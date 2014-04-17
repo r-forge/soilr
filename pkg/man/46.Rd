@@ -1,18 +1,17 @@
-\name{GeneralModel-methods}
-\docType{methods}
-\alias{GeneralModel-methods}
-\alias{GeneralModel,numeric,ANY,numeric-method}
-\title{ ~~ Methods for Function \code{GeneralModel}  ~~}
-\description{
- ~~ Methods for function \code{GeneralModel} ~~
+\name{Delta14C_from_AbsoluteFractionModern_method__matrix}
+\alias{Delta14C_from_AbsoluteFractionModern_method__matrix}
+\title{Converts Absolute Fraction Modern values to Delta14C}
+\description{This method produces a matrix of  Delta14C values from a matrix of values in Absolute Fraction Modern.}
+\arguments{
+  \item{AbsoluteFractionModern}{An object of class matrix containing the values in Absolute Fraction Modern format}
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(t = "numeric", A = "ANY", ivList = "numeric")}}{
-      \code{\link{GeneralModel_method__numeric_ANY_numeric}}  
-    }
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

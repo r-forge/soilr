@@ -1,22 +1,23 @@
-\name{fT.RothC}
-\alias{fT.RothC}
-\title{Effects of temperature on decomposition rates according to the functions included in the RothC model}
-\description{Calculates the effects of temperature on decomposition rates according to the functions included in the RothC model.}
-\usage{fT.RothC(Temp)}\arguments{
-  \item{Temp}{A scalar or vector containing values of temperature for which the effects on decomposition rates are calculated.}
+\name{fT.Daycent2}
+\alias{fT.Daycent2}
+\title{Effects of temperature on decomposition rates according to the DAYCENT model}
+\description{Calculates the effects of temperature on decomposition rates according to the Daycent/Century models.}
+\usage{fT.Daycent2(Temp)}\arguments{
+  \item{Temp}{A scalar or vector containing values of soil temperature for which the effects on decomposition rates are calculated.}
 }
 
 \value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
-\references{Jenkinson, D. S., S. P. S. Andrew, J. M. Lynch, M. J. Goss, and P. B. Tinker (1990), 
-The Turnover of Organic Carbon and Nitrogen in Soil, Philosophical Transactions: Biological Sciences, 329(1255), 361-368.}
+\references{Del Grosso, S. J., W. J. Parton, A. R. Mosier, E. A. Holland, E. Pendall, D. S. Schimel, and D. S. Ojima (2005), 
+Modeling soil CO2 emissions from ecosystems, Biogeochemistry, 73(1), 71-91.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
-\note{This function returns NA for Temp <= -18.3}
+
 
 
 
 \examples{
 Temperature=0:50
-plot(Temperature,fT.RothC(Temperature),type="l",ylab="f(T) (unitless)", 
-     main="Effects of temperature on decomposition rates according to the RothC model")
+plot(Temperature,fT.Daycent2(Temperature),type="l",
+     ylab="f(T) (unitless)",
+     main="Effects of temperature on decomposition rates according to the DAYCENT model")
 }

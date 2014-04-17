@@ -1,16 +1,18 @@
-\name{fW.Daycent2}
-\alias{fW.Daycent2}
-\title{Effects of moisture on decomposition rates according to the DAYCENT model}
-\description{Calculates the effects of volumetric water content on decomposition rates according to the Daycent/Century models.}
-\usage{fW.Daycent2(W, WP = 0, FC = 100)}\arguments{
-  \item{W}{A scalar or vector of volumetric water content in percentage.}
-  \item{WP}{A scalar representing the wilting point in percentage.}
-  \item{FC}{A scalar representing the field capacity in percentage.}
+\name{fT.Standcarb}
+\alias{fT.Standcarb}
+\title{Effects of temperature on decomposition rates according to the StandCarb model}
+\description{Calculates the effects of temperature on decomposition rates according to the StandCarb model.}
+\usage{fT.Standcarb(Temp, Topt = 45, Tlag = 4, Tshape = 15, Q10 = 2)}\arguments{
+  \item{Temp}{A scalar or vector containing values of temperature for which the effects on decomposition rates are calculated.}
+  \item{Topt}{A scalar representing the optimum temperature for decomposition.}
+  \item{Tlag}{A scalar that determines the lag of the response curve.}
+  \item{Tshape}{A scalar that determines the shape of the response curve.}
+  \item{Q10}{A scalar. Temperature coefficient Q10.}
 }
 
-\value{A data frame with values of relative water content (RWC) and the effects of RWC on decomposition rates (fRWC).}
-\references{Del Grosso, S. J., W. J. Parton, A. R. Mosier, E. A. Holland, E. Pendall, D. S. Schimel, and D. S. Ojima (2005), 
-Modeling soil CO2 emissions from ecosystems, Biogeochemistry, 73(1), 71-91.}
+\value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
+\references{Harmon, M. E., and J. B. Domingo (2001), A users guide to STANDCARB version 2.0: 
+A model to simulate carbon stores in forest stands. Oregon State University, Corvallis.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -18,7 +20,7 @@ Modeling soil CO2 emissions from ecosystems, Biogeochemistry, 73(1), 71-91.}
 
 
 \examples{
-W=10:90
-fW=fW.Daycent2(W,WP=10,FC=90)
-plot(fW,type="l",ylim=c(0,6)) #This plot reproduces Figure 1b, in del Grosso et al. (2005)
+Temperature=0:50
+plot(Temperature,fT.Standcarb(Temperature),type="l",ylab="f(T) (unitless)", 
+     main="Effects of temperature on decomposition rates according to the StandCarb model")
 }

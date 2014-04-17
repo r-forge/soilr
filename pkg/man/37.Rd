@@ -1,19 +1,21 @@
-\name{DecompOp_method__matrix}
-\alias{DecompOp_method__matrix}
-\title{creates a ConstanDecompOp from a matrix}
-\description{The resulting operator is creted by a call to the constructor of class
-ConstLinDecompOp}
-\arguments{
-  \item{object}{
+\name{DecompOp-class}
+\Rdversion{1.1}
+\docType{class}
+\alias{DecompOp-class}
+\title{Class \code{"DecompOp"}}
+\description{
+NA
 }
+\section{Methods}{
+  \describe{
+    \item{DecompOp}{\code{signature(object = "DecompOp")}: ... }
+	 }
 }
-
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\author{
+ Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de> 
+}
+\examples{
+showClass("DecompOp")
+}
+\keyword{classes}

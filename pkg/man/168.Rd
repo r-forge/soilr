@@ -1,18 +1,11 @@
-\name{getReleaseFlux14-methods}
+\name{getOutputFluxes-methods}
 \docType{methods}
-\alias{getReleaseFlux14-methods}
-\alias{getReleaseFlux14,Model_14-method}
-\title{ ~~ Methods for Function \code{getReleaseFlux14}  ~~}
+\alias{getOutputFluxes-methods}
+\alias{getOutputFluxes,NlModel-method}
+\title{ ~~ Methods for Function \code{getOutputFluxes}  ~~}
 \description{
- ~~ Methods for function \code{getReleaseFlux14} ~~
+ All methods for function \code{getOutputFluxes} are intended for internal use inside the package only. 
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "Model_14")}}{
-      \code{\link{getReleaseFlux14_method__Model_14}}  
-    }
 
-  }
-}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

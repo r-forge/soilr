@@ -146,7 +146,7 @@ setMethod(
 #########################################################
 setMethod(
       f="BoundInFlux",
-      signature=c("TimeMap","missing","missing","missing"),
+      signature=c("TimeMap","missing","missing","missing","missing"),
       definition=function # convert to BoundInFlux
       ### The method is used internally to convert TimeMap objects to BoundInFlux objects, since the use of TimeMap objects is now deprecated.
       (map){

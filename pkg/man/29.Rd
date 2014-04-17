@@ -1,19 +1,20 @@
-\name{C14Atm_NH}
-\alias{C14Atm_NH}
-\docType{data}
-\title{Post-bomb atmospheric 14C fraction}
-\description{
-    Atmospheric 14C concentrations for the post-bomb period expressed as Delta 14C in per mile. This dataset contains a combination of observations from locations in Europe and North America. It is representative for the Northern Hemisphere. 
+\name{BoundLinDecompOp_method__function_numeric_numeric_numeric}
+\alias{BoundLinDecompOp_method__function_numeric_numeric_numeric}
+\title{a constructor }
+\description{This method creates a BoundLinDecompOp from a timedependent function and its domain }
+\arguments{
+  \item{map}{a function}
+  \item{starttime}{the begin of the time domain}
+  \item{endtime}{the end of the time domain}
+  \item{lag}{lag time}
 }
-\usage{data(C14Atm_NH)}
-\format{
-  A data frame with 111 observations on the following 2 variables.
-  \describe{
-    \item{\code{YEAR}}{a numeric vector with year of measurement.}
-    \item{\code{Atmosphere}}{a numeric vector with the Delta 14 value of atmospheric CO2 in per mil.}
-  }
-}
-\examples{
-plot(C14Atm_NH,type="l")
-}
-\keyword{datasets}
+
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

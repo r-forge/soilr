@@ -1,23 +1,19 @@
-\name{DecompOp-methods}
-\docType{methods}
-\alias{DecompOp-methods}
-\alias{DecompOp,DecompOp-method}
-\alias{DecompOp,TimeMap-method}
-\alias{DecompOp,matrix-method}
-\title{ ~~ Methods for Function \code{DecompOp}  ~~}
-\description{
- ~~ Methods for function \code{DecompOp} ~~
+\name{ConstLinDecompOp}
+\alias{ConstLinDecompOp}
+\title{Generic constructor}
+\description{Creates a ConstantDecompositonOperator object from different sources.
+Please look at the different methods to see what kind of input is supported. }
+\usage{ConstLinDecompOp(mat)}\arguments{
+  \item{mat}{
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "TimeMap")}}{
-      \code{\link{DecompOp_method__TimeMap}}  
-    }
-    \item{\code{signature(object = "matrix")}}{
-      \code{\link{DecompOp_method__matrix}}  
-    }
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

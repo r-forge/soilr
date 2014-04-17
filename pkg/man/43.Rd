@@ -1,17 +1,19 @@
-\name{Delta14C_from_AbsoluteFractionModern_method__numeric}
-\alias{Delta14C_from_AbsoluteFractionModern_method__numeric}
-\title{Converts to Delta14C format}
-\description{This method produces Delta14C values from Absolute Fraction Modern}
-\arguments{
-  \item{AbsoluteFractionModern}{A numeric object containing the values in Absolute Fraction Modern format}
+\name{Delta14C-methods}
+\docType{methods}
+\alias{Delta14C-methods}
+\alias{Delta14C,BoundFc-method}
+\alias{Delta14C,ConstFc-method}
+\title{ ~~ Methods for Function \code{Delta14C}  ~~}
+\description{
+ ~~ Methods for function \code{Delta14C} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(F = "BoundFc")}}{
+      \code{\link{Delta14C_method__BoundFc}}  
+    }
 
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+  }
+}
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

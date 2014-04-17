@@ -1,22 +1,21 @@
-\name{Delta14C_from_AbsoluteFractionModern-methods}
-\docType{methods}
-\alias{Delta14C_from_AbsoluteFractionModern-methods}
-\alias{Delta14C_from_AbsoluteFractionModern,matrix-method}
-\alias{Delta14C_from_AbsoluteFractionModern,numeric-method}
-\title{ ~~ Methods for Function \code{Delta14C_from_AbsoluteFractionModern}  ~~}
-\description{
- ~~ Methods for function \code{Delta14C_from_AbsoluteFractionModern} ~~
+\name{DecompOp_method__TimeMap}
+\alias{DecompOp_method__TimeMap}
+\title{creates a BoundLinDecompOp from a TimeMap object}
+\description{The resulting operator is creted by a call to the constructor of class
+BoundLinDecompOp
+The method is used to ensure backward compatibility with the now deprecated
+TimeMap class}
+\arguments{
+  \item{object}{
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(AbsoluteFractionModern = "matrix")}}{
-      \code{\link{Delta14C_from_AbsoluteFractionModern_method__matrix}}  
-    }
-    \item{\code{signature(AbsoluteFractionModern = "numeric")}}{
-      \code{\link{Delta14C_from_AbsoluteFractionModern_method__numeric}}  
-    }
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

@@ -1,26 +1,24 @@
-\name{BoundLinDecompOp-methods}
-\docType{methods}
-\alias{BoundLinDecompOp-methods}
-\alias{BoundLinDecompOp,ConstLinDecompOp,ANY,ANY,ANY-method}
-\alias{BoundLinDecompOp,TimeMap,missing,missing,missing-method}
-\alias{BoundLinDecompOp,function,numeric,numeric,numeric-method}
-\title{ ~~ Methods for Function \code{BoundLinDecompOp}  ~~}
-\description{
- ~~ Methods for function \code{BoundLinDecompOp} ~~
+\name{BoundInFlux_method__function_numeric_numeric_numeric_missing}
+\alias{BoundInFlux_method__function_numeric_numeric_numeric_missing}
+\title{costructor }
+\description{the method constructs a Temporary Input Flux from its basic ingredients}
+\arguments{
+  \item{map}{
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(map = "ConstLinDecompOp", starttime = "ConstLinDecompOp", endtime = "ConstLinDecompOp", lag = "ConstLinDecompOp")}}{
-      \code{\link{BoundLinDecompOp_method__ConstLinDecompOp}}  
-    }
-    \item{\code{signature(map = "TimeMap", starttime = "missing", endtime = "missing", lag = "missing")}}{
-      \code{\link{BoundLinDecompOp_method__TimeMap_missing_missing_missing}}  
-    }
-    \item{\code{signature(map = "function", starttime = "numeric", endtime = "numeric", lag = "numeric")}}{
-      \code{\link{BoundLinDecompOp_method__function_numeric_numeric_numeric}}  
-    }
+  \item{starttime}{
+}
+  \item{endtime}{
+}
+  \item{lag}{
+}
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

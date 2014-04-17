@@ -1,41 +1,52 @@
-\name{Model_14-class}
-\Rdversion{1.1}
-\docType{class}
-\alias{Model_14-class}
-\title{Class \code{"Model_14"}}
-\description{
-defines a representation of a 14C model
+\name{IntCal09}
+\alias{IntCal09}
+\docType{data}
+\title{
+Northern Hemisphere atmospheric radiocarbon for the pre-bomb period
 }
-\section{Slots}{
+\description{
+Northern Hemisphere atmospheric radiocarbon calibration curve for the period 0 to 50,000 yr BP. 
+}
+\usage{data(IntCal09)}
+\format{
+  A data frame with 3522 observations on the following 5 variables.
   \describe{
-    \item{\code{c14Fraction}:}{Object of class \code{"BoundFc"} ~~ }
-    \item{\code{c14DecayRate}:}{Object of class \code{"numeric"} ~~ }
-    \item{\code{initialValF}:}{Object of class \code{"ConstFc"} ~~ }
-    \item{\code{times}:}{Object of class \code{"numeric"} ~~ }
-    \item{\code{mat}:}{Object of class \code{"DecompOp"} ~~ }
-    \item{\code{initialValues}:}{Object of class \code{"numeric"} ~~ }
-    \item{\code{inputFluxes}:}{Object of class \code{"InFlux"} ~~ }
-    \item{\code{solverfunc}:}{Object of class \code{"function"} ~~ }
+    \item{\code{CAL.BP}}{Calibrated age in years Before Present (BP).}
+    \item{\code{C14.age}}{C14 age in years BP.}
+    \item{\code{Error}}{Error estimate for \code{C14.age}.}
+    \item{\code{Delta.14C}}{Delta.14C value in per mil.}
+    \item{\code{Sigma}}{Standard deviation of \code{Delta.14C} in per mil.}
   }
 }
-\section{Extends}{
-Class \code{"\linkS4class{Model}"}, directly.
+\details{
+\code{Deltal.14C} is age-corrected as per Stuiver and Polach (1977). All details about the derivation of this dataset are provided in Reimer et al. (2009).
 }
-\section{Methods}{
-  \describe{
-    \item{getC14}{\code{signature(object = "Model_14")}: ... }
-    \item{getF14}{\code{signature(object = "Model_14")}: ... }
-    \item{getF14C}{\code{signature(object = "Model_14")}: ... }
-    \item{getF14R}{\code{signature(object = "Model_14")}: ... }
-    \item{getReleaseFlux14}{\code{signature(object = "Model_14")}: ... }
-    \item{initialize}{\code{signature(.Object = "Model_14")}: ... }
-	 }
+
+\source{
+\url{
+  http://www.radiocarbon.org/IntCal09%20files/intcal09.14c
+  }
 }
-\author{
- Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de> 
+\references{
+P. Reimer, M.Baillie, E. Bard, A. Bayliss, J. Beck, P. Blackwell, C. Ramsey, C. Buck, G. Burr, R. Edwards, et al. 2009. IntCal09 and Marine09 radiocarbon age calibration curves, 0 - 50,000 years cal bp. Radiocarbon, 51(4):1111 - 1150.
+
+
+M. Stuiver and H. A. Polach. 1977. Rerporting of C-14 data. Radiocarbon, 19(3):355 - 363.
 }
 \examples{
-showClass("Model_14")
+
+par(mfrow=c(2,1))
+plot(IntCal09$CAL.BP, IntCal09$C14.age, type="l")
+polygon(x=c(IntCal09$CAL.BP,rev(IntCal09$CAL.BP)),
+	y=c(IntCal09$C14.age+IntCal09$Error,rev(IntCal09$C14.age-IntCal09$Error)),
+	col="gray",border=NA)
+lines(IntCal09$CAL.BP,IntCal09$C14.age)
+
+plot(IntCal09$CAL.BP,IntCal09$Delta.14C,type="l")
+polygon(x=c(IntCal09$CAL.BP,rev(IntCal09$CAL.BP)),
+	y=c(IntCal09$Delta.14C+IntCal09$Sigma,rev(IntCal09$Delta.14C-IntCal09$Sigma)),
+	col="gray",border=NA)
+lines(IntCal09$CAL.BP,IntCal09$Delta.14C)
+par(mfrow=c(1,1))
 }
-\keyword{classes}
+\keyword{datasets}
