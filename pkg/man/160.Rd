@@ -1,6 +1,6 @@
-\name{getFunctionDefinition_method__DecompositionOperator}
-\alias{getFunctionDefinition_method__DecompositionOperator}
-\title{getFunctionDefinition method  DecompositionOperator}
+\name{getFunctionDefinition_method__BoundFc}
+\alias{getFunctionDefinition_method__BoundFc}
+\title{function definition }
 \description{extract the function definition (the R-function) }
 \arguments{
   \item{object}{

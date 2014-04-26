@@ -24,19 +24,19 @@ ThreepSeriesModel14<-structure(
     if(length(ks)!=3) stop("ks must be of length = 3")
     if(length(C0)!=3) stop("the vector with initial conditions must be of length = 3")
     
-    if(length(In)==1) inputFluxes=new("TimeMap",
+    if(length(In)==1) inputFluxes=BoundInFlux(
+                                      function(t){matrix(nrow=3,ncol=1,c(In,0,0))},
                                       t_start,
-                                      t_stop,
-                                      function(t){matrix(nrow=3,ncol=1,c(In,0,0))}
+                                      t_stop
                                       )
     if(class(In)=="data.frame"){
       x=In[,1]  
       y=In[,2]  
       inputFlux=function(t0){as.numeric(spline(x,y,xout=t0)[2])}
-      inputFluxes=new("TimeMap",
+      inputFluxes=BoundInFlux(
+                      function(t){matrix(nrow=3,ncol=1,c(inputFlux(t),0,0))},
                       t_start,
-                      t_stop,
-                      function(t){matrix(nrow=3,ncol=1,c(inputFlux(t),0,0))}
+                      t_stop
                       )   
     }
     
@@ -53,12 +53,12 @@ ThreepSeriesModel14<-structure(
     A[2,1]=a21
     A[3,2]=a32
     
-    At=new(Class="BoundLinDecompOp",
-           t_start,
-           t_stop,
+    At=BoundLinDecompOp(
            function(t){
              fX(t)*A
-           }
+           },
+           t_start,
+           t_stop
            ) 
     
     Fc=BoundFc(inputFc,lag=lag,format="Delta14C")

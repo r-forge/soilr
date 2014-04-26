@@ -1,21 +1,21 @@
-\name{InFlux_method__TimeMap}
-\alias{InFlux_method__TimeMap}
-\title{create a BoundInFlux from a TimeMap object}
-\description{The method is used to ensure backward compatibility with the now deprecated
-TimeMap class.
-The resulting BoundInFlux is created by a call to
-the constructor BoundInFlux(object) of that class.}
-\arguments{
-  \item{object}{
+\name{InFlux-class}
+\Rdversion{1.1}
+\docType{class}
+\alias{InFlux-class}
+\title{Class \code{"InFlux"}}
+\description{
+NA
 }
+\section{Methods}{
+  \describe{
+    \item{InFlux}{\code{signature(object = "InFlux")}: ... }
+	 }
 }
-
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\author{
+ Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de> 
+}
+\examples{
+showClass("InFlux")
+}
+\keyword{classes}

@@ -1,33 +1,15 @@
-\name{getTimeRange-methods}
+\name{getReleaseFlux14-methods}
 \docType{methods}
-\alias{getTimeRange-methods}
-\alias{getTimeRange,BoundFc-method}
-\alias{getTimeRange,BoundInFlux-method}
-\alias{getTimeRange,BoundLinDecompOp-method}
-\alias{getTimeRange,ConstLinDecompOp-method}
-\alias{getTimeRange,DecompositionOperator-method}
-\alias{getTimeRange,TimeMap-method}
-\alias{getTimeRange,TransportDecompositionOperator-method}
-\title{ ~~ Methods for Function \code{getTimeRange}  ~~}
+\alias{getReleaseFlux14-methods}
+\alias{getReleaseFlux14,Model_14-method}
+\title{ ~~ Methods for Function \code{getReleaseFlux14}  ~~}
 \description{
- ~~ Methods for function \code{getTimeRange} ~~
+ ~~ Methods for function \code{getReleaseFlux14} ~~
 }
 \section{Methods}{
   \describe{
-    \item{\code{signature(object = "BoundFc")}}{
-      \code{\link{getTimeRange_method__BoundFc}}  
-    }
-    \item{\code{signature(object = "BoundLinDecompOp")}}{
-      \code{\link{getTimeRange_method__BoundLinDecompOp}}  
-    }
-    \item{\code{signature(object = "ConstLinDecompOp")}}{
-      \code{\link{getTimeRange_method__ConstLinDecompOp}}  
-    }
-    \item{\code{signature(object = "DecompositionOperator")}}{
-      \code{\link{getTimeRange_method__DecompositionOperator}}  
-    }
-    \item{\code{signature(object = "TimeMap")}}{
-      \code{\link{getTimeRange_method__TimeMap}}  
+    \item{\code{signature(object = "Model_14")}}{
+      \code{\link{getReleaseFlux14_method__Model_14}}  
     }
 
   }

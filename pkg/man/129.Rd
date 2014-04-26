@@ -1,17 +1,16 @@
-\name{fW.Moyano}
-\alias{fW.Moyano}
-\title{Effects of moisture on decomposition rates according to the function proposed by Moyano et al. (2013)}
-\description{Calculates the effects of water content on decomposition rates.}
-\usage{fW.Moyano(theta, a = 3.11, b = 2.42)}\arguments{
-  \item{theta}{A scalar or vector containing values of volumetric soil water content.}
-  \item{a}{Empirical parameter}
-  \item{b}{Empirical parameter}
+\name{fW.Daycent2}
+\alias{fW.Daycent2}
+\title{Effects of moisture on decomposition rates according to the DAYCENT model}
+\description{Calculates the effects of volumetric water content on decomposition rates according to the Daycent/Century models.}
+\usage{fW.Daycent2(W, WP = 0, FC = 100)}\arguments{
+  \item{W}{A scalar or vector of volumetric water content in percentage.}
+  \item{WP}{A scalar representing the wilting point in percentage.}
+  \item{FC}{A scalar representing the field capacity in percentage.}
 }
 
-
-\references{F. E. Moyano, S. Manzoni, C. Chenu. 2013
-Responses of soil heterotrophic respiration to moisture availability: An exploration of processes and models. 
-Soil Biology and Biochemistry, Volume 59, April 2013, Pages 72-85}
+\value{A data frame with values of relative water content (RWC) and the effects of RWC on decomposition rates (fRWC).}
+\references{Del Grosso, S. J., W. J. Parton, A. R. Mosier, E. A. Holland, E. Pendall, D. S. Schimel, and D. S. Ojima (2005), 
+Modeling soil CO2 emissions from ecosystems, Biogeochemistry, 73(1), 71-91.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -19,8 +18,7 @@ Soil Biology and Biochemistry, Volume 59, April 2013, Pages 72-85}
 
 
 \examples{
-th=seq(0,1,0.01)
-xi=fW.Moyano(theta=th)
-plot(th,xi,type="l",main="Effects of soil water content on decomposition rates",
-     xlab="Volumetric soil water content (cm3 cm-3)",ylab=expression(xi))
+W=10:90
+fW=fW.Daycent2(W,WP=10,FC=90)
+plot(fW,type="l",ylim=c(0,6)) #This plot reproduces Figure 1b, in del Grosso et al. (2005)
 }

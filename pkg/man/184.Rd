@@ -1,19 +1,18 @@
-\name{getTimes-methods}
-\docType{methods}
-\alias{getTimes-methods}
-\alias{getTimes,Model-method}
-\alias{getTimes,NlModel-method}
-\title{ ~~ Methods for Function \code{getTimes}  ~~}
-\description{
- ~~ Methods for function \code{getTimes} ~~
+\name{getTimeRange_method__BoundInFlux}
+\alias{getTimeRange_method__BoundInFlux}
+\title{time domain of the function}
+\description{The method returns a vector containing the start and end time where the intepolation is valid.}
+\arguments{
+  \item{object}{
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "Model")}}{
-      \code{\link{getTimes_method__Model}}  
-    }
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

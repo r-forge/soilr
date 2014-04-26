@@ -1,17 +1,18 @@
-\name{fW.Century}
-\alias{fW.Century}
-\title{Effects of moisture on decomposition rates according to the CENTURY model}
-\description{Calculates the effects of precipitation and potential evapotranspiration on decomposition rates.}
-\usage{fW.Century(PPT, PET)}\arguments{
-  \item{PPT}{A scalar or vector containing values of monthly precipitation.}
-  \item{PET}{A scalar or vector containing values of potential evapotranspiration.}
+\name{fT.Standcarb}
+\alias{fT.Standcarb}
+\title{Effects of temperature on decomposition rates according to the StandCarb model}
+\description{Calculates the effects of temperature on decomposition rates according to the StandCarb model.}
+\usage{fT.Standcarb(Temp, Topt = 45, Tlag = 4, Tshape = 15, Q10 = 2)}\arguments{
+  \item{Temp}{A scalar or vector containing values of temperature for which the effects on decomposition rates are calculated.}
+  \item{Topt}{A scalar representing the optimum temperature for decomposition.}
+  \item{Tlag}{A scalar that determines the lag of the response curve.}
+  \item{Tshape}{A scalar that determines the shape of the response curve.}
+  \item{Q10}{A scalar. Temperature coefficient Q10.}
 }
 
-\value{A scalar or a vector containing the effects of precipitation and potential evapotranspiration on decomposition rates (unitless).}
-\references{Adair, E. C., W. J. Parton, S. J. D. Grosso, W. L. Silver, M. E. Harmon, S. A. Hall, I. C. Burke, and S. C. Hart (2008), 
-Simple three-pool model accurately describes patterns of long-term litter decomposition in diverse climates, Global Change Biology, 14(11), 2636-2660.
-\code{\\} Parton, W. J., J. A. Morgan, R. H. Kelly, and D. S. Ojima (2001), Modeling soil C responses to environmental change in grassland systems, 
-in The potential of U.S. grazing lands to sequester carbon and mitigate the greenhouse effect, edited by R. F. Follett, J. M. Kimble and R. Lal, pp. 371-398, Lewis Publishers, Boca Raton.}
+\value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
+\references{Harmon, M. E., and J. B. Domingo (2001), A users guide to STANDCARB version 2.0: 
+A model to simulate carbon stores in forest stands. Oregon State University, Corvallis.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -19,10 +20,7 @@ in The potential of U.S. grazing lands to sequester carbon and mitigate the gree
 
 
 \examples{
-PPT=seq(0,1500,by=10)
-PET=rep(1500,length(PPT))
-PPT.PET=fW.Century(PPT,PET)
-plot(PPT/PET,PPT.PET, 
-     ylab="f(PPT, PET) (unitless)", 
-     main="Effects of precipitation and potential evapotranspiration on decomposition rates")
+Temperature=0:50
+plot(Temperature,fT.Standcarb(Temperature),type="l",ylab="f(T) (unitless)", 
+     main="Effects of temperature on decomposition rates according to the StandCarb model")
 }

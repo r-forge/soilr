@@ -1,11 +1,18 @@
-\name{getInitialValues-methods}
-\docType{methods}
-\alias{getInitialValues-methods}
-\alias{getInitialValues,NlModel-method}
-\title{ ~~ Methods for Function \code{getInitialValues}  ~~}
-\description{
- All methods for function \code{getInitialValues} are intended for internal use inside the package only. 
+\name{getFunctionDefinition_method__ConstLinDecompOp}
+\alias{getFunctionDefinition_method__ConstLinDecompOp}
+\title{creates a constant timedependent function and returns it}
+\description{The method creates a timedependent function from the existing matrix describing the operator }
+\arguments{
+  \item{object}{
+}
 }
 
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

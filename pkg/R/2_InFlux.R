@@ -25,10 +25,10 @@ setMethod(
   ### This method handles the case that no actual construction is necessary since
   ### the argument is already of a subclass of InFlux 
   ##<<details This is useful to simplify argument handling of functions which rely on 
-  ##<<details the presence of some kind of an InFlux 
-  ##<<details Due to this method those functions can 
-  ##<<details call InFlux(something) without having to check if 
-  ##<<details it is necessary.
+  ## the presence of some kind of an InFlux 
+  ## Due to this method those functions can 
+  ## call InFlux(something) without having to check if 
+  ## it is necessary.
   (object){
     object
     ### the unchanged argument

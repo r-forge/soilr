@@ -1,38 +1,27 @@
-\name{GeneralModel_14-methods}
-\docType{methods}
-\alias{GeneralModel_14-methods}
-\alias{GeneralModel_14,numeric,ANY,numeric,ANY,ANY,ANY,missing,missing,missing,missing,logical-method}
-\alias{GeneralModel_14,numeric,ANY,numeric,ANY,ANY,ANY,missing,numeric,missing,function,logical-method}
-\alias{GeneralModel_14,numeric,ANY,numeric,ANY,ANY,ANY,missing,numeric,missing,function,missing-method}
-\alias{GeneralModel_14,numeric,ANY,numeric,ANY,ANY,ANY,missing,numeric,missing,missing,logical-method}
-\alias{GeneralModel_14,numeric,ANY,numeric,ANY,ANY,ANY,missing,numeric,missing,missing,missing-method}
-\alias{GeneralModel_14,numeric,ANY,numeric,ANY,ANY,missing,ANY,numeric,missing,missing,missing-method}
-\title{ ~~ Methods for Function \code{GeneralModel_14}  ~~}
-\description{
- ~~ Methods for function \code{GeneralModel_14} ~~
+\name{GeneralModel}
+\alias{GeneralModel}
+\title{A general constructor }
+\description{Creates a Model object from different sources
+Have a look at the methods for details.}
+\usage{GeneralModel(t, A, ivList, inputFluxes, ...)}\arguments{
+  \item{t}{
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(t = "numeric", A = "ANY", ivList = "numeric", initialValF = "ANY", inputFluxes = "ANY", inputFc = "ANY", Fc = "missing", di = "missing", lambda = "missing", solverfunc = "missing", pass = "logical")}}{
-      \code{\link{GeneralModel_14_method__numeric_ANY_numeric_ANY_ANY_ANY_missing_missing_missing_missing_logical}}  
-    }
-    \item{\code{signature(t = "numeric", A = "ANY", ivList = "numeric", initialValF = "ANY", inputFluxes = "ANY", inputFc = "ANY", Fc = "missing", di = "numeric", lambda = "missing", solverfunc = "function", pass = "logical")}}{
-      \code{\link{GeneralModel_14_method__numeric_ANY_numeric_ANY_ANY_ANY_missing_numeric_missing_function_logical}}  
-    }
-    \item{\code{signature(t = "numeric", A = "ANY", ivList = "numeric", initialValF = "ANY", inputFluxes = "ANY", inputFc = "ANY", Fc = "missing", di = "numeric", lambda = "missing", solverfunc = "function", pass = "missing")}}{
-      \code{\link{GeneralModel_14_method__numeric_ANY_numeric_ANY_ANY_ANY_missing_numeric_missing_function_missing}}  
-    }
-    \item{\code{signature(t = "numeric", A = "ANY", ivList = "numeric", initialValF = "ANY", inputFluxes = "ANY", inputFc = "ANY", Fc = "missing", di = "numeric", lambda = "missing", solverfunc = "missing", pass = "logical")}}{
-      \code{\link{GeneralModel_14_method__numeric_ANY_numeric_ANY_ANY_ANY_missing_numeric_missing_missing_logical}}  
-    }
-    \item{\code{signature(t = "numeric", A = "ANY", ivList = "numeric", initialValF = "ANY", inputFluxes = "ANY", inputFc = "ANY", Fc = "missing", di = "numeric", lambda = "missing", solverfunc = "missing", pass = "missing")}}{
-      \code{\link{GeneralModel_14_method__numeric_ANY_numeric_ANY_ANY_ANY_missing_numeric_missing_missing_missing}}  
-    }
-    \item{\code{signature(t = "numeric", A = "ANY", ivList = "numeric", initialValF = "ANY", inputFluxes = "ANY", inputFc = "missing", Fc = "ANY", di = "numeric", lambda = "missing", solverfunc = "missing", pass = "missing")}}{
-      \code{\link{GeneralModel_14_method__numeric_ANY_numeric_ANY_ANY_missing_ANY_numeric_missing_missing_missing}}  
-    }
+  \item{A}{
+}
+  \item{ivList}{
+}
+  \item{inputFluxes}{
+}
+  \item{\dots}{
+}
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

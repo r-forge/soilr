@@ -1,13 +1,9 @@
-\name{BoundLinDecompOp_method__function_numeric_numeric_missing}
-\alias{BoundLinDecompOp_method__function_numeric_numeric_missing}
-\title{a constructor }
-\description{This method creates a BoundLinDecompOp from a timedependent function and its domain }
+\name{BoundLinDecompOp_method__TimeMap_missing_missing_missing}
+\alias{BoundLinDecompOp_method__TimeMap_missing_missing_missing}
+\title{create a BoundLinDecompOp from a TimeMap}
+\description{The method is used internally to convert TimeMap objects to BoundLinDecompOp where the use of TimeMap is now deprecated.}
 \arguments{
   \item{map}{
-}
-  \item{starttime}{
-}
-  \item{endtime}{
 }
 }
 

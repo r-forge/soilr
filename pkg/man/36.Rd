@@ -1,10 +1,9 @@
-\name{ConstLinDecompOp_method__matrix}
-\alias{ConstLinDecompOp_method__matrix}
-\title{construct from matric}
-\description{This method creates a ConstLinDecompOp from a matrix
-The operator is assumed to act on the vector of carbon stocks
-by multiplication of the (time invariant) matrix from the left.}
-\arguments{
+\name{ConstLinDecompOp}
+\alias{ConstLinDecompOp}
+\title{Generic constructor}
+\description{Creates a ConstantDecompositonOperator object from different sources.
+Please look at the different methods to see what kind of input is supported. }
+\usage{ConstLinDecompOp(mat)}\arguments{
   \item{mat}{
 }
 }

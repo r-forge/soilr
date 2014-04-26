@@ -8,8 +8,6 @@
      )
      {
       warning(WarningConstFc())
- 	#F0=new(Class="SoilR.F0",values=values,format=format)
- 	#F0=new(Class="SoilR.F0",values=values,format=format)
  	F0=ConstFc(values=values,format=format)
  	return(F0)
  	### An object of class SoilR.F0 that contains data and a format description that can later be used to convert the data into other formats if the conversion is implemented.

@@ -1,18 +1,11 @@
-\name{getReleaseFlux14-methods}
+\name{getOutputReceivers-methods}
 \docType{methods}
-\alias{getReleaseFlux14-methods}
-\alias{getReleaseFlux14,Model_14-method}
-\title{ ~~ Methods for Function \code{getReleaseFlux14}  ~~}
+\alias{getOutputReceivers-methods}
+\alias{getOutputReceivers,TransportDecompositionOperator,numeric-method}
+\title{ ~~ Methods for Function \code{getOutputReceivers}  ~~}
 \description{
- ~~ Methods for function \code{getReleaseFlux14} ~~
+ All methods for function \code{getOutputReceivers} are intended for internal use inside the package only. 
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "Model_14")}}{
-      \code{\link{getReleaseFlux14_method__Model_14}}  
-    }
 
-  }
-}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

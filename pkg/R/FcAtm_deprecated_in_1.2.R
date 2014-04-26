@@ -9,6 +9,7 @@ lag=0, ##<< a scalar describing the time lag. Positive Values shift the argument
 interpolation=splinefun, ##<<A function that  returns a function  the default is splinefun. Other possible values are the linear interpolation approxfun or any self made function with the same interface.
 format ##<< a string that specifies the format used to represent the atmospheric fracton. Possible values are "Delta14C" which is the default or "afn" the Absolute Fraction Normal representation 
 ){
+   warning("The class FcAtm is deprecated, you can use the generic constructor BoundFc with the same data.frame arguemten instead")
    t=dframe[,1]  
    y=dframe[,2]  
    o=order(t)

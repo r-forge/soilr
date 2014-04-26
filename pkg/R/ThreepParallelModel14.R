@@ -26,19 +26,19 @@ ThreepParallelModel14<-structure(
     if((gam1+gam2)^2 > 1) stop("The sum of the partitioning coefficients gam is outside the interval [0,1]")
     if(gam1 < 0 | gam2 < 0) stop("Partitioning coefficients gam must be positive")
     
-    if(length(In)==1) inputrates=new("TimeMap",
+    if(length(In)==1) inputrates=BoundInFlux(
+                                     function(t){matrix(nrow=3,ncol=1,c(gam1*In,gam2*In,(1-gam1-gam2)*In))},
                                      t_start,
-                                     t_stop,
-                                     function(t){matrix(nrow=3,ncol=1,c(gam1*In,gam2*In,(1-gam1-gam2)*In))}
+                                     t_stop
                                      )
     if(class(In)=="data.frame"){
       x=In[,1]  
       y=In[,2]  
       inputrate=function(t0){as.numeric(spline(x,y,xout=t0)[2])}
-      inputrates=new("TimeMap",
+      inputrates=BoundInFlux(
+                     function(t){matrix(nrow=3,ncol=1,c(gam1*inputrate(t),gam2*inputrate(t),(1-gam1-gam2)*inputrate(t)))},
                      t_start,
-                     t_stop,
-                     function(t){matrix(nrow=3,ncol=1,c(gam1*inputrate(t),gam2*inputrate(t),(1-gam1-gam2)*inputrate(t)))}
+                     t_stop
                      )   
     }
     
@@ -50,12 +50,12 @@ ThreepParallelModel14<-structure(
     }
     
     
-    At=new(Class="BoundLinDecompOp",
-           t_start,
-           t_stop,
+    At=BoundLinDecompOp(
            function(t){
              fX(t)*diag(-abs(ks))
-           }
+           },
+           t_start,
+           t_stop
            ) 
     
     Fc=BoundFc(inputFc,lag=lag,format="Delta14C")

@@ -1,36 +1,19 @@
-\name{getFunctionDefinition-methods}
-\docType{methods}
-\alias{getFunctionDefinition-methods}
-\alias{getFunctionDefinition,BoundFc-method}
-\alias{getFunctionDefinition,BoundInFlux-method}
-\alias{getFunctionDefinition,BoundLinDecompOp-method}
-\alias{getFunctionDefinition,ConstLinDecompOp-method}
-\alias{getFunctionDefinition,DecompositionOperator-method}
-\alias{getFunctionDefinition,TimeMap-method}
-\alias{getFunctionDefinition,TransportDecompositionOperator-method}
-\title{ ~~ Methods for Function \code{getFunctionDefinition}  ~~}
-\description{
- ~~ Methods for function \code{getFunctionDefinition} ~~
+\name{getF14_method__Model_14}
+\alias{getF14_method__Model_14}
+\title{radiocarbon}
+\description{Calculates the radiocarbon fraction for each pool at each time step.
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "BoundFc")}}{
-      \code{\link{getFunctionDefinition_method__BoundFc}}  
-    }
-    \item{\code{signature(object = "BoundLinDecompOp")}}{
-      \code{\link{getFunctionDefinition_method__BoundLinDecompOp}}  
-    }
-    \item{\code{signature(object = "ConstLinDecompOp")}}{
-      \code{\link{getFunctionDefinition_method__ConstLinDecompOp}}  
-    }
-    \item{\code{signature(object = "DecompositionOperator")}}{
-      \code{\link{getFunctionDefinition_method__DecompositionOperator}}  
-    }
-    \item{\code{signature(object = "TimeMap")}}{
-      \code{\link{getFunctionDefinition_method__TimeMap}}  
-    }
+\arguments{
+  \item{object}{
+}
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+\value{A matrix of dimension n x m; i.e. n time steps as rows and m pools as columns.}
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

@@ -1,32 +1,32 @@
-\name{eCO2}
-\alias{eCO2}
-\docType{data}
-\title{
- Soil CO2 efflux from incubation experiments
+\name{bind.C14curves}
+\alias{bind.C14curves}
+\title{Binding of pre- and post-bomb Delta14C curves}
+\description{This function takes a pre- and a post-bomb curve, binds them together, and reports the results back either in years BP or AD.}
+\usage{bind.C14curves(prebomb, postbomb, time.scale)}\arguments{
+  \item{prebomb}{A pre-bomb radiocarbon dataset. They could be either \code{\link{IntCal09}} or \code{\link{IntCal13}}.}
+  \item{postbomb}{A post-bomb radiocarbon dataset. They could be any of the datasets in \code{\link{Hua2013}}.}
+  \item{time.scale}{A character indicating whether to report the results in years before present \code{BP} or anno domini \code{AD}.}
 }
-\description{
-A dataset with soil CO2 efflux measurements in two laboratory incubations at controlled temperature and moisture conditions.
-}
-\usage{data(eCO2)}
-\format{
-  A data frame with the following 4 variables.
-  \describe{
-    \item{\code{Sample}}{Sample code: AK_T25 is a soil from a boreal forest in Alaska incubated at 25 degrees C. HN_T35 is a soil from a temperate German forest (Hainich National Park) incubated at 35 degrees C.}
-    \item{\code{Days}}{A numeric vector with the day of measurement.}
-    \item{\code{eCO2mean}}{A numeric vector with the accumulated release of CO2. Units in mg C g-1 soil C.}
-    \item{\code{eCO2sd}}{A numeric vector with the standard deviation of the accumulated release of CO2. Units in mg C g-1 soil C.}
-  }
-}
-\details{
-Two laboratory incubation experiments where performed in April-May 2013 for a period of 42 days. Soil CO2 measurements were taken under controlled laboratory conditions. One soil was sampled at a boreal forest site (Caribou Poker Research Watershed, Alaska, USA) and the other from a temperate forest in Germany (Hainich National Park). For each soil 5 replicates were incubated and sampled. This dataset presents the mean and standard deviation of the measurements.
-}
-\examples{
-head(eCO2)
 
-plot(eCO2mean~Days,data=eCO2,subset=Sample=="HN_T35",col=2)
-points(eCO2mean~Days,data=eCO2,subset=Sample=="AK_T25",col=4)
-legend("topleft",
-       c("HN_T35: temperate forest soil","AK_T25: boreal forest soil"),
-       pch=1,col=c(2,4),bty="n")
+\value{A \code{data.frame} with 3 columns: years in AD or BP, the atmospheric Delta14C value, the standard deviation of the Delta14C value.}
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+\examples{
+#Bind the IntCal13 dataset and Hua2013 for the NH Zone 1
+bp=bind.C14curves(prebomb=IntCal13,postbomb=Hua2013$NHZone1,time.scale="BP")
+
+plot(bp[,1:2],type="l")
+plot(bp[,1:2],type="l",xlim=c(-100,100))
+
+#Report results in years AD
+ad=bind.C14curves(prebomb=IntCal13,postbomb=Hua2013$NHZone1,time.scale="AD")
+
+plot(ad[,1:2],type="l")
+plot(ad[,1:2],type="l",xlim=c(0,2010))
+abline(v=1950,lty=2)
 }
-\keyword{datasets}

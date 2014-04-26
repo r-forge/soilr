@@ -44,11 +44,17 @@ bacwaveModel<-structure(
     
     Anl=new("TransportDecompositionOperator",t_start,Inf,nr,alpha,f)
     
-    inputrates=new("TimeMap",t_start,t_end,function(t){return(matrix(
-      nrow=nr,
-      ncol=1,
-      c(BGF+(ExuM*exp(-ExuT*t)),  0)
-    ))})
+    inputrates=BoundInFlux(
+      function(t){
+        matrix(
+          nrow=nr,
+          ncol=1,
+          c(BGF+(ExuM*exp(-ExuT*t)),  0)
+        )
+      },
+      t_start,
+      t_end
+    )
     
     modnl=GeneralNlModel(t, Anl, ival, inputrates, deSolve.lsoda.wrapper)
     

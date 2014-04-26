@@ -3,7 +3,7 @@
 \title{convert to Absolute Fraction Normal values  }
 \description{convert a BoundFc object containing values in any supported format to the appropriate Absolute Fraction Modern values.}
 \arguments{
-  \item{F}{object of class BoundFc containing the values in any format}
+  \item{F}{object containing the values in any format}
 }
 
 

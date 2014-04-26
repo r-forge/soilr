@@ -51,7 +51,7 @@ setMethod(
     f="getValues",
     signature="ConstFc",
     definition=function# extract the format string
-			(object ##<< object of class ConstFc containing information aboutn the format that could be Delta14C or AFM (Absolute Fraction Modern) for instance
+			(object ##<< object containing information aboutn the format that could be Delta14C or AFM (Absolute Fraction Modern) for instance
 			){
        ### the function just yields the format as a string
         return(object@values)
@@ -61,7 +61,7 @@ setMethod(
    f= "Delta14C",
       signature("ConstFc"),
       definition=function# convert to Absolute Fraction Normal values  
-	(F##<< object of class SoilR.Fo containing the values in any format
+	(F##<< object containing the values in any format
 	){
 	### convert a ConstFc object containing values in any supported format to the appropriate Absolute Fraction Modern values.
 	f=F@format
@@ -86,7 +86,7 @@ setMethod(
    f= "AbsoluteFractionModern",
       signature("ConstFc"),
       definition=function# convert to Absolute Fraction Normal values  
-	(F ##<< object of class ConstFc containing the values in any format
+	(F ##<< object containing the values in any format
 	){
 	### convert a ConstFc object containing values in any supported format to the appropriate Absolute Fraction Modern values.
 	f=F@format

@@ -1,11 +1,19 @@
-\name{availableParticleSets-methods}
-\docType{methods}
-\alias{availableParticleSets-methods}
-\alias{availableParticleSets,MCSim-method}
-\title{ ~~ Methods for Function \code{availableParticleSets}  ~~}
-\description{
- All methods for function \code{availableParticleSets} are intended for internal use inside the package only. 
+\name{as.character_method__BoundInFlux}
+\alias{as.character_method__BoundInFlux}
+\title{convert BoundInFlux Objects to something printable.}
+\description{returns a string describing the object}
+\arguments{
+  \item{x}{An object}
+  \item{\dots}{
+}
 }
 
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

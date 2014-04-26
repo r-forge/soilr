@@ -1,34 +1,24 @@
-\name{BoundLinDecompOp-class}
-\Rdversion{1.1}
-\docType{class}
-\alias{BoundLinDecompOp-class}
-\title{Class \code{"BoundLinDecompOp"}}
-\description{
-NA
+\name{BoundInFlux_method__function_numeric_numeric_numeric_missing}
+\alias{BoundInFlux_method__function_numeric_numeric_numeric_missing}
+\title{costructor }
+\description{the method constructs an object from its basic ingredients}
+\arguments{
+  \item{map}{
 }
-\section{Slots}{
-  \describe{
-    \item{\code{map}:}{Object of class \code{"function"} ~~ }
-    \item{\code{lag}:}{Object of class \code{"numeric"} ~~ }
-    \item{\code{starttime}:}{Object of class \code{"numeric"} ~~ }
-    \item{\code{endtime}:}{Object of class \code{"numeric"} ~~ }
-  }
+  \item{starttime}{
 }
-\section{Extends}{
-Class \code{"\linkS4class{DecompOp}"}, directly.
+  \item{endtime}{
 }
-\section{Methods}{
-  \describe{
-    \item{getFunctionDefinition}{\code{signature(object = "BoundLinDecompOp")}: ... }
-    \item{getTimeRange}{\code{signature(object = "BoundLinDecompOp")}: ... }
-    \item{initialize}{\code{signature(.Object = "BoundLinDecompOp")}: ... }
-	 }
+  \item{lag}{
 }
-\author{
- Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de> 
 }
-\examples{
-showClass("BoundLinDecompOp")
-}
-\keyword{classes}
+
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

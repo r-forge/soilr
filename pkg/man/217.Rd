@@ -1,12 +1,9 @@
-\name{[_method__Model_character}
-\alias{[_method__Model_character}
-\title{(experimenta) partially overload [ ] for models }
-\description{This method overloads the [] operator for Model objects but is not yet finished so the full interface for [] is not yet implemented
-and the behavior is very likely to change in future versions of SoilR}
+\name{summary_method__Model}
+\alias{summary_method__Model}
+\title{summary method  Model}
+\description{This function is a stub}
 \arguments{
-  \item{x}{
-}
-  \item{i}{
+  \item{object}{
 }
 }
 

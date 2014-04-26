@@ -1,21 +1,21 @@
-\name{plot-methods}
-\docType{methods}
-\alias{plot-methods}
-\alias{plot,ANY-method}
-\alias{plot,MCSim-method}
-\alias{plot,Model-method}
-\alias{plot,NlModel-method}
-\title{ ~~ Methods for Function \code{plot}  ~~}
-\description{
- ~~ Methods for function \code{plot} ~~
+\name{initialize_method__ConstLinDecompOp}
+\alias{initialize_method__ConstLinDecompOp}
+\title{internal constructor }
+\description{This mehtod is intendet to be used internally. It may change in the future.
+For user code it is recommended to use one of the generic constructor \code{ConstLinDecompOp} instead.}
+\arguments{
+  \item{.Object}{
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(x = "Model")}}{
-      \code{\link{plot_method__Model}}  
-    }
+  \item{mat}{
+}
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

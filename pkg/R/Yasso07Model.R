@@ -22,21 +22,14 @@ Yasso07Model<-structure(
       if(length(p)!=13) stop("The vector of transfer coefficients p must be of length = 13")
       
       if(length(In)==1){
-          inputFluxes=TimeMap.new(
+          inputFluxes=BoundInFlux(
+            function(t){matrix(nrow=5,ncol=1,c(In,0,0,0,0))},
             t_start,
-            t_end,
-            function(t){matrix(nrow=5,ncol=1,c(In,0,0,0,0))}
+            t_end
         )
       }
       if(class(In)=="data.frame"){
-       #  x=In[,1]  
-       #  y=In[,2]
-       #  inputFlux=splinefun(x,y)
-       #  inputFluxes=TimeMap.new(
-       #   t_start, # these are taken from another argument of the function 
-       #   t_end,   # and have nothing to do with the times in the dataframe
-       #   function(t){matrix(nrow=5,ncol=1,c(inputFlux(t),0,0,0,0))}
-       inputFluxes=TimeMap.from.Dataframe(In)
+       inputFluxes=BoundInFlux(In)
       }
       A1=abs(diag(ks))
       Ap=diag(-1,5,5)
@@ -58,13 +51,13 @@ Yasso07Model<-structure(
       
       if(length(xi)==1){
 	fX=function(t){xi}
-	Af=new("BoundLinDecompOp",t_start,t_end,function(t) fX(t)*A)
+	Af=BoundLinDecompOp(function(t) fX(t)*A,t_start,t_end)
 	}
       if(class(xi)=="data.frame"){
 	      X=xi[,1]
       	Y=xi[,2]
         fX=splinefun(X,Y)
-	Af=new("BoundLinDecompOp",min(X),max(X),function(t) fX(t)*A)
+	Af=BoundLinDecompOp(function(t){fX(t)*A},min(X),max(X))
        }
       Mod=GeneralModel(t=t,A=Af,ivList=C0,inputFluxes=inputFluxes,solver,pass)
      return(Mod)

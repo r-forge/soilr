@@ -70,7 +70,7 @@ setMethod(
         starttime,
         endtime
       ){
-      return(new("BoundLinDecompOp",starttime=starttime,endtime=endtime,map=map,lag=0))
+      return(BoundLinDecompOp(starttime=starttime,endtime=endtime,map=map,lag=0))
     }
 )
 #---------------------------------------------------------------------
@@ -82,7 +82,7 @@ setMethod(
 #      definition=function # a constructor for a single function without limits  
 #      ### This method creates a BoundLinDecompOp from a timedependent function and a lag only
 #      (map,lag=0){
-#      return(new("BoundLinDecompOp",starttime=-Inf,endtime=Inf,map=map))
+#      return(BoundLinDecompOp(starttime=-Inf,endtime=Inf,map=map))
 #    }
 #)
 #---------------------------------------------------------------------

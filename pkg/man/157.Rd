@@ -1,10 +1,9 @@
-\name{getFunctionDefinition_method__BoundFc}
-\alias{getFunctionDefinition_method__BoundFc}
-\title{function definition }
-\description{extract the function definition (the R-function) }
+\name{getFormat_method__BoundFc}
+\alias{getFormat_method__BoundFc}
+\title{extract the format string}
+\description{the function just yields the format as a string}
 \arguments{
-  \item{object}{
-}
+  \item{object}{object  containing imformation about the format that could be Delta14C or AFM (Absolute Fraction Modern) for instance}
 }
 
 

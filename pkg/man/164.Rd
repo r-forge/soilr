@@ -1,18 +1,18 @@
-\name{getMeanTransitTime-methods}
-\docType{methods}
-\alias{getMeanTransitTime-methods}
-\alias{getMeanTransitTime,ConstLinDecompOp-method}
-\title{ ~~ Methods for Function \code{getMeanTransitTime}  ~~}
-\description{
- ~~ Methods for function \code{getMeanTransitTime} ~~
+\name{getFunctionDefinition_method__DecompositionOperator}
+\alias{getFunctionDefinition_method__DecompositionOperator}
+\title{getFunctionDefinition method  DecompositionOperator}
+\description{extract the function definition (the R-function) }
+\arguments{
+  \item{object}{
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "ConstLinDecompOp")}}{
-      \code{\link{getMeanTransitTime_method__ConstLinDecompOp}}  
-    }
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

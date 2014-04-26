@@ -1,18 +1,14 @@
-\name{fT.Standcarb}
-\alias{fT.Standcarb}
-\title{Effects of temperature on decomposition rates according to the StandCarb model}
-\description{Calculates the effects of temperature on decomposition rates according to the StandCarb model.}
-\usage{fT.Standcarb(Temp, Topt = 45, Tlag = 4, Tshape = 15, Q10 = 2)}\arguments{
-  \item{Temp}{A scalar or vector containing values of temperature for which the effects on decomposition rates are calculated.}
-  \item{Topt}{A scalar representing the optimum temperature for decomposition.}
-  \item{Tlag}{A scalar that determines the lag of the response curve.}
-  \item{Tshape}{A scalar that determines the shape of the response curve.}
-  \item{Q10}{A scalar. Temperature coefficient Q10.}
+\name{fT.LandT}
+\alias{fT.LandT}
+\title{Effects of temperature on decomposition rates according to a function proposed by Lloyd and Taylor (1994)}
+\description{Calculates the effects of temperature on decomposition rates according to a function proposed by Lloyd and Taylor (1994).}
+\usage{fT.LandT(Temp)}\arguments{
+  \item{Temp}{A scalar or vector containing values of soil temperature for which the effects on decomposition rates are calculated}
 }
 
 \value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
-\references{Harmon, M. E., and J. B. Domingo (2001), A users guide to STANDCARB version 2.0: 
-A model to simulate carbon stores in forest stands. Oregon State University, Corvallis.}
+\references{Lloyd, J., and J. A. Taylor (1994), On the Temperature Dependence of Soil Respiration, 
+Functional Ecology, 8(3), 315-323.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -21,6 +17,8 @@ A model to simulate carbon stores in forest stands. Oregon State University, Cor
 
 \examples{
 Temperature=0:50
-plot(Temperature,fT.Standcarb(Temperature),type="l",ylab="f(T) (unitless)", 
-     main="Effects of temperature on decomposition rates according to the StandCarb model")
+plot(Temperature,fT.LandT(Temperature),type="l",
+     ylab="f(T) (unitless)", 
+     main="Effects of temperature on decomposition 
+     rates according to the Lloyd and Taylor function")
 }

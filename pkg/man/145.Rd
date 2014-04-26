@@ -1,18 +1,11 @@
-\name{getF14}
-\alias{getF14}
-\title{Calculates the 14C fraction of all pools}
-\description{This function computes the radiocarbon fraction for all pools as funtion of time.}
-\usage{getF14(object)}\arguments{
-  \item{object}{
+\name{getDecompOp-methods}
+\docType{methods}
+\alias{getDecompOp-methods}
+\alias{getDecompOp,NlModel-method}
+\title{ ~~ Methods for Function \code{getDecompOp}  ~~}
+\description{
+ All methods for function \code{getDecompOp} are intended for internal use inside the package only. 
 }
-}
 
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

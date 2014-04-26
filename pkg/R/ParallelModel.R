@@ -21,8 +21,8 @@ ParallelModel=structure(function
     A=function(t){diag(x=coeffs(t))}
     tstart=getTimeRange(coeffs_tm)[[1]]
     tend=getTimeRange(coeffs_tm)[[2]]
-    A_tm=new("BoundLinDecompOp",tstart,tend,A)
-    obj=new(Class="Model",times,A_tm,startvalues,inputrates,solverfunc,pass)
+    A_tm=BoundLinDecompOp(A,tstart,tend)
+    obj=Model(times,A_tm,startvalues,inputrates,solverfunc,pass)
 ### a model object
 }
 ,ex=function(){

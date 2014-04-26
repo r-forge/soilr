@@ -3,7 +3,7 @@
 GaudinskiModel14<-structure(
   function #Implementation of a the six-pool C14 model proposed by Gaudinski et al. 2000
   ### This function creates a model as described in Gaudinski et al. 2000. 
-  ### It is a wrapper for the more general function \code{\link{GeneralModel_14}} that can handle an arbitrary number of pools.
+  ### It is a wrapper for the more general functions  \code{\link{GeneralModel_14}} that can handle an arbitrary number of pools.
   ##references<< Gaudinski JB, Trumbore SE, Davidson EA, Zheng S (2000) Soil carbon cycling in a temperate forest: radiocarbon-based estimates of residence times, sequestration rates and partitioning fluxes. Biogeochemistry 51: 33-69
   (t,      ##<< A vector containing the points in time where the solution is sought. It must be specified within the same period for which the Delta 14 C of the atmosphere is provided. The default period in the provided dataset \code{\link{C14Atm_NH}} is 1900-2010.
    ks=c(kr=1/1.5,koi=1/1.5,koeal=1/4,koeah=1/80,kA1=1/3,kA2=1/75,kM=1/110),	##<< A vector of length 7 containing the decomposition rates for the 6 soil pools plus the fine-root pool. 
@@ -24,10 +24,13 @@ GaudinskiModel14<-structure(
     if(length(ks)!=7) stop("ks must be of length = 7")
     if(length(C0)!=7) stop("the vector with initial conditions must be of length = 7")
     
-    if(length(LI)==1) inputFluxes=new("TimeMap",
+    if(length(LI)==1) inputFluxes=BoundInFlux(
+                                      function(t){
+                                        matrix(
+                                          nrow=7,ncol=1, c(RI,LI,0,0,0,0,0))
+                                      },
                                       t_start,
-                                      t_stop,
-                                      function(t){matrix(nrow=7,ncol=1,c(RI,LI,0,0,0,0,0))}
+                                      t_stop
                                       )
     if(class(LI)=="data.frame"){
       x1=LI[,1]  
@@ -36,11 +39,7 @@ GaudinskiModel14<-structure(
       y2=RI[,2]  
       LitterFlux=function(t0){as.numeric(spline(x1,y1,xout=t0)[2])}
       RootFlux=function(t0){as.numeric(spline(x2,y2,xout=t0)[2])}
-      inputFluxes=new("TimeMap",
-                      t_start,
-                      t_stop,
-                      function(t){matrix(nrow=7,ncol=1,c(RootFlux(t),LitterFlux(t),0,0,0,0,0))}
-                      )   
+      inputFluxes= BoundInFlux(map=function(t){matrix(nrow=7,ncol=1,c(RootFlux(t),LitterFlux(t),0,0,0,0,0))}, t_start, t_stop )   
     }
     
     if(length(xi)==1) fX=function(t){xi}
@@ -59,23 +58,23 @@ GaudinskiModel14<-structure(
     A[4,1]=ks[1]*(35/(35+190+30))
     A[5,1]=ks[1]*(30/(35+190+30))  
     
-    At=new(Class="BoundLinDecompOp",
+    At=BoundLinDecompOp(
+           map=function(t){ fX(t)*A },
            t_start,
-           t_stop,
-           function(t){
-             fX(t)*A
-           }
+           t_stop
            ) 
     
     Fc=BoundFc(inputFc,lag=lag,format="Delta14C")
     
-    mod=GeneralModel_14(t,
+    #mod=GeneralModel_14(t,
+    mod=Model_14(t,
       At,
       ivList=C0,
       initialValF=ConstFc(F0_Delta14C,"Delta14C"),
       inputFluxes=inputFluxes,
       inputFc=Fc,
-      di=lambda,
+      c14DecayRate=lambda,
+      #di=lambda,
       pass=pass
     )
     ### A Model Object that can be further queried 

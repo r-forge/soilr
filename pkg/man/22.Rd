@@ -1,15 +1,13 @@
-\name{BoundInFlux_method__function_numeric_numeric_numeric_missing}
-\alias{BoundInFlux_method__function_numeric_numeric_numeric_missing}
+\name{BoundInFlux_method__function_numeric_numeric_missing_missing}
+\alias{BoundInFlux_method__function_numeric_numeric_missing_missing}
 \title{costructor }
-\description{the method constructs a Temporary Input Flux from its basic ingredients}
+\description{the method constructs an object from its basic ingredients}
 \arguments{
   \item{map}{
 }
   \item{starttime}{
 }
   \item{endtime}{
-}
-  \item{lag}{
 }
 }
 

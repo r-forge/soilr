@@ -1,18 +1,11 @@
-\name{getReleaseFlux14}
-\alias{getReleaseFlux14}
-\title{Calculates the mass of radiocarbon in the release flux (14C fraction times release flux)}
-\description{This function computes the mass of radiocarbon in the release flux (14C fraction times release flux) as a function of time.}
-\usage{getReleaseFlux14(object)}\arguments{
-  \item{object}{
+\name{getParticleMonteCarloSimulator-methods}
+\docType{methods}
+\alias{getParticleMonteCarloSimulator-methods}
+\alias{getParticleMonteCarloSimulator,NlModel-method}
+\title{ ~~ Methods for Function \code{getParticleMonteCarloSimulator}  ~~}
+\description{
+ All methods for function \code{getParticleMonteCarloSimulator} are intended for internal use inside the package only. 
 }
-}
 
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

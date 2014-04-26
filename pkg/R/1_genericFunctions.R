@@ -4,7 +4,8 @@ setGeneric(
     name="Delta14C",
     def=function( # Converts its argument to a Delta14C representation
     ### The function returns an object of the same type as its input,
-    ### which can be a number, a matrix, or an object of class BoundFc
+    ### which can be of different type.
+    ### Have a look at the methods for details.
     F ##<< an object that contains data and a format description.  So it can be converted into the AbsoluteFractionModern format if a conversion is implemented.
     ){
         standardGeneric("Delta14C")
@@ -14,7 +15,8 @@ setGeneric(
     name="Delta14C_from_AbsoluteFractionModern",
     def=function( # Converts its argument from an Absolute Fraction Modern to a Delta14C representation
     ### The function returns an object of the same type as its input,
-    ### which can be a number or a matrix. 
+    ### which can be of different type.
+    ### Have a look at the methods for details.
     AbsoluteFractionModern ##<< A numeric object
     ){
         standardGeneric("Delta14C_from_AbsoluteFractionModern")
@@ -24,7 +26,8 @@ setGeneric(
     name="AbsoluteFractionModern",
     def=function( # Converts its argument to an Absolute Fraction Modern representation
     ### The function returns an object of the same type as its input,
-    ### which can be a number, a matrix, or an object of class BoundFc.
+    ### which can be of different type.
+    ### Have a look at the methods for details.
     F ##<< An object that contains data and a format description.  So it can be converted into the AbsoluteFractionModern format if a conversion is implemented.
     ){
         standardGeneric("AbsoluteFractionModern")
@@ -34,7 +37,8 @@ setGeneric(
     name="AbsoluteFractionModern_from_Delta14C",
     def=function( # Converts its argument to an Absolute Fraction Modern representation
     ### The function returns an object of the same type as its input,
-    ### which can be a number or a matrix 
+    ### which can be a number or a matrix.
+    ### Have a look at the methods for details.
     delta14C){
         standardGeneric("AbsoluteFractionModern_from_Delta14C")
     }
@@ -44,7 +48,7 @@ setGeneric(
     def=function( # Extracts the format from an object that contains one
     ### The function returns a format string that describes the format of the given data.
     ### More detailed information is given in the methods		 
-    object ##<< Usually an object of a subclass of TimeMap
+    object ##<< the type depends on the implementing method
     ){
         standardGeneric("getFormat")
     }
@@ -54,7 +58,7 @@ setGeneric(
     def=function( # Extracts numeric values from an object that contains additional information such as format or units
     ### The function returns the actual  number(s) 
     ### More detailed information is provided in the methods		 
-    object ##<< Usually an object of a class implemented by soilR e.g. a startvalue for the 14C fraction. 
+    object ##<< The class of object depends on the method 
     ){
         standardGeneric("getValues")
     }
@@ -63,7 +67,8 @@ setMethod(
    f= "AbsoluteFractionModern_from_Delta14C",
       signature("numeric"),
       definition=function(# Converts from Delta14C to Absolute Fraction Modern
-	### Converts a number or vector containing Delta14C values to the appropriate Absolute Fraction Modern values.
+      ### Converts a number or vector containing Delta14C values to the appropriate Absolute Fraction Modern values.
+      ### Have a look at the methods for details.
 	delta14C ##<< A numeric object containing the values in Delta14C format
 	){
 	fprime=(delta14C/1000)+1
@@ -75,17 +80,18 @@ setMethod(
       signature("numeric"),
       definition=function(# Converts to Delta14C format
       ### This method produces Delta14C values from Absolute Fraction Modern
-	AbsoluteFractionModern ##<< A numeric object containing the values in Absolute Fraction Modern format
-	){
-	D14C=(AbsoluteFractionModern-1)*1000
-	return(D14C)
-	}
+      ### Have a look at the methods for details.
+      AbsoluteFractionModern ##<< A numeric object containing the values in Absolute Fraction Modern format
+      ){
+        D14C=(AbsoluteFractionModern-1)*1000
+        return(D14C)
+      }
 )
 setMethod(
    f= "AbsoluteFractionModern_from_Delta14C",
       signature("matrix"),
       definition=function #Converts from Delta14C to Absolute Fraction Modern
- ### This method produces a matrix of Delta14C values from  a Matrix of  Absolute Fraction Modern
+      ### This method produces a matrix of Delta14C values from a Matrix or number of  Absolute Fraction Modern
 	(
    delta14C ##<< An object of class matrix containing the values in Delta14C format
 	){
@@ -255,57 +261,59 @@ setGeneric ( # This function
 setGeneric ( 
    name= "getC",
    def=function(# Calculates the C content of the pools 
-    ### This function computes the carbon content of the pools as function of time
-	object ##<< An object of class Model or Model14 created by a call to \code{\link{GeneralModel}} or other model creating functions.
+    ### This function computes the carbon content of the pools as function of time.
+    ### Have a look at the methods for details.
+	object ##<< some model object, the actual class depends on the method used.
   ,as.closures=F ##<< if set to TRUE instead of a matrix a list of functions will be returned.  
 	){standardGeneric("getC")
-    ##value<< A matrix with m columns representing the number of pools, and n rows representing the time step as specified by the argument
-    ##\code{t} in \code{\link{GeneralModel}} or other model creating function.
-    ##details<< This function takes a Model object, which represents a system of ODEs of the form 
-    ##\deqn{\frac{d \mathbf{C}(t)}{dt} = \mathbf{I}(t) + \mathbf{A}(t) \mathbf{C}(t)}{dC(t)/dt = I(t) + A(t)C(t)} 
-    ##and solves the system for \eqn{\mathbf{C}(t)}{C(t)}. The numerical solver used can be specified in \code{\link{GeneralModel}}.
+    ##value<< A matrix with m columns representing the number of pools, and n rows representing the times as specified by the argument
+    ##\code{t} in \code{\link{GeneralModel}} or another model creating function.
+    ##details<< This function takes a Model object, which represents a system of ODEs 
+    ##and solves the system for \eqn{\mathbf{C}(t)}{C(t)}. The numerical solver used can be specified in the costructors of the Model classes
+    ## e.g. \code{\link{Model}},\code{\link{Model_14}},\code{\link{GeneralModel}}.
 	  ##seealso<< See examples in \code{\link{GeneralModel}}, \code{\link{GeneralModel_14}}, \code{\link{TwopParallelModel}}, 
     ## \code{\link{TwopSeriesModel}}, \code{\link{TwopFeedbackModel}}, etc.
    }
    
 )
-setGeneric ( # This function 
+setGeneric( 
    name= "getParticleMonteCarloSimulator",
-   def=function(# creates an MCSimulator that can be run afterwards to get statistical estimates for mean transit times and ages either pool specific or for the entire system. 
-   ### This function computes carbon release from each pool of the given model as funtion of time 
-	object ##<< An object of class NlModel ,NlModel14 or their subclasses created by a call to \code{\link{NlModel}} or other model creating functions.
+   def=function# creates an MCSimulator that can be run afterwards to get statistical estimates for mean transit times and ages either pool specific or for the entire system. 
+	(object ##<< An object of class NlModel ,NlModel14 or their subclasses created by a call to \code{\link{NlModel}} or other model creating functions.
 	){standardGeneric("getParticleMonteCarloSimulator")
 	  ##value<< MCS a Monte Carlos Simulator object (basically a closure) that can be run with various input parameters
     }
 )
 setGeneric ( # This function 
    name= "getReleaseFlux",
-   def=function(# Calculates the release of C from each pool
+   def=function# Calculates the release of C from each pool
    ### This function computes carbon release from each pool of the given model as funtion of time 
-	object ##<< An object of class Model or Model14 created by a call to \code{\link{GeneralModel}} or other model creating functions.
+   ### Have a look at the methods for details.
+   (
+	object ##<< An model object (the actual class depends on the method e.g. Model or  Model14 
+	    ##details<< This function takes a Model object, which represents a system of ODEs 
+	    ## solves the system for \eqn{\mathbf{C}(t)}{C(t)}, calculates a diagonal matrix of release coefficients \eqn{\mathbf{R}(t)}{R(t)}, 
+      ## and computes the release flux as \eqn{\mathbf{R}(t) \mathbf{C}(t)}{R(t) C(t)}.
+      ## The numerical solver used can be specified in the model creating functions like e.g. \code{\link{Model}}.
+  
 	){standardGeneric("getReleaseFlux")
-	  ##value<< A n x m matrix of release fluxes with m columns representing the number of pools, and n rows representing the time step as specified by the argument
-	  ##\code{t} in \code{\link{GeneralModel}} or other model creating function.
-	  ##details<< This function takes a Model object, which represents a system of ODEs of the form 
-	  ##\deqn{\frac{d \mathbf{C}(t)}{dt} = \mathbf{I}(t) + \mathbf{A}(t) \mathbf{C}(t)}{dC(t)/dt = I(t) + A(t)C(t)} 
-	  ##solves the system for \eqn{\mathbf{C}(t)}{C(t)}, calculates a diagonal matrix of release coefficients \eqn{\mathbf{R}(t)}{R(t)}, 
-    ##and computes the release flux as \eqn{\mathbf{R}(t) \mathbf{C}(t)}{R(t) C(t)}.
-    ##The numerical solver used can be specified in \code{\link{GeneralModel}}.
-	  ##seealso<< See examples in \code{\link{GeneralModel}}, \code{\link{GeneralModel_14}}, \code{\link{TwopParallelModel}}, 
+    ##value<< A matrix. Every column represents a pool and every row a point in time
+	  ##seealso<< See examples in  \code{\link{Model}}, \code{\link{GeneralModel}}, \code{\link{GeneralModel_14}}, \code{\link{TwopParallelModel}}, 
 	  ## \code{\link{TwopSeriesModel}}, \code{\link{TwopFeedbackModel}}, etc.
    }
 )
 setGeneric ( 
    name= "getAccumulatedRelease",
-   def=function(# Calculates the accumulated carbon release from the pools as a function of time
+   def=function# Calculates the accumulated carbon release from the pools as a function of time
    ### This function computes the accumulated carbon release of the given model as funtion of time. 
-	object ##<< An object of class Model or Model14 created by a call to \code{\link{GeneralModel}} or other model creating functions.
+	(object ##<< A Model object (e.g. of class Model or Model14)  
+    ## Have a look at the methods for details.
 	){standardGeneric("getAccumulatedRelease")
-	  ##value<< A n x m matrix of cummulative release fluxes with m columns representing the number of pools, and n rows representing the time step as specified by the argument
-	  ##\code{t} in \code{\link{GeneralModel}} or other model creating function.
+	  ##value<< A n x m matrix of cummulative release fluxes with m columns representing the number of pools, and n rows representing the times as specified by the argument
+	  ##\code{t} in \code{\link{GeneralModel}} or other model creating functions.
 	  ##details<< This function takes a Model object, calculates the release flux as specified by \code{\link{getReleaseFlux}}, 
-    ##and integrates numerically the release flux up to each time step \code{t}.
-	  ##seealso<< See examples in \code{\link{GeneralModel}}, \code{\link{GeneralModel_14}}, \code{\link{TwopParallelModel}}, 
+    ##and integrates numerically the release flux up to each time in \code{t}.
+	  ##seealso<< See examples in \code{\link{Model}}, \code{\link{GeneralModel}}, \code{\link{GeneralModel_14}}, \code{\link{TwopParallelModel}}, 
 	  ## \code{\link{TwopSeriesModel}}, \code{\link{TwopFeedbackModel}}, etc.
 	 }
 )
@@ -313,6 +321,7 @@ setGeneric ( # This function
    name= "getC14",
    def=function(# Calculates the mass of radiocarbon (14C fraction times C stock) in all pools
     ### This function computes the mass of 14C (14C fraction times C stock) for all pools as function of time.
+    ### Have a look at the methods for details.
 	object
 	){standardGeneric("getC14")}
 )
@@ -320,6 +329,7 @@ setGeneric ( # Computes the  \eqn{\frac{^{14}C}{C}}{14C/C} ratio
    name= "getF14",
    def=function(# Calculates the 14C fraction of all pools
    ### This function computes the radiocarbon fraction for all pools as funtion of time.
+   ### Have a look at the methods for details.
 	object
 	){standardGeneric("getF14")}
 )
@@ -327,6 +337,7 @@ setGeneric ( # This function
    name= "getReleaseFlux14",
    def=function(# Calculates the mass of radiocarbon in the release flux (14C fraction times release flux)
    ### This function computes the mass of radiocarbon in the release flux (14C fraction times release flux) as a function of time.
+   ### Have a look at the methods for details.
 	object
 	){standardGeneric("getReleaseFlux14")}
 )
@@ -334,6 +345,7 @@ setGeneric ( # This function
   name= "getF14R",
   def=function(# Calculates the average radiocarbon fraction weighted by the amount of carbon release
     ### This function calculates the average radiocarbon fraction weighted by the amount of carbon release at each time step.
+    ### Have a look at the methods for details.
     object
     ){standardGeneric("getF14R")}
   )
@@ -341,6 +353,7 @@ setGeneric ( # This function
   name= "getF14C",
   def=function(# Calculates the average radiocarbon fraction weighted by the mass of carbon
     ### This function calculates the average radiocarbon fraction weighted by the mass of carbon at each time step 
+    ### Have a look at the methods for details.
     object
     ){standardGeneric("getF14C")}
   )
@@ -348,6 +361,7 @@ setGeneric(
     name="getTimeRange",
     def=function(object){
     ### This function returns the time range of the given object. 
+    ### Have a look at the methods for details.
         standardGeneric("getTimeRange")
     }
 )
@@ -355,27 +369,28 @@ setGeneric(
     name="getFunctionDefinition",
     def=function(object){
     ### Extracts the function definition (the R-function) from the argument
+    ### Have a look at the methods for details.
         standardGeneric("getFunctionDefinition")
     }
 )
 setGeneric(
     name="getNumberOfPools",
     def=function(object){
-    ### Extracts the function definition (the R-function) from the argument
+    ### gives the number of poosl from the argument
         standardGeneric("getNumberOfPools")
     }
 )
 setGeneric(
     name="getOutputReceivers",
     def=function(object,i){
-    ### Extracts the InputFluxes from a model object
+    ### Extracts the pools that recieve output 
         standardGeneric("getOutputReceivers")
     }
 )
 setGeneric(
     name="getDecompOp",
     def=function(object){
-    ### Extracts the InputFluxes from a model object
+    ### Extracts the Operator from a model object
         standardGeneric("getDecompOp")
     }
 )
@@ -506,6 +521,7 @@ setGeneric(
     name="GeneralModel",
     def=function # A general constructor 
     ### Creates a Model object from different sources
+    ### Have a look at the methods for details.
     (t,A,ivList,inputFluxes,...){
         standardGeneric("GeneralModel")
     }
@@ -513,7 +529,8 @@ setGeneric(
 setGeneric(
     name="GeneralModel_14",
     def=function # A general constructor 
-    ### Creates a Model object from different sources
+    ### Creates a Model14 object from different sources
+    ### Have a look at the methods for details.
     (
       t,	
       A,	
@@ -536,6 +553,7 @@ setGeneric(
     name="Model",
     def=function # A general costructor 
     ### Creates a Model object from different sources
+    ### Have a look at the methods for details.
     (t,A,ivList,inputFluxes,...){
         standardGeneric("Model")
     }
@@ -544,6 +562,7 @@ setGeneric(
     name="Model_14",
     def=function # A general costructor 
     ### Creates a Model_14 object from different sources
+    ### Have a look at the methods for details.
     (
       t, 
       A,

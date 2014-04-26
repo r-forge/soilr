@@ -1,26 +1,18 @@
-\name{SoilR-package}
-\alias{SoilR-package}
-\alias{SoilR}
-\docType{package}
-\title{Models of Soil Organic Matter Decomposition}
-\description{This package contains functions for modeling Soil Organic
-Matter decomposition in terrestrial ecosystems.}
-\details{
-\tabular{ll}{Package: \tab SoilR\cr
-Title: \tab Models of Soil Organic Matter Decomposition\cr
-Version: \tab 1.1-20\cr
-Date: \tab 2014-04-17\cr
-Author: \tab Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>\cr
-Maintainer: \tab Markus Mueller <mamueller@bgc-jena.mpg.de>\cr
-License: \tab GPL-3\cr
-Depends: \tab deSolve,methods,parallel,RUnit\cr
-Suggests: \tab FME,lattice,MASS\cr
-LazyData: \tab TRUE\cr}
+\name{RespirationCoefficients}
+\alias{RespirationCoefficients}
+\title{helper function to compute respiration coefficients}
+\description{This function computes the respiration coefficients as function of time for all pools
+according to the given matrix A}
+\usage{RespirationCoefficients(A)}\arguments{
+  \item{A}{A matrix valued function representing the model.}
 }
+
+\value{A vector valued function of time containing the respiration coefficients for all pools.}
+
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
-\keyword{ package }
+
+
 
 

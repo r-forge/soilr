@@ -1,31 +1,18 @@
-\name{initialize_method__BoundFc}
-\alias{initialize_method__BoundFc}
-\title{internal constructor (new)}
-\description{The function is probably called internally only but used by all other constructors
-It calls a sanity check on its arguments and initialized the object }
-\arguments{
-  \item{.Object}{
+\name{getTransitTimeDistributionDensity-methods}
+\docType{methods}
+\alias{getTransitTimeDistributionDensity-methods}
+\alias{getTransitTimeDistributionDensity,ConstLinDecompOp-method}
+\title{ ~~ Methods for Function \code{getTransitTimeDistributionDensity}  ~~}
+\description{
+ ~~ Methods for function \code{getTransitTimeDistributionDensity} ~~
 }
-  \item{map}{
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "ConstLinDecompOp")}}{
+      \code{\link{getTransitTimeDistributionDensity_method__ConstLinDecompOp}}  
+    }
+
+  }
 }
-  \item{starttime}{
-}
-  \item{endtime}{
-}
-  \item{lag}{
-}
-  \item{format}{
-}
-  \item{interpolation}{
-}
-}
-
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

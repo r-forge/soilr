@@ -1,69 +1,69 @@
-\name{TwopMMmodel}
-\alias{TwopMMmodel}
-\title{Implementation of a two-pool Michaelis-Menten model}
-\description{This function implements a two-pool Michaelis-Meneten model with a microbial biomass and a substrate pool.}
-\usage{TwopMMmodel(t, ks = 1.8e-05, kb = 0.007, Km = 900, r = 0.6, Af = 1, 
-    ADD = 3.2, ival)}\arguments{
-  \item{t}{vector of times (in days) to calculate a solution.}
-  \item{ks}{a scalar representing SOM decomposition rate (m3 d-1 (gCB)-1)}
-  \item{kb}{a scalar representing microbial decay rate (d-1)}
-  \item{Km}{a scalar representing the Michaelis constant (g m-3)}
-  \item{r}{a scalar representing the respired carbon fraction (unitless)}
-  \item{Af}{a scalar representing the Activity factor; i.e. a temperature and moisture modifier (unitless)}
-  \item{ADD}{a scalar representing the annual C input to the soil (g m-3 d-1)}
-  \item{ival}{
+\name{TwopFeedbackModel}
+\alias{TwopFeedbackModel}
+\title{Implementation of a two pool model with feedback structure}
+\description{This function creates a model for two pools connected with feedback. It is a wrapper for the more general function \code{\link{GeneralModel}}.}
+\usage{TwopFeedbackModel(t, ks, a21, a12, C0, In, xi = 1, solver = deSolve.lsoda.wrapper, 
+    pass = FALSE)}\arguments{
+  \item{t}{A vector containing the points in time where the solution is sought.}
+  \item{ks}{A vector of length 2 with the values of the decomposition rate for pools 1 and 2.}
+  \item{a21}{A scalar with the value of the transfer rate from pool 1 to pool 2.}
+  \item{a12}{A scalar with the value of the transfer rate from pool 2 to pool 1.}
+  \item{C0}{A vector of length 2 containing the initial amount of carbon for the 2 pools.}
+  \item{In}{A data.frame object specifying the amount of litter inputs by time.}
+  \item{xi}{A scalar or data.frame object specifying the external (environmental and/or edaphic) effects on decomposition rates.}
+  \item{solver}{A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.}
+  \item{pass}{if TRUE forces the constructor to create the model even if it is invalid}
 }
-}
-\details{This implementation is similar to the model described in Manzoni and Porporato (2007). }
-\value{An object of class NlModel that can be further queried.}
-\references{Manzoni, S, A. Porporato (2007). A theoretical analysis of nonlinearities and feedbacks in soil carbon and nitrogen cycles.
-Soil Biology and Biochemistry 39: 1542-1556.}
+
+\value{A Model Object that can be further queried }
+\references{Sierra, C.A., M. Mueller, S.E. Trumbore. 2012. Models of soil organic matter decomposition: the SoilR package version 1.0. Geoscientific Model Development 5, 1045-1060.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
 
 
-
+\seealso{\code{\link{TwopParallelModel}}, \code{\link{TwopSeriesModel}} }
 \examples{
 
-days=seq(0,1000,0.5)
+#This example show the difference between the three types of two-pool models  
+times=seq(0,20,by=0.1)
+ks=c(k1=0.8,k2=0.00605)
+C0=c(C10=5,C20=5)
+  
+Temp=rnorm(times,15,2)
+WC=runif(times,10,20)
+TempEffect=data.frame(times,fT=fT.Daycent1(Temp))
+MoistEffect=data.frame(times, fW=fW.Daycent2(WC)[2])
 
-#Run the model with default parameter values
-MMmodel=TwopMMmodel(t=days,ival=c(100,10))
-Cpools=getC(MMmodel)
+Inmean=1
+InRand=data.frame(times,Random.inputs=rnorm(length(times),Inmean,0.2))
+InSin=data.frame(times,Inmean+0.5*sin(times*pi*2))
+      
+Parallel=TwopParallelModel(t=times,ks=ks,C0=C0,In=Inmean,gam=0.9,
+                           xi=(fT.Daycent1(15)*fW.Demeter(15)))
+Series=TwopSeriesModel(t=times,ks=ks,a21=0.2*ks[1],C0=C0,In=InSin,
+                       xi=(fT.Daycent1(15)*fW.Demeter(15)))
+Feedback=TwopFeedbackModel(t=times,ks=ks,a21=0.2*ks[1],a12=0.5*ks[2],C0=C0,
+                           In=InRand,xi=MoistEffect)
 
-#Time solution
-matplot(days,Cpools,type="l",ylab="Concentrations",xlab="Days",lty=1,ylim=c(0,max(Cpools)*1.2))
-legend("topleft",c("SOM-C", "Microbial biomass"),lty=1,col=c(1,2),bty="n")
+CtP=getC(Parallel)
+CtS=getC(Series)
+CtF=getC(Feedback)
 
-ks=0.000018
-kb=0.007
-r=0.6
-ADD=3.2
+RtP=getReleaseFlux(Parallel)
+RtS=getReleaseFlux(Series)
+RtF=getReleaseFlux(Feedback)
 
-#Analytical solution of fixed points
-Cs=kb/((1-r)*ks)
-abline(h=Cs,lty=2)
-
-Cb=(ADD*(1-r))/(r*kb)
-abline(h=Cb,lty=2,col=2)
-
-#State-space diagram
-plot(Cpools[,2],Cpools[,1],type="l",ylab="SOM-C",xlab="Microbial biomass")
-
-#Microbial biomass over time
-plot(days,Cpools[,2],type="l",col=2,xlab="Days",ylab="Microbial biomass")
-
-#The default parameterization exhaust the microbial biomass.
-#A different behavior is obtained by increasing ks and decreasing kb
-MMmodel=TwopMMmodel(t=days,ival=c(972,304) ,Af=3,kb=0.0000001)
-Cpools=getC(MMmodel)
-
-matplot(days,Cpools,type="l",ylab="Concentrations",xlab="Days",lty=1,ylim=c(0,max(Cpools)*1.2))
-legend("topleft",c("SOM-C", "Microbial biomass"),lty=1,col=c(1,2),bty="n")
-
-plot(Cpools[,2],Cpools[,1],type="l",ylab="SOM-C",xlab="Microbial biomass")
-
-plot(days,Cpools[,2],type="l",col=2,xlab="Days",ylab="Microbial biomass")
+par(mfrow=c(2,1),mar=c(4,4,1,1))
+plot(times,rowSums(CtP),type="l",ylim=c(0,20),ylab="Carbon stocks (arbitrary units)",xlab=" ")
+lines(times,rowSums(CtS),col=2)
+lines(times,rowSums(CtF),col=3)
+legend("topleft",c("Two-pool Parallel","Two-pool Series","Two-pool Feedback"),
+       lty=c(1,1,1),col=c(1,2,3),bty="n")
+      
+plot(times,rowSums(RtP),type="l",ylim=c(0,3),ylab="Carbon release (arbitrary units)", xlab="Time")
+lines(times,rowSums(RtS),col=2)
+lines(times,rowSums(RtF),col=3)
+par(mfrow=c(1,1))
 
 }

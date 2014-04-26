@@ -1,18 +1,12 @@
-\name{getReleaseFlux-methods}
+\name{getNumberOfPools-methods}
 \docType{methods}
-\alias{getReleaseFlux-methods}
-\alias{getReleaseFlux,Model-method}
-\title{ ~~ Methods for Function \code{getReleaseFlux}  ~~}
+\alias{getNumberOfPools-methods}
+\alias{getNumberOfPools,NlModel-method}
+\alias{getNumberOfPools,TransportDecompositionOperator-method}
+\title{ ~~ Methods for Function \code{getNumberOfPools}  ~~}
 \description{
- ~~ Methods for function \code{getReleaseFlux} ~~
+ All methods for function \code{getNumberOfPools} are intended for internal use inside the package only. 
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "Model")}}{
-      \code{\link{getReleaseFlux_method__Model}}  
-    }
 
-  }
-}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

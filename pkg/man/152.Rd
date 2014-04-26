@@ -1,19 +1,18 @@
-\name{getF14_method__Model_14}
-\alias{getF14_method__Model_14}
-\title{radiocarbon}
-\description{Calculates the radiocarbon fraction for each pool at each time step.
+\name{getF14R-methods}
+\docType{methods}
+\alias{getF14R-methods}
+\alias{getF14R,Model_14-method}
+\title{ ~~ Methods for Function \code{getF14R}  ~~}
+\description{
+ ~~ Methods for function \code{getF14R} ~~
 }
-\arguments{
-  \item{object}{
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "Model_14")}}{
+      \code{\link{getF14R_method__Model_14}}  
+    }
+
+  }
 }
-}
-
-\value{A matrix of dimension n x m; i.e. n time steps as rows and m pools as columns.}
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

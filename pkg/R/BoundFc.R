@@ -118,7 +118,8 @@ setMethod(
    t_start=min(t)
    t_end=max(t)
    interpol=interpolation(to,yo)
-   obj=new(Class="BoundFc",interpol,t_start,t_end,lag=lag,format=format) 
+   #obj=new(Class="BoundFc",interpol,t_start,t_end,lag=lag,format=format) 
+   obj=BoundFc(map=interpol,starttime=t_start,endtime=t_end,lag=lag,format=format) 
 return(obj)
 ### An object  that contains the interpolation function and the limits of the time range where the function is valid. Note that the limits change according to the time lag
 }
@@ -173,7 +174,7 @@ setMethod(
     signature="BoundFc",
     definition=function# extract the format string
     ### the function just yields the format as a string
-	  (object ##<< object of class BoundFc containing imformation about the format that could be Delta14C or AFM (Absolute Fraction Modern) for instance
+	  (object ##<< object  containing imformation about the format that could be Delta14C or AFM (Absolute Fraction Modern) for instance
 		){
         return(object@format)
     }
@@ -213,7 +214,7 @@ setMethod(
       signature("BoundFc"),
       definition=function# convert to Absolute Fraction Normal values  
       ### convert a BoundFc object containing values in any supported format to the appropriate Absolute Fraction Modern values.
-	    (F ##<< object of class BoundFc containing the values in any format
+	    (F ##<< object containing the values in any format
 	    ){
         f=F@format
               targetFormat="AbsoluteFractionModern"

@@ -140,7 +140,7 @@ setMethod(
       starttime=map@starttime
       endtime=map@endtime
       map=map@map
-      return(new("BoundLinDecompOp",starttime,endtime,map))
+      return(BoundLinDecompOp(map,starttime,endtime))
      }
      )
 #########################################################
@@ -153,6 +153,6 @@ setMethod(
       starttime=map@starttime
       endtime=map@endtime
       map=map@map
-      return(new("BoundInFlux",starttime,endtime,map))
+      return(BoundInFlux(map,starttime,endtime))
      }
      )

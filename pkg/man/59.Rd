@@ -1,5 +1,5 @@
-\name{GeneralModel_14_method__numeric_ANY_numeric_ANY_ANY_missing_ANY_numeric_missing_missing_missing}
-\alias{GeneralModel_14_method__numeric_ANY_numeric_ANY_ANY_missing_ANY_numeric_missing_missing_missing}
+\name{GeneralModel_14_method__numeric_ANY_numeric_ANY_ANY_ANY_missing_numeric_missing_missing_missing}
+\alias{GeneralModel_14_method__numeric_ANY_numeric_ANY_ANY_ANY_missing_numeric_missing_missing_missing}
 \title{a constructor for class Model}
 \description{A wrapper for \code{\link{Model_14}} with pass=FALSE}
 \arguments{
@@ -12,7 +12,7 @@
 }
   \item{inputFluxes}{
 }
-  \item{Fc}{
+  \item{inputFc}{
 }
   \item{di}{
 }

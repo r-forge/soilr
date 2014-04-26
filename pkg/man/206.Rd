@@ -1,20 +1,28 @@
-\name{print-methods}
-\docType{methods}
-\alias{print-methods}
-\alias{print,ANY-method}
-\alias{print,Model-method}
-\alias{print,NlModel-method}
-\title{ ~~ Methods for Function \code{print}  ~~}
-\description{
- ~~ Methods for function \code{print} ~~
+\name{initialize_method__TimeMap}
+\alias{initialize_method__TimeMap}
+\title{initialize called by (new)}
+\description{This is the standard constructor for objects of this class
+It is called by statements of the form 
+\code{new("TimeMap",start,end,f,lag)}}
+\arguments{
+  \item{.Object}{
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(x = "Model")}}{
-      \code{\link{print_method__Model}}  
-    }
+  \item{starttime}{
+}
+  \item{endtime}{
+}
+  \item{map}{
+}
+  \item{lag}{
+}
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

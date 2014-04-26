@@ -1,9 +1,10 @@
-\name{GeneralModel_14_method__numeric_ANY_numeric_ANY_ANY_ANY_missing_numeric_missing_missing_missing}
-\alias{GeneralModel_14_method__numeric_ANY_numeric_ANY_ANY_ANY_missing_numeric_missing_missing_missing}
-\title{a constructor for class Model}
+\name{GeneralModel_14_method__numeric_ANY_numeric_ANY_ANY_ANY_missing_numeric_missing_missing_logical}
+\alias{GeneralModel_14_method__numeric_ANY_numeric_ANY_ANY_ANY_missing_numeric_missing_missing_logical}
+\title{a constructor for class Model_ 14}
 \description{A wrapper for \code{\link{Model_14}} with pass=FALSE}
 \arguments{
-  \item{t}{A vector containing the points in time where the solution is sought.}
+  \item{t}{
+}
   \item{A}{
 }
   \item{ivList}{

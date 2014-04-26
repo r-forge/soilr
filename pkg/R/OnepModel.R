@@ -27,18 +27,14 @@ OnepModel<-structure(
         )
       }
       if(class(In)=="data.frame"){
-         print("blubberer")
-	 print(class(In))
          x=In[,1]  
-	 print(min(x))
          y=In[,2]  
          inputFlux=splinefun(x,y)
-          inputFluxes=TimeMap.new(
+          inputFluxes=BoundInFlux(
+            function(t){matrix(nrow=1,ncol=1,inputFlux(t))},
             min(x),
-            max(x),
-            function(t){matrix(nrow=1,ncol=1,inputFlux(t))}
+            max(x)
           )
-	  print(inputFluxes)
         }
       A=-1*abs(matrix(k,1,1))
       
@@ -48,10 +44,10 @@ OnepModel<-structure(
       Y=xi[,2]
       fX=splinefun(X,Y)
       }
-      Af=new("BoundLinDecompOp",
+      Af=BoundLinDecompOp(
+        function(t){fX(t)*A},
         t_start,
-        t_end,
-        function(t){fX(t)*A}
+        t_end
       )
       Mod=GeneralModel(t=t,A=Af,ivList=C0,inputFluxes=inputFluxes,solver,pass)
      return(Mod)

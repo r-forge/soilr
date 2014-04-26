@@ -1,30 +1,34 @@
-\name{BoundLinDecompOp-methods}
-\docType{methods}
-\alias{BoundLinDecompOp-methods}
-\alias{BoundLinDecompOp,ConstLinDecompOp,ANY,ANY,ANY-method}
-\alias{BoundLinDecompOp,TimeMap,missing,missing,missing-method}
-\alias{BoundLinDecompOp,function,numeric,numeric,missing-method}
-\alias{BoundLinDecompOp,function,numeric,numeric,numeric-method}
-\title{ ~~ Methods for Function \code{BoundLinDecompOp}  ~~}
+\name{BoundLinDecompOp-class}
+\Rdversion{1.1}
+\docType{class}
+\alias{BoundLinDecompOp-class}
+\title{Class \code{"BoundLinDecompOp"}}
 \description{
- ~~ Methods for function \code{BoundLinDecompOp} ~~
+NA
+}
+\section{Slots}{
+  \describe{
+    \item{\code{map}:}{Object of class \code{"function"} ~~ }
+    \item{\code{lag}:}{Object of class \code{"numeric"} ~~ }
+    \item{\code{starttime}:}{Object of class \code{"numeric"} ~~ }
+    \item{\code{endtime}:}{Object of class \code{"numeric"} ~~ }
+  }
+}
+\section{Extends}{
+Class \code{"\linkS4class{DecompOp}"}, directly.
 }
 \section{Methods}{
   \describe{
-    \item{\code{signature(map = "ConstLinDecompOp", starttime = "ConstLinDecompOp", endtime = "ConstLinDecompOp", lag = "ConstLinDecompOp")}}{
-      \code{\link{BoundLinDecompOp_method__ConstLinDecompOp}}  
-    }
-    \item{\code{signature(map = "TimeMap", starttime = "missing", endtime = "missing", lag = "missing")}}{
-      \code{\link{BoundLinDecompOp_method__TimeMap_missing_missing_missing}}  
-    }
-    \item{\code{signature(map = "function", starttime = "numeric", endtime = "numeric", lag = "missing")}}{
-      \code{\link{BoundLinDecompOp_method__function_numeric_numeric_missing}}  
-    }
-    \item{\code{signature(map = "function", starttime = "numeric", endtime = "numeric", lag = "numeric")}}{
-      \code{\link{BoundLinDecompOp_method__function_numeric_numeric_numeric}}  
-    }
-
-  }
+    \item{getFunctionDefinition}{\code{signature(object = "BoundLinDecompOp")}: ... }
+    \item{getTimeRange}{\code{signature(object = "BoundLinDecompOp")}: ... }
+    \item{initialize}{\code{signature(.Object = "BoundLinDecompOp")}: ... }
+	 }
 }
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+\author{
+ Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de> 
+}
+\examples{
+showClass("BoundLinDecompOp")
+}
+\keyword{classes}

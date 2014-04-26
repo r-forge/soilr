@@ -1,16 +1,13 @@
-\name{Model_14-class}
+\name{Model-class}
 \Rdversion{1.1}
 \docType{class}
-\alias{Model_14-class}
-\title{Class \code{"Model_14"}}
+\alias{Model-class}
+\title{Class \code{"Model"}}
 \description{
-defines a representation of a 14C model
+serves as a fence to the interface of SoilR functions. So that later implementations can differ	 
 }
 \section{Slots}{
   \describe{
-    \item{\code{c14Fraction}:}{Object of class \code{"BoundFc"} ~~ }
-    \item{\code{c14DecayRate}:}{Object of class \code{"numeric"} ~~ }
-    \item{\code{initialValF}:}{Object of class \code{"ConstFc"} ~~ }
     \item{\code{times}:}{Object of class \code{"numeric"} ~~ }
     \item{\code{mat}:}{Object of class \code{"DecompOp"} ~~ }
     \item{\code{initialValues}:}{Object of class \code{"numeric"} ~~ }
@@ -18,17 +15,18 @@ defines a representation of a 14C model
     \item{\code{solverfunc}:}{Object of class \code{"function"} ~~ }
   }
 }
-\section{Extends}{
-Class \code{"\linkS4class{Model}"}, directly.
-}
 \section{Methods}{
   \describe{
-    \item{getC14}{\code{signature(object = "Model_14")}: ... }
-    \item{getF14}{\code{signature(object = "Model_14")}: ... }
-    \item{getF14C}{\code{signature(object = "Model_14")}: ... }
-    \item{getF14R}{\code{signature(object = "Model_14")}: ... }
-    \item{getReleaseFlux14}{\code{signature(object = "Model_14")}: ... }
-    \item{initialize}{\code{signature(.Object = "Model_14")}: ... }
+    \item{[}{\code{signature(x = "Model", i = "character")}: ... }
+    \item{getAccumulatedRelease}{\code{signature(object = "Model")}: ... }
+    \item{getC}{\code{signature(object = "Model")}: ... }
+    \item{getReleaseFlux}{\code{signature(object = "Model")}: ... }
+    \item{getTimes}{\code{signature(object = "Model")}: ... }
+    \item{initialize}{\code{signature(.Object = "Model")}: ... }
+    \item{plot}{\code{signature(x = "Model")}: ... }
+    \item{print}{\code{signature(x = "Model")}: ... }
+    \item{show}{\code{signature(object = "Model")}: ... }
+    \item{summary}{\code{signature(object = "Model")}: ... }
 	 }
 }
 \author{
@@ -36,6 +34,6 @@ Class \code{"\linkS4class{Model}"}, directly.
 <mamueller@bgc-jena.mpg.de> 
 }
 \examples{
-showClass("Model_14")
+showClass("Model")
 }
 \keyword{classes}

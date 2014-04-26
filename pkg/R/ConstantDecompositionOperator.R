@@ -63,7 +63,7 @@ setMethod(
       ### and the limits of its domain (starttime and endtime) set to -Inf and Inf respectively
       (map){
       f=getFunctionDefinition(map)
-      return(new("BoundLinDecompOp",starttime=-Inf,endtime=Inf,map=f))
+      return(BoundLinDecompOp(starttime=-Inf,endtime=Inf,map=f))
      }
 )
 setMethod(
@@ -183,11 +183,10 @@ setMethod(
       sVmat=inputDistribution
       n=length(inputDistribution)
       # we provide a zero inputflux
-      inputFluxes=new(
-        "TimeMap",
-        -Inf,
-        +Inf,
-        function(t0){matrix(nrow=n,ncol=1,0)}
+      inputFluxes=BoundInFlux(
+        map=function(t0){matrix(nrow=n,ncol=1,0)},
+        starttime= -Inf, 
+        endtime=+Inf 
       ) 
       #we create a model 
       mod=GeneralModel(times,object,sVmat,inputFluxes)

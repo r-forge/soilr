@@ -1,25 +1,23 @@
-\name{fT.Century1}
-\alias{fT.Century1}
-\title{Effects of temperature on decomposition rates according the the CENTURY model}
-\description{Calculates the effects of temperature on decomposition rates according to the CENTURY model.}
-\usage{fT.Century1(Temp, Tmax = 45, Topt = 35)}\arguments{
-  \item{Temp}{A scalar or vector containing values of temperature for which the effects on decomposition rates are calculated.}
-  \item{Tmax}{A scalar defining the maximum temperature in degrees C.}
-  \item{Topt}{A scalar defining the optimum temperature for the decomposition process in degrees C.}
+\name{deSolve.lsoda.wrapper}
+\alias{deSolve.lsoda.wrapper}
+\title{deSolve lsoda wrapper}
+\description{The function serves as a wrapper for lsoda using a much simpler interface which allows the use 
+of matrices in the definition of the derivative. 
+To use lsoda we have to convert our vectors to lists, define tolerances and so on.
+This function does this for us , so we don't need to bother about it.}
+\usage{deSolve.lsoda.wrapper(t, ydot, startValues)}\arguments{
+  \item{t}{A row vector containing the points in time where the solution is sought.}
+  \item{ydot}{The function of y and t that computes the derivative for a given
+point in time and a column vector y.}
+  \item{startValues}{A column vector with the starting values.}
 }
 
-\value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
-\references{Burke, I. C., J. P. Kaye, S. P. Bird, S. A. Hall, R. L. McCulley, and G. L. Sommerville. 2003. 
-Evaluating and testing models of terrestrial biogeochemistry: the role of temperature in controlling decomposition. 
-Pages 235-253 in C. D. Canham, J. J. Cole, and W. K. Lauenroth, editors. Models in ecosystem science. Princeton University Press, Princeton.}
+\value{A matrix. Every column represents a pool and every row a point in time}
+
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
 
 
 
-\examples{
-Temperature=0:50
-plot(Temperature,fT.Century1(Temperature),type="l",ylab="f(T) (unitless)",
-     main="Effects of temperature on decomposition rates according to the Century model")
-}
+

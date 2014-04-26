@@ -92,6 +92,8 @@ ConstLinDecompOp,
 BoundLinDecompOp,
 DecompositionOperator,
 DecompOp,
+BoundInFlux,
+InFlux,
 BoundFc
 )
 exportMethods(

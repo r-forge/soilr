@@ -57,5 +57,4 @@ test.BoundFc_constructor_func_tstart_tend_format=function(){
    obj=BoundFc(f,tstart,tend,format="Delta14C") 
    checkEquals(c("t_min"=tstart,"t_max"=tend),getTimeRange(obj))
 }
-#---------------------------------------------------------------------
 

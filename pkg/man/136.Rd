@@ -1,16 +1,15 @@
-\name{getC-methods}
+\name{getAccumulatedRelease-methods}
 \docType{methods}
-\alias{getC-methods}
-\alias{getC,Model-method}
-\alias{getC,NlModel-method}
-\title{ ~~ Methods for Function \code{getC}  ~~}
+\alias{getAccumulatedRelease-methods}
+\alias{getAccumulatedRelease,Model-method}
+\title{ ~~ Methods for Function \code{getAccumulatedRelease}  ~~}
 \description{
- ~~ Methods for function \code{getC} ~~
+ ~~ Methods for function \code{getAccumulatedRelease} ~~
 }
 \section{Methods}{
   \describe{
     \item{\code{signature(object = "Model")}}{
-      \code{\link{getC_method__Model}}  
+      \code{\link{getAccumulatedRelease_method__Model}}  
     }
 
   }

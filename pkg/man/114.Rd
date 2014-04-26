@@ -1,14 +1,16 @@
-\name{fT.Daycent1}
-\alias{fT.Daycent1}
-\title{Effects of temperature on decomposition rates according to the DAYCENT model}
-\description{Calculates the effects of temperature on decomposition rates according to the DAYCENT model.}
-\usage{fT.Daycent1(Temp)}\arguments{
-  \item{Temp}{A scalar or vector containing values of soil temperature for which the effects on decomposition rates are calculated}
+\name{fT.Arrhenius}
+\alias{fT.Arrhenius}
+\title{Effects of temperature on decomposition rates according the Arrhenius equation}
+\description{Calculates the effects of temperature on decomposition rates according to the Arrhenius equation.}
+\usage{fT.Arrhenius(Temp, A = 1000, Ea = 75000, Re = 8.3144621)}\arguments{
+  \item{Temp}{A scalar or vector containing values of temperature (in degrees Kelvin) for which the effects on decomposition rates are calculated.}
+  \item{A}{A scalar defining the pre-exponential factor.}
+  \item{Ea}{A scalar defining the activation energy in units of J mol^-1.}
+  \item{Re}{A scalar defining the universal gas contant in units of J K^-1 mol^-1.}
 }
 
 \value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
-\references{Kelly, R. H., W. J. Parton, M. D. Hartman, L. K. Stretch, D. S. Ojima, and D. S. Schimel (2000), 
-Intra-annual and interannual variability of ecosystem processes in shortgrass steppe, J. Geophys. Res., 105.}
+
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -16,7 +18,7 @@ Intra-annual and interannual variability of ecosystem processes in shortgrass st
 
 
 \examples{
-Temperature=0:50
-plot(Temperature,fT.Daycent1(Temperature),type="l",ylab="f(T) (unitless)", 
-     main="Effects of temperature on decomposition rates according to the DAYCENT model")
+Temperature=273:300
+plot(Temperature,fT.Arrhenius(Temperature),type="l",ylab="f(T) (unitless)", xlab="Temperature (K)",
+     main="Effects of temperature on decomposition rates according to the Arrhenius equation")
 }

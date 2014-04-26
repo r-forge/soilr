@@ -1,64 +1,67 @@
-\name{ParallelModel}
-\alias{ParallelModel}
-\title{ParallelModel}
-\description{This function creates a numerical model for n independent (parallel) pools that can be queried afterwards. 
-It is used by the convinient wrapper functions \code{\link{TwopParallelModel}} and \code{\link{ThreepParallelModel}}
-but can also be used independently.}
-\usage{ParallelModel(times,
- coeffs_tm, startvalues, inputrates, solverfunc = deSolve.lsoda.wrapper, 
+\name{OnepModel}
+\alias{OnepModel}
+\title{Implementation of a one pool model }
+\description{This function creates a model for one pool. It is a wrapper for the more general function \code{\link{GeneralModel}}.}
+\usage{OnepModel(t, k, C0, In, xi = 1, solver = deSolve.lsoda.wrapper, 
     pass = FALSE)}\arguments{
-  \item{times}{A vector containing the points in time where the solution is sought.}
-  \item{coeffs_tm}{A TimeMap object consisting of a vector valued function containing the decay rates for the n pools as function of time and the time range where this function is valid. The length of the vector is equal to the number of pools.}
-  \item{startvalues}{A vector containing the initial amount of carbon for the n pools.
-<<The length of this vector is equal to the number of pools and thus equal to the length of k. This is checked by the function.}
-  \item{inputrates}{An  object consisting of a vector valued function describing the inputs to the pools as funtions of time \code{\link{TimeMap.new}}}
-  \item{solverfunc}{The function used to actually solve the ODE system. This can be \code{\link{deSolve.lsoda.wrapper}} or any other user provided function with the same interface.}
+  \item{t}{A vector containing the points in time where the solution is sought.}
+  \item{k}{A scalar with the decomposition rate of the pool.}
+  \item{C0}{A scalar containing the initial amount of carbon in the pool.}
+  \item{In}{A scalar or a data.frame object specifying the amount of litter inputs by time.}
+  \item{xi}{A scalar or a data.frame specifying the external (environmental and/or edaphic) effects on decomposition rates.}
+  \item{solver}{A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.}
   \item{pass}{if TRUE forces the constructor to create the model even if it is invalid}
 }
 
-\value{a model object}
-
+\value{A Model Object that can be further queried }
+\references{Sierra, C.A., M. Mueller, S.E. Trumbore. 2012. Models of soil organic matter decomposition: the SoilR package version 1.0. Geoscientific Model Development 5, 1045-1060.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
 
 
-
+\seealso{\code{\link{TwopParallelModel}},\code{\link{TwopFeedbackModel}} }
 \examples{
-      t_start=0 
-      t_end=10 
-      tn=50
-      timestep=(t_end-t_start)/tn 
-      t=seq(t_start,t_end,timestep) 
-      k=TimeMap.new(t_start,t_end,function(times){c(-0.5,-0.2,-0.3)})
-      c0=c(1, 2, 3)
-      #constant inputrates
-      inputrates=BoundInFlux(
-          function(t){matrix(nrow=3,ncol=1,c(1,1,1))},
-          t_start,
-          t_end
-      ) 
-      mod=ParallelModel(t,k,c0,inputrates)
-      Y=getC(mod)
-      lt1=1 ;lt2=2 ;lt3=3 
-      col1=1; col2=2; col3=3
-      plot(t,Y[,1],type="l",lty=lt1,col=col1,
-  ylab="C stocks",xlab="Time") 
-      lines(t,Y[,2],type="l",lty=lt2,col=col2) 
-      lines(t,Y[,3],type="l",lty=lt3,col=col3) 
-      legend(
-"topleft",
-c("C in pool 1",
-  "C in 2",
-  "C in pool 3"
-),
-lty=c(lt1,lt2,lt3),
-col=c(col1,col2,col3)
-      )
-      Y=getAccumulatedRelease(mod)
-      plot(t,Y[,1],type="l",lty=lt1,col=col1,ylab="C release",xlab="Time") 
-      lines(t,Y[,2],lt2,type="l",lty=lt2,col=col2) 
-      lines(t,Y[,3],type="l",lty=lt3,col=col3) 
-      legend("topright",c("R1","R2","R3"),lty=c(lt1,lt2,lt3),col=c(col1,col2,col3))
- 
+t_start=0 
+t_end=10 
+tn=50
+timestep=(t_end-t_start)/tn 
+t=seq(t_start,t_end,timestep) 
+k=0.8
+C0=100
+In = 30
+
+    
+Ex=OnepModel(t,k,C0,In)
+Ct=getC(Ex)
+Rt=getReleaseFlux(Ex)
+Rc=getAccumulatedRelease(Ex)
+
+plot(
+  t,
+  Ct,
+  type="l",
+  ylab="Carbon stocks (arbitrary units)",
+  xlab="Time (arbitrary units)",
+  lwd=2
+) 
+
+plot(
+  t,
+  Rt,
+  type="l",
+  ylab="Carbon released (arbitrary units)",
+  xlab="Time (arbitrary units)",
+  lwd=2
+) 
+
+plot(
+  t,
+  Rc,
+  type="l",
+  ylab="Cummulative carbon released (arbitrary units)",
+  xlab="Time (arbitrary units)",
+  lwd=2
+) 
+
 }

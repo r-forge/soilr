@@ -1,18 +1,17 @@
-\name{fW.Skopp}
-\alias{fW.Skopp}
-\title{Effects of moisture on decomposition rates according to the function proposed by Skopp et al. 1990}
-\description{Calculates the effects of relative soil water content on decomposition rates.}
-\usage{fW.Skopp(rwc, alpha = 2, beta = 2, f = 1.3, g = 0.8)}\arguments{
-  \item{rwc}{relative water content}
-  \item{alpha}{Empirical parameter}
-  \item{beta}{Empirical parameter}
-  \item{f}{Empirical parameter}
-  \item{g}{Empirical parameter}
+\name{fW.Gompertz}
+\alias{fW.Gompertz}
+\title{Effects of moisture on decomposition rates according to the Gompertz function}
+\description{Calculates the effects of water content on decomposition rates.}
+\usage{fW.Gompertz(theta, a = 0.824, b = 0.308)}\arguments{
+  \item{theta}{A scalar or vector containing values of volumetric soil water content.}
+  \item{a}{Empirical parameter}
+  \item{b}{Empirical parameter}
 }
 
 
-\references{J. Skopp, M. D. Jawson, and J. W. Doran. 1990.
-Steady-state aerobic microbial activity as a function of soil water content. Soil Sci. Soc. Am. J., 54(6):1619-1625}
+\references{I. Janssens, S. Dore, D. Epron, H. Lankreijer, N. Buchmann, B. Longdoz, J. Brossaud, L. Montagnani. 2003.
+Climatic Influences on Seasonal and Spatial Differences in Soil CO2 Efflux. In Valentini, R. (Ed.)
+Fluxes of Carbon, Water and Energy of European Forests. pp 235-253. Springer. }
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -21,7 +20,7 @@ Steady-state aerobic microbial activity as a function of soil water content. Soi
 
 \examples{
 th=seq(0,1,0.01)
-xi=fW.Skopp(rwc=th)
+xi=fW.Gompertz(theta=th)
 plot(th,xi,type="l",main="Effects of soil water content on decomposition rates",
-     xlab="Relative water content",ylab=expression(xi))
+     xlab="Volumetric soil water content (cm3 cm-3)",ylab=expression(xi))
 }

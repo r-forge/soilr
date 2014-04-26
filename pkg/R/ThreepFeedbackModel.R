@@ -23,20 +23,20 @@ ThreepFeedbackModel<-structure(
       if(length(C0)!=3) stop("the vector with initial conditions must be of length = 3")
       
       if(length(In)==1){
-          inputFluxes=TimeMap.new(
+          inputFluxes=BoundInFlux(
+            function(t){matrix(nrow=3,ncol=1,c(In,0,0))},
             t_start,
-            t_end,
-            function(t){matrix(nrow=3,ncol=1,c(In,0,0))}
+            t_end
         )
       }
       if(class(In)=="data.frame"){
          x=In[,1]  
          y=In[,2]
          inputFlux=splinefun(x,y)
-         inputFluxes=TimeMap.new(
+         inputFluxes=BoundInFlux(
+          function(t){matrix(nrow=3,ncol=1,c(inputFlux(t),0,0))},
           t_start,
-          t_end,
-          function(t){matrix(nrow=3,ncol=1,c(inputFlux(t),0,0))}
+          t_end
       )
       }
       A=-1*abs(diag(ks))
@@ -46,14 +46,15 @@ ThreepFeedbackModel<-structure(
       A[2,3]=a23
       
       if(length(xi)==1){
-	fX=function(t){xi}
-	Af=new("BoundLinDecompOp",t_start,t_end,function(t) fX(t)*A)
-	}
+        fX=function(t){xi}
+        Af=BoundLinDecompOp(function(t){fX(t)*A},t_start,t_end)
+      }
+	
       if(class(xi)=="data.frame"){
-	X=xi[,1]
+        X=xi[,1]
       	Y=xi[,2]
         fX=splinefun(X,Y)
-	Af=new("BoundLinDecompOp",min(X),max(X),function(t) fX(t)*A)
+        Af=BoundLinDecompOp(function(t){fX(t)*A},min(X),max(X))
        }
       Mod=GeneralModel(t=t,A=Af,ivList=C0,inputFluxes=inputFluxes,solver,pass)
      return(Mod)

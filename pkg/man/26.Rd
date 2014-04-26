@@ -1,10 +1,16 @@
-\name{BoundLinDecompOp_method__ConstLinDecompOp}
-\alias{BoundLinDecompOp_method__ConstLinDecompOp}
-\title{convert a ConstLinDecompOp to a BoundLinDecompOp}
-\description{The method creates a BoundLinDecompOp consisting of a constant time dependent function 
-and the limits of its domain (starttime and endtime) set to -Inf and Inf respectively}
-\arguments{
+\name{BoundLinDecompOp}
+\alias{BoundLinDecompOp}
+\title{Generic constructor}
+\description{Creates a LinearDecompositonOperator from different sources.
+Please look at the methods to see what kind of input is supported. }
+\usage{BoundLinDecompOp(map, starttime, endtime, lag)}\arguments{
   \item{map}{
+}
+  \item{starttime}{
+}
+  \item{endtime}{
+}
+  \item{lag}{
 }
 }
 

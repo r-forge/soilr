@@ -30,7 +30,7 @@ ICBMModel<-structure(
         t_start,
         t_end
      )
-     Af=new("BoundLinDecompOp",t_start,t_end, function(t0){Ar})
+     Af=BoundLinDecompOp(map=function(t0){Ar},t_start,t_end)
      Mod=GeneralModel(t=t,A=Af,c0,inputFluxes,solver,pass)
      return(Mod)
  

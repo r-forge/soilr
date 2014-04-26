@@ -1,11 +1,18 @@
-\name{[[-methods}
-\docType{methods}
-\alias{[[-methods}
-\alias{[[,MCSim-method}
-\title{ ~~ Methods for Function \code{[[}  ~~}
-\description{
- All methods for function \code{[[} are intended for internal use inside the package only. 
+\name{show_method__Model}
+\alias{show_method__Model}
+\title{show method  Model}
+\description{This function is a stub}
+\arguments{
+  \item{object}{
+}
 }
 
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

@@ -1,11 +1,18 @@
-\name{getOutputFluxes-methods}
+\name{getMeanTransitTime-methods}
 \docType{methods}
-\alias{getOutputFluxes-methods}
-\alias{getOutputFluxes,NlModel-method}
-\title{ ~~ Methods for Function \code{getOutputFluxes}  ~~}
+\alias{getMeanTransitTime-methods}
+\alias{getMeanTransitTime,ConstLinDecompOp-method}
+\title{ ~~ Methods for Function \code{getMeanTransitTime}  ~~}
 \description{
- All methods for function \code{getOutputFluxes} are intended for internal use inside the package only. 
+ ~~ Methods for function \code{getMeanTransitTime} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "ConstLinDecompOp")}}{
+      \code{\link{getMeanTransitTime_method__ConstLinDecompOp}}  
+    }
 
+  }
+}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

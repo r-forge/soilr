@@ -23,19 +23,19 @@ TwopSeriesModel14<-structure(
     if(length(ks)!=2) stop("ks must be of length = 2")
     if(length(C0)!=2) stop("the vector with initial conditions must be of length = 2")
     
-    if(length(In)==1) inputFluxes=new("BoundInFlux",
+    if(length(In)==1) inputFluxes=BoundInFlux(
+                                     function(t){matrix(nrow=2,ncol=1,c(In,0))},
                                      t_start,
-                                     t_stop,
-                                     function(t){matrix(nrow=2,ncol=1,c(In,0))}
+                                     t_stop
                                      )
     if(class(In)=="data.frame"){
       x=In[,1]  
       y=In[,2]  
       inputFlux=function(t0){as.numeric(spline(x,y,xout=t0)[2])}
-      inputFluxes=new("BoundInFlux",
+      inputFluxes=BoundInFlux(
+                     function(t){matrix(nrow=2,ncol=1,c(inputFlux(t),0))},
                      min(x),
-                     max(x),
-                     function(t){matrix(nrow=2,ncol=1,c(inputFlux(t),0))}
+                     max(x)
                      )   
     }
     
@@ -49,13 +49,13 @@ TwopSeriesModel14<-structure(
     A=-abs(diag(ks))
     A[2,1]=a21
     
-    At=new(Class="BoundLinDecompOp",
-           t_start,
-           t_stop,
+    At=BoundLinDecompOp(
            function(t){
              fX(t)*A
-           }
-           ) 
+           },
+           t_start,
+           t_stop
+    ) 
 
     Fc=BoundFc(inputFc,lag=lag,format="Delta14C")
     

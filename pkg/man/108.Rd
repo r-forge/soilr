@@ -1,11 +1,10 @@
-\name{computeResults-methods}
+\name{availableParticleSets-methods}
 \docType{methods}
-\alias{computeResults-methods}
-\alias{computeResults,MCSim-method}
-\alias{computeResults,NlModel-method}
-\title{ ~~ Methods for Function \code{computeResults}  ~~}
+\alias{availableParticleSets-methods}
+\alias{availableParticleSets,MCSim-method}
+\title{ ~~ Methods for Function \code{availableParticleSets}  ~~}
 \description{
- All methods for function \code{computeResults} are intended for internal use inside the package only. 
+ All methods for function \code{availableParticleSets} are intended for internal use inside the package only. 
 }
 
 \keyword{methods}

@@ -1,16 +1,23 @@
-\name{GeneralModel_method__numeric_ANY_numeric}
-\alias{GeneralModel_method__numeric_ANY_numeric}
+\name{GeneralModel_14_method__numeric_ANY_numeric_ANY_ANY_missing_ANY_numeric_missing_missing_missing}
+\alias{GeneralModel_14_method__numeric_ANY_numeric_ANY_ANY_missing_ANY_numeric_missing_missing_missing}
 \title{a constructor for class Model}
-\description{This method tries to create a Model object from any combination of arguments 
-that can be converted into  the required set of building blocks for a model
-for n arbitrarily connected pools.}
+\description{A wrapper for \code{\link{Model_14}} with pass=FALSE}
 \arguments{
   \item{t}{A vector containing the points in time where the solution is sought.}
-  \item{A}{something that can be converted to any of the available DecompositionOperator classes}
-  \item{ivList}{A vector containing the initial amount of carbon for the n pools. The length of this vector is equal to the number of pools and thus equal to the length of k. This is checked by an internal  function.}
-  \item{inputFluxes}{something that can be converted to any of the available InFlux classes}
-  \item{solverfunc}{The function used by to actually solve the ODE system. This can be \code{\link{deSolve.lsoda.wrapper}} or any other user provided function with the same interface.}
-  \item{pass}{Forces the constructor to create the model even if it is invalid}
+  \item{A}{
+}
+  \item{ivList}{
+}
+  \item{initialValF}{
+}
+  \item{inputFluxes}{
+}
+  \item{Fc}{
+}
+  \item{di}{
+}
+  \item{pass}{
+}
 }
 
 \value{A model object that can be further queried. }

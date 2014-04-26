@@ -1,11 +1,18 @@
-\name{getDotOut-methods}
-\docType{methods}
-\alias{getDotOut-methods}
-\alias{getDotOut,TransportDecompositionOperator-method}
-\title{ ~~ Methods for Function \code{getDotOut}  ~~}
-\description{
- All methods for function \code{getDotOut} are intended for internal use inside the package only. 
+\name{getC14_method__Model_14}
+\alias{getC14_method__Model_14}
+\title{getC14 method  Model 14}
+\description{This function computes the value for \eqn{^{14}C}{14C} (mass or concentration ) as function of time}
+\arguments{
+  \item{object}{
+}
 }
 
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

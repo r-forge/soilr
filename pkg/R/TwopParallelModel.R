@@ -21,18 +21,16 @@ TwopParallelModel<-structure(
       if(length(C0)!=2) stop("the vector with initial conditions must be of length = 2")
       if(gam > 1 | gam < 0) stop("The the partitioning coefficient gam is outside the interval [0,1]")
       
-      if(length(In)==1) inputrates=TimeMap.new(
+      if(length(In)==1) inputrates=BoundInFlux(
+        function(t){matrix(nrow=2,ncol=1,c(gam*In,(1-gam)*In))},
         t_start,
-        t_stop,
-        function(t){matrix(nrow=2,ncol=1,c(gam*In,(1-gam)*In))}
+        t_stop
       )
       if(class(In)=="data.frame"){
          x=In[,1]  
          y=In[,2]  
          inputrate=function(t0){as.numeric(spline(x,y,xout=t0)[2])}
-         inputrates=TimeMap.new(
-            min(x),
-            max(x),
+         inputrates=BoundInFlux(
             function(t){
                 matrix(nrow=2,ncol=1,
                     c(
@@ -40,7 +38,9 @@ TwopParallelModel<-structure(
                         (1-gam)*inputrate(t)
                     )
                 )
-            }
+            },
+            min(x),
+            max(x)
          )   
         }
       

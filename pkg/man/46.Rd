@@ -1,9 +1,11 @@
-\name{Delta14C_from_AbsoluteFractionModern_method__matrix}
-\alias{Delta14C_from_AbsoluteFractionModern_method__matrix}
-\title{Converts Absolute Fraction Modern values to Delta14C}
-\description{This method produces a matrix of  Delta14C values from a matrix of values in Absolute Fraction Modern.}
-\arguments{
-  \item{AbsoluteFractionModern}{An object of class matrix containing the values in Absolute Fraction Modern format}
+\name{Delta14C_from_AbsoluteFractionModern}
+\alias{Delta14C_from_AbsoluteFractionModern}
+\title{Converts its argument from an Absolute Fraction Modern to a Delta14C representation}
+\description{The function returns an object of the same type as its input,
+which can be of different type.
+Have a look at the methods for details.}
+\usage{Delta14C_from_AbsoluteFractionModern(AbsoluteFractionModern)}\arguments{
+  \item{AbsoluteFractionModern}{A numeric object}
 }
 
 

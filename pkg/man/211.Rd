@@ -1,9 +1,9 @@
-\name{summary_method__Model}
-\alias{summary_method__Model}
-\title{summary method  Model}
+\name{plot_method__Model}
+\alias{plot_method__Model}
+\title{plot method  Model}
 \description{This function is a stub}
 \arguments{
-  \item{object}{
+  \item{x}{
 }
 }
 

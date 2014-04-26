@@ -1,16 +1,16 @@
-\name{[-methods}
+\name{show-methods}
 \docType{methods}
-\alias{[-methods}
-\alias{[,Model,character-method}
-\alias{[,NlModel,character-method}
-\title{ ~~ Methods for Function \code{[}  ~~}
+\alias{show-methods}
+\alias{show,Model-method}
+\alias{show,NlModel-method}
+\title{ ~~ Methods for Function \code{show}  ~~}
 \description{
- ~~ Methods for function \code{[} ~~
+ ~~ Methods for function \code{show} ~~
 }
 \section{Methods}{
   \describe{
-    \item{\code{signature(x = "Model", i = "character")}}{
-      \code{\link{[_method__Model_character}}  
+    \item{\code{signature(object = "Model")}}{
+      \code{\link{show_method__Model}}  
     }
 
   }

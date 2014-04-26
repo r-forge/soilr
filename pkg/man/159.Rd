@@ -1,8 +1,9 @@
-\name{getFunctionDefinition_method__ConstLinDecompOp}
-\alias{getFunctionDefinition_method__ConstLinDecompOp}
-\title{creates a constant timedependent function and returns it}
-\description{The method creates a timedependent function from the existing matrix describing the operator }
-\arguments{
+\name{getFunctionDefinition}
+\alias{getFunctionDefinition}
+\title{getFunctionDefinition}
+\description{Extracts the function definition (the R-function) from the argument
+Have a look at the methods for details.}
+\usage{getFunctionDefinition(object)}\arguments{
   \item{object}{
 }
 }

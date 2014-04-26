@@ -33,10 +33,10 @@ OnepModel14<-structure(
       x=In[,1]  
       y=In[,2]  
       inputFlux=function(t0){as.numeric(spline(x,y,xout=t0)[2])}
-      inputFluxes=new("TimeMap",
+      inputFluxes=BoundInFlux(
+                      function(t){matrix(nrow=1,ncol=1,inputFlux(t),0)},
                       t_start,
-                      t_stop,
-                      function(t){matrix(nrow=1,ncol=1,inputFlux(t),0)}
+                      t_stop
                       )   
     }
     
@@ -49,12 +49,12 @@ OnepModel14<-structure(
     
     A=-abs(matrix(k,1,1))
     
-    At=new(Class="BoundLinDecompOp",
-           t_start,
-           t_stop,
+    At=BoundLinDecompOp(
            function(t){
              fX(t)*A
-           }
+           },
+           t_start,
+           t_stop
            ) 
     
     inputFc=BoundFc(inputFc,lag=lag,format="Delta14C")

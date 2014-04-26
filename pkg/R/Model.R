@@ -127,18 +127,15 @@ setMethod(
     (
         .Object,
         times=c(0,1),
-        mat=new("ConstLinDecompOp",     
-                    matrix(nrow=1,ncol=1,0)
-        )                     ##<< A decomposition Operator of some kind 
-        ,
+        mat=ConstLinDecompOp(matrix(nrow=1,ncol=1,0)), ##<< A decomposition Operator of some kind 
         initialValues=numeric()
         ,
-        inputFluxes= BoundInFlux.new(
-            0,
-            1,
+        inputFluxes= BoundInFlux(
             function(t){
                 return(matrix(nrow=1,ncol=1,1))
-            }
+            },
+            0,
+            1
         )
         ,
         solverfunc=deSolve.lsoda.wrapper
@@ -274,6 +271,14 @@ setMethod(
       f=function(i){paste("C",i,sep="")}
       #colnames(Y)=sapply((1:ncol(Y)),f)
       return(Y)
+      ##value<< A matrix with m columns representing the number of pools, and n rows representing the times as specified by the argument
+      ##\code{t} in \code{\link{Model}},\code{\link{GeneralModel}} or another model creating function.
+      ##details<< This function takes a Model object, which represents a system of ODEs of the form 
+      ##\deqn{\frac{d \mathbf{C}(t)}{dt} = \mathbf{I}(t) + \mathbf{A}(t) \mathbf{C}(t)}{dC(t)/dt = I(t) + A(t)C(t)} 
+     ##and solves the system for \eqn{\mathbf{C}(t)}{C(t)}. The numerical solver used can be specified in the costructor of the Model class
+    ## e.g. \code{\link{Model}}, \code{\link{GeneralModel}}.
+	  ##seealso<< See examples in \code{\link{GeneralModel}}, \code{\link{GeneralModel_14}}, \code{\link{TwopParallelModel}}, 
+    ## \code{\link{TwopSeriesModel}}, \code{\link{TwopFeedbackModel}}, etc.
    }
 )
 #------------------------------------------------------------------------------------
@@ -285,6 +290,8 @@ setMethod(
       ### specified in the Model objects time slot.
       (
       object ##<< an object of class Model
+      ## created by a call to a constructor e.g. \code{\link{Model}}, 
+      ## \code{\link{GeneralModel}}or other model creating functions.
       ){
       C=getC(object)
       times=object@times
@@ -299,7 +306,13 @@ setMethod(
       f=function(i){paste("ReleaseFlux",i,sep="")}
       #colnames(R)=sapply((1:ncol(R)),f)
       return(R)
-      ### A matrix. Every column represents a pool and every row a point in time
+	    ##value<< A n x m matrix of release fluxes with m columns representing the number of pools, and n rows representing the time step as specified by the argument
+	    ## \code{t} in \code{\link{Model}}, \code{\link{GeneralModel}} or another model creating function.
+	    ##details<< This function takes a Model object, which represents a system of ODEs 
+	    ## \deqn{\frac{d \mathbf{C}(t)}{dt} = \mathbf{I}(t) + \mathbf{A}(t) \mathbf{C}(t)}{dC(t)/dt = I(t) + A(t)C(t)} 
+	    ## solves the system for \eqn{\mathbf{C}(t)}{C(t)}, calculates the release coefficients \eqn{\mathbf{R}(t)}{R(t)}, 
+      ## and computes the release flux as \eqn{\mathbf{R}(t) \mathbf{C}(t)}{R(t) C(t)}.
+      ## The numerical solver used can be specified in the model creating functions like e.g. \code{\link{Model}}.
    }
 )
 #------------------------------------------------------------------------------------

@@ -1,7 +1,8 @@
-\name{BoundLinDecompOp_method__TimeMap_missing_missing_missing}
-\alias{BoundLinDecompOp_method__TimeMap_missing_missing_missing}
-\title{create a BoundLinDecompOp from a TimeMap}
-\description{The method is used internally to convert TimeMap objects to BoundLinDecompOp where the use of TimeMap is now deprecated.}
+\name{BoundLinDecompOp_method__ConstLinDecompOp}
+\alias{BoundLinDecompOp_method__ConstLinDecompOp}
+\title{convert a ConstLinDecompOp to a BoundLinDecompOp}
+\description{The method creates a BoundLinDecompOp consisting of a constant time dependent function 
+and the limits of its domain (starttime and endtime) set to -Inf and Inf respectively}
 \arguments{
   \item{map}{
 }

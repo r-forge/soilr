@@ -1,15 +1,16 @@
-\name{getTransitTimeDistributionDensity-methods}
+\name{getTimes-methods}
 \docType{methods}
-\alias{getTransitTimeDistributionDensity-methods}
-\alias{getTransitTimeDistributionDensity,ConstLinDecompOp-method}
-\title{ ~~ Methods for Function \code{getTransitTimeDistributionDensity}  ~~}
+\alias{getTimes-methods}
+\alias{getTimes,Model-method}
+\alias{getTimes,NlModel-method}
+\title{ ~~ Methods for Function \code{getTimes}  ~~}
 \description{
- ~~ Methods for function \code{getTransitTimeDistributionDensity} ~~
+ ~~ Methods for function \code{getTimes} ~~
 }
 \section{Methods}{
   \describe{
-    \item{\code{signature(object = "ConstLinDecompOp")}}{
-      \code{\link{getTransitTimeDistributionDensity_method__ConstLinDecompOp}}  
+    \item{\code{signature(object = "Model")}}{
+      \code{\link{getTimes_method__Model}}  
     }
 
   }

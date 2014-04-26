@@ -21,20 +21,20 @@ ThreepSeriesModel<-structure(
       if(length(C0)!=3) stop("the vector with initial conditions must be of length = 3")
       
       if(length(In)==1){
-          inputFluxes=TimeMap.new(
+          inputFluxes=BoundInFlux(
+            function(t){matrix(nrow=3,ncol=1,c(In,0,0))},
             t_start,
-            t_end,
-            function(t){matrix(nrow=3,ncol=1,c(In,0,0))}
+            t_end
         )
       }
       if(class(In)=="data.frame"){
          x=In[,1]  
          y=In[,2]  
          inputFlux=splinefun(x,y)
-          inputFluxes=TimeMap.new(
+          inputFluxes=BoundInFlux(
+            function(t){matrix(nrow=3,ncol=1,c(inputFlux(t),0,0))},
             min(x),
-            max(x),
-            function(t){matrix(nrow=3,ncol=1,c(inputFlux(t),0,0))}
+            max(x)
           )
         }
 
@@ -48,10 +48,10 @@ ThreepSeriesModel<-structure(
         Y=xi[,2]
         fX=splinefun(X,Y)
        }
-      Af=new("BoundLinDecompOp",
+      Af=BoundLinDecompOp(
+            function(t){fX(t)*A},
             t_start,
-            t_end,
-            function(t){fX(t)*A}
+            t_end
       )
       Mod=GeneralModel(t=t,A=Af,ivList=C0,inputFluxes=inputFluxes,pass=pass)
      return(Mod)

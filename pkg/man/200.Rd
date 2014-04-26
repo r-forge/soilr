@@ -1,9 +1,7 @@
-\name{initialize_method__TimeMap}
-\alias{initialize_method__TimeMap}
-\title{initialize called by (new)}
-\description{This is the standard constructor for objects of this class
-It is called by statements of the form 
-\code{new("TimeMap",start,end,f,lag)}}
+\name{initialize_method__BoundInFlux}
+\alias{initialize_method__BoundInFlux}
+\title{internal constructor}
+\description{This mehtod is intended for internal use only, it may change with the internal representation of the class. In user code please use the generic constructor \code{\link{BoundInFlux}} instead.}
 \arguments{
   \item{.Object}{
 }

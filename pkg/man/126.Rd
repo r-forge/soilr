@@ -1,16 +1,16 @@
-\name{fW.Daycent2}
-\alias{fW.Daycent2}
-\title{Effects of moisture on decomposition rates according to the DAYCENT model}
-\description{Calculates the effects of volumetric water content on decomposition rates according to the Daycent/Century models.}
-\usage{fW.Daycent2(W, WP = 0, FC = 100)}\arguments{
-  \item{W}{A scalar or vector of volumetric water content in percentage.}
-  \item{WP}{A scalar representing the wilting point in percentage.}
-  \item{FC}{A scalar representing the field capacity in percentage.}
+\name{fW.Candy}
+\alias{fW.Candy}
+\title{Effects of moisture on decomposition rates according to the Candy model}
+\description{Calculates the effects of water content and pore volume on decomposition rates.}
+\usage{fW.Candy(theta, PV)}\arguments{
+  \item{theta}{A scalar or vector containing values of volumetric soil water content.}
+  \item{PV}{A scalar or vector containing values of pore volume.}
 }
 
-\value{A data frame with values of relative water content (RWC) and the effects of RWC on decomposition rates (fRWC).}
-\references{Del Grosso, S. J., W. J. Parton, A. R. Mosier, E. A. Holland, E. Pendall, D. S. Schimel, and D. S. Ojima (2005), 
-Modeling soil CO2 emissions from ecosystems, Biogeochemistry, 73(1), 71-91.}
+
+\references{J. Bauer, M. Herbst, J.A. Huisman, L. Weiherm\"uller, H. Vereecken. 2008.
+Sensitivity of simulated soil heterotrophic respiration to temperature and moisture reduction functions.
+Geoderma, Volume 145, Issues 1-2, 15 May 2008, Pages 17-27.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -18,7 +18,13 @@ Modeling soil CO2 emissions from ecosystems, Biogeochemistry, 73(1), 71-91.}
 
 
 \examples{
-W=10:90
-fW=fW.Daycent2(W,WP=10,FC=90)
-plot(fW,type="l",ylim=c(0,6)) #This plot reproduces Figure 1b, in del Grosso et al. (2005)
+th=seq(0,1,0.01)
+xi1=fW.Candy(theta=th,PV=0.4)
+xi2=fW.Candy(theta=th,PV=0.6)
+xi3=fW.Candy(theta=th,PV=0.8)
+plot(th,xi1,type="l",main="Effects of soil water content and pore volume on decomposition rates",
+     xlab="Volumetric soil water content (cm3 cm-3)",ylab=expression(xi))
+lines(th,xi2,col=2)
+lines(th,xi3,col=3)
+legend("bottomright",c("Pore volume = 0.4","Pore volume = 0.6", "Pore volume = 0.8"),lty=1,col=1:3)
 }

@@ -1,18 +1,34 @@
-\name{ConstLinDecompOp-methods}
-\docType{methods}
-\alias{ConstLinDecompOp-methods}
-\alias{ConstLinDecompOp,matrix-method}
-\title{ ~~ Methods for Function \code{ConstLinDecompOp}  ~~}
+\name{ConstLinDecompOp-class}
+\Rdversion{1.1}
+\docType{class}
+\alias{ConstLinDecompOp-class}
+\title{Class \code{"ConstLinDecompOp"}}
 \description{
- ~~ Methods for function \code{ConstLinDecompOp} ~~
+NA
+}
+\section{Slots}{
+  \describe{
+    \item{\code{mat}:}{Object of class \code{"matrix"} ~~ }
+  }
+}
+\section{Extends}{
+Class \code{"\linkS4class{DecompOp}"}, directly.
 }
 \section{Methods}{
   \describe{
-    \item{\code{signature(mat = "matrix")}}{
-      \code{\link{ConstLinDecompOp_method__matrix}}  
-    }
-
-  }
+    \item{BoundLinDecompOp}{\code{signature(map = "ConstLinDecompOp", starttime = "ANY", endtime = "ANY", lag = "ANY")}: ... }
+    \item{getFunctionDefinition}{\code{signature(object = "ConstLinDecompOp")}: ... }
+    \item{getMeanTransitTime}{\code{signature(object = "ConstLinDecompOp")}: ... }
+    \item{getTimeRange}{\code{signature(object = "ConstLinDecompOp")}: ... }
+    \item{getTransitTimeDistributionDensity}{\code{signature(object = "ConstLinDecompOp")}: ... }
+    \item{initialize}{\code{signature(.Object = "ConstLinDecompOp")}: ... }
+	 }
 }
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+\author{
+ Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de> 
+}
+\examples{
+showClass("ConstLinDecompOp")
+}
+\keyword{classes}

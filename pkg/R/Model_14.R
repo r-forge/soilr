@@ -53,7 +53,7 @@ correctnessOfModel14=function#check for unreasonable input parameters to Model c
 supported_formats=c("Delta14C","AbsoluteFractionModern")
 atm_c14=object@c14Fraction
 if (class(atm_c14)!="BoundFc"){
-   stop(simpleError("The object describing the atmospheric c_14 fraction must be of class BoundFc. This is a subclass of TimeMap additionally containing information about the format in which the values are given"))
+   stop(simpleError("The object describing the atmospheric c_14 fraction must be of class BoundFc containing information about the format in which the values are given"))
 }
 f=atm_c14@format
 if (!any(grepl(f,supported_formats))){
@@ -96,7 +96,8 @@ setMethod(
     f="initialize",
     signature=c("Model_14"),
     definition=function #An internal constructor for \code{Model_14} objects not recommended to be used directly in user code.
-    ### This method implements R's initialize generic for objects of class \code{Model_14} and is not intended as part of the public interface to SoilR. It may change in the future as the classes implementing SoilR may.
+    ### This method implements R's initialize generic for objects of class \code{Model_14} and is not intended as part of the public interface to SoilR. 
+    ### It may change in the future as the classes implementing SoilR may.
     ### It is called whenever a new object of this class is created by a call to \code{new} with the first argument \code{Model_14}.
     ### It performs some sanity checks of its arguments and in case those tests pass returns an object of class \code{Model_14} 
     ### The checks can be turned off.( see arguments)
@@ -114,20 +115,17 @@ setMethod(
     (
         .Object,              ##<< the Model_14 object itself
         times=c(0,1),         ##<< The points in time where the solution is sought 
-        mat=new("ConstLinDecompOp",     
-                    matrix(nrow=1,ncol=1,0)
-        )                     ##<< A decomposition Operator of some kind 
-        ,
+        mat=ConstLinDecompOp(matrix(nrow=1,ncol=1,0)),##<< A decomposition Operator of some kind 
         initialValues=numeric()
         ,
-        initialValF=new(Class="ConstFc",values=c(0),format="Delta14C")      ##<< An object of class ConstFc containing a vector with the initial values of the radiocarbon fraction for each pool and a format string describing in which format the values are given.
+        initialValF=ConstFc(values=c(0),format="Delta14C")      ##<< An object of class ConstFc containing a vector with the initial values of the radiocarbon fraction for each pool and a format string describing in which format the values are given.
         ,
-        inputFluxes= BoundInFlux.new(
-            0,
-            1,
+        inputFluxes= BoundInFlux(
             function(t){
                 return(matrix(nrow=1,ncol=1,1))
-            }
+            },
+            0,
+            1
         )
         ,
         c14Fraction=BoundFc(
@@ -164,7 +162,7 @@ setMethod(f="Model_14",
     t="numeric",
     A="ANY",
     ivList="numeric",
-    initialValF="ANY",
+    initialValF="ConstFc",
     inputFluxes="ANY",
     inputFc="ANY",
     c14DecayRate="numeric",
@@ -179,11 +177,11 @@ setMethod(f="Model_14",
   (t,			##<< A vector containing the points in time where the solution is sought.
    A,			##<< something that can be converted to any of the available DecompositionOperator classes
    ivList,		##<< A vector containing the initial amount of carbon for the n pools. The length of this vector is equal to the number of pools and thus equal to the length of k. This is checked by an internal  function. 
-   initialValF, ##<< An object of class ConstFc containing a vector with the initial values of the radiocarbon fraction for each pool and a format string describing in which format the values are given.
+   initialValF, ##<< An object equal or equivalent to class ConstFc containing a vector with the initial values of the radiocarbon fraction for each pool and a format string describing in which format the values are given.
    inputFluxes, ##<<  something that can be converted to any of the available InFlux classes
    inputFc,##<< An object describing the fraction of C_14 in per mille (different formats are possible)
    c14DecayRate,## << the rate at which C_14 decays radioactivly. If you don't provide a value here we assume the following value: k=-0.0001209681 y^-1 . This has the side effect that all your time related data are treated as if the time unit was year. Thus beside time itself it also  affects decay rates the inputrates and the output 
-   solverfunc=deSolve.lsoda.wrapper,		##<< The function used by to actually solve the ODE system. This can be \code{\link{deSolve.lsoda.wrapper}} or any other user provided function with the same interface. 
+   solverfunc,		##<< The function used by to actually solve the ODE system. This can be \code{\link{deSolve.lsoda.wrapper}} or any other user provided function with the same interface. 
    pass=FALSE  ##<< Forces the constructor to create the model even if it is invalid 
    )
   {
@@ -191,6 +189,39 @@ setMethod(f="Model_14",
      return(obj)
      ### A model object that can be further queried. 
      ##seealso<< \code{\link{TwopParallelModel}}, \code{\link{TwopSeriesModel}}, \code{\link{TwopFeedbackModel}} 
+  }
+)
+#------------------------------------------------------------------------------------
+setMethod(f="Model_14",
+  signature=c(
+    t="numeric",
+    A="ANY",
+    ivList="numeric",
+    initialValF="ConstFc",
+    inputFluxes="ANY",
+    inputFc="ANY",
+    c14DecayRate="numeric",
+    solverfunc="missing",
+    pass="logical"
+  ),
+  definition=function #constructor for class Model_14
+  ### This method is a wrapper for \code{\link{Model_14__method_numeric_ ANY_ numeric_ ANY_ ANY_ ANY_ numeric_ function_logical}}
+  ### with solverfunc set to \code{deSolve.lsoda.wrapper}
+  
+  (t,			
+   A,		
+   ivList,		
+   initialValF,
+   inputFluxes, 
+   inputFc,
+   c14DecayRate,
+   pass=FALSE  
+   )
+  {
+     obj=Model_14(t,DecompOp(A),ivList, initialValF,InFlux(inputFluxes),inputFc,c14DecayRate=c14DecayRate,solverfunc=deSolve.lsoda.wrapper,pass=pass)
+     return(obj)
+     ### A Model_14 object that can be further queried. 
+     ##seealso<< \code{\link{TwopParallelModel14}}, \code{\link{TwopSeriesModel14}}, \code{\link{TwopFeedbackModel14}} and so on. 
   }
 )
 #------------------------------------------------------------------------------------
@@ -272,7 +303,7 @@ setMethod(
       ### is not greater for \eqn{^{14}C}{14C} 
       ### although the decay is faster due to the contribution of radioactivity.
       (
-        object ##<< an object of class Model_14
+        object ##<< an object 
       )
       {
       C14=getC14(object) ### we use the C14 here
@@ -304,7 +335,7 @@ setMethod(
   definition=function # average radiocarbon fraction weighted by carbonrelease 
     ### Calculates the average radiocarbon fraction weighted by the amount of carbon release at each time step. 
     (
-     object ##<< an object of class  Model_14
+     object ##<< an object
 
      ){
     R=getReleaseFlux(object) ### we use the C14 here

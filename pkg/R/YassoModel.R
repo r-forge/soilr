@@ -22,10 +22,10 @@ YassoModel<-structure(
     if(length(p)!=10) stop("The vector of transfer coefficients p must be of length = 10")
     
     if(length(In)==7){
-      inputFluxes=TimeMap.new(
+      inputFluxes=BoundInFlux(
+        function(t){matrix(nrow=7,ncol=1,In)},
         t_start,
-        t_end,
-        function(t){matrix(nrow=7,ncol=1,In)}
+        t_end
       )
     }
     if(class(In)=="data.frame") stop("Inputs must be a vector of length 7")
@@ -47,13 +47,13 @@ YassoModel<-structure(
     
     if(length(xi)==1){
       fX=function(t){xi}
-      Af=new("BoundLinDecompOp",t_start,t_end,function(t) fX(t)*A)
+      Af=BoundLinDecompOp(function(t){fX(t)*A},t_start,t_end)
     }
     if(class(xi)=="data.frame"){
       X=xi[,1]
       Y=xi[,2]
       fX=splinefun(X,Y)
-      Af=new("BoundLinDecompOp",min(X),max(X),function(t) fX(t)*A)
+      Af=BoundLinDecompOp(function(t){fX(t)*A},min(X),max(X))
     }
     Mod=GeneralModel(t=t,A=Af,ivList=C0,inputFluxes=inputFluxes,solver,pass)
     return(Mod)

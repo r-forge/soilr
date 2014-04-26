@@ -1,18 +1,19 @@
-\name{getFunctionDefinition}
-\alias{getFunctionDefinition}
-\title{getFunctionDefinition}
-\description{Extracts the function definition (the R-function) from the argument}
-\usage{getFunctionDefinition(object)}\arguments{
-  \item{object}{
+\name{getFormat-methods}
+\docType{methods}
+\alias{getFormat-methods}
+\alias{getFormat,BoundFc-method}
+\alias{getFormat,ConstFc-method}
+\title{ ~~ Methods for Function \code{getFormat}  ~~}
+\description{
+ ~~ Methods for function \code{getFormat} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "BoundFc")}}{
+      \code{\link{getFormat_method__BoundFc}}  
+    }
+
+  }
 }
-
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

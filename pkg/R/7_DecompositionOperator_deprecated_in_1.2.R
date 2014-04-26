@@ -1,7 +1,8 @@
 #
 # vim:set ff=unix expandtab ts=2 sw=2:
 
-setClass(# a decomposition operator described by a matrix valued function of time
+setClass(# deprecated decomposition operator class 
+    ### The new class implementing the same functionality is names \code{BoundLinDecompOp}
     Class="DecompositionOperator",
     contains="DecompOp",   
     slots=list(
@@ -39,17 +40,6 @@ setMethod(
     return(.Object)
     }
 )
-##---------------------------------------------------------------------
-#setMethod(
-#      f="DecompositionOperator",
-#      ### 
-#      signature=c(map="function",starttime="missing",endtime="missing",lag="numeric"),
-#      definition=function # a constructor for a single function without limits  
-#      ### This method creates a DecompositionOperator from a timedependent function and a lag only
-#      (map,lag=0){
-#      return(new("DecompositionOperator",starttime=-Inf,endtime=Inf,map=map))
-#    }
-#)
 #---------------------------------------------------------------------
 setMethod(
     f="getTimeRange",
