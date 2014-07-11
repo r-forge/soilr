@@ -1,18 +1,11 @@
-\name{getTransitTimeDistributionDensity-methods}
+\name{getTransferMatrix-methods}
 \docType{methods}
-\alias{getTransitTimeDistributionDensity-methods}
-\alias{getTransitTimeDistributionDensity,ConstLinDecompOp-method}
-\title{ ~~ Methods for Function \code{getTransitTimeDistributionDensity}  ~~}
+\alias{getTransferMatrix-methods}
+\alias{getTransferMatrix,TransportDecompositionOperator-method}
+\title{ ~~ Methods for Function \code{getTransferMatrix}  ~~}
 \description{
- ~~ Methods for function \code{getTransitTimeDistributionDensity} ~~
+ All methods for function \code{getTransferMatrix} are intended for internal use inside the package only. 
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "ConstLinDecompOp")}}{
-      \code{\link{getTransitTimeDistributionDensity_method__ConstLinDecompOp}}  
-    }
 
-  }
-}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

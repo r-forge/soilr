@@ -269,7 +269,7 @@ setGeneric (
     ##value<< A matrix with m columns representing the number of pools, and n rows representing the times as specified by the argument
     ##\code{t} in \code{\link{GeneralModel}} or another model creating function.
     ##details<< This function takes a Model object, which represents a system of ODEs 
-    ##and solves the system for \eqn{\mathbf{C}(t)}{C(t)}. The numerical solver used can be specified in the costructors of the Model classes
+    ##and solves the system for \eqn{\mathbf{C}(t)}{C(t)}. The numerical solver used can be specified in the constructors of the Model classes
     ## e.g. \code{\link{Model}},\code{\link{Model_14}},\code{\link{GeneralModel}}.
 	  ##seealso<< See examples in \code{\link{GeneralModel}}, \code{\link{GeneralModel_14}}, \code{\link{TwopParallelModel}}, 
     ## \code{\link{TwopSeriesModel}}, \code{\link{TwopFeedbackModel}}, etc.
@@ -551,7 +551,7 @@ setGeneric(
 )
 setGeneric(
     name="Model",
-    def=function # A general costructor 
+    def=function # A general constructor 
     ### Creates a Model object from different sources
     ### Have a look at the methods for details.
     (t,A,ivList,inputFluxes,...){
@@ -560,7 +560,7 @@ setGeneric(
 )
 setGeneric(
     name="Model_14",
-    def=function # A general costructor 
+    def=function # A general constructor 
     ### Creates a Model_14 object from different sources
     ### Have a look at the methods for details.
     (

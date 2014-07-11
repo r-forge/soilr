@@ -1,7 +1,7 @@
-\name{getFunctionDefinition_method__BoundInFlux}
-\alias{getFunctionDefinition_method__BoundInFlux}
-\title{getFunctionDefinition method  BoundInFlux}
-\description{extract the function definition (the R-function) from the BoundInFlux }
+\name{getFunctionDefinition_method__BoundFc}
+\alias{getFunctionDefinition_method__BoundFc}
+\title{function definition }
+\description{extract the function definition (the R-function) }
 \arguments{
   \item{object}{
 }

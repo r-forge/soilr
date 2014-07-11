@@ -1,45 +1,57 @@
-\name{Yasso07Model}
-\alias{Yasso07Model}
-\title{Implementation of the Yasso07 model}
-\description{This function creates a model for five pools as described in Tuomi et al. (2008)}
-\usage{Yasso07Model(t, ks = c(kA = 0.66, kW = 4.3, kE = 0.35, kN = 0.22, 
-    kH = 0.0033), p = c(p1 = 0.32, p2 = 0.01, p3 = 0.93, p4 = 0.34, 
-    p5 = 0, p6 = 0, p7 = 0, p8 = 0, p9 = 0.01, p10 = 0, p11 = 0, 
-    p12 = 0.92, pH = 0.04), C0, In, xi = 1, solver = deSolve.lsoda.wrapper, 
+\name{TwopSeriesModel14}
+\alias{TwopSeriesModel14}
+\title{Implementation of a two-pool C14 model with series structure}
+\description{This function creates a model for two pools connected in series. 
+It is a wrapper for the more general function \code{\link{GeneralModel_14}} that can handle an arbitrary number of pools.}
+\usage{TwopSeriesModel14(t, ks, C0, F0_Delta14C, In, a21, xi = 1, inputFc, 
+    lambda = -0.0001209681, lag = 0, solver = deSolve.lsoda.wrapper, 
     pass = FALSE)}\arguments{
-  \item{t}{A vector containing the points in time where the solution is sought.}
-  \item{ks}{A vector of lenght 5 containing the values of the decomposition rates for each pool.}
-  \item{p}{A vector of length 13 containing transfer coefficients among different pools.}
-  \item{C0}{A vector containing the initial amount of carbon for the 5 pools. The length of this vector must be 5.}
-  \item{In}{A single scalar or data.frame object specifying the amount of litter inputs by time}
-  \item{xi}{A scalar or data.frame object specifying the external (environmental and/or edaphic) effects on decomposition rates.}
+  \item{t}{A vector containing the points in time where the solution is sought. It must be specified within the same period for which the Delta 14 C of the atmosphere is provided. The default period in the provided dataset \code{\link{C14Atm_NH}} is 1900-2010.}
+  \item{ks}{A vector of length 2 containing the decomposition rates for the 2 pools.}
+  \item{C0}{A vector of length 2 containing the initial amount of carbon for the 2 pools.}
+  \item{F0_Delta14C}{A vector of length 2 containing the initial amount of the radiocarbon fraction for the 2 pools as Delta14C values in per mil.}
+  \item{In}{A scalar or a data.frame object specifying the amount of litter inputs by time.}
+  \item{a21}{A scalar with the value of the transfer rate from pool 1 to pool 2.}
+  \item{xi}{A scalar or a data.frame specifying the external (environmental and/or edaphic) effects on decomposition rates.}
+  \item{inputFc}{A Data Frame object containing values of atmospheric Delta14C per time. First column must be time values, second column must be Delta14C values in per mil.}
+  \item{lambda}{Radioactive decay constant. By default lambda=-0.0001209681 y^-1 . This has the side effect that all your time related data are treated as if the time unit was year.}
+  \item{lag}{A (positive) scalar representing a time lag for radiocarbon to enter the system.}
   \item{solver}{A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.}
-  \item{pass}{if TRUE forces the constructor to create the model even if it is invalid}
+  \item{pass}{if TRUE Forces the constructor to create the model even if it is invalid}
 }
 
 \value{A Model Object that can be further queried }
-\references{Tuomi, M., Thum, T., Jarvinen, H., Fronzek, S., Berg, B., Harmon, M., Trofymow, J., Sevanto, S., and Liski, J. (2009).
-Leaf litter decomposition-estimates of global variability based on Yasso07 model. Ecological Modelling, 220:3362 - 3371.}
+
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
 
 
-\seealso{\code{\link{ICBMModel}}, \code{\link{RothCModel}}}
+\seealso{\code{\link{TwopParallelModel14}}, \code{\link{TwopFeedbackModel14}} }
 \examples{
-years=seq(0,50,0.1) 
-C0=rep(100,5)
-In=0
 
-Ex1=Yasso07Model(t=years,C0=C0,In=In)
-Ct=getC(Ex1)
-Rt=getReleaseFlux(Ex1)
+years=seq(1901,2009,by=0.5)
+LitterInput=700 
 
-plotCPool(years,Ct,col=1:5,xlab="years",ylab="C pool",
-          ylim=c(0,max(Ct)))
-legend("topright",c("xA","xW","xE","xN","xH"),lty=1,col=1:5,bty="n")
+Ex=TwopSeriesModel14(t=years,ks=c(k1=1/2.8, k2=1/35),
+                     C0=c(200,5000), F0_Delta14C=c(0,0),
+                     In=LitterInput, a21=0.1,inputFc=C14Atm_NH)
+R14m=getF14R(Ex)
+C14m=getF14C(Ex)
+C14t=getF14(Ex)
 
-plotCPool(years,Rt,col=1:5,xlab="years",ylab="Respiration",ylim=c(0,50))
-legend("topright",c("xA","xW","xE","xN","xH"),lty=1,col=1:5,bty="n")
+par(mfrow=c(2,1))
+plot(C14Atm_NH,type="l",xlab="Year",
+     ylab="Delta 14C (per mil)",xlim=c(1940,2010)) 
+lines(years, C14t[,1], col=4)
+lines(years, C14t[,2],col=4,lwd=2)
+legend("topright",c("Delta 14C Atmosphere", "Delta 14C pool 1", "Delta 14C pool 2"),
+       lty=c(1,1,1),col=c(1,4,4),lwd=c(1,1,2),bty="n")
 
+plot(C14Atm_NH,type="l",xlab="Year",ylab="Delta 14C (per mil)",xlim=c(1940,2010)) 
+lines(years,C14m,col=4)
+lines(years,R14m,col=2)
+legend("topright",c("Delta 14C Atmosphere","Delta 14C SOM", "Delta 14C Respired"),
+       lty=c(1,1,1), col=c(1,4,2),bty="n")
+par(mfrow=c(1,1))
 }

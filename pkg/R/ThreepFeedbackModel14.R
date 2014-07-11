@@ -24,8 +24,8 @@ ThreepFeedbackModel14<-structure(
 { 
     t_start=min(t)
     t_stop=max(t)
-    if(length(ks)!=3) stop("ks must be of length = 2")
-    if(length(C0)!=3) stop("the vector with initial conditions must be of length = 2")
+    if(length(ks)!=3) stop("ks must be of length = 3")
+    if(length(C0)!=3) stop("the vector with initial conditions must be of length = 3")
     
     if(length(In)==1) inputFluxes=BoundInFlux(
                                       function(t){matrix(nrow=3,ncol=1,c(In,0,0))},

@@ -1,16 +1,17 @@
-\name{fT.Century2}
-\alias{fT.Century2}
+\name{fT.Century1}
+\alias{fT.Century1}
 \title{Effects of temperature on decomposition rates according the the CENTURY model}
 \description{Calculates the effects of temperature on decomposition rates according to the CENTURY model.}
-\usage{fT.Century2(Temp, Tmax = 45, Topt = 35)}\arguments{
+\usage{fT.Century1(Temp, Tmax = 45, Topt = 35)}\arguments{
   \item{Temp}{A scalar or vector containing values of temperature for which the effects on decomposition rates are calculated.}
   \item{Tmax}{A scalar defining the maximum temperature in degrees C.}
   \item{Topt}{A scalar defining the optimum temperature for the decomposition process in degrees C.}
 }
 
 \value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
-\references{Adair, E. C., W. J. Parton, S. J. D. Grosso, W. L. Silver, M. E. Harmon, S. A. Hall, I. C. Burke, and S. C. Hart. 2008. 
-Simple three-pool model accurately describes patterns of long-term litter decomposition in diverse climates. Global Change Biology 14:2636-2660.}
+\references{Burke, I. C., J. P. Kaye, S. P. Bird, S. A. Hall, R. L. McCulley, and G. L. Sommerville. 2003. 
+Evaluating and testing models of terrestrial biogeochemistry: the role of temperature in controlling decomposition. 
+Pages 235-253 in C. D. Canham, J. J. Cole, and W. K. Lauenroth, editors. Models in ecosystem science. Princeton University Press, Princeton.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -19,7 +20,6 @@ Simple three-pool model accurately describes patterns of long-term litter decomp
 
 \examples{
 Temperature=0:50
-plot(Temperature,fT.Century2(Temperature),type="l",
-     ylab="f(T) (unitless)",
+plot(Temperature,fT.Century1(Temperature),type="l",ylab="f(T) (unitless)",
      main="Effects of temperature on decomposition rates according to the Century model")
 }

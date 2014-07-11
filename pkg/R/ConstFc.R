@@ -9,7 +9,7 @@ correctnessOfConstFc=function#check for unreasonable parameters or unsupported f
    res=TRUE
    supported_formats=supported14CFractionFormats()
    f=object@format
-   print(paste("format=",f))
+#   print(paste("format=",f))
    if (!any(grepl(f,supported_formats))){
       err_str=cat("The required format:",f," describing the c_14 fraction is not supported.\n 
    	     The supported formats are: ",supported_formats,". \n",sep="")

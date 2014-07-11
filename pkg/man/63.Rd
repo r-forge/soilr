@@ -1,57 +1,24 @@
-\name{Hua2013}
-\alias{Hua2013}
+\name{HarvardForest14CO2}
+\alias{HarvardForest14CO2}
 \docType{data}
 \title{
-Atmospheric radiocarbon for the period 1950-2010 from Hua et al. (2013)
+ Delta14C in soil CO2 efflux from Harvard Forest
 }
 \description{
-Atmospheric radiocarbon for the period 1950-2010 reported by Hua et al. (2013) for 5 atmospheric zones.
+Measurements of Delta14C in soil CO2 efflux conducted at Harvard Forest, USA, between 1996 and 2010.
 }
-\usage{data(Hua2013)}
+\usage{data(HarvardForest14CO2)}
 \format{
-  A \link{list} containing 5 data frames, each representing an atmospheric zone. The zones are: 
-  NHZone1: northern hemisphere zone 1, NHZone2: northern hemisphere zone 2,
-  NHZone3: northern hemisphere zone 3, SHZone12: southern hemisphere zones 1 and 2, 
-  SHZone3: southern hemisphere zone 3. Each data frame contains a variable number of observations 
-  on the following 5 variables.
+  A data frame with the following 3 variables.
   \describe{
-    \item{\code{Year.AD}}{Year AD}
-    \item{\code{mean.Delta14C}}{mean value of atmospheric radiocarbon reported as Delta14C}
-    \item{\code{sd.Delta14C}}{standard deviation of atmospheric radiocarbon reported as Delta14C}
-    \item{\code{mean.F14C}}{mean value of atmospheric radiocarbon reported as fraction modern F14C}
-    \item{\code{sd.F14}}{standard deviation of atmospheric radiocarbon reported as fraction modern F14C}
+    \item{\code{Year}}{A numeric vector with the date of measurement in years}
+    \item{\code{D14C}}{A numeric vector with the value of the Delta 14C value measured in CO2 efflux in per mil}
+    \item{\code{Site}}{A factor indicating the site where measurements were made. NWN: Northwest Near, Drydown: Rainfall exclusion experiment.}
   }
 }
-\details{
-This dataset corresponds to Table S3 from Hua et al. (2013). For additional details see the original publication.
-}
-\source{
-\url{https://journals.uair.arizona.edu/index.php/radiocarbon/article/view/16177}
-}
-\references{
-Hua Q., M. Barbetti, A. Z. Rakowski. 2013. Atmospheric radiocarbon for the period 1950-2010. Radiocarbon 55(4):2059-2072.
-}
+\details{Samples for isotopic measurements of soil CO2 efflux were collected from chambers that enclosed an air headspace in contact with the soil surface in the absence of vegetation using a closed dynamic chamber system to collect accumulated CO2 in stainless steel traps with a molecular sieve inside. See Sierra et al. (2012) for additional details.}
+\references{Sierra, C. A., Trumbore, S. E., Davidson, E. A., Frey, S. D., Savage, K. E., and Hopkins, F. M. 2012. Predicting decadal trends and transient responses of radiocarbon storage and fluxes in a temperate forest soil, Biogeosciences, 9, 3013-3028, doi:10.5194/bg-9-3013-2012}
 \examples{
-
-plot(Hua2013$NHZone1$Year.AD, Hua2013$NHZone1$mean.Delta14C, 
-     type="l",xlab="Year AD",ylab=expression(paste(Delta^14,"C (\u2030)")))
-lines(Hua2013$NHZone2$Year.AD,Hua2013$NHZone2$mean.Delta14C,col=2)
-lines(Hua2013$NHZone3$Year.AD,Hua2013$NHZone3$mean.Delta14C,col=3)
-lines(Hua2013$SHZone12$Year.AD,Hua2013$SHZone12$mean.Delta14C,col=4)
-lines(Hua2013$SHZone3$Year.AD,Hua2013$SHZone3$mean.Delta14C,col=5)
-legend(
-	"topright",
-	c(
-		"Norther hemisphere zone 1",
-		"Norther hemisphere zone 2",
-		"Norther hemisphere zone 3",
-                "Southern hemisphere zones 1 and 2",
-		"Southern Hemispher zone 3"
-	),
-	lty=1,
-	col=1:5,
-	bty="n"
-)
-
+plot(HarvardForest14CO2[,1:2])
 }
 \keyword{datasets}

@@ -1,18 +1,19 @@
-\name{getTimes}
-\alias{getTimes}
-\title{Extracts the times argument}
-\description{This functions extracts the times argument from an argument of class NlModel}
-\usage{getTimes(object)}\arguments{
-  \item{object}{
+\name{getTimes-methods}
+\docType{methods}
+\alias{getTimes-methods}
+\alias{getTimes,Model-method}
+\alias{getTimes,NlModel-method}
+\title{ ~~ Methods for Function \code{getTimes}  ~~}
+\description{
+ ~~ Methods for function \code{getTimes} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "Model")}}{
+      \code{\link{getTimes_method__Model}}  
+    }
+
+  }
 }
-
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

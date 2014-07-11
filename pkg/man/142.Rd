@@ -1,19 +1,18 @@
-\name{getC14}
-\alias{getC14}
-\title{Calculates the mass of radiocarbon (14C fraction times C stock) in all pools}
-\description{This function computes the mass of 14C (14C fraction times C stock) for all pools as function of time.
-Have a look at the methods for details.}
-\usage{getC14(object)}\arguments{
-  \item{object}{
+\name{getC14-methods}
+\docType{methods}
+\alias{getC14-methods}
+\alias{getC14,Model_14-method}
+\title{ ~~ Methods for Function \code{getC14}  ~~}
+\description{
+ ~~ Methods for function \code{getC14} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "Model_14")}}{
+      \code{\link{getC14_method__Model_14}}  
+    }
+
+  }
 }
-
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

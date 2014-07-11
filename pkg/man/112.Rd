@@ -1,23 +1,12 @@
-\name{deSolve.lsoda.wrapper}
-\alias{deSolve.lsoda.wrapper}
-\title{deSolve lsoda wrapper}
-\description{The function serves as a wrapper for lsoda using a much simpler interface which allows the use 
-of matrices in the definition of the derivative. 
-To use lsoda we have to convert our vectors to lists, define tolerances and so on.
-This function does this for us , so we don't need to bother about it.}
-\usage{deSolve.lsoda.wrapper(t, ydot, startValues)}\arguments{
-  \item{t}{A row vector containing the points in time where the solution is sought.}
-  \item{ydot}{The function of y and t that computes the derivative for a given
-point in time and a column vector y.}
-  \item{startValues}{A column vector with the starting values.}
+\name{computeResults-methods}
+\docType{methods}
+\alias{computeResults-methods}
+\alias{computeResults,MCSim-method}
+\alias{computeResults,NlModel-method}
+\title{ ~~ Methods for Function \code{computeResults}  ~~}
+\description{
+ All methods for function \code{computeResults} are intended for internal use inside the package only. 
 }
 
-\value{A matrix. Every column represents a pool and every row a point in time}
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

@@ -1,21 +1,36 @@
-\name{TimeMap.from.Dataframe}
-\alias{TimeMap.from.Dataframe}
-\title{TimeMap from Dataframe}
-\description{This function is another constructor of the class TimeMap.}
-\usage{TimeMap.from.Dataframe(dframe, lag = 0, interpolation = splinefun)}\arguments{
-  \item{dframe}{A data frame containing exactly two columns:
-the first one is interpreted as time}
-  \item{lag}{a scalar describing the time lag. Positive Values shift the argument of the interpolation function forward in time. (retard its effect)}
-  \item{interpolation}{A function that  returns a function  the default is splinefun. Other possible values are the linear interpolation approxfun or any self made function with the same interface.}
+\name{TimeMap-class}
+\Rdversion{1.1}
+\docType{class}
+\alias{TimeMap-class}
+\title{Class \code{"TimeMap"}}
+\description{
+defines a (time dependent) mapping including the function definition and the ### domain where the function is well define.  This can be used to avoid interpolations out of range when mixing different time dependent data sets
 }
-
-\value{An object of class TimeMap that contains the interpolation function and the limits of the time range where the function is valid. Note that the limits change according to the time lag
-this serves as a saveguard for Model which thus can check that all involved functions of time are actually defined for the times of interest  }
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\section{Slots}{
+  \describe{
+    \item{\code{map}:}{Object of class \code{"function"} ~~ }
+    \item{\code{lag}:}{Object of class \code{"numeric"} ~~ }
+    \item{\code{starttime}:}{Object of class \code{"numeric"} ~~ }
+    \item{\code{endtime}:}{Object of class \code{"numeric"} ~~ }
+  }
+}
+\section{Methods}{
+  \describe{
+    \item{BoundInFlux}{\code{signature(map = "TimeMap", starttime = "missing", endtime = "missing", lag = "missing", interpolation = "missing")}: ... }
+    \item{BoundLinDecompOp}{\code{signature(map = "TimeMap", starttime = "missing", endtime = "missing", lag = "missing")}: ... }
+    \item{DecompOp}{\code{signature(object = "TimeMap")}: ... }
+    \item{InFlux}{\code{signature(object = "TimeMap")}: ... }
+    \item{as.character}{\code{signature(x = "TimeMap")}: ... }
+    \item{getFunctionDefinition}{\code{signature(object = "TimeMap")}: ... }
+    \item{getTimeRange}{\code{signature(object = "TimeMap")}: ... }
+    \item{initialize}{\code{signature(.Object = "TimeMap")}: ... }
+	 }
+}
+\author{
+ Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de> 
+}
+\examples{
+showClass("TimeMap")
+}
+\keyword{classes}

@@ -1,10 +1,10 @@
-\name{availableParticleSets-methods}
+\name{availableParticleProperties-methods}
 \docType{methods}
-\alias{availableParticleSets-methods}
-\alias{availableParticleSets,MCSim-method}
-\title{ ~~ Methods for Function \code{availableParticleSets}  ~~}
+\alias{availableParticleProperties-methods}
+\alias{availableParticleProperties,MCSim-method}
+\title{ ~~ Methods for Function \code{availableParticleProperties}  ~~}
 \description{
- All methods for function \code{availableParticleSets} are intended for internal use inside the package only. 
+ All methods for function \code{availableParticleProperties} are intended for internal use inside the package only. 
 }
 
 \keyword{methods}

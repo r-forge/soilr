@@ -1,7 +1,7 @@
-\name{getFunctionDefinition_method__BoundLinDecompOp}
-\alias{getFunctionDefinition_method__BoundLinDecompOp}
-\title{getFunctionDefinition method  BoundLinDecompOp}
-\description{extract the function definition (the R-function) }
+\name{getFunctionDefinition_method__BoundInFlux}
+\alias{getFunctionDefinition_method__BoundInFlux}
+\title{getFunctionDefinition method  BoundInFlux}
+\description{extract the function definition (the R-function) from the BoundInFlux }
 \arguments{
   \item{object}{
 }

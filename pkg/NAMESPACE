@@ -82,7 +82,8 @@ ConstLinDecompOp,
 BoundLinDecompOp,
 BoundFc,
 Model,
-Model_14
+Model_14,
+AWBmodel
 )
 exportClasses(
 Model,

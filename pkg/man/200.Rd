@@ -1,17 +1,22 @@
-\name{initialize_method__BoundInFlux}
-\alias{initialize_method__BoundInFlux}
-\title{internal constructor}
-\description{This mehtod is intended for internal use only, it may change with the internal representation of the class. In user code please use the generic constructor \code{\link{BoundInFlux}} instead.}
+\name{initialize_method__BoundFc}
+\alias{initialize_method__BoundFc}
+\title{internal constructor (new)}
+\description{The function is probably called internally only but used by all other constructors
+It calls a sanity check on its arguments and initialized the object }
 \arguments{
   \item{.Object}{
+}
+  \item{map}{
 }
   \item{starttime}{
 }
   \item{endtime}{
 }
-  \item{map}{
-}
   \item{lag}{
+}
+  \item{format}{
+}
+  \item{interpolation}{
 }
 }
 

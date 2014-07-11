@@ -1,18 +1,20 @@
-\name{summary_method__Model}
-\alias{summary_method__Model}
-\title{summary method  Model}
-\description{This function is a stub}
-\arguments{
-  \item{object}{
+\name{summary-methods}
+\docType{methods}
+\alias{summary-methods}
+\alias{summary,ANY-method}
+\alias{summary,Model-method}
+\alias{summary,NlModel-method}
+\title{ ~~ Methods for Function \code{summary}  ~~}
+\description{
+ ~~ Methods for function \code{summary} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "Model")}}{
+      \code{\link{summary_method__Model}}  
+    }
+
+  }
 }
-
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

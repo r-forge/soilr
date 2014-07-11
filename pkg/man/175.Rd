@@ -1,18 +1,11 @@
-\name{getReleaseFlux-methods}
+\name{getParticleMonteCarloSimulator-methods}
 \docType{methods}
-\alias{getReleaseFlux-methods}
-\alias{getReleaseFlux,Model-method}
-\title{ ~~ Methods for Function \code{getReleaseFlux}  ~~}
+\alias{getParticleMonteCarloSimulator-methods}
+\alias{getParticleMonteCarloSimulator,NlModel-method}
+\title{ ~~ Methods for Function \code{getParticleMonteCarloSimulator}  ~~}
 \description{
- ~~ Methods for function \code{getReleaseFlux} ~~
+ All methods for function \code{getParticleMonteCarloSimulator} are intended for internal use inside the package only. 
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "Model")}}{
-      \code{\link{getReleaseFlux_method__Model}}  
-    }
 
-  }
-}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

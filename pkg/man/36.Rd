@@ -1,19 +1,18 @@
-\name{ConstLinDecompOp}
-\alias{ConstLinDecompOp}
-\title{Generic constructor}
-\description{Creates a ConstantDecompositonOperator object from different sources.
-Please look at the different methods to see what kind of input is supported. }
-\usage{ConstLinDecompOp(mat)}\arguments{
-  \item{mat}{
+\name{ConstLinDecompOp-methods}
+\docType{methods}
+\alias{ConstLinDecompOp-methods}
+\alias{ConstLinDecompOp,matrix-method}
+\title{ ~~ Methods for Function \code{ConstLinDecompOp}  ~~}
+\description{
+ ~~ Methods for function \code{ConstLinDecompOp} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(mat = "matrix")}}{
+      \code{\link{ConstLinDecompOp_method__matrix}}  
+    }
+
+  }
 }
-
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

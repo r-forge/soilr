@@ -1,19 +1,34 @@
-\name{Delta14C-methods}
-\docType{methods}
-\alias{Delta14C-methods}
-\alias{Delta14C,BoundFc-method}
-\alias{Delta14C,ConstFc-method}
-\title{ ~~ Methods for Function \code{Delta14C}  ~~}
+\name{DecompositionOperator-class}
+\Rdversion{1.1}
+\docType{class}
+\alias{DecompositionOperator-class}
+\title{Class \code{"DecompositionOperator"}}
 \description{
- ~~ Methods for function \code{Delta14C} ~~
+The new class implementing the same functionality is names \code{BoundLinDecompOp}
+}
+\section{Slots}{
+  \describe{
+    \item{\code{map}:}{Object of class \code{"function"} ~~ }
+    \item{\code{lag}:}{Object of class \code{"numeric"} ~~ }
+    \item{\code{starttime}:}{Object of class \code{"numeric"} ~~ }
+    \item{\code{endtime}:}{Object of class \code{"numeric"} ~~ }
+  }
+}
+\section{Extends}{
+Class \code{"\linkS4class{DecompOp}"}, directly.
 }
 \section{Methods}{
   \describe{
-    \item{\code{signature(F = "BoundFc")}}{
-      \code{\link{Delta14C_method__BoundFc}}  
-    }
-
-  }
+    \item{getFunctionDefinition}{\code{signature(object = "DecompositionOperator")}: ... }
+    \item{getTimeRange}{\code{signature(object = "DecompositionOperator")}: ... }
+    \item{initialize}{\code{signature(.Object = "DecompositionOperator")}: ... }
+	 }
 }
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+\author{
+ Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de> 
+}
+\examples{
+showClass("DecompositionOperator")
+}
+\keyword{classes}

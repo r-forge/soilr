@@ -1,10 +1,11 @@
-\name{getTransferMatrix-methods}
+\name{getTransferCoefficients-methods}
 \docType{methods}
-\alias{getTransferMatrix-methods}
-\alias{getTransferMatrix,TransportDecompositionOperator-method}
-\title{ ~~ Methods for Function \code{getTransferMatrix}  ~~}
+\alias{getTransferCoefficients-methods}
+\alias{getTransferCoefficients,NlModel-method}
+\alias{getTransferCoefficients,TransportDecompositionOperator-method}
+\title{ ~~ Methods for Function \code{getTransferCoefficients}  ~~}
 \description{
- All methods for function \code{getTransferMatrix} are intended for internal use inside the package only. 
+ All methods for function \code{getTransferCoefficients} are intended for internal use inside the package only. 
 }
 
 \keyword{methods}

@@ -1,17 +1,17 @@
-\name{fW.Moyano}
-\alias{fW.Moyano}
-\title{Effects of moisture on decomposition rates according to the function proposed by Moyano et al. (2013)}
+\name{fW.Gompertz}
+\alias{fW.Gompertz}
+\title{Effects of moisture on decomposition rates according to the Gompertz function}
 \description{Calculates the effects of water content on decomposition rates.}
-\usage{fW.Moyano(theta, a = 3.11, b = 2.42)}\arguments{
+\usage{fW.Gompertz(theta, a = 0.824, b = 0.308)}\arguments{
   \item{theta}{A scalar or vector containing values of volumetric soil water content.}
   \item{a}{Empirical parameter}
   \item{b}{Empirical parameter}
 }
 
 
-\references{F. E. Moyano, S. Manzoni, C. Chenu. 2013
-Responses of soil heterotrophic respiration to moisture availability: An exploration of processes and models. 
-Soil Biology and Biochemistry, Volume 59, April 2013, Pages 72-85}
+\references{I. Janssens, S. Dore, D. Epron, H. Lankreijer, N. Buchmann, B. Longdoz, J. Brossaud, L. Montagnani. 2003.
+Climatic Influences on Seasonal and Spatial Differences in Soil CO2 Efflux. In Valentini, R. (Ed.)
+Fluxes of Carbon, Water and Energy of European Forests. pp 235-253. Springer. }
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -20,7 +20,7 @@ Soil Biology and Biochemistry, Volume 59, April 2013, Pages 72-85}
 
 \examples{
 th=seq(0,1,0.01)
-xi=fW.Moyano(theta=th)
+xi=fW.Gompertz(theta=th)
 plot(th,xi,type="l",main="Effects of soil water content on decomposition rates",
      xlab="Volumetric soil water content (cm3 cm-3)",ylab=expression(xi))
 }

@@ -1,19 +1,18 @@
-\name{getReleaseFlux14}
-\alias{getReleaseFlux14}
-\title{Calculates the mass of radiocarbon in the release flux (14C fraction times release flux)}
-\description{This function computes the mass of radiocarbon in the release flux (14C fraction times release flux) as a function of time.
-Have a look at the methods for details.}
-\usage{getReleaseFlux14(object)}\arguments{
-  \item{object}{
+\name{getReleaseFlux14-methods}
+\docType{methods}
+\alias{getReleaseFlux14-methods}
+\alias{getReleaseFlux14,Model_14-method}
+\title{ ~~ Methods for Function \code{getReleaseFlux14}  ~~}
+\description{
+ ~~ Methods for function \code{getReleaseFlux14} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "Model_14")}}{
+      \code{\link{getReleaseFlux14_method__Model_14}}  
+    }
+
+  }
 }
-
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

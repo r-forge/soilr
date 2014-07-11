@@ -1,15 +1,15 @@
-\name{IntCal13}
-\alias{IntCal13}
+\name{IntCal09}
+\alias{IntCal09}
 \docType{data}
 \title{
-Atmospheric radiocarbon for the 0-50,000 yr BP period
+Northern Hemisphere atmospheric radiocarbon for the pre-bomb period
 }
 \description{
-Atmospheric radiocarbon calibration curve for the period 0 to 50,000 yr BP. This is the most recent update to the internationally agreed calibration curve and superseds \code{\link{IntCal09}}.
+Northern Hemisphere atmospheric radiocarbon calibration curve for the period 0 to 50,000 yr BP. 
 }
-\usage{data(IntCal13)}
+\usage{data(IntCal09)}
 \format{
-  A data frame with 5140 observations on the following 5 variables.
+  A data frame with 3522 observations on the following 5 variables.
   \describe{
     \item{\code{CAL.BP}}{Calibrated age in years Before Present (BP).}
     \item{\code{C14.age}}{C14 age in years BP.}
@@ -19,34 +19,34 @@ Atmospheric radiocarbon calibration curve for the period 0 to 50,000 yr BP. This
   }
 }
 \details{
-\code{Deltal.14C} is age-corrected as per Stuiver and Polach (1977). All details about the derivation of this dataset are provided in Reimer et al. (2013).
+\code{Deltal.14C} is age-corrected as per Stuiver and Polach (1977). All details about the derivation of this dataset are provided in Reimer et al. (2009).
 }
 
 \source{
 \url{
-  http://www.radiocarbon.org/IntCal13%20files/intcal13.14c
+  http://www.radiocarbon.org/IntCal09%20files/intcal09.14c
   }
 }
 \references{
-Reimer PJ, Bard E, Bayliss A, Beck JW, Blackwell PG, Bronk Ramsey C, Buck CE,
-Cheng H, Edwards RL, Friedrich M, Grootes PM, Guilderson TP, Haflidason H, 
-Hajdas I, Hatte C, Heaton TJ, Hogg AG, Hughen KA, Kaiser KF, Kromer B, 
-Manning SW, Niu M, Reimer RW, Richards DA, Scott EM, Southon JR, Turney CSM,
-van der Plicht J. 2013. IntCal13 and MARINE13 radiocarbon age calibration curves 0-50000 years calBP. Radiocarbon 55(4): 1869-1887. DOI: 10.2458/azu_js_rc.55.16947
+P. Reimer, M.Baillie, E. Bard, A. Bayliss, J. Beck, P. Blackwell, C. Ramsey, C. Buck, G. Burr, R. Edwards, et al. 2009. IntCal09 and Marine09 radiocarbon age calibration curves, 0 - 50,000 years cal bp. Radiocarbon, 51(4):1111 - 1150.
 
 
 M. Stuiver and H. A. Polach. 1977. Rerporting of C-14 data. Radiocarbon, 19(3):355 - 363.
 }
 \examples{
 
+par(mfrow=c(2,1))
+plot(IntCal09$CAL.BP, IntCal09$C14.age, type="l")
+polygon(x=c(IntCal09$CAL.BP,rev(IntCal09$CAL.BP)),
+	y=c(IntCal09$C14.age+IntCal09$Error,rev(IntCal09$C14.age-IntCal09$Error)),
+	col="gray",border=NA)
+lines(IntCal09$CAL.BP,IntCal09$C14.age)
 
-     plot(IntCal13$CAL.BP,IntCal13$C14.age-IntCal13$Error,type="l",col=2,
-          xlab="cal BP",ylab="14C BP")
-     lines(IntCal13$CAL.BP,IntCal13$C14.age+IntCal13$Error,col=2)
-
-     plot(IntCal13$CAL.BP,IntCal13$Delta.14C+IntCal13$Sigma,type="l",col=2,
-          xlab="cal BP",ylab="Delta14C")
-     lines(IntCal13$CAL.BP,IntCal13$Delta.14C-IntCal13$Sigma,col=2)
-
+plot(IntCal09$CAL.BP,IntCal09$Delta.14C,type="l")
+polygon(x=c(IntCal09$CAL.BP,rev(IntCal09$CAL.BP)),
+	y=c(IntCal09$Delta.14C+IntCal09$Sigma,rev(IntCal09$Delta.14C-IntCal09$Sigma)),
+	col="gray",border=NA)
+lines(IntCal09$CAL.BP,IntCal09$Delta.14C)
+par(mfrow=c(1,1))
 }
 \keyword{datasets}

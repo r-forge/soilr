@@ -1,51 +1,69 @@
-\name{TwopParallelModel}
-\alias{TwopParallelModel}
-\title{Implementation of a two pool model with parallel structure}
-\description{This function creates a model for two independent (parallel) pools. 
-It is a wrapper for the more general function \code{\link{ParallelModel}} that can handle an arbitrary number of pools.}
-\usage{TwopParallelModel(t, ks, C0, In, gam, xi = 1, solver = deSolve.lsoda.wrapper, 
-    pass = FALSE)}\arguments{
-  \item{t}{A vector containing the points in time where the solution is sought.}
-  \item{ks}{A vector of length 2 containing the decomposition rates for the 2 pools.}
-  \item{C0}{A vector of length 2 containing the initial amount of carbon for the 2 pools.}
-  \item{In}{A scalar or a data.frame object specifying the amount of litter inputs by time.}
-  \item{gam}{A scalar representing the partitioning coefficient, i.e. the proportion from the total amount of inputs that goes to pool 1.}
-  \item{xi}{A scalar or a data.frame specifying the external (environmental and/or edaphic) effects on decomposition rates.}
-  \item{solver}{A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.}
-  \item{pass}{Forces the constructor to create the model even if it is invalid}
+\name{TwopMMmodel}
+\alias{TwopMMmodel}
+\title{Implementation of a two-pool Michaelis-Menten model}
+\description{This function implements a two-pool Michaelis-Meneten model with a microbial biomass and a substrate pool.}
+\usage{TwopMMmodel(t, ks = 1.8e-05, kb = 0.007, Km = 900, r = 0.6, Af = 1, 
+    ADD = 3.2, ival)}\arguments{
+  \item{t}{vector of times (in days) to calculate a solution.}
+  \item{ks}{a scalar representing SOM decomposition rate (m3 d-1 (gCB)-1)}
+  \item{kb}{a scalar representing microbial decay rate (d-1)}
+  \item{Km}{a scalar representing the Michaelis constant (g m-3)}
+  \item{r}{a scalar representing the respired carbon fraction (unitless)}
+  \item{Af}{a scalar representing the Activity factor; i.e. a temperature and moisture modifier (unitless)}
+  \item{ADD}{a scalar representing the annual C input to the soil (g m-3 d-1)}
+  \item{ival}{
 }
-
-\value{A Model Object that can be further queried }
-\references{Sierra, C.A., M. Mueller, S.E. Trumbore. 2012. Models of soil organic matter decomposition: the SoilR package version 1.0. Geoscientific Model Development 5, 1045-1060.}
+}
+\details{This implementation is similar to the model described in Manzoni and Porporato (2007). }
+\value{An object of class NlModel that can be further queried.}
+\references{Manzoni, S, A. Porporato (2007). A theoretical analysis of nonlinearities and feedbacks in soil carbon and nitrogen cycles.
+Soil Biology and Biochemistry 39: 1542-1556.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
 
 
-\seealso{\code{\link{ThreepParallelModel}} }
+
 \examples{
-t_start=0 
-t_end=10 
-tn=50
-timestep=(t_end-t_start)/tn 
-t=seq(t_start,t_end,timestep) 
 
-Ex=TwopParallelModel(t,ks=c(k1=0.5,k2=0.2),C0=c(c10=100, c20=150),In=10,gam=0.7,xi=0.5)
-Ct=getC(Ex)
+days=seq(0,1000,0.5)
 
-plot(t,rowSums(Ct),type="l",lwd=2,
-     ylab="Carbon stocks (arbitrary units)",xlab="Time",ylim=c(0,sum(Ct[1,]))) 
-lines(t,Ct[,1],col=2)
-lines(t,Ct[,2],col=4)
-legend("topright",c("Total C","C in pool 1", "C in pool 2"),
-       lty=c(1,1,1),col=c(1,2,4),lwd=c(2,1,1),bty="n")
+#Run the model with default parameter values
+MMmodel=TwopMMmodel(t=days,ival=c(100,10))
+Cpools=getC(MMmodel)
 
-Rt=getReleaseFlux(Ex)
-plot(t,rowSums(Rt),type="l",ylab="Carbon released (arbitrary units)",
-     xlab="Time",lwd=2,ylim=c(0,sum(Rt[1,]))) 
-lines(t,Rt[,1],col=2)
-lines(t,Rt[,2],col=4) 
-legend("topleft",c("Total C release","C release from pool 1", "C release from pool 2"),
-       lty=c(1,1,1),col=c(1,2,4),lwd=c(2,1,1),bty="n")
+#Time solution
+matplot(days,Cpools,type="l",ylab="Concentrations",xlab="Days",lty=1,ylim=c(0,max(Cpools)*1.2))
+legend("topleft",c("SOM-C", "Microbial biomass"),lty=1,col=c(1,2),bty="n")
+
+ks=0.000018
+kb=0.007
+r=0.6
+ADD=3.2
+
+#Analytical solution of fixed points
+Cs=kb/((1-r)*ks)
+abline(h=Cs,lty=2)
+
+Cb=(ADD*(1-r))/(r*kb)
+abline(h=Cb,lty=2,col=2)
+
+#State-space diagram
+plot(Cpools[,2],Cpools[,1],type="l",ylab="SOM-C",xlab="Microbial biomass")
+
+#Microbial biomass over time
+plot(days,Cpools[,2],type="l",col=2,xlab="Days",ylab="Microbial biomass")
+
+#The default parameterization exhaust the microbial biomass.
+#A different behavior is obtained by increasing ks and decreasing kb
+MMmodel=TwopMMmodel(t=days,ival=c(972,304) ,Af=3,kb=0.0000001)
+Cpools=getC(MMmodel)
+
+matplot(days,Cpools,type="l",ylab="Concentrations",xlab="Days",lty=1,ylim=c(0,max(Cpools)*1.2))
+legend("topleft",c("SOM-C", "Microbial biomass"),lty=1,col=c(1,2),bty="n")
+
+plot(Cpools[,2],Cpools[,1],type="l",ylab="SOM-C",xlab="Microbial biomass")
+
+plot(days,Cpools[,2],type="l",col=2,xlab="Days",ylab="Microbial biomass")
 
 }

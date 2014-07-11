@@ -1,38 +1,35 @@
-\name{BoundFc-methods}
-\docType{methods}
-\alias{BoundFc-methods}
-\alias{BoundFc,data.frame,missing,missing,missing,character,function-method}
-\alias{BoundFc,data.frame,missing,missing,missing,character,missing-method}
-\alias{BoundFc,data.frame,missing,missing,numeric,character,function-method}
-\alias{BoundFc,data.frame,missing,missing,numeric,character,missing-method}
-\alias{BoundFc,function,numeric,numeric,missing,character,missing-method}
-\alias{BoundFc,function,numeric,numeric,numeric,character,missing-method}
-\title{ ~~ Methods for Function \code{BoundFc}  ~~}
+\name{BoundFc-class}
+\Rdversion{1.1}
+\docType{class}
+\alias{BoundFc-class}
+\title{Class \code{"BoundFc"}}
 \description{
- ~~ Methods for function \code{BoundFc} ~~
+Objects of this class contain a time dependent function describing the Atmospheric \eqn{^{14}C}{14C} fraction and a format description, that allows to use the numeric valuest to be interpreted correctly in subsequent computations.
+}
+\section{Slots}{
+  \describe{
+    \item{\code{starttime}:}{Object of class \code{"numeric"} ~~ }
+    \item{\code{endtime}:}{Object of class \code{"numeric"} ~~ }
+    \item{\code{map}:}{Object of class \code{"function"} ~~ }
+    \item{\code{lag}:}{Object of class \code{"numeric"} ~~ }
+    \item{\code{format}:}{Object of class \code{"character"} ~~ }
+  }
 }
 \section{Methods}{
   \describe{
-    \item{\code{signature(map = "data.frame", starttime = "missing", endtime = "missing", lag = "missing", format = "character", interpolation = "function")}}{
-      \code{\link{BoundFc_method__data.frame_missing_missing_missing_character_function}}  
-    }
-    \item{\code{signature(map = "data.frame", starttime = "missing", endtime = "missing", lag = "missing", format = "character", interpolation = "missing")}}{
-      \code{\link{BoundFc_method__data.frame_missing_missing_missing_character_missing}}  
-    }
-    \item{\code{signature(map = "data.frame", starttime = "missing", endtime = "missing", lag = "numeric", format = "character", interpolation = "function")}}{
-      \code{\link{BoundFc_method__data.frame_missing_missing_numeric_character_function}}  
-    }
-    \item{\code{signature(map = "data.frame", starttime = "missing", endtime = "missing", lag = "numeric", format = "character", interpolation = "missing")}}{
-      \code{\link{BoundFc_method__data.frame_missing_missing_numeric_character_missing}}  
-    }
-    \item{\code{signature(map = "function", starttime = "numeric", endtime = "numeric", lag = "missing", format = "character", interpolation = "missing")}}{
-      \code{\link{BoundFc_method__function_numeric_numeric_missing_character_missing}}  
-    }
-    \item{\code{signature(map = "function", starttime = "numeric", endtime = "numeric", lag = "numeric", format = "character", interpolation = "missing")}}{
-      \code{\link{BoundFc_method__function_numeric_numeric_numeric_character_missing}}  
-    }
-
-  }
+    \item{AbsoluteFractionModern}{\code{signature(F = "BoundFc")}: ... }
+    \item{Delta14C}{\code{signature(F = "BoundFc")}: ... }
+    \item{getFormat}{\code{signature(object = "BoundFc")}: ... }
+    \item{getFunctionDefinition}{\code{signature(object = "BoundFc")}: ... }
+    \item{getTimeRange}{\code{signature(object = "BoundFc")}: ... }
+    \item{initialize}{\code{signature(.Object = "BoundFc")}: ... }
+	 }
 }
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+\author{
+ Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de> 
+}
+\examples{
+showClass("BoundFc")
+}
+\keyword{classes}

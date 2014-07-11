@@ -1,8 +1,9 @@
-\name{getFunctionDefinition_method__BoundFc}
-\alias{getFunctionDefinition_method__BoundFc}
-\title{function definition }
-\description{extract the function definition (the R-function) }
-\arguments{
+\name{getFunctionDefinition}
+\alias{getFunctionDefinition}
+\title{getFunctionDefinition}
+\description{Extracts the function definition (the R-function) from the argument
+Have a look at the methods for details.}
+\usage{getFunctionDefinition(object)}\arguments{
   \item{object}{
 }
 }

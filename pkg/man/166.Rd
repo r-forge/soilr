@@ -1,11 +1,18 @@
-\name{getInFluxes-methods}
-\docType{methods}
-\alias{getInFluxes-methods}
-\alias{getInFluxes,NlModel-method}
-\title{ ~~ Methods for Function \code{getInFluxes}  ~~}
-\description{
- All methods for function \code{getInFluxes} are intended for internal use inside the package only. 
+\name{getFunctionDefinition_method__TimeMap}
+\alias{getFunctionDefinition_method__TimeMap}
+\title{getFunctionDefinition method  TimeMap}
+\description{extract the function definition (the R-function) }
+\arguments{
+  \item{object}{
+}
 }
 
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

@@ -1,67 +1,24 @@
-\name{OnepModel}
-\alias{OnepModel}
-\title{Implementation of a one pool model }
-\description{This function creates a model for one pool. It is a wrapper for the more general function \code{\link{GeneralModel}}.}
-\usage{OnepModel(t, k, C0, In, xi = 1, solver = deSolve.lsoda.wrapper, 
-    pass = FALSE)}\arguments{
+\name{Model_method__numeric_ANY_numeric}
+\alias{Model_method__numeric_ANY_numeric}
+\title{general  constructor for class Model}
+\description{This method tries to create a Model object from any combination of arguments 
+that can be converted into  the required set of building blocks for a model
+for n arbitrarily connected pools.}
+\arguments{
   \item{t}{A vector containing the points in time where the solution is sought.}
-  \item{k}{A scalar with the decomposition rate of the pool.}
-  \item{C0}{A scalar containing the initial amount of carbon in the pool.}
-  \item{In}{A scalar or a data.frame object specifying the amount of litter inputs by time.}
-  \item{xi}{A scalar or a data.frame specifying the external (environmental and/or edaphic) effects on decomposition rates.}
-  \item{solver}{A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.}
-  \item{pass}{if TRUE forces the constructor to create the model even if it is invalid}
+  \item{A}{something that can be converted to any of the available DecompOp classes}
+  \item{ivList}{A vector containing the initial amount of carbon for the n pools. The length of this vector is equal to the number of pools and thus equal to the length of k. This is checked by an internal  function.}
+  \item{inputFluxes}{something that can be converted to any of the available InFlux classes}
+  \item{solverfunc}{The function used by to actually solve the ODE system. This can be \code{\link{deSolve.lsoda.wrapper}} or any other user provided function with the same interface.}
+  \item{pass}{Forces the constructor to create the model even if it is invalid}
 }
 
-\value{A Model Object that can be further queried }
-\references{Sierra, C.A., M. Mueller, S.E. Trumbore. 2012. Models of soil organic matter decomposition: the SoilR package version 1.0. Geoscientific Model Development 5, 1045-1060.}
+\value{A model object that can be further queried. }
+
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
 
 
-\seealso{\code{\link{TwopParallelModel}},\code{\link{TwopFeedbackModel}} }
-\examples{
-t_start=0 
-t_end=10 
-tn=50
-timestep=(t_end-t_start)/tn 
-t=seq(t_start,t_end,timestep) 
-k=0.8
-C0=100
-In = 30
+\seealso{\code{\link{TwopParallelModel}}, \code{\link{TwopSeriesModel}}, \code{\link{TwopFeedbackModel}} }
 
-    
-Ex=OnepModel(t,k,C0,In)
-Ct=getC(Ex)
-Rt=getReleaseFlux(Ex)
-Rc=getAccumulatedRelease(Ex)
-
-plot(
-  t,
-  Ct,
-  type="l",
-  ylab="Carbon stocks (arbitrary units)",
-  xlab="Time (arbitrary units)",
-  lwd=2
-) 
-
-plot(
-  t,
-  Rt,
-  type="l",
-  ylab="Carbon released (arbitrary units)",
-  xlab="Time (arbitrary units)",
-  lwd=2
-) 
-
-plot(
-  t,
-  Rc,
-  type="l",
-  ylab="Cummulative carbon released (arbitrary units)",
-  xlab="Time (arbitrary units)",
-  lwd=2
-) 
-
-}

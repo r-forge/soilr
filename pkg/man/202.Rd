@@ -1,12 +1,20 @@
-\name{initialize_method__ConstLinDecompOp}
-\alias{initialize_method__ConstLinDecompOp}
-\title{internal constructor }
-\description{This mehtod is intendet to be used internally. It may change in the future.
-For user code it is recommended to use one of the generic constructor \code{ConstLinDecompOp} instead.}
+\name{initialize_method__BoundLinDecompOp}
+\alias{initialize_method__BoundLinDecompOp}
+\title{initialize called by (new)}
+\description{This is the internal constructor for objects of this class
+It is called by statements of the form new("..) 
+which in turn is called by all other constructors 
+which may have more convienient interfaces}
 \arguments{
   \item{.Object}{
 }
-  \item{mat}{
+  \item{starttime}{
+}
+  \item{endtime}{
+}
+  \item{map}{
+}
+  \item{lag}{
 }
 }
 

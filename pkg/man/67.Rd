@@ -1,19 +1,22 @@
-\name{InFlux_method__InFlux}
-\alias{InFlux_method__InFlux}
-\title{pass through constructor}
-\description{This method handles the case that no actual construction is necessary since
-the argument is already of a subclass of InFlux }
-\arguments{
-  \item{object}{
+\name{InFlux-methods}
+\docType{methods}
+\alias{InFlux-methods}
+\alias{InFlux,InFlux-method}
+\alias{InFlux,TimeMap-method}
+\title{ ~~ Methods for Function \code{InFlux}  ~~}
+\description{
+ ~~ Methods for function \code{InFlux} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "InFlux")}}{
+      \code{\link{InFlux_method__InFlux}}  
+    }
+    \item{\code{signature(object = "TimeMap")}}{
+      \code{\link{InFlux_method__TimeMap}}  
+    }
+
+  }
 }
-
-\value{the unchanged argument}
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

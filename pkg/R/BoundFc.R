@@ -9,7 +9,7 @@ correctnessOfBoundFc=function#check for unreasonable parameters or unsupported f
    res=TRUE
    supported_formats=supported14CFractionFormats()
    f=object@format
-   print(paste("format=",f))
+#   print(paste("format=",f))
    if (!any(grepl(f,supported_formats))){
       err_str=cat("The required format:",f," describing the atmospheric c_14 fraction is not supported.\n 
    	     The supported formats are: ",supported_formats,". \n",sep="")
@@ -56,7 +56,7 @@ setMethod(
 setMethod(
   f="BoundFc",
   signature=c(map="function",starttime="numeric",endtime="numeric",lag="numeric",format="character",interpolation="missing"),
-  definition=function # costructor
+  definition=function # constructor
   ### the method constructs an object from a function a timerange where it is valid and a format  
 (
   map,        ##<< a function of one argument (time) 
@@ -81,7 +81,7 @@ return(obj)
 setMethod(
   f="BoundFc",
   signature=c(map="function",starttime="numeric",endtime="numeric",lag="missing",format="character",interpolation="missing"),
-  definition=function # costructor
+  definition=function # constructor
   ### wrapper for \code{\link{BoundFc_method__function_numeric_numeric_numeric_character_missing}} with the assumption lag=0
   (
     map, 
@@ -98,7 +98,7 @@ setMethod(
 setMethod(
   f="BoundFc",
   signature=c(map="data.frame",starttime="missing",endtime="missing",lag="numeric",format="character",interpolation="function"),
-  definition=function # costructor 
+  definition=function # constructor 
   ### the method constructs an object from a dataframe a timelag format using the given interpolating function
 (
   map,            ##<<A data frame containing exactly two columns:
@@ -128,7 +128,7 @@ return(obj)
 setMethod(
   f="BoundFc",
   signature=c(map="data.frame",starttime="missing",endtime="missing",lag="numeric",format="character",interpolation="missing"),
-  definition=function # costructor
+  definition=function # constructor
   ### wrapper for \code{\link{BoundFc_method__data.frame_missing_missing_numeric_character_missing}} with the assumption interpolation =splinefun
 (map, 
 lag,
@@ -142,7 +142,7 @@ return(obj)
 setMethod(
   f="BoundFc",
   signature=c(map="data.frame",starttime="missing",endtime="missing",lag="missing",format="character",interpolation="function"),
-  definition=function # costructor 
+  definition=function # constructor 
   ### wrapper for \code{\link{BoundFc_method__data.frame_missing_missing_numeric_character_missing}} with the assumption lag=0
 (map, 
 format, 
@@ -156,7 +156,7 @@ return(obj)
 setMethod(
   f="BoundFc",
   signature=c(map="data.frame",starttime="missing",endtime="missing",lag="missing",format="character",interpolation="missing"),
-  definition=function # costructor 
+  definition=function # constructor 
   ### wrapper for \code{\link{BoundFc_method__data.frame_missing_missing_numeric_character_missing}} with the assumption lag=0 interpolation = splinefun
 (map, 
 format, 

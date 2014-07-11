@@ -1,25 +1,30 @@
-\name{BoundLinDecompOp}
-\alias{BoundLinDecompOp}
-\title{Generic constructor}
-\description{Creates a LinearDecompositonOperator from different sources.
-Please look at the methods to see what kind of input is supported. }
-\usage{BoundLinDecompOp(map, starttime, endtime, lag)}\arguments{
-  \item{map}{
+\name{BoundLinDecompOp-methods}
+\docType{methods}
+\alias{BoundLinDecompOp-methods}
+\alias{BoundLinDecompOp,ConstLinDecompOp,ANY,ANY,ANY-method}
+\alias{BoundLinDecompOp,TimeMap,missing,missing,missing-method}
+\alias{BoundLinDecompOp,function,numeric,numeric,missing-method}
+\alias{BoundLinDecompOp,function,numeric,numeric,numeric-method}
+\title{ ~~ Methods for Function \code{BoundLinDecompOp}  ~~}
+\description{
+ ~~ Methods for function \code{BoundLinDecompOp} ~~
 }
-  \item{starttime}{
+\section{Methods}{
+  \describe{
+    \item{\code{signature(map = "ConstLinDecompOp", starttime = "ConstLinDecompOp", endtime = "ConstLinDecompOp", lag = "ConstLinDecompOp")}}{
+      \code{\link{BoundLinDecompOp_method__ConstLinDecompOp}}  
+    }
+    \item{\code{signature(map = "TimeMap", starttime = "missing", endtime = "missing", lag = "missing")}}{
+      \code{\link{BoundLinDecompOp_method__TimeMap_missing_missing_missing}}  
+    }
+    \item{\code{signature(map = "function", starttime = "numeric", endtime = "numeric", lag = "missing")}}{
+      \code{\link{BoundLinDecompOp_method__function_numeric_numeric_missing}}  
+    }
+    \item{\code{signature(map = "function", starttime = "numeric", endtime = "numeric", lag = "numeric")}}{
+      \code{\link{BoundLinDecompOp_method__function_numeric_numeric_numeric}}  
+    }
+
+  }
 }
-  \item{endtime}{
-}
-  \item{lag}{
-}
-}
-
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

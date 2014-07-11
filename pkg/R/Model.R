@@ -194,8 +194,9 @@ setMethod(f="Model",
 setMethod(
    f= "plot",
       signature(x="Model"),
-      definition=function(x){
+      definition=function # not yet implemented method to plot an overview of several inputs and outpust of a model 
       ### This function is a stub
+      (x){
       # It only starts the thing ...    
       plot(getTimes(x),getC(x)[,1])
    }
@@ -204,34 +205,35 @@ setMethod(
 setMethod(
    f= "print",
       signature(x="Model"),
-      definition=function(x){
+      definition=function# not yet implemented method to print an overview of several inputs and outpust of a model  
       ### This function is a stub
+      (x){
       # It only starts the thing ...    
-      print("Hi there I am the method print for model objects. Change me if you can")
-      print(getC(x)[,1])
    }
 )
 #------------------------------------------------------------------------------------
 setMethod(
    f= "summary",
       signature(object="Model"),
-      definition=function(object){
+      definition=function 
       ### This function is a stub
+      (object){
       # It only starts the thing ...    
-      print("Hi there, I am the method summarize for model objects. 
-            I summarize everything....")
-      print(getC(object)[,1])
+#      print("Hi there, I am the method summarize for model objects. 
+#            I summarize everything....")
+#      print(getC(object)[,1])
    }
 )
 #------------------------------------------------------------------------------------
 setMethod(
    f= "show",
       signature(object="Model"),
-      definition=function(object){
+      definition=function
       ### This function is a stub
+      (object){
       # It only starts the thing ...    
-      print("Hi there I am the method show for model objects")
-      print(getC(object)[,1])
+#      print("Hi there I am the method show for model objects")
+#      print(getC(object)[,1])
    }
 )
 
@@ -275,7 +277,7 @@ setMethod(
       ##\code{t} in \code{\link{Model}},\code{\link{GeneralModel}} or another model creating function.
       ##details<< This function takes a Model object, which represents a system of ODEs of the form 
       ##\deqn{\frac{d \mathbf{C}(t)}{dt} = \mathbf{I}(t) + \mathbf{A}(t) \mathbf{C}(t)}{dC(t)/dt = I(t) + A(t)C(t)} 
-     ##and solves the system for \eqn{\mathbf{C}(t)}{C(t)}. The numerical solver used can be specified in the costructor of the Model class
+     ##and solves the system for \eqn{\mathbf{C}(t)}{C(t)}. The numerical solver used can be specified in the constructor of the Model class
     ## e.g. \code{\link{Model}}, \code{\link{GeneralModel}}.
 	  ##seealso<< See examples in \code{\link{GeneralModel}}, \code{\link{GeneralModel_14}}, \code{\link{TwopParallelModel}}, 
     ## \code{\link{TwopSeriesModel}}, \code{\link{TwopFeedbackModel}}, etc.

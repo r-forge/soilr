@@ -1,10 +1,7 @@
-\name{initialize_method__BoundLinDecompOp}
-\alias{initialize_method__BoundLinDecompOp}
-\title{initialize called by (new)}
-\description{This is the internal constructor for objects of this class
-It is called by statements of the form new("..) 
-which in turn is called by all other constructors 
-which may have more convienient interfaces}
+\name{initialize_method__BoundInFlux}
+\alias{initialize_method__BoundInFlux}
+\title{internal constructor}
+\description{This mehtod is intended for internal use only, it may change with the internal representation of the class. In user code please use the generic constructor \code{\link{BoundInFlux}} instead.}
 \arguments{
   \item{.Object}{
 }

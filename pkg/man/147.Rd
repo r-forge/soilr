@@ -1,18 +1,11 @@
-\name{getF14-methods}
+\name{getDotOut-methods}
 \docType{methods}
-\alias{getF14-methods}
-\alias{getF14,Model_14-method}
-\title{ ~~ Methods for Function \code{getF14}  ~~}
+\alias{getDotOut-methods}
+\alias{getDotOut,TransportDecompositionOperator-method}
+\title{ ~~ Methods for Function \code{getDotOut}  ~~}
 \description{
- ~~ Methods for function \code{getF14} ~~
+ All methods for function \code{getDotOut} are intended for internal use inside the package only. 
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "Model_14")}}{
-      \code{\link{getF14_method__Model_14}}  
-    }
 
-  }
-}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

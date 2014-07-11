@@ -1,8 +1,9 @@
-\name{getC14_method__Model_14}
-\alias{getC14_method__Model_14}
-\title{getC14 method  Model 14}
-\description{This function computes the value for \eqn{^{14}C}{14C} (mass or concentration ) as function of time}
-\arguments{
+\name{getC14}
+\alias{getC14}
+\title{Calculates the mass of radiocarbon (14C fraction times C stock) in all pools}
+\description{This function computes the mass of 14C (14C fraction times C stock) for all pools as function of time.
+Have a look at the methods for details.}
+\usage{getC14(object)}\arguments{
   \item{object}{
 }
 }

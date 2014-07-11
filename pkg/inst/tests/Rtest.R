@@ -12,7 +12,7 @@ alltests <- defineTestSuite(
    dirs=c(".","protected"),
    testFileRegexp = tfr,
    
-   #testFuncRegexp = "^test.TwopSerial_linear_vs_nonlinear"
+   testFuncRegexp = "test.Ident"
    #"^test.FourpSerial_1"
    #"test.TwopParallel_ZeroInput"
    #"^test.TwopFeedback"
@@ -28,7 +28,7 @@ alltests <- defineTestSuite(
    #"test.BoundFc"
    #"test.ThreepFeedbackModel14|test.ThreepParallelModel14|test.ThreepSeriesModel14|test.TwopFeedbackModel14|test.TwopParallelModel14|test.TwopSeriesModel14"
    #"test.LowVerticalRatesPaper|test.ModelInit|test.SoilRPaper1"
-   "test.LowVerticalRatesPaper|test.SoilRPaper1"
+   #"test.LowVerticalRatesPaper|test.SoilRPaper1"
    #"test.Deprecation"
    #"test.GaudinskiModel14"
    #"test.MC"

@@ -1,14 +1,16 @@
-\name{fW.Demeter}
-\alias{fW.Demeter}
-\title{Effects of moisture on decomposition rates according to the DEMETER model}
-\description{Calculates the effects of soil moisture on decomposition rates according to the DEMETER model.}
-\usage{fW.Demeter(M, Msat = 100)}\arguments{
-  \item{M}{A scalar or vector containing values of soil moisture for which the effects on decomposition rates are calculated.}
-  \item{Msat}{A scalar representing saturated soil moisture.}
+\name{fW.Daycent2}
+\alias{fW.Daycent2}
+\title{Effects of moisture on decomposition rates according to the DAYCENT model}
+\description{Calculates the effects of volumetric water content on decomposition rates according to the Daycent/Century models.}
+\usage{fW.Daycent2(W, WP = 0, FC = 100)}\arguments{
+  \item{W}{A scalar or vector of volumetric water content in percentage.}
+  \item{WP}{A scalar representing the wilting point in percentage.}
+  \item{FC}{A scalar representing the field capacity in percentage.}
 }
 
-\value{A scalar or a vector containing the effects of moisture on decomposition rates (unitless).}
-\references{Foley, J. A. (1995), An equilibrium model of the terrestrial carbon budget, Tellus B, 47(3), 310-319.}
+\value{A data frame with values of relative water content (RWC) and the effects of RWC on decomposition rates (fRWC).}
+\references{Del Grosso, S. J., W. J. Parton, A. R. Mosier, E. A. Holland, E. Pendall, D. S. Schimel, and D. S. Ojima (2005), 
+Modeling soil CO2 emissions from ecosystems, Biogeochemistry, 73(1), 71-91.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -16,7 +18,7 @@
 
 
 \examples{
-Moisture=0:100
-plot(Moisture,fW.Demeter(Moisture),type="l",ylab="f(W) (unitless)", 
-     main="Effects of soil moisture on decomposition rates according to the DEMETER model")
+W=10:90
+fW=fW.Daycent2(W,WP=10,FC=90)
+plot(fW,type="l",ylim=c(0,6)) #This plot reproduces Figure 1b, in del Grosso et al. (2005)
 }

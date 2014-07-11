@@ -1,9 +1,15 @@
-\name{BoundFc_method__data.frame_missing_missing_missing_character_function}
-\alias{BoundFc_method__data.frame_missing_missing_missing_character_function}
-\title{costructor }
-\description{wrapper for \code{\link{BoundFc_method__data.frame_missing_missing_numeric_character_missing}} with the assumption lag=0}
-\arguments{
+\name{BoundFc}
+\alias{BoundFc}
+\title{generic constructor}
+\description{create a BoundFc object from different sources}
+\usage{BoundFc(map, starttime, endtime, lag, format, interpolation)}\arguments{
   \item{map}{
+}
+  \item{starttime}{
+}
+  \item{endtime}{
+}
+  \item{lag}{
 }
   \item{format}{
 }

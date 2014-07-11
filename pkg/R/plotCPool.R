@@ -9,7 +9,7 @@ plotCPool<-structure(
    ...    ##<< Other arguments passed to \code{link{plot}}.
   )
   {
-    n=dim(mat)[2]
+    n=ncol(mat)
     plot(t,mat[,1],type="l",col=col[1],...)
     for(i in 2:n){
       lines(t,mat[,i],col=col[i])

@@ -11,7 +11,8 @@ plotC14Pool<-structure(
      )
     {
      n=dim(mat)[2]
-     plot(inputFc,type="l",...)
+     Fc=inputFc[inputFc[,1]>=min(t), ]
+     plot(Fc,type="l",...)
          for(i in 1:n){
          lines(t,mat[,i],col=col[i])
          }

@@ -1,16 +1,14 @@
-\name{fT.Q10}
-\alias{fT.Q10}
-\title{Effects of temperature on decomposition rates according to a Q10 function}
-\description{Calculates the effects of temperature on decomposition rates according to the modified Van't Hoff function (Q10 function).}
-\usage{fT.Q10(Temp, k_ref = 1, T_ref = 10, Q10 = 2)}\arguments{
-  \item{Temp}{A scalar or vector containing values of temperature for which the effects on decomposition rates are calculated.}
-  \item{k_ref}{A scalar representing the value of the decomposition rate at a reference temperature vaule.}
-  \item{T_ref}{A scalar representing the reference temperature.}
-  \item{Q10}{A scalar. Temperature coefficient Q10.}
+\name{fT.LandT}
+\alias{fT.LandT}
+\title{Effects of temperature on decomposition rates according to a function proposed by Lloyd and Taylor (1994)}
+\description{Calculates the effects of temperature on decomposition rates according to a function proposed by Lloyd and Taylor (1994).}
+\usage{fT.LandT(Temp)}\arguments{
+  \item{Temp}{A scalar or vector containing values of soil temperature for which the effects on decomposition rates are calculated}
 }
 
 \value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
-
+\references{Lloyd, J., and J. A. Taylor (1994), On the Temperature Dependence of Soil Respiration, 
+Functional Ecology, 8(3), 315-323.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -19,9 +17,8 @@
 
 \examples{
 Temperature=0:50
-plot(Temperature,fT.Q10(Temperature),type="l",ylab="f(T) (unitless)", 
-     main="Effects of temperature on decomposition rates according to a Q10 function")
-lines(Temperature, fT.Q10(Temperature,Q10=2.2),col=2)
-lines(Temperature, fT.Q10(Temperature,Q10=1.4),col=4)
-legend("topleft",c("Q10 = 2", "Q10 = 2.2", "Q10 = 1.4"),lty=c(1,1,1),col=c(1,2,4),bty="n")
+plot(Temperature,fT.LandT(Temperature),type="l",
+     ylab="f(T) (unitless)", 
+     main="Effects of temperature on decomposition 
+     rates according to the Lloyd and Taylor function")
 }

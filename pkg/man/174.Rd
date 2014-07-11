@@ -1,10 +1,10 @@
-\name{getParticleMonteCarloSimulator-methods}
+\name{getOutputReceivers-methods}
 \docType{methods}
-\alias{getParticleMonteCarloSimulator-methods}
-\alias{getParticleMonteCarloSimulator,NlModel-method}
-\title{ ~~ Methods for Function \code{getParticleMonteCarloSimulator}  ~~}
+\alias{getOutputReceivers-methods}
+\alias{getOutputReceivers,TransportDecompositionOperator,numeric-method}
+\title{ ~~ Methods for Function \code{getOutputReceivers}  ~~}
 \description{
- All methods for function \code{getParticleMonteCarloSimulator} are intended for internal use inside the package only. 
+ All methods for function \code{getOutputReceivers} are intended for internal use inside the package only. 
 }
 
 \keyword{methods}

@@ -1,6 +1,6 @@
-\name{getFunctionDefinition_method__TimeMap}
-\alias{getFunctionDefinition_method__TimeMap}
-\title{getFunctionDefinition method  TimeMap}
+\name{getFunctionDefinition_method__DecompositionOperator}
+\alias{getFunctionDefinition_method__DecompositionOperator}
+\title{getFunctionDefinition method  DecompositionOperator}
 \description{extract the function definition (the R-function) }
 \arguments{
   \item{object}{

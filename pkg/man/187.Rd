@@ -1,18 +1,14 @@
-\name{getTimeRange_method__DecompositionOperator}
-\alias{getTimeRange_method__DecompositionOperator}
-\title{ask for the boundaries of the underlying time interval}
-\description{The method returns the time range of the given object 
-It is ( probably mostly ) used internally to make sure that 
-time dependent functions retrieved from data are not
-used outside the interval where they are valid. }
+\name{getTimeRange_method__ConstLinDecompOp}
+\alias{getTimeRange_method__ConstLinDecompOp}
+\title{return an (infinite) time range since the operator is constant}
+\description{some functions dealing with DecompOps in general rely on this
+so we have to implement it even though the timerange is always the same: (-inf,inf)}
 \arguments{
   \item{object}{
 }
 }
 
-\value{a vector of length two \code{ c(t_min,t_max) }
-containing start and end time of the time interval 
-for which the object has been defined.}
+
 
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}

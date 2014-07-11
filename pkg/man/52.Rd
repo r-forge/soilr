@@ -1,27 +1,18 @@
-\name{GeneralModel}
-\alias{GeneralModel}
-\title{A general constructor }
-\description{Creates a Model object from different sources
-Have a look at the methods for details.}
-\usage{GeneralModel(t, A, ivList, inputFluxes, ...)}\arguments{
-  \item{t}{
+\name{GeneralModel-methods}
+\docType{methods}
+\alias{GeneralModel-methods}
+\alias{GeneralModel,numeric,ANY,numeric-method}
+\title{ ~~ Methods for Function \code{GeneralModel}  ~~}
+\description{
+ ~~ Methods for function \code{GeneralModel} ~~
 }
-  \item{A}{
+\section{Methods}{
+  \describe{
+    \item{\code{signature(t = "numeric", A = "ANY", ivList = "numeric")}}{
+      \code{\link{GeneralModel_method__numeric_ANY_numeric}}  
+    }
+
+  }
 }
-  \item{ivList}{
-}
-  \item{inputFluxes}{
-}
-  \item{\dots}{
-}
-}
-
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

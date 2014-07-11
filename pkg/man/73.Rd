@@ -1,27 +1,18 @@
-\name{Model}
-\alias{Model}
-\title{A general costructor }
-\description{Creates a Model object from different sources
-Have a look at the methods for details.}
-\usage{Model(t, A, ivList, inputFluxes, ...)}\arguments{
-  \item{t}{
+\name{Model-methods}
+\docType{methods}
+\alias{Model-methods}
+\alias{Model,numeric,ANY,numeric-method}
+\title{ ~~ Methods for Function \code{Model}  ~~}
+\description{
+ ~~ Methods for function \code{Model} ~~
 }
-  \item{A}{
+\section{Methods}{
+  \describe{
+    \item{\code{signature(t = "numeric", A = "ANY", ivList = "numeric")}}{
+      \code{\link{Model_method__numeric_ANY_numeric}}  
+    }
+
+  }
 }
-  \item{ivList}{
-}
-  \item{inputFluxes}{
-}
-  \item{\dots}{
-}
-}
-
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

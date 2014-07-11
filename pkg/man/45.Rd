@@ -1,19 +1,16 @@
-\name{Delta14C_from_AbsoluteFractionModern-methods}
+\name{Delta14C-methods}
 \docType{methods}
-\alias{Delta14C_from_AbsoluteFractionModern-methods}
-\alias{Delta14C_from_AbsoluteFractionModern,matrix-method}
-\alias{Delta14C_from_AbsoluteFractionModern,numeric-method}
-\title{ ~~ Methods for Function \code{Delta14C_from_AbsoluteFractionModern}  ~~}
+\alias{Delta14C-methods}
+\alias{Delta14C,BoundFc-method}
+\alias{Delta14C,ConstFc-method}
+\title{ ~~ Methods for Function \code{Delta14C}  ~~}
 \description{
- ~~ Methods for function \code{Delta14C_from_AbsoluteFractionModern} ~~
+ ~~ Methods for function \code{Delta14C} ~~
 }
 \section{Methods}{
   \describe{
-    \item{\code{signature(AbsoluteFractionModern = "matrix")}}{
-      \code{\link{Delta14C_from_AbsoluteFractionModern_method__matrix}}  
-    }
-    \item{\code{signature(AbsoluteFractionModern = "numeric")}}{
-      \code{\link{Delta14C_from_AbsoluteFractionModern_method__numeric}}  
+    \item{\code{signature(F = "BoundFc")}}{
+      \code{\link{Delta14C_method__BoundFc}}  
     }
 
   }

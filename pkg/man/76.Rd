@@ -1,36 +1,12 @@
-\name{Model_14}
-\alias{Model_14}
-\title{A general costructor }
-\description{Creates a Model_14 object from different sources
-Have a look at the methods for details.}
-\usage{Model_14(t, A, ivList, initialValF, inputFluxes, inputFc, c14DecayRate, 
-    solverfunc, pass)}\arguments{
-  \item{t}{
-}
-  \item{A}{
-}
-  \item{ivList}{
-}
-  \item{initialValF}{
-}
-  \item{inputFluxes}{
-}
-  \item{inputFc}{
-}
-  \item{c14DecayRate}{
-}
-  \item{solverfunc}{
-}
-  \item{pass}{
-}
+\name{Model_14-methods}
+\docType{methods}
+\alias{Model_14-methods}
+\alias{Model_14,numeric,ANY,numeric,ConstFc,ANY,ANY,numeric,function,logical-method}
+\alias{Model_14,numeric,ANY,numeric,ConstFc,ANY,ANY,numeric,missing,logical-method}
+\title{ ~~ Methods for Function \code{Model_14}  ~~}
+\description{
+ All methods for function \code{Model_14} are intended for internal use inside the package only. 
 }
 
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

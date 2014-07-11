@@ -1,9 +1,9 @@
-\name{as.character_method__TimeMap}
-\alias{as.character_method__TimeMap}
-\title{convert TimeMap Objects to something printable.}
-\description{This method is needed to print a TimeMap object.}
+\name{as.character_method__BoundInFlux}
+\alias{as.character_method__BoundInFlux}
+\title{convert BoundInFlux Objects to something printable.}
+\description{returns a string describing the object}
 \arguments{
-  \item{x}{An Object of class time map}
+  \item{x}{An object}
   \item{\dots}{
 }
 }

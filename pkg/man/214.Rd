@@ -1,19 +1,18 @@
-\name{show-methods}
-\docType{methods}
-\alias{show-methods}
-\alias{show,Model-method}
-\alias{show,NlModel-method}
-\title{ ~~ Methods for Function \code{show}  ~~}
-\description{
- ~~ Methods for function \code{show} ~~
+\name{print_method__Model}
+\alias{print_method__Model}
+\title{not yet implemented method to print an overview of several inputs and outpust of a model  }
+\description{This function is a stub}
+\arguments{
+  \item{x}{
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "Model")}}{
-      \code{\link{show_method__Model}}  
-    }
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

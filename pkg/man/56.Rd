@@ -1,9 +1,7 @@
-\name{GeneralModel_14_method__numeric_ANY_numeric_ANY_ANY_ANY_missing_numeric_missing_function_logical}
-\alias{GeneralModel_14_method__numeric_ANY_numeric_ANY_ANY_ANY_missing_numeric_missing_function_logical}
-\title{a constructor for class Model_14}
-\description{This method tries to create a Model object from any combination of arguments 
-that can be converted into  the required set of building blocks for a model
-for n arbitrarily connected pools.}
+\name{GeneralModel_14_method__numeric_ANY_numeric_ANY_ANY_ANY_missing_missing_missing_missing_logical}
+\alias{GeneralModel_14_method__numeric_ANY_numeric_ANY_ANY_ANY_missing_missing_missing_missing_logical}
+\title{a constructor for class Model}
+\description{A wrapper for \code{\link{Model_14}} with pass=FALSE}
 \arguments{
   \item{t}{A vector containing the points in time where the solution is sought.}
   \item{A}{
@@ -15,10 +13,6 @@ for n arbitrarily connected pools.}
   \item{inputFluxes}{
 }
   \item{inputFc}{
-}
-  \item{di}{
-}
-  \item{solverfunc}{
 }
   \item{pass}{
 }

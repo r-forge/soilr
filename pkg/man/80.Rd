@@ -1,64 +1,48 @@
-\name{ParallelModel}
-\alias{ParallelModel}
-\title{ParallelModel}
-\description{This function creates a numerical model for n independent (parallel) pools that can be queried afterwards. 
-It is used by the convinient wrapper functions \code{\link{TwopParallelModel}} and \code{\link{ThreepParallelModel}}
-but can also be used independently.}
-\usage{ParallelModel(times,
- coeffs_tm, startvalues, inputrates, solverfunc = deSolve.lsoda.wrapper, 
-    pass = FALSE)}\arguments{
-  \item{times}{A vector containing the points in time where the solution is sought.}
-  \item{coeffs_tm}{A TimeMap object consisting of a vector valued function containing the decay rates for the n pools as function of time and the time range where this function is valid. The length of the vector is equal to the number of pools.}
-  \item{startvalues}{A vector containing the initial amount of carbon for the n pools.
-<<The length of this vector is equal to the number of pools and thus equal to the length of k. This is checked by the function.}
-  \item{inputrates}{An  object consisting of a vector valued function describing the inputs to the pools as funtions of time \code{\link{TimeMap.new}}}
-  \item{solverfunc}{The function used to actually solve the ODE system. This can be \code{\link{deSolve.lsoda.wrapper}} or any other user provided function with the same interface.}
-  \item{pass}{if TRUE forces the constructor to create the model even if it is invalid}
+\name{OnepModel14}
+\alias{OnepModel14}
+\title{Implementation of a one-pool C14 model}
+\description{This function creates a model for one pool. It is a wrapper for the more general function \code{\link{GeneralModel_14}}. }
+\usage{OnepModel14(t, k, C0, F0_Delta14C, In, xi = 1, inputFc, lambda = -0.0001209681, 
+    lag = 0, solver = deSolve.lsoda.wrapper, pass = FALSE)}\arguments{
+  \item{t}{A vector containing the points in time where the solution is sought. It must be specified within the same period for which the Delta 14 C of the atmosphere is provided. The default period in the provided dataset \code{\link{C14Atm_NH}} is 1900-2010.}
+  \item{k}{A scalar with the decomposition rate of the pool.}
+  \item{C0}{A scalar containing the initial amount of carbon in the pool.}
+  \item{F0_Delta14C}{A scalar containing the initial amount of the radiocarbon fraction in the pool in Delta_14C format.}
+  \item{In}{A scalar or a data.frame object specifying the amount of litter inputs by time.}
+  \item{xi}{A scalar or a data.frame specifying the external (environmental and/or edaphic) effects on decomposition rates.}
+  \item{inputFc}{A Data Frame object consisting of  a function describing the fraction of C_14 in per mille. The first column will be assumed to contain the times.}
+  \item{lambda}{Radioactive decay constant. By default lambda=-0.0001209681 y^-1 . This has the side effect that all your time related data are treated as if the time unit was year.}
+  \item{lag}{A (positive) scalar representing a time lag for radiocarbon to enter the system.}
+  \item{solver}{A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.}
+  \item{pass}{if TRUE Forces the constructor to create the model even if it is invalid}
 }
 
-\value{a model object}
+\value{A Model Object that can be further queried }
 
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
 
 
-
+\seealso{\code{\link{OnepModel}}, \code{\link{TwopParallelModel14}}, 
+\code{\link{TwopFeedbackModel14}} }
 \examples{
-      t_start=0 
-      t_end=10 
-      tn=50
-      timestep=(t_end-t_start)/tn 
-      t=seq(t_start,t_end,timestep) 
-      k=TimeMap.new(t_start,t_end,function(times){c(-0.5,-0.2,-0.3)})
-      c0=c(1, 2, 3)
-      #constant inputrates
-      inputrates=BoundInFlux(
-          function(t){matrix(nrow=3,ncol=1,c(1,1,1))},
-          t_start,
-          t_end
-      ) 
-      mod=ParallelModel(t,k,c0,inputrates)
-      Y=getC(mod)
-      lt1=1 ;lt2=2 ;lt3=3 
-      col1=1; col2=2; col3=3
-      plot(t,Y[,1],type="l",lty=lt1,col=col1,
-  ylab="C stocks",xlab="Time") 
-      lines(t,Y[,2],type="l",lty=lt2,col=col2) 
-      lines(t,Y[,3],type="l",lty=lt3,col=col3) 
-      legend(
-"topleft",
-c("C in pool 1",
-  "C in 2",
-  "C in pool 3"
-),
-lty=c(lt1,lt2,lt3),
-col=c(col1,col2,col3)
-      )
-      Y=getAccumulatedRelease(mod)
-      plot(t,Y[,1],type="l",lty=lt1,col=col1,ylab="C release",xlab="Time") 
-      lines(t,Y[,2],lt2,type="l",lty=lt2,col=col2) 
-      lines(t,Y[,3],type="l",lty=lt3,col=col3) 
-      legend("topright",c("R1","R2","R3"),lty=c(lt1,lt2,lt3),col=c(col1,col2,col3))
- 
+
+years=seq(1901,2009,by=0.5)
+LitterInput=700 
+
+Ex=OnepModel14(t=years,k=1/10,C0=500, F0=0,In=LitterInput, inputFc=C14Atm_NH)
+C14t=getF14(Ex)
+
+plot(C14Atm_NH,type="l",xlab="Year",ylab="Delta 14C (per mil)",xlim=c(1940,2010)) 
+lines(years, C14t[,1], col=4)
+legend(
+  "topright",
+  c("Delta 14C Atmosphere", "Delta 14C in SOM"),
+  lty=c(1,1),
+  col=c(1,4),
+  lwd=c(1,1),
+  bty="n"
+)
+
 }

@@ -51,7 +51,7 @@ setMethod(
     lag="numeric",
     interpolation="missing"
   ),
-  definition=function # costructor 
+  definition=function # constructor 
   ### the method constructs an object from its basic ingredients
   (
     map,
@@ -65,7 +65,7 @@ setMethod(
 setMethod(
   f="BoundInFlux",
   signature=c(map="function",starttime="numeric",endtime="numeric",lag="missing",interpolation="missing"),
-  definition=function # costructor 
+  definition=function # constructor 
   ### the method constructs an object from its basic ingredients
   (map,starttime,endtime){
     BoundInFlux(map=map,starttime=starttime,endtime=endtime,lag=0)

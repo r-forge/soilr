@@ -1,34 +1,35 @@
-\name{BoundInFlux-methods}
-\docType{methods}
-\alias{BoundInFlux-methods}
-\alias{BoundInFlux,TimeMap,missing,missing,missing,missing-method}
-\alias{BoundInFlux,data.frame,missing,missing,missing,missing-method}
-\alias{BoundInFlux,data.frame,missing,missing,numeric,function-method}
-\alias{BoundInFlux,function,numeric,numeric,missing,missing-method}
-\alias{BoundInFlux,function,numeric,numeric,numeric,missing-method}
-\title{ ~~ Methods for Function \code{BoundInFlux}  ~~}
+\name{BoundInFlux-class}
+\Rdversion{1.1}
+\docType{class}
+\alias{BoundInFlux-class}
+\title{Class \code{"BoundInFlux"}}
 \description{
- ~~ Methods for function \code{BoundInFlux} ~~
+defines a time dependent inputrate as function of time and including the domain where the function is well defined. This can be used to avoid interpolations out of range when mixing different time dependent data sets
+}
+\section{Slots}{
+  \describe{
+    \item{\code{starttime}:}{Object of class \code{"numeric"} ~~ }
+    \item{\code{endtime}:}{Object of class \code{"numeric"} ~~ }
+    \item{\code{map}:}{Object of class \code{"function"} ~~ }
+    \item{\code{lag}:}{Object of class \code{"numeric"} ~~ }
+  }
+}
+\section{Extends}{
+Class \code{"\linkS4class{InFlux}"}, directly.
 }
 \section{Methods}{
   \describe{
-    \item{\code{signature(map = "TimeMap", starttime = "missing", endtime = "missing", lag = "missing", interpolation = "missing")}}{
-      \code{\link{BoundInFlux_method__TimeMap_missing_missing_missing_missing}}  
-    }
-    \item{\code{signature(map = "data.frame", starttime = "missing", endtime = "missing", lag = "missing", interpolation = "missing")}}{
-      \code{\link{BoundInFlux_method__data.frame_missing_missing_missing_missing}}  
-    }
-    \item{\code{signature(map = "data.frame", starttime = "missing", endtime = "missing", lag = "numeric", interpolation = "function")}}{
-      \code{\link{BoundInFlux_method__data.frame_missing_missing_numeric_function}}  
-    }
-    \item{\code{signature(map = "function", starttime = "numeric", endtime = "numeric", lag = "missing", interpolation = "missing")}}{
-      \code{\link{BoundInFlux_method__function_numeric_numeric_missing_missing}}  
-    }
-    \item{\code{signature(map = "function", starttime = "numeric", endtime = "numeric", lag = "numeric", interpolation = "missing")}}{
-      \code{\link{BoundInFlux_method__function_numeric_numeric_numeric_missing}}  
-    }
-
-  }
+    \item{as.character}{\code{signature(x = "BoundInFlux")}: ... }
+    \item{getFunctionDefinition}{\code{signature(object = "BoundInFlux")}: ... }
+    \item{getTimeRange}{\code{signature(object = "BoundInFlux")}: ... }
+    \item{initialize}{\code{signature(.Object = "BoundInFlux")}: ... }
+	 }
 }
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+\author{
+ Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de> 
+}
+\examples{
+showClass("BoundInFlux")
+}
+\keyword{classes}

@@ -1,10 +1,10 @@
-\name{getDotOut-methods}
+\name{getDecompOp-methods}
 \docType{methods}
-\alias{getDotOut-methods}
-\alias{getDotOut,TransportDecompositionOperator-method}
-\title{ ~~ Methods for Function \code{getDotOut}  ~~}
+\alias{getDecompOp-methods}
+\alias{getDecompOp,NlModel-method}
+\title{ ~~ Methods for Function \code{getDecompOp}  ~~}
 \description{
- All methods for function \code{getDotOut} are intended for internal use inside the package only. 
+ All methods for function \code{getDecompOp} are intended for internal use inside the package only. 
 }
 
 \keyword{methods}

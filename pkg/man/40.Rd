@@ -1,19 +1,26 @@
-\name{DecompOp_method__DecompOp}
-\alias{DecompOp_method__DecompOp}
-\title{pass through constructor}
-\description{This method handles the case that no actual construction is necessary since
-the argument is already of a subclass of DecompOp }
-\arguments{
-  \item{object}{
+\name{DecompOp-methods}
+\docType{methods}
+\alias{DecompOp-methods}
+\alias{DecompOp,DecompOp-method}
+\alias{DecompOp,TimeMap-method}
+\alias{DecompOp,matrix-method}
+\title{ ~~ Methods for Function \code{DecompOp}  ~~}
+\description{
+ ~~ Methods for function \code{DecompOp} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "DecompOp")}}{
+      \code{\link{DecompOp_method__DecompOp}}  
+    }
+    \item{\code{signature(object = "TimeMap")}}{
+      \code{\link{DecompOp_method__TimeMap}}  
+    }
+    \item{\code{signature(object = "matrix")}}{
+      \code{\link{DecompOp_method__matrix}}  
+    }
+
+  }
 }
-
-\value{the unchanged argument}
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

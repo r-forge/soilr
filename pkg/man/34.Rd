@@ -1,34 +1,19 @@
-\name{ConstLinDecompOp-class}
-\Rdversion{1.1}
-\docType{class}
-\alias{ConstLinDecompOp-class}
-\title{Class \code{"ConstLinDecompOp"}}
-\description{
-NA
+\name{ConstFc}
+\alias{ConstFc}
+\title{creates an object containing the initial values for the 14C fraction needed to create models in SoilR}
+\description{The function returns an object of class ConstFc which is a building block for any 14C model in SoilR.
+The building blocks of a model have to keep iformation about the formats their data are in, because the high level function dealing wiht the models have to know. This function is actually a convienient wrapper for a call to R's standard constructor new, to hide its complexity from the user.}
+\usage{ConstFc(values = c(0), format = "Delta14C")}\arguments{
+  \item{values}{a numeric vector}
+  \item{format}{a character string describing the format e.g. "Delta14C"}
 }
-\section{Slots}{
-  \describe{
-    \item{\code{mat}:}{Object of class \code{"matrix"} ~~ }
-  }
-}
-\section{Extends}{
-Class \code{"\linkS4class{DecompOp}"}, directly.
-}
-\section{Methods}{
-  \describe{
-    \item{BoundLinDecompOp}{\code{signature(map = "ConstLinDecompOp", starttime = "ANY", endtime = "ANY", lag = "ANY")}: ... }
-    \item{getFunctionDefinition}{\code{signature(object = "ConstLinDecompOp")}: ... }
-    \item{getMeanTransitTime}{\code{signature(object = "ConstLinDecompOp")}: ... }
-    \item{getTimeRange}{\code{signature(object = "ConstLinDecompOp")}: ... }
-    \item{getTransitTimeDistributionDensity}{\code{signature(object = "ConstLinDecompOp")}: ... }
-    \item{initialize}{\code{signature(.Object = "ConstLinDecompOp")}: ... }
-	 }
-}
-\author{
- Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de> 
-}
-\examples{
-showClass("ConstLinDecompOp")
-}
-\keyword{classes}
+
+\value{An object of class ConstFc that contains data and a format description that can later be used to convert the data into other formats if the conversion is implemented.}
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

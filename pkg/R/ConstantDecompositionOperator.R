@@ -98,19 +98,19 @@ setMethod(
           t=seq(0,t_end,t_step)
           norms=sapply(t,g)
           tm=100*max(norms)
-	  print(paste("tm=",tm))
+#	  print(paste("tm=",tm))
 	  return(tm)
       } 
       t_end=20
-      print(paste("t_end=",t_end,sep=""))
+#      print(paste("t_end=",t_end,sep=""))
       t_end_new=t_max(t_end)
-      print(paste("t_end_new_before while=",t_end_new))
+#      print(paste("t_end_new_before while=",t_end_new))
       while(t_end_new>t_end){
-          print(t_end)
+#          print(t_end)
 	  t_end=t_end_new
 	  t_end_new=t_max(t_end)
       }
-      print("after while")
+#      print("after while")
       longTailEstimate=t_end
       subd=10000
       t_step=t_end/subd
@@ -121,11 +121,11 @@ setMethod(
       #print(paste("ttdd=",ttdd))
       #print(paste("t=",t))
       #print(paste("ttdd*t=",ttdd*t))
-      meanTimeRiemann=sum(ttdd*t)*t_step
+#      meanTimeRiemann=sum(ttdd*t)*t_step
       int2=splinefun(t,ttdd*t)
       meanTimeIntegrate=integrate(int2,0,t_end,subdivisions=subd)[["value"]] 
-      print(paste("meanTimeRiemann=",meanTimeRiemann))
-      print(paste("meanTimeIntegrate=",meanTimeIntegrate))
+#      print(paste("meanTimeRiemann=",meanTimeRiemann))
+#      print(paste("meanTimeIntegrate=",meanTimeIntegrate))
       #meanTime_s=integrate(integrand,0,shortTailEstimate,subdivisions=subd)[["value"]] 
       # here we must first check if the two values differ significantly
       #return(meanTimeRiemann)

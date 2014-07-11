@@ -1,22 +1,21 @@
-\name{InFlux-methods}
-\docType{methods}
-\alias{InFlux-methods}
-\alias{InFlux,InFlux-method}
-\alias{InFlux,TimeMap-method}
-\title{ ~~ Methods for Function \code{InFlux}  ~~}
+\name{InFlux-class}
+\Rdversion{1.1}
+\docType{class}
+\alias{InFlux-class}
+\title{Class \code{"InFlux"}}
 \description{
- ~~ Methods for function \code{InFlux} ~~
+NA
 }
 \section{Methods}{
   \describe{
-    \item{\code{signature(object = "InFlux")}}{
-      \code{\link{InFlux_method__InFlux}}  
-    }
-    \item{\code{signature(object = "TimeMap")}}{
-      \code{\link{InFlux_method__TimeMap}}  
-    }
-
-  }
+    \item{InFlux}{\code{signature(object = "InFlux")}: ... }
+	 }
 }
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+\author{
+ Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de> 
+}
+\examples{
+showClass("InFlux")
+}
+\keyword{classes}

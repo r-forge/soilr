@@ -7,7 +7,7 @@ bacwaveModel<-structure(
   ##references<< Zelenev, V.V., A.H.C. van Bruggen, A.M. Semenov. 2000. ``BACWAVE,'' a spatial-temporal model for traveling waves of bacterial populations
   ## in response to a moving carbon source in soil. Microbail Ecology 40: 260-272.
   (t, ##<< vector of times (in hours) to calculate a solution.
-   umax=0.063, ##<< a scalar representing the maximal relative growth rate of bacteria (hr-1)
+   umax=0.063, ##<< a scalar representing the maximum relative growth rate of bacteria (hr-1)
    ks=3.0, ##<< a scalar representing the substrate constant for growth (ug C /ml soil solution)
    theta=0.23, ##<< a scalar representing soil water content (ml solution/cm3 soil)
    Dmax=0.26, ##<< a scalar representing the maximal relative death rate of bacteria (hr-1)

@@ -1,9 +1,10 @@
-\name{AbsoluteFractionModern_method__BoundFc}
-\alias{AbsoluteFractionModern_method__BoundFc}
-\title{convert to Absolute Fraction Normal values  }
-\description{convert a BoundFc object containing values in any supported format to the appropriate Absolute Fraction Modern values.}
+\name{AbsoluteFractionModern_from_Delta14C_method__numeric}
+\alias{AbsoluteFractionModern_from_Delta14C_method__numeric}
+\title{Converts from Delta14C to Absolute Fraction Modern}
+\description{Converts a number or vector containing Delta14C values to the appropriate Absolute Fraction Modern values.
+Have a look at the methods for details.}
 \arguments{
-  \item{F}{object containing the values in any format}
+  \item{delta14C}{A numeric object containing the values in Delta14C format}
 }
 
 

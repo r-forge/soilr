@@ -1,10 +1,10 @@
-\name{getInitialValues-methods}
+\name{getInFluxes-methods}
 \docType{methods}
-\alias{getInitialValues-methods}
-\alias{getInitialValues,NlModel-method}
-\title{ ~~ Methods for Function \code{getInitialValues}  ~~}
+\alias{getInFluxes-methods}
+\alias{getInFluxes,NlModel-method}
+\title{ ~~ Methods for Function \code{getInFluxes}  ~~}
 \description{
- All methods for function \code{getInitialValues} are intended for internal use inside the package only. 
+ All methods for function \code{getInFluxes} are intended for internal use inside the package only. 
 }
 
 \keyword{methods}

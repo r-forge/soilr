@@ -1,19 +1,24 @@
-\name{C14Atm_NH}
-\alias{C14Atm_NH}
+\name{C14Atm}
+\alias{C14Atm}
 \docType{data}
-\title{Post-bomb atmospheric 14C fraction}
-\description{
-    Atmospheric 14C concentrations for the post-bomb period expressed as Delta 14C in per mile. This dataset contains a combination of observations from locations in Europe and North America. It is representative for the Northern Hemisphere. 
+\title{
+Atmospheric 14C fraction
 }
-\usage{data(C14Atm_NH)}
+\description{
+    Atmospheric 14C fraction in units of Delta14C for the bomb period in the northern hemisphere. 
+}
+\usage{data(C14Atm)}
 \format{
-  A data frame with 111 observations on the following 2 variables.
+  A data frame with 108 observations on the following 2 variables.
   \describe{
-    \item{\code{YEAR}}{a numeric vector with year of measurement.}
-    \item{\code{Atmosphere}}{a numeric vector with the Delta 14 value of atmospheric CO2 in per mil.}
+    \item{\code{V1}}{a numeric vector}
+    \item{\code{V2}}{a numeric vector}
   }
 }
+\note{This function will be deprecated soon. Please use \link{C14Atm_NH} or \link{Hua2013} instead.}
 \examples{
+#Notice that C14Atm is a shorter version of C14Atm_NH
 plot(C14Atm_NH,type="l")
+lines(C14Atm,col=2)
 }
 \keyword{datasets}

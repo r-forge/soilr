@@ -1,13 +1,23 @@
-\name{as.character}
-\alias{as.character}
-\title{creates a character representation of the object in question}
-\description{This function computes the carbon content of the pools as function of time}
-\usage{as.character(object)}
-\arguments{
-  \item{object}{The object to be printed.}
+\name{as.character-methods}
+\docType{methods}
+\alias{as.character-methods}
+\alias{as.character,BoundInFlux-method}
+\alias{as.character,MCSim-method}
+\alias{as.character,TimeMap-method}
+\title{ ~~ Methods for Function \code{as.character}  ~~}
+\description{
+ ~~ Methods for function \code{as.character} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(x = "BoundInFlux")}}{
+      \code{\link{as.character_method__BoundInFlux}}  
+    }
+    \item{\code{signature(x = "TimeMap")}}{
+      \code{\link{as.character_method__TimeMap}}  
+    }
 
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller <mamueller@bgc-jena.mpg.de>}
-
-
-
+  }
+}
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

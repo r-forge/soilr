@@ -1,10 +1,11 @@
-\name{getOutputFluxes-methods}
+\name{getNumberOfPools-methods}
 \docType{methods}
-\alias{getOutputFluxes-methods}
-\alias{getOutputFluxes,NlModel-method}
-\title{ ~~ Methods for Function \code{getOutputFluxes}  ~~}
+\alias{getNumberOfPools-methods}
+\alias{getNumberOfPools,NlModel-method}
+\alias{getNumberOfPools,TransportDecompositionOperator-method}
+\title{ ~~ Methods for Function \code{getNumberOfPools}  ~~}
 \description{
- All methods for function \code{getOutputFluxes} are intended for internal use inside the package only. 
+ All methods for function \code{getNumberOfPools} are intended for internal use inside the package only. 
 }
 
 \keyword{methods}

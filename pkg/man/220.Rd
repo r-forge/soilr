@@ -1,19 +1,11 @@
-\name{[-methods}
+\name{$-methods}
 \docType{methods}
-\alias{[-methods}
-\alias{[,Model,character-method}
-\alias{[,NlModel,character-method}
-\title{ ~~ Methods for Function \code{[}  ~~}
+\alias{$-methods}
+\alias{$,NlModel-method}
+\title{ ~~ Methods for Function \code{$}  ~~}
 \description{
- ~~ Methods for function \code{[} ~~
+ All methods for function \code{$} are intended for internal use inside the package only. 
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(x = "Model", i = "character")}}{
-      \code{\link{[_method__Model_character}}  
-    }
 
-  }
-}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

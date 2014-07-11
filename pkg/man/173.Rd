@@ -1,10 +1,10 @@
-\name{getOutputReceivers-methods}
+\name{getOutputFluxes-methods}
 \docType{methods}
-\alias{getOutputReceivers-methods}
-\alias{getOutputReceivers,TransportDecompositionOperator,numeric-method}
-\title{ ~~ Methods for Function \code{getOutputReceivers}  ~~}
+\alias{getOutputFluxes-methods}
+\alias{getOutputFluxes,NlModel-method}
+\title{ ~~ Methods for Function \code{getOutputFluxes}  ~~}
 \description{
- All methods for function \code{getOutputReceivers} are intended for internal use inside the package only. 
+ All methods for function \code{getOutputFluxes} are intended for internal use inside the package only. 
 }
 
 \keyword{methods}

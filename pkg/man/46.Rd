@@ -1,19 +1,22 @@
-\name{Delta14C_from_AbsoluteFractionModern}
-\alias{Delta14C_from_AbsoluteFractionModern}
-\title{Converts its argument from an Absolute Fraction Modern to a Delta14C representation}
-\description{The function returns an object of the same type as its input,
-which can be of different type.
-Have a look at the methods for details.}
-\usage{Delta14C_from_AbsoluteFractionModern(AbsoluteFractionModern)}\arguments{
-  \item{AbsoluteFractionModern}{A numeric object}
+\name{Delta14C_from_AbsoluteFractionModern-methods}
+\docType{methods}
+\alias{Delta14C_from_AbsoluteFractionModern-methods}
+\alias{Delta14C_from_AbsoluteFractionModern,matrix-method}
+\alias{Delta14C_from_AbsoluteFractionModern,numeric-method}
+\title{ ~~ Methods for Function \code{Delta14C_from_AbsoluteFractionModern}  ~~}
+\description{
+ ~~ Methods for function \code{Delta14C_from_AbsoluteFractionModern} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(AbsoluteFractionModern = "matrix")}}{
+      \code{\link{Delta14C_from_AbsoluteFractionModern_method__matrix}}  
+    }
+    \item{\code{signature(AbsoluteFractionModern = "numeric")}}{
+      \code{\link{Delta14C_from_AbsoluteFractionModern_method__numeric}}  
+    }
 
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+  }
+}
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

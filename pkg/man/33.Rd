@@ -1,19 +1,19 @@
-\name{ConstFc}
-\alias{ConstFc}
-\title{creates an object containing the initial values for the 14C fraction needed to create models in SoilR}
-\description{The function returns an object of class ConstFc which is a building block for any 14C model in SoilR.
-The building blocks of a model have to keep iformation about the formats their data are in, because the high level function dealing wiht the models have to know. This function is actually a convienient wrapper for a call to R's standard constructor new, to hide its complexity from the user.}
-\usage{ConstFc(values = c(0), format = "Delta14C")}\arguments{
-  \item{values}{a numeric vector}
-  \item{format}{a character string describing the format e.g. "Delta14C"}
+\name{C14Atm_NH}
+\alias{C14Atm_NH}
+\docType{data}
+\title{Post-bomb atmospheric 14C fraction}
+\description{
+    Atmospheric 14C concentrations for the post-bomb period expressed as Delta 14C in per mile. This dataset contains a combination of observations from locations in Europe and North America. It is representative for the Northern Hemisphere. 
 }
-
-\value{An object of class ConstFc that contains data and a format description that can later be used to convert the data into other formats if the conversion is implemented.}
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\usage{data(C14Atm_NH)}
+\format{
+  A data frame with 111 observations on the following 2 variables.
+  \describe{
+    \item{\code{YEAR}}{a numeric vector with year of measurement.}
+    \item{\code{Atmosphere}}{a numeric vector with the Delta 14 value of atmospheric CO2 in per mil.}
+  }
+}
+\examples{
+plot(C14Atm_NH,type="l")
+}
+\keyword{datasets}

@@ -1,18 +1,19 @@
-\name{getF14C-methods}
-\docType{methods}
-\alias{getF14C-methods}
-\alias{getF14C,Model_14-method}
-\title{ ~~ Methods for Function \code{getF14C}  ~~}
-\description{
- ~~ Methods for function \code{getF14C} ~~
+\name{getF14}
+\alias{getF14}
+\title{Calculates the 14C fraction of all pools}
+\description{This function computes the radiocarbon fraction for all pools as funtion of time.
+Have a look at the methods for details.}
+\usage{getF14(object)}\arguments{
+  \item{object}{
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "Model_14")}}{
-      \code{\link{getF14C_method__Model_14}}  
-    }
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

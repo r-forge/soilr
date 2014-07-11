@@ -12,7 +12,8 @@ turnoverFit=structure(
       C0=0, ##<< a scalar with the initial amount of carbon stored at the begning of the simulation.
       yr0=1900, ##<< The year at which simulations will start.
       Zone="NHZone2", ##<< the hemispheric zone of atmospheric radiocarbon. Possible values are NHZone1: northern hemisphere zone 1, NHZone2: northern hemisphere zone 2, NHZone3: northern hemisphere zone 3, SHZone12: southern hemisphere zones 1 and 2, SHZone3: southern hemisphere zone 3. See \code{\link{Hua2013}} for additional information.
-      plot=TRUE ##<< logical. Should the function produce a plot?
+      plot=TRUE, ##<< logical. Should the function produce a plot?
+      by=0.5 ##<< numeric. The increment of the sequence of years used in the simulations.
       )
      {
           if(length(obsC14) != 1) stop("obsC14 must be a numeric value of length 1")
@@ -33,7 +34,7 @@ turnoverFit=structure(
      
           if(obsyr > tail(inputFc,1)$Year.AD) stop("The observed C14 datum must be from a year within the atmospheric radiocarbon period of the Hua et al (2012) dataset.")
      
-          years=seq(yr0,tail(inputFc,1)$Year.AD,by=0.1)
+          years=seq(yr0,tail(inputFc,1)$Year.AD,by=by)
           C14cost=function(k){
                tmp=OnepModel14(t=years,k=k,C0=C0,F0_Delta14C=inputFc[which(inputFc[,1]==yr0),2],
                                In=In,inputFc=inputFc)
