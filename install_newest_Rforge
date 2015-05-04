@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "this is $0"
 v=$(awk '/^Version/{print $2}' pkg/DESCRIPTION)
-command="R CMD INSTALL --library=~/R/x86_64-pc-linux-gnu-library/3.1 SoilR_${v}.tar.gz"
+#command="R CMD INSTALL --library=~/R/x86_64-pc-linux-gnu-library/3.1 SoilR_${v}.tar.gz"
+command="R CMD INSTALL  SoilR_${v}.tar.gz"
 echo $command
 eval $command
