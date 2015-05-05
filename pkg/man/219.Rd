@@ -25,10 +25,8 @@ If the turnover time is relatively short (< 50 yrs), it is safe to assume C0=0 b
 
 
 \examples{
-# To calculate the turnover time for a sample from a temperate forest soil
-# remove uncomment the following lines!
-
-#turnoverFit(obsC14=115.22, obsyr=2004.5, C0=2800, yr0=1900,
-#                          In=473, Zone="NHZone2")
+# Calculate the turnover time for a sample from a temperate forest soil
+turnoverFit(obsC14=115.22, obsyr=2004.5, C0=2800, yr0=1900,
+                          In=473, Zone="NHZone2")
 
 }

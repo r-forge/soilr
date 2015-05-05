@@ -8,8 +8,8 @@ Matter decomposition in terrestrial ecosystems.}
 \details{
 \tabular{ll}{Package: \tab SoilR\cr
 Title: \tab Models of Soil Organic Matter Decomposition\cr
-Version: \tab 1.1-25\cr
-Date: \tab 2014-07-11\cr
+Version: \tab 1.1-24\cr
+Date: \tab 2014-04-26\cr
 Author: \tab Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>\cr
 Maintainer: \tab Markus Mueller <mamueller@bgc-jena.mpg.de>\cr
