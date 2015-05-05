@@ -1,9 +1,6 @@
-#
-# vim:set ff=unix expandtab ts=2 sw=2:
 TwopSeriesModel<-structure(
     function #Implementation of a two pool model with series structure
     ### This function creates a model for two pools connected in series. It is a wrapper for the more general function \code{\link{GeneralModel}}.
-    ##references<< Sierra, C.A., M. Mueller, S.E. Trumbore. 2012. Models of soil organic matter decomposition: the SoilR package version 1.0. Geoscientific Model Development 5, 1045-1060.
      (t,  		##<< A vector containing the points in time where the solution is sought.
       ks,	##<< A vector of length 2 with the values of the decomposition rate for pools 1 and 2. 
       a21, ##<< A scalar with the value of the transfer rate from pool 1 to pool 2.
@@ -20,20 +17,20 @@ TwopSeriesModel<-structure(
       if(length(C0)!=2) stop("the vector with initial conditions must be of length = 2")
       
       if(length(In)==1){
-          inputFluxes=BoundInFlux(
-            function(t){matrix(nrow=2,ncol=1,c(In,0))},
+          inputFluxes=TimeMap.new(
             t_start,
-            t_end
+            t_end,
+            function(t){matrix(nrow=2,ncol=1,c(In,0))}
         )
       }
       if(class(In)=="data.frame"){
          x=In[,1]  
          y=In[,2]  
          inputFlux=splinefun(x,y)
-          inputFluxes=BoundInFlux(
-            function(t){matrix(nrow=2,ncol=1,c(inputFlux(t),0))},
+          inputFluxes=TimeMap.new(
             min(x),
-            max(x)
+            max(x),
+            function(t){matrix(nrow=2,ncol=1,c(inputFlux(t),0))}
           )
         }
       A=-1*abs(diag(ks))
@@ -45,10 +42,10 @@ TwopSeriesModel<-structure(
       Y=xi[,2]
       fX=splinefun(X,Y)
       }
-      Af=BoundLinDecompOp(
-        function(t){fX(t)*A},
+      Af=TimeMap.new(
         t_start,
-        t_end
+        t_end,
+        function(t){fX(t)*A}
       )
       Mod=GeneralModel(t=t,A=Af,ivList=C0,inputFluxes=inputFluxes,pass=pass)
      return(Mod)
@@ -74,19 +71,15 @@ TwopSeriesModel<-structure(
       Ct=getC(Ex1)
       Rt=getReleaseFlux(Ex1)
       
-      plot(t,rowSums(Ct),type="l",ylab="Carbon stocks (arbitrary units)",
-           xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Ct[1,]))) 
+      plot(t,rowSums(Ct),type="l",ylab="Carbon stocks (arbitrary units)",xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Ct[1,]))) 
       lines(t,Ct[,1],col=2)
       lines(t,Ct[,2],col=4) 
-      legend("bottomright",c("Total C","C in pool 1", "C in pool 2"),
-             lty=c(1,1,1),col=c(1,2,4),lwd=c(2,1,1),bty="n")
+      legend("bottomright",c("Total C","C in pool 1", "C in pool 2"),lty=c(1,1,1),col=c(1,2,4),lwd=c(2,1,1),bty="n")
 
-      plot(t,rowSums(Rt),type="l",ylab="Carbon released (arbitrary units)",
-           xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Rt[1,]))) 
+      plot(t,rowSums(Rt),type="l",ylab="Carbon released (arbitrary units)",xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Rt[1,]))) 
       lines(t,Rt[,1],col=2)
       lines(t,Rt[,2],col=4) 
-      legend("topright",c("Total C release","C release from pool 1", "C release from pool 2"),
-             lty=c(1,1,1),col=c(1,2,4),lwd=c(2,1,1),bty="n")
+      legend("topright",c("Total C release","C release from pool 1", "C release from pool 2"),lty=c(1,1,1),col=c(1,2,4),lwd=c(2,1,1),bty="n")
       
       Inr=data.frame(t,Random.inputs=rnorm(length(t),30,5))
       plot(Inr)
@@ -95,18 +88,14 @@ TwopSeriesModel<-structure(
       Ctr=getC(Ex2)
       Rtr=getReleaseFlux(Ex2)
       
-      plot(t,rowSums(Ctr),type="l",ylab="Carbon stocks (arbitrary units)",
-           xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Ctr[1,]))) 
+      plot(t,rowSums(Ctr),type="l",ylab="Carbon stocks (arbitrary units)",xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Ctr[1,]))) 
       lines(t,Ctr[,1],col=2)
       lines(t,Ctr[,2],col=4) 
-      legend("topright",c("Total C","C in pool 1", "C in pool 2"),
-             lty=c(1,1,1),col=c(1,2,4),lwd=c(2,1,1),bty="n")
+      legend("topright",c("Total C","C in pool 1", "C in pool 2"),lty=c(1,1,1),col=c(1,2,4),lwd=c(2,1,1),bty="n")
 
-      plot(t,rowSums(Rtr),type="l",ylab="Carbon released (arbitrary units)",
-           xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Rtr[1,]))) 
+      plot(t,rowSums(Rtr),type="l",ylab="Carbon released (arbitrary units)",xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Rtr[1,]))) 
       lines(t,Rtr[,1],col=2)
       lines(t,Rtr[,2],col=4) 
-      legend("topright",c("Total C release","C release from pool 1", "C release from pool 2"),
-             lty=c(1,1,1),col=c(1,2,4),lwd=c(2,1,1),bty="n")
+      legend("topright",c("Total C release","C release from pool 1", "C release from pool 2"),lty=c(1,1,1),col=c(1,2,4),lwd=c(2,1,1),bty="n")
 }
 )

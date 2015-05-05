@@ -1,5 +1,3 @@
-#
-# vim:set ff=unix expandtab ts=2 sw=2:
 fW.Gompertz<- structure(
   function #Effects of moisture on decomposition rates according to the Gompertz function
   ### Calculates the effects of water content on decomposition rates.

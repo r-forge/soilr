@@ -1,5 +1,3 @@
-#
-# vim:set ff=unix expandtab ts=2 sw=2:
 vecFuncMaker=function# creates a vector valued function from the functions for the components
 ### The function is a helper to create a vector valued function of two arguments which is very useful to create systems of ode
 (

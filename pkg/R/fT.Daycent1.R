@@ -1,5 +1,3 @@
-#
-# vim:set ff=unix expandtab ts=2 sw=2:
 fT.Daycent1<-structure(
   function #Effects of temperature on decomposition rates according to the DAYCENT model
     ### Calculates the effects of temperature on decomposition rates according to the DAYCENT model.

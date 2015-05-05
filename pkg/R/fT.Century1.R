@@ -1,5 +1,3 @@
-#
-# vim:set ff=unix expandtab ts=2 sw=2:
 fT.Century1<-structure(
   function #Effects of temperature on decomposition rates according the the CENTURY model
     ### Calculates the effects of temperature on decomposition rates according to the CENTURY model.

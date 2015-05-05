@@ -1,5 +1,3 @@
-#
-# vim:set ff=unix expandtab ts=2 sw=2:
 fW.Candy<- structure(
   function #Effects of moisture on decomposition rates according to the Candy model
   ### Calculates the effects of water content and pore volume on decomposition rates.

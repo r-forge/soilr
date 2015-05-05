@@ -1,9 +1,6 @@
-#
-# vim:set ff=unix expandtab ts=2 sw=2:
 OnepModel<-structure(
     function #Implementation of a one pool model 
     ### This function creates a model for one pool. It is a wrapper for the more general function \code{\link{GeneralModel}}.
-    ##references<< Sierra, C.A., M. Mueller, S.E. Trumbore. 2012. Models of soil organic matter decomposition: the SoilR package version 1.0. Geoscientific Model Development 5, 1045-1060.
      (t,  		##<< A vector containing the points in time where the solution is sought.
       k,	##<< A scalar with the decomposition rate of the pool. 
       C0,	##<< A scalar containing the initial amount of carbon in the pool.
@@ -20,21 +17,25 @@ OnepModel<-structure(
       C0=c(C0)
       
       if(length(In)==1){
-          inputFluxes=BoundInFlux(
-            function(t){matrix(nrow=1,ncol=1,In)},
+          inputFluxes=TimeMap.new(
             t_start,
-            t_end
+            t_end,
+            function(t){matrix(nrow=1,ncol=1,In)}
         )
       }
       if(class(In)=="data.frame"){
+         print("blubberer")
+	 print(class(In))
          x=In[,1]  
+	 print(min(x))
          y=In[,2]  
          inputFlux=splinefun(x,y)
-          inputFluxes=BoundInFlux(
-            function(t){matrix(nrow=1,ncol=1,inputFlux(t))},
+          inputFluxes=TimeMap.new(
             min(x),
-            max(x)
+            max(x),
+            function(t){matrix(nrow=1,ncol=1,inputFlux(t))}
           )
+	  print(inputFluxes)
         }
       A=-1*abs(matrix(k,1,1))
       
@@ -44,10 +45,10 @@ OnepModel<-structure(
       Y=xi[,2]
       fX=splinefun(X,Y)
       }
-      Af=BoundLinDecompOp(
-        function(t){fX(t)*A},
+      Af=TimeMap.new(
         t_start,
-        t_end
+        t_end,
+        function(t){fX(t)*A}
       )
       Mod=GeneralModel(t=t,A=Af,ivList=C0,inputFluxes=inputFluxes,solver,pass)
      return(Mod)
@@ -71,32 +72,11 @@ OnepModel<-structure(
       Rt=getReleaseFlux(Ex)
       Rc=getAccumulatedRelease(Ex)
       
-      plot(
-        t,
-        Ct,
-        type="l",
-        ylab="Carbon stocks (arbitrary units)",
-        xlab="Time (arbitrary units)",
-        lwd=2
-      ) 
+      plot(t,Ct,type="l",ylab="Carbon stocks (arbitrary units)",xlab="Time (arbitrary units)",lwd=2) 
       
-      plot(
-        t,
-        Rt,
-        type="l",
-        ylab="Carbon released (arbitrary units)",
-        xlab="Time (arbitrary units)",
-        lwd=2
-      ) 
+      plot(t,Rt,type="l",ylab="Carbon released (arbitrary units)",xlab="Time (arbitrary units)",lwd=2) 
       
-      plot(
-        t,
-        Rc,
-        type="l",
-        ylab="Cummulative carbon released (arbitrary units)",
-        xlab="Time (arbitrary units)",
-        lwd=2
-      ) 
+      plot(t,Rc,type="l",ylab="Cummulative carbon released (arbitrary units)",xlab="Time (arbitrary units)",lwd=2) 
 
 }
 )

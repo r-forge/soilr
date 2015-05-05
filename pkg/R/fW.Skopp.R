@@ -1,5 +1,3 @@
-#
-# vim:set ff=unix expandtab ts=2 sw=2:
 fW.Skopp<- structure(
   function #Effects of moisture on decomposition rates according to the function proposed by Skopp et al. 1990
   ### Calculates the effects of relative soil water content on decomposition rates.

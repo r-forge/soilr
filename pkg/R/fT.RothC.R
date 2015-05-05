@@ -1,5 +1,3 @@
-#
-# vim:set ff=unix expandtab ts=2 sw=2:
 fT.RothC<-structure(
   function #Effects of temperature on decomposition rates according to the functions included in the RothC model
     ### Calculates the effects of temperature on decomposition rates according to the functions included in the RothC model.
