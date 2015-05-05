@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 ICBMModel<-structure(
     function #Implementation of the Introductory Carbon Balance Model (ICBM)
     ### This function is an implementation of the Introductory Carbon Balance Model (ICBM).
@@ -23,12 +25,12 @@ ICBMModel<-structure(
      A=diag(-ks)
      A[2,1]=ks[1]*h
      Ar=A*r
-     inputFluxes=TimeMap.new(
+     inputFluxes=BoundInFlux(
+        function(t){matrix(nrow=nrow(A),ncol=1,c(In,0))},
         t_start,
-        t_end,
-        function(t){matrix(nrow=nrow(A),ncol=1,c(In,0))}
+        t_end
      )
-     Af=TimeMap.new(t_start,t_end, function(t0){Ar})
+     Af=BoundLinDecompOp(map=function(t0){Ar},t_start,t_end)
      Mod=GeneralModel(t=t,A=Af,c0,inputFluxes,solver,pass)
      return(Mod)
  
@@ -36,8 +38,10 @@ ICBMModel<-structure(
     }
     ,
     ex=function(){
-        #This example reproduces the simulations presented in Table 1 of Andren and Katterer (1997).
-        #First, the model is run for different values of the parameters representing different field experiments. 
+        # This example reproduces the simulations 
+        # presented in Table 1 of Andren and Katterer (1997).
+        # First, the model is run for different values of the 
+        # parameters representing different field experiments. 
         times=seq(0,20,by=0.1)
         Bare=ICBMModel(t=times) #Bare fallow
         pNpS=ICBMModel(t=times, h=0.125, r=1,    c0=c(0.3,4.11),  In=0.19+0.095) #+N +Straw
@@ -59,7 +63,14 @@ ICBMModel<-structure(
         CtSS=getC(SS)
 
         #This plot reproduces Figure 1 in Andren and Katterer (1997)
-        plot(times, rowSums(CtBare),type="l",ylim=c(0,8),xlim=c(0,20),ylab="Topsoil carbon mass (kg m-2)",xlab="Time (years)")
+        plot(times,
+          rowSums(CtBare),
+          type="l",
+          ylim=c(0,8),
+          xlim=c(0,20),
+          ylab="Topsoil carbon mass (kg m-2)",
+          xlab="Time (years)"
+        )
         lines(times,rowSums(CtpNpS),lty=2)
         lines(times,rowSums(CtmNpS),lty=3)
         lines(times,rowSums(CtmNmS),lty=4)
@@ -67,7 +78,19 @@ ICBMModel<-structure(
         lines(times,rowSums(CtFM),lty=2,lwd=2)
         lines(times,rowSums(CtSwS),lty=3,lwd=2)
         #lines(times,rowSums(CtSS),lty=4,lwd=2)
-        legend("topleft",c("Bare fallow", "+N +Straw", "-N +Straw", "-N -Straw", "+N -Straw", "Manure","Sludge"),lty=c(1,2,3,4,1,2,3),lwd=c(1,1,1,1,2,2,2),bty="n")
+        legend("topleft",
+          c("Bare fallow",
+            "+N +Straw",
+            "-N +Straw",
+            "-N -Straw",
+            "+N -Straw",
+            "Manure",
+           "Sludge"
+          ),
+          lty=c(1,2,3,4,1,2,3),
+          lwd=c(1,1,1,1,2,2,2),
+          bty="n"
+        )
  
 }
 )

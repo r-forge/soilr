@@ -1,0 +1,24 @@
+#include "ParticleTest.h"
+// Registers the fixture into the 'registry'
+CPPUNIT_TEST_SUITE_REGISTRATION( ParticleTest );
+///////////////////////////////////////////////////////////////////////////////////////////////
+void
+ParticleTest::setUp()
+{
+}
+///////////////////////////////////////////////////////////////////////////////////////////////
+void
+ParticleTest::tearDown()
+{
+}
+///////////////////////////////////////////////////////////////////////////////////////////////
+void
+ParticleTest::testConstructor()
+{
+	// Set up
+	const double exampleTime = 12345678.90123;
+	// Process
+	Particle particle( exampleTime );
+	// Check
+	CPPUNIT_ASSERT_EQUAL( exampleTime, particle.getEntryTime() );
+}
