@@ -1,46 +1,71 @@
-\name{YassoModel}
-\alias{YassoModel}
-\title{Implementation of the Yasso model.}
-\description{This function creates a model for seven pools as described in Liski et al. (2005). Model not yet implemented due to lack of data in original publication: values of vector p not completely described in paper. 0.1 was assumed. }
-\usage{YassoModel(t, ks = c(a_fwl = 0.54, a_cwl = 0.03, k_ext = 0.48, 
-    k_cel = 0.3, k_lig = 0.22, k_hum1 = 0.012, k_hum2 = 0.0012), 
-    p = c(fwl_ext = 0.1, cwl_ext = 0.1, fwl_cel = 0.1, cwl_cel = 0.1, 
-        fwl_lig = 0.1, cwl_lig = 0.1, pext = 0.05, pcel = 0.24, 
-        plig = 0.77, phum1 = 0.51), C0, In = c(u_fwl = 0.0758, 
-        u_cwl = 0.0866, u_nwl_cnwl_ext = 0.251 * 0.3, u_nwl_cnwl_cel = 0.251 * 
-            0.3, u_nwl_cnwl_lig = 0.251 * 0.3, 0, 0), xi = 1, 
-    solver = deSolve.lsoda.wrapper, pass = FALSE)}\arguments{
-  \item{t}{A vector containing the points in time where the solution is sought.}
-  \item{ks}{A vector of lenght 7 containing the values of the exposure and decomposition rates for each pool.}
-  \item{p}{A vector of containing transfer coefficients among different pools.}
-  \item{C0}{A vector containing the initial amount of carbon for the 7 pools. The length of this vector must be 7.}
-  \item{In}{A vector of constatn litter inputs.}
-  \item{xi}{A scalar or data.frame object specifying the external (environmental and/or edaphic) effects on decomposition rates.}
-  \item{solver}{A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.}
-  \item{pass}{if TRUE forces the constructor to create the model even if it is invalid}
+\name{TwopMMmodel}
+\alias{TwopMMmodel}
+\title{Implementation of a two-pool Michaelis-Menten model}
+\description{This function implements a two-pool Michaelis-Meneten model with a microbial biomass and a substrate pool.}
+\usage{TwopMMmodel(t, ks = 1.8e-05, kb = 0.007, Km = 900, r = 0.6, Af = 1, 
+    ADD = 3.2, ival)}\arguments{
+  \item{t}{vector of times (in days) to calculate a solution.}
+  \item{ks}{a scalar representing SOM decomposition rate (m3 d-1 (gCB)-1)}
+  \item{kb}{a scalar representing microbial decay rate (d-1)}
+  \item{Km}{a scalar representing the Michaelis constant (g m-3)}
+  \item{r}{a scalar representing the respired carbon fraction (unitless)}
+  \item{Af}{a scalar representing the Activity factor; i.e. a temperature and moisture modifier (unitless)}
+  \item{ADD}{a scalar representing the annual C input to the soil (g m-3 d-1)}
+  \item{ival}{a vector of length 2 with the initial values of the SOM pool and the microbial biomass pool (g m-3)}
 }
-
-\value{A Model Object that can be further queried }
-\references{Liski, J., Palosuo, T., Peltoniemi, M., and Sievanen, R. (2005).
-Carbon and decomposition model Yasso for forest soils. Ecological Modelling, 189:168-182.}
+\details{This implementation is similar to the model described in Manzoni and Porporato (2007). }
+\value{An object of class NlModel that can be further queried.}
+\references{Manzoni, S, A. Porporato (2007). A theoretical analysis of nonlinearities and feedbacks in soil carbon and nitrogen cycles.
+Soil Biology and Biochemistry 39: 1542-1556.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
 
 
-\seealso{\code{\link{ThreepParallelModel}}, \code{\link{ThreepSeriesModel}}}
+
 \examples{
-years=seq(0,500,0.5) 
-C0=rep(100,7)
 
-Ex1=YassoModel(t=years,C0=C0)
-Ct=getC(Ex1)
-Rt=getReleaseFlux(Ex1)
+days=seq(0,1000,0.5)
 
-plotCPool(years,Ct,col=1:7,xlab="years",ylab="C pool",ylim=c(0,200))
-legend("topright",c("fwl","cwl","ext","cel","lig","hum1","hum2"),lty=1,col=1:7,bty="n")
+#Run the model with default parameter values
+MMmodel=TwopMMmodel(t=days,ival=c(100,10))
+Cpools=getC(MMmodel)
 
-plotCPool(years,Rt,col=1:7,xlab="years",ylab="Respiration",ylim=c(0,50))
-legend("topright",c("fwl","cwl","ext","cel","lig","hum1","hum2"),lty=1,col=1:7,bty="n")
+#Time solution
+matplot(days,Cpools,type="l",ylab="Concentrations",xlab="Days",lty=1,ylim=c(0,max(Cpools)*1.2))
+legend("topleft",c("SOM-C", "Microbial biomass"),lty=1,col=c(1,2),bty="n")
+
+ks=0.000018
+kb=0.007
+r=0.6
+ADD=3.2
+
+#Analytical solution of fixed points
+#Cs_=kb/((1-r)*ks) wrong look at the sympy test print twopMModel.pdf
+Km=900
+Af=1
+Cs=kb*Km/(Af*ks*(1-r)-kb)
+abline(h=Cs,lty=2)
+
+Cb=(ADD*(1-r))/(r*kb)
+abline(h=Cb,lty=2,col=2)
+
+#State-space diagram
+plot(Cpools[,2],Cpools[,1],type="l",ylab="SOM-C",xlab="Microbial biomass")
+
+#Microbial biomass over time
+plot(days,Cpools[,2],type="l",col=2,xlab="Days",ylab="Microbial biomass")
+
+#The default parameterization exhaust the microbial biomass.
+#A different behavior is obtained by increasing ks and decreasing kb
+MMmodel=TwopMMmodel(t=days,ival=c(972,304) ,Af=3,kb=0.0000001)
+Cpools=getC(MMmodel)
+
+matplot(days,Cpools,type="l",ylab="Concentrations",xlab="Days",lty=1,ylim=c(0,max(Cpools)*1.2))
+legend("topleft",c("SOM-C", "Microbial biomass"),lty=1,col=c(1,2),bty="n")
+
+plot(Cpools[,2],Cpools[,1],type="l",ylab="SOM-C",xlab="Microbial biomass")
+
+plot(days,Cpools[,2],type="l",col=2,xlab="Days",ylab="Microbial biomass")
 
 }

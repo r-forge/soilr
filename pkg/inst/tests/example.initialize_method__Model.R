@@ -1,3 +1,5 @@
+#
+# vim:set ff=unix expandtab ts=2 sw=2:
 require(RUnit)
 # We present three possible scenarios:
 # 1.) create an object from valid input
@@ -7,32 +9,32 @@ require(RUnit)
 # 4.) show some other insensible models being rejected 
 #     
 #1.) we first create a sensible model
-   t_start=0 
-   t_end=10 
-   tn=50
-   timestep=(t_end-t_start)/tn 
-   t=seq(t_start,t_end,timestep) 
-   A=new("BoundLinDecompOp",
+  t_start=0 
+  t_end=10 
+  tn=50
+  timestep=(t_end-t_start)/tn 
+  t=seq(t_start,t_end,timestep) 
+  A=BoundLinDecompOp(
+    function(times){
+      matrix(nrow=3,ncol=3,byrow=TRUE,
+    	     c(-1,    0,    0, 
+    	      0.5,   -2,    0,   
+    	        0,    1, -0.5)
+      )    
+    },
     t_start,
-    t_end,
-    function(times){matrix(nrow=3,ncol=3,byrow=TRUE,
-        c(-1,    0,    0, 
-         0.5,   -2,    0,   
-           0,    1, -0.5)
-   )    
-   }
+    t_end
   )  
-  I=TimeMap.new(
-     t_start,
-     t_end,
+  I=BoundInFlux(
      function(times){
        matrix(nrow=3,ncol=1,byrow=TRUE,
            c(-1,    0,    0)
        )
-     }
+     },
+     t_start,
+     t_end
   )
-  res=new("Model",t,mat=A,c(0,0,0),I)
-  print(class(res))
+  res=Model(t,A,c(0,0,0),I)
 #2.)
 # Now we present some examples where the constructor protests
 # test.correctnessOfModel.impossibleCoefficients
@@ -42,36 +44,35 @@ require(RUnit)
    timestep=(t_end-t_start)/tn 
    t=seq(t_start,t_end,timestep) 
 
-   A=TimeMap.new(
-      t_start,
-      t_end,
+   A=BoundLinDecompOp(
       function(times){
         matrix(nrow=3,ncol=3,byrow=TRUE,
             c(-1,    0,    0, 
             1, -0.7,    0,   
             0,    1, -0.5)
         )
-      }
-   )   
-   I=TimeMap.new(
+      },
       t_start,
-      t_end,
+      t_end
+   )   
+   I=BoundInFlux(
       function(times){
         matrix(nrow=3,ncol=1,byrow=TRUE,
             c(-1,    0,    0)
         )
-      }
+      },
+      t_start,
+      t_end
     )
-   checkException(
-	new("Model",t,A,c(0,0,0),I), 
+  checkException(
+	Model(t,A,c(0,0,0),I), 
 	"correctnessOfModel should have returned FALSE 
 	because the matrix values indicate unbiological 
 	behavior (ruwsum should be smaller than zero), 
-	but has not"
-   )	
+	but has not",silent=TRUE)
 #3.) 
 # force it nevertheless 
-	new("Model",t,A,c(0,0,0),I,pass=TRUE) 
+	Model(t,A,c(0,0,0),I,pass=TRUE) 
 
 #4.) further examples	
 # test.correctnessOfModel.impossibleTimeRanges
@@ -86,94 +87,94 @@ require(RUnit)
    #we create an A(t) with sensible coeficients 
    #but where the time range begins to late 
 
-   A=TimeMap.new(
-      t_start+1/4*tdiff,
-      t_end,
-      function(times){
+   A=BoundLinDecompOp(
+      function(t){
         matrix(nrow=3,ncol=3,byrow=TRUE,
             c(-1,    0,    0, 
             1, -0.7,    0,   
             0,    0.5, -0.5)
         )
-      }
+      },
+      t_start+1/4*tdiff,
+      t_end
    )   
-   I=TimeMap.new(
-      t_start,
-      t_end,
+   I=BoundInFlux(
       function(times){
         matrix(nrow=3,ncol=1,byrow=TRUE,
             c(-1,    0,    0)
         )
-      }
+      },
+      t_start,
+      t_end
     )
    
-   checkException(new("Model",t,A,c(0,0,0),I),mess)
+   checkException(Model(t,A,c(0,0,0),I),mess,silent=TRUE)
    #now we do the same to the InFluxes(t) while A(t) is correct 
-   A=TimeMap.new(
-      t_start,
-      t_end,
+   A=BoundLinDecompOp(
       function(times){
         matrix(nrow=3,ncol=3,byrow=TRUE,
             c(-1,    0,    0, 
             1, -0.7,    0,   
             0,  0.5, -0.5)
         )
-      }
+      },
+      t_start,
+      t_end
    )   
-   I=TimeMap.new(
-      t_start+1/4*tdiff,
-      t_end,
+   I=BoundInFlux(
       function(times){
         matrix(nrow=3,ncol=1,byrow=TRUE,
             c(-1,    0,    0)
         )
-      }
+      },
+      t_start+1/4*tdiff,
+      t_end
     )
-   checkException(new("Model",t,A,c(0,0,0),I),mess)
+   checkException(Model(t,A,c(0,0,0),I),mess,silent=TRUE)
 
    #we create an A(t) with sensible coeficients 
    #but where the time range ends to early 
 
-   A=TimeMap.new(
-      t_start,
-      t_end-1/4*tdiff,
+   A=BoundLinDecompOp(
       function(times){
         matrix(nrow=3,ncol=3,byrow=TRUE,
             c(-1,    0,    0, 
             1, -0.7,    0,   
             0,    0.5, -0.5)
         )
-      }
-   )   
-   I=TimeMap.new(
+      },
       t_start,
-      t_end,
+      t_end-1/4*tdiff
+   )   
+   I=BoundInFlux(
       function(times){
         matrix(nrow=3,ncol=1,byrow=TRUE,
             c(-1,    0,    0)
         )
-      }
-    )
-   checkException(new("Model",t,A,c(0,0,0),I),mess)
-   #now we do the same to the InFluxes(t) while A(t) is correct 
-   A=TimeMap.new(
+      },
       t_start,
-      t_end,
+      t_end
+    )
+   checkException(Model(t,A,c(0,0,0),I),mess,silent=TRUE)
+   #now we do the same to the InFluxes(t) while A(t) is correct 
+   A=BoundLinDecompOp(
       function(times){
         matrix(nrow=3,ncol=3,byrow=TRUE,
             c(-1,    0,    0, 
             1, -0.7,    0,   
             0,  0.5, -0.5)
         )
-      }
-   )   
-   I=TimeMap.new(
+      },
       t_start,
-      t_end-1/4*tdiff,
+      t_end
+   )   
+   I=BoundInFlux(
       function(times){
         matrix(nrow=3,ncol=1,byrow=TRUE,
             c(-1,    0,    0)
         )
-      }
+      },
+      t_start,
+      t_end-1/4*tdiff
     )
-   checkException(new("Model",t,A,c(0,0,0),I),mess)
+   checkException(Model(t,A,c(0,0,0),I),mess,silent=TRUE)

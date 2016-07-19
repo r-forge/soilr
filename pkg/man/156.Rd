@@ -1,19 +1,11 @@
-\name{getF14_method__Model_14}
-\alias{getF14_method__Model_14}
-\title{radiocarbon}
-\description{Calculates the radiocarbon fraction for each pool at each time step.
+\name{getDecompOp-methods}
+\docType{methods}
+\alias{getDecompOp-methods}
+\alias{getDecompOp,NlModel-method}
+\title{ ~~ Methods for Function \code{getDecompOp}  ~~}
+\description{
+ All methods for function \code{getDecompOp} are intended for internal use inside the package only. 
 }
-\arguments{
-  \item{object}{
-}
-}
 
-\value{A matrix of dimension n x m; i.e. n time steps as rows and m pools as columns.}
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

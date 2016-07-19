@@ -39,13 +39,26 @@ setMethod(### plot some of the statistics of the simulation as functions of time
       ### This method plots all the results computed with the Monte Carlo simulation
      (x, ##<< An object of class MCSim
       ...){
+      # add default entries to the tasklist if they are not allready there
+      # 1.) Cstocks
+      nop=getNumberOfPools(x)
+      aRS=availableResidentSets(x)
+      tasklist <-x[["tasklist"]]
+      for (rs in aRS){
+        tasklist[[paste("number of",rs)]] <- quote(nrow(particleSets[["rs"]]))
+      }
+
       resnames=names(x@tasklist)
       l=computeResults(x)
       
+      # now plot the results
+      # 1.) Cstocks
+      
       for (name in resnames){
-      print(name)
-      print(l[["cr"]][,name])
+      #print(name)
+      #print(l[["cr"]][,name])
         plot(
+        type="l",
         l[["cr"]][,"time"],
         l[["cr"]][,name],
         xlab="time",
@@ -56,10 +69,23 @@ setMethod(### plot some of the statistics of the simulation as functions of time
 )
 #################################################
 setMethod(
+    f="availableResidentSets",
+    signature="MCSim",
+    definition=function(object){
+    n=getNumberOfPools(object)
+    res=c(
+      mapply(stockKey,1:n),
+      "particles_in_the_system"
+      )
+    return(res)
+    }
+)
+#################################################
+setMethod(
     f="availableParticleSets",
     signature="MCSim",
     definition=function(object){
-    n=getNumberOfPools(object@model)
+    n=getNumberOfPools(object)
     res=c(
       mapply(stockKey,1:n),
       mapply(leaveKey,1:n),
@@ -73,7 +99,7 @@ setMethod(
     f="availableParticleProperties",
     signature="MCSim",
     definition=function(object){
-    n=getNumberOfPools(object@model)
+    n=getNumberOfPools(object)
     #determine the number of transit times that follow from the transfer model
     f=function(i){paste("t_entryPool_",i,sep="")}
     res=c("t_entrySystem",mapply(f,1:n),"t_exitSystem")
@@ -110,6 +136,15 @@ setMethod("[[<-",
 
 )
 #################################################
+setMethod(
+   f= "getNumberOfPools",
+      signature(object="MCSim"),
+      definition=function(object){
+      return(getNumberOfPools(object@model))
+   }
+)
+#################################################
+#################################################
 setMethod(#
     f="computeResults",
     signature="MCSim",
@@ -121,7 +156,7 @@ setMethod(#
             extractColumn=function(df,colname){df[,colname]}
             #####################################################################
             reduce2singledf=function(l){
-              pp("l",environment())
+              #pp("l",environment())
             	colavg=function(colname){
             		mat=mcmapply(extractColumn,l,MoreArgs=list(colname))
             		rs=function(i){mean(mat[i,])}
@@ -171,7 +206,7 @@ setMethod(#
               vI=getFunctionDefinition(getInFluxes(mod))
               
               # initialize dataframes for particle stock and output for every pool
-              nop=getNumberOfPools(mod)
+              nop=getNumberOfPools(object)
               particleSets=list()
               # create a dataframe without content but with the correct columns for the properties
               zeroFrame <- as.data.frame(matrix(ncol=length(avp),nrow=0,dimnames=list(c(),avp)))
@@ -191,6 +226,7 @@ setMethod(#
               # initialize
             	results=as.data.frame(matrix(ncol=length(tasklist)+1,nrow=0,dimnames=list(c(),c("time",names(tasklist)))))
             	t_old=st
+              # iterate over all times
             	for (it in 2:nt){
                 t=times[[it]]
                 sts=t-t_old				#timestepsize	

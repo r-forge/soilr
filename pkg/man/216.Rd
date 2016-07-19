@@ -1,9 +1,9 @@
-\name{show_method__Model}
-\alias{show_method__Model}
-\title{show method  Model}
+\name{print_method__Model}
+\alias{print_method__Model}
+\title{not yet implemented method to print an overview of several inputs and outpust of a model  }
 \description{This function is a stub}
 \arguments{
-  \item{object}{
+  \item{x}{
 }
 }
 

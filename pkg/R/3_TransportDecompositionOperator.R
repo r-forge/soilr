@@ -2,27 +2,28 @@
 # vim:set ff=unix expandtab ts=2 sw=2:
 setClass(
    Class="TransportDecompositionOperator",
+   contains="TimeMap",
    slots=list(
-	starttime="numeric"
-    ,
-	endtime="numeric"
-    ,
     numberOfPools="numeric"
     ,
     alpha="list"
     ,
     f="function"
-    ,
-    lag="numeric"
    )
 ) 
 #########################################################
 setMethod(
     f="initialize",
     signature="TransportDecompositionOperator",
-    definition=function(.Object,starttime=numeric(),endtime=numeric(),
-    numberOfPools=1,
-    alpha=list(),f=function(t,O){t},lag=0){
+    definition=function(
+      .Object,
+      starttime=numeric(),
+      endtime=numeric(),
+      numberOfPools=1,
+      alpha=list(),
+      f=function(t,O){t},
+      lag=0
+    ){
     #cat("-initializer at work-\n")
     .Object@starttime=starttime
     .Object@endtime=endtime
@@ -72,6 +73,7 @@ setMethod(
         
         np=object@numberOfPools
         m=matrix(nrow=np,ncol=np,0)
+        #print(np)
         for (i in 1:np){m[i,i]=-1}
         keys=names(alpha)
         # Tr is assembled from  alpha
@@ -108,25 +110,8 @@ setMethod(
       signature(object="TransportDecompositionOperator"),
       definition=function(object){
       ### extract the function definition (the R-function) from the object
+      
       return(object@f)
-    }
-)
-##########################################################################
-setMethod(
-    f="getTimeRange",
-    signature=signature(object="TransportDecompositionOperator"),
-    definition=function # ask for the boundaries of the underlying time interval
-    ### The method returns the time range of the given object 
-    ### It is probably mostly used internally to make sure that 
-    ### time dependent functions retrieved from data are not
-    ### used outside the interval where they are valid. 
-    
-    (object 
-    ){
-        return( c("t_min"=object@starttime,"t_max"=object@endtime))
-        ### a vector of length two \code{ c(t_min,t_max) }
-        ### containing start and end time of the time interval 
-        ### for which the object has been defined.
     }
 )
 ##########################################################

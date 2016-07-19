@@ -1,18 +1,18 @@
-\name{getC14_method__Model_14}
-\alias{getC14_method__Model_14}
-\title{getC14 method  Model 14}
-\description{This function computes the value for \eqn{^{14}C}{14C} (mass or concentration ) as function of time}
-\arguments{
-  \item{object}{
+\name{fromDataFrame-methods}
+\docType{methods}
+\alias{fromDataFrame-methods}
+\alias{fromDataFrame,TimeMap,data.frame-method}
+\title{ ~~ Methods for Function \code{fromDataFrame}  ~~}
+\description{
+ ~~ Methods for function \code{fromDataFrame} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(.Object = "TimeMap", map = "data.frame")}}{
+      \code{\link{fromDataFrame_method__TimeMap_data.frame}}  
+    }
+
+  }
 }
-
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

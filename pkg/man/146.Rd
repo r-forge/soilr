@@ -1,11 +1,18 @@
-\name{getDecompOp-methods}
+\name{getAccumulatedRelease-methods}
 \docType{methods}
-\alias{getDecompOp-methods}
-\alias{getDecompOp,NlModel-method}
-\title{ ~~ Methods for Function \code{getDecompOp}  ~~}
+\alias{getAccumulatedRelease-methods}
+\alias{getAccumulatedRelease,Model-method}
+\title{ ~~ Methods for Function \code{getAccumulatedRelease}  ~~}
 \description{
- All methods for function \code{getDecompOp} are intended for internal use inside the package only. 
+ ~~ Methods for function \code{getAccumulatedRelease} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "Model")}}{
+      \code{\link{getAccumulatedRelease_method__Model}}  
+    }
 
+  }
+}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

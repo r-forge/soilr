@@ -6,7 +6,7 @@ test.MC=function(){
   # 
   t_start=0
   t_end=20
-  tn=3e2
+  tn=1e2
   timestep=(t_end-t_start)/tn
   t=seq(t_start,t_end,timestep)
   nr=3
@@ -59,9 +59,10 @@ test.MC=function(){
     # size as C
     return(N%*%C)
   }
-  fac=1e2
+  fac=1e1
   
-  inputrates=new("TimeMap",t_start,t_end,function(t){return(matrix(
+  #inputrates=new("TimeMap",t_start,t_end,function(t){return(matrix(
+  inputrates=BoundInFlux(function(t){return(matrix(
     nrow=nr,
     rep(
       c(
@@ -69,7 +70,7 @@ test.MC=function(){
       ),
       length(t)
     )
-  ))})
+  ))},t_start,t_end)
   A=new("TransportDecompositionOperator",t_start,Inf,nr,alpha,f)
   mod=GeneralNlModel(
    t,
@@ -91,16 +92,24 @@ test.MC=function(){
   aPS=availableParticleSets(MCSim)
   ref_PP=c("t_entrySystem","t_entryPool_1","t_entryPool_2","t_entryPool_3","t_exitSystem")
   ref_PS=c(
-  "particles_in_pool_1",
-  "particles_in_pool_2",
-  "particles_in_pool_3",
-  "particles_leaving_pool_1",
-  "particles_leaving_pool_2",
-  "particles_leaving_pool_3",
-  "particles_leaving_the_system"
-)
+    "particles_in_pool_1",
+    "particles_in_pool_2",
+    "particles_in_pool_3",
+    "particles_leaving_pool_1",
+    "particles_leaving_pool_2",
+    "particles_leaving_pool_3",
+    "particles_leaving_the_system"
+  )
   checkEquals(aPP,ref_PP)
   checkEquals(aPS,ref_PS)
+  ref_RS=c(
+    "particles_in_pool_1",
+    "particles_in_pool_2",
+    "particles_in_pool_3",
+    "particles_in_the_system"
+  )
+  aRS=availableResidentSets(MCSim)
+  checkEquals(aRS,ref_RS)
   tasklist=list()
   tasklist[["meanTransitTime"]] <- quote(
                 mean(
@@ -118,40 +127,42 @@ test.MC=function(){
   tasklist[["particles_leaving_the_system"]] <- quote(nrow(particleSets[["particles_leaving_the_system"]]))
 
   MCSim[["tasklist"]]<-tasklist
-  #plot(MCSim)
+  plot(MCSim)
 
-  results=computeResults(MCSim)[["cr"]]
-  # compare with the ode solutions
-  Y=getC(mod) 
-  tsim=results[,"time"]
-  pe(quote(length(tsim)),environment())
-  pe(quote(length(t)),environment())
-  #pe(quote(t-tsim),environment())
-  #checkEquals(t,tsim) # although results[,"Cstock_1"] had a meaning for t=0 not all the # problems in tasklist have
-  plot(
-       tsim,
-       results[,"Cstock_1"],
-       col="red",
-       ylim=c(min(results[,c("Cstock_1","Cstock_2","Cstock_3")],Y),max(results[,c("Cstock_1","Cstock_2","Cstock_3")],Y))
-  )
-  points(tsim,results[,"Cstock_2"],col="blue")
-  points(tsim,results[,"Cstock_3"],col="green")
-  lines(t,Y[,1],type="l",lty=2,col="red")
-  lines(t,Y[,2],type="l",lty=2,col="blue")
-  lines(t,Y[,3],type="l",lty=2,col="green")
-  
-  plot(
-       tsim,
-       results[,"leave_1"],
-       col="red",
-       ylim=c(min(results[,c("leave_1","leave_2","leave_3")]),max(results[,c("leave_1","leave_2","leave_3")]))
-  )
-  points(tsim,results[,"leave_2"],col="blue")
-  points(tsim,results[,"leave_3"],col="green")
-  points(tsim,results[,"particles_leaving_the_system"],col="yellow")
-  
+#  results=computeResults(MCSim)[["cr"]]
+#  # compare with the ode solutions
+#  Y=getC(mod) 
+#  tsim=results[,"time"]
+#  #pe(quote(length(tsim)),environment())
+#  #pe(quote(length(t)),environment())
+#  #pe(quote(t-tsim),environment())
+#  #checkEquals(t,tsim) # although results[,"Cstock_1"] had a meaning for t=0 not all the # problems in tasklist have
+#  plot(
+#       tsim,
+#       results[,"Cstock_1"],
+#       col="red",
+#       type="l",
+#       ylim=c(min(results[,c("Cstock_1","Cstock_2","Cstock_3")],Y),max(results[,c("Cstock_1","Cstock_2","Cstock_3")],Y))
+#  )
+#  lines(tsim,results[,"Cstock_2"],col="blue")
+#  lines(tsim,results[,"Cstock_3"],col="green")
+#  lines(t,Y[,1],type="l",lty=2,col="red")
+#  lines(t,Y[,2],type="l",lty=2,col="blue")
+#  lines(t,Y[,3],type="l",lty=2,col="green")
+#  
+#  plot(
+#       tsim,
+#       results[,"leave_1"],
+#       col="red",
+#       type="l",
+#       ylim=c(min(results[,c("leave_1","leave_2","leave_3","particles_leaving_the_system")]),max(results[,c("leave_1","leave_2","leave_3","particles_leaving_the_system")]))
+#  )
+#  lines(tsim,results[,"leave_2"],col="blue")
+#  lines(tsim,results[,"leave_3"],col="green")
+#  lines(tsim,results[,"particles_leaving_the_system"],col="yellow")
+#  
   #check the inputratefunction
   ir=getFunctionDefinition(inputrates)
-  pe(quote(ir(0)),environment())
+  # pe(quote(ir(0)),environment())
 }
 

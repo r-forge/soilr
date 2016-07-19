@@ -1,17 +1,16 @@
-\name{summary-methods}
+\name{show-methods}
 \docType{methods}
-\alias{summary-methods}
-\alias{summary,ANY-method}
-\alias{summary,Model-method}
-\alias{summary,NlModel-method}
-\title{ ~~ Methods for Function \code{summary}  ~~}
+\alias{show-methods}
+\alias{show,Model-method}
+\alias{show,NlModel-method}
+\title{ ~~ Methods for Function \code{show}  ~~}
 \description{
- ~~ Methods for function \code{summary} ~~
+ ~~ Methods for function \code{show} ~~
 }
 \section{Methods}{
   \describe{
     \item{\code{signature(object = "Model")}}{
-      \code{\link{summary_method__Model}}  
+      \code{\link{show_method__Model}}  
     }
 
   }

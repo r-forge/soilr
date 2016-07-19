@@ -1,21 +1,32 @@
-\name{plot-methods}
-\docType{methods}
-\alias{plot-methods}
-\alias{plot,ANY-method}
-\alias{plot,MCSim-method}
-\alias{plot,Model-method}
-\alias{plot,NlModel-method}
-\title{ ~~ Methods for Function \code{plot}  ~~}
-\description{
- ~~ Methods for function \code{plot} ~~
+\name{initialize_method__TimeMap}
+\alias{initialize_method__TimeMap}
+\title{initialize called by (new)}
+\description{This is the standard constructor for objects of this class
+It is called by statements of the form 
+\code{new("TimeMap",start,end,f,lag)}
+but should be avoided by user code since it is much more 
+likely to change.
+Rather use the generic constructor TimeMap(...)
+which implements a lot of methods }
+\arguments{
+  \item{.Object}{
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(x = "Model")}}{
-      \code{\link{plot_method__Model}}  
-    }
+  \item{starttime}{
+}
+  \item{endtime}{
+}
+  \item{map}{
+}
+  \item{lag}{
+}
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

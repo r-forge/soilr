@@ -16,14 +16,10 @@ defines a time dependent inputrate as function of time and including the domain 
 }
 \section{Extends}{
 Class \code{"\linkS4class{InFlux}"}, directly.
+Class \code{"\linkS4class{TimeMap}"}, directly.
 }
 \section{Methods}{
-  \describe{
-    \item{as.character}{\code{signature(x = "BoundInFlux")}: ... }
-    \item{getFunctionDefinition}{\code{signature(object = "BoundInFlux")}: ... }
-    \item{getTimeRange}{\code{signature(object = "BoundInFlux")}: ... }
-    \item{initialize}{\code{signature(.Object = "BoundInFlux")}: ... }
-	 }
+No methods defined with class "BoundInFlux" in the signature.
 }
 \author{
  Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller

@@ -7,7 +7,7 @@ test.ThreepSerial_linear_vs_nonlinear=function(){
   t_end=20
   tn=100
   tol=.02/tn
-  print(tol)
+  #print(tol)
   timestep=(t_end-t_start)/tn
   t=seq(t_start,t_end,timestep)
   k1=1/2
@@ -34,7 +34,7 @@ test.ThreepSerial_linear_vs_nonlinear=function(){
   alpha[["2_to_3"]]=function(C,t){
     a32/k2
   }
-  pe(quote(names(alpha)),environment())
+  #pe(quote(names(alpha)),environment())
   N=matrix( 
      nrow=nr,
      ncol=nr,
@@ -76,9 +76,9 @@ test.ThreepSerial_linear_vs_nonlinear=function(){
   T_00=Tr(matrix(nrow=nr,iv),0)
   af=getFunctionDefinition(A)
   af_0=af(0)
-  pp("T_00",environment())
-  pp("af_0",environment())
-  pe(quote(T_00%*%N),environment())
+  #pp("T_00",environment())
+  #pp("af_0",environment())
+  #pe(quote(T_00%*%N),environment())
   checkEquals(af_0,T_00%*%N)
   
           
@@ -89,8 +89,8 @@ test.ThreepSerial_linear_vs_nonlinear=function(){
   # compare the Cstock
   Y=getC(mod) 
   Ynonlin=getC(modnl) 
-  #R=getReleaseFlux(mod) 
-  #Rnonlin=getReleaseFlux(modnl) 
+  R=getReleaseFlux(mod) 
+  Rnonlin=getReleaseFlux(modnl) 
 #begin plots 
   lt1=2
   lt2=4
@@ -118,25 +118,25 @@ test.ThreepSerial_linear_vs_nonlinear=function(){
     )
   )  
   plotAndCheck("runit.ThreepSerial_linear_vs_nonlinear.pdf",ex,environment())
-  #plot(t,R[,1],type="l",lty=lt1,col=1,ylab="Respirationfluxes",xlab="Time",ylim=c(min(R),max(R)))
-  #lines(t,Rnonlin[,1],type="l",lty=lt2,col=1)
-  #lines(t,R[,2],type="l",lty=lt1,col=2)
-  #lines(t,Rnonlin[,2],type="l",lty=lt2,col=2)
-  #lines(t,R[,3],type="l",lty=lt1,col=3)
-  #lines(t,Rnonlin[,3],type="l",lty=lt2,col=3)
-  #legend(
-  #"topright",
-  #  c(
-  #  "linear sol for pool 1",
-  #  "non linear sol for pool 1",
-  #  "linear sol for pool 2",
-  #  "non linear sol for pool 2",
-  #  "linear sol for pool 3",
-  #  "non linear sol for pool 3"
-  #  ),
-  #  lty=c(lt1,lt2),
-  #  col=c(1,1,2,2,3,3)
-  #)
+  plot(t,R[,1],type="l",lty=lt1,col=1,ylab="Respirationfluxes",xlab="Time",ylim=c(min(R),max(R)))
+  lines(t,Rnonlin[,1],type="l",lty=lt2,col=1)
+  lines(t,R[,2],type="l",lty=lt1,col=2)
+  lines(t,Rnonlin[,2],type="l",lty=lt2,col=2)
+  lines(t,R[,3],type="l",lty=lt1,col=3)
+  lines(t,Rnonlin[,3],type="l",lty=lt2,col=3)
+  legend(
+  "topright",
+    c(
+    "linear sol for pool 1",
+    "non linear sol for pool 1",
+    "linear sol for pool 2",
+    "non linear sol for pool 2",
+    "linear sol for pool 3",
+    "non linear sol for pool 3"
+    ),
+    lty=c(lt1,lt2),
+    col=c(1,1,2,2,3,3)
+  )
 # end plots 
 # begin checks 
   checkEquals(
@@ -145,11 +145,11 @@ test.ThreepSerial_linear_vs_nonlinear=function(){
    "test non linear solution for C-Content computed by the ode mehtod against analytical",
    tolerance = tol,
   )
-  #checkEquals(
-  # R,
-  # Rnonlin,
-  # "test non linear solution for Respiration computed by the ode mehtod against analytical",
-  # tolerance = tol,
-  #)
+  checkEquals(
+   R,
+   Rnonlin,
+   "test non linear solution for Respiration computed by the ode mehtod against analytical",
+   tolerance = tol,
+  )
 
  }

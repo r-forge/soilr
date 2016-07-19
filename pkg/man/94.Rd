@@ -1,19 +1,37 @@
-\name{TimeMap.new}
-\alias{TimeMap.new}
-\title{basic constructor of the class TimeMap.}
-\description{A TimeMap is nothing more than an usual R-function of one argument augmented by the lower and upper boundary of the interval where it is defined.}
-\usage{TimeMap.new(t_start, t_end, f)}\arguments{
-  \item{t_start}{A number marking the begin of the time domain where the function is valid}
-  \item{t_end}{A number the end of the time domain where the function is valid}
-  \item{f}{The time dependent function definition (a function in R's sense)}
+\name{TimeMap-class}
+\Rdversion{1.1}
+\docType{class}
+\alias{TimeMap-class}
+\title{Class \code{"TimeMap"}}
+\description{
+defines a (time dependent) mapping including the function definition and the ### domain where the function is well defined.  This can be used to avoid interpolations out of range when mixing different time dependent data sets
 }
-
-\value{An object of class TimeMap that can be used to describe models.}
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\section{Slots}{
+  \describe{
+    \item{\code{map}:}{Object of class \code{"function"} ~~ }
+    \item{\code{lag}:}{Object of class \code{"numeric"} ~~ }
+    \item{\code{starttime}:}{Object of class \code{"numeric"} ~~ }
+    \item{\code{endtime}:}{Object of class \code{"numeric"} ~~ }
+  }
+}
+\section{Methods}{
+  \describe{
+    \item{BoundInFlux}{\code{signature(map = "TimeMap", starttime = "missing", endtime = "missing", lag = "missing", interpolation = "missing")}: ... }
+    \item{BoundLinDecompOp}{\code{signature(map = "TimeMap", starttime = "missing", endtime = "missing")}: ... }
+    \item{DecompOp}{\code{signature(object = "TimeMap")}: ... }
+    \item{InFlux}{\code{signature(object = "TimeMap")}: ... }
+    \item{as.character}{\code{signature(x = "TimeMap")}: ... }
+    \item{fromDataFrame}{\code{signature(.Object = "TimeMap", map = "data.frame")}: ... }
+    \item{getFunctionDefinition}{\code{signature(object = "TimeMap")}: ... }
+    \item{getTimeRange}{\code{signature(object = "TimeMap")}: ... }
+    \item{initialize}{\code{signature(.Object = "TimeMap")}: ... }
+	 }
+}
+\author{
+ Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de> 
+}
+\examples{
+showClass("TimeMap")
+}
+\keyword{classes}

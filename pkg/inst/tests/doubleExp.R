@@ -73,7 +73,7 @@ return(cost6)
  Cmodcost(pars)$model
 Fit <- modFit(f=Cmodcost,p=pars)
 fitted=Cmod(Fit$par)
-print(Fit)
+#print(Fit)
 plot(out$time, out$C, main = "C stocks", ylab = "log(V)",
  xlab = "time", type = "b")
 lines(fitted)

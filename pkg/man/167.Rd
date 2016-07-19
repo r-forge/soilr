@@ -1,11 +1,19 @@
-\name{getInFluxes-methods}
+\name{getFormat-methods}
 \docType{methods}
-\alias{getInFluxes-methods}
-\alias{getInFluxes,NlModel-method}
-\title{ ~~ Methods for Function \code{getInFluxes}  ~~}
+\alias{getFormat-methods}
+\alias{getFormat,BoundFc-method}
+\alias{getFormat,ConstFc-method}
+\title{ ~~ Methods for Function \code{getFormat}  ~~}
 \description{
- All methods for function \code{getInFluxes} are intended for internal use inside the package only. 
+ ~~ Methods for function \code{getFormat} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "BoundFc")}}{
+      \code{\link{getFormat_method__BoundFc}}  
+    }
 
+  }
+}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

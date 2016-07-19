@@ -1,7 +1,7 @@
 #
 # vim:set ff=unix expandtab ts=2 sw=2:
 TwopParallelModel<-structure(
-    function #Implementation of a two pool model with parallel structure
+    function #Implementation of a linear two pool model with parallel structure
     ### This function creates a model for two independent (parallel) pools. 
     ### It is a wrapper for the more general function \code{\link{ParallelModel}} that can handle an arbitrary number of pools.
     ##references<< Sierra, C.A., M. Mueller, S.E. Trumbore. 2012. Models of soil organic matter decomposition: the SoilR package version 1.0. Geoscientific Model Development 5, 1045-1060.
@@ -51,12 +51,12 @@ TwopParallelModel<-structure(
       fX=function(t){as.numeric(spline(X,Y,xout=t)[2])}
       }
 
-      coeffs=TimeMap.new(
+      coeffs=TimeMap(
+        function(t){fX(t)*(-1*abs(ks))},
         t_start,
-        t_stop,
-        function(t){fX(t)*(-1*abs(ks))}
+        t_stop
       )
-      res=ParallelModel(t,coeffs,startvalues=C0,inputrates,solver,pass=pass)
+      obj=ParallelModel(t,coeffs,startvalues=C0,inputrates,solver,pass=pass)
       ### A Model Object that can be further queried 
       ##seealso<< \code{\link{ThreepParallelModel}} 
     }

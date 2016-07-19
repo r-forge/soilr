@@ -6,7 +6,7 @@ test.Conversion=function(){
    t_end=2
    tn=100
    tol=.02/tn
-   print(tol)
+   #print(tol)
    timestep=(t_end-t_start)/tn
    t=seq(t_start,t_end,timestep)
    th=5730

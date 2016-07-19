@@ -1,7 +1,8 @@
 \name{GeneralModel_method__numeric_ANY_numeric}
 \alias{GeneralModel_method__numeric_ANY_numeric}
 \title{a constructor for class Model}
-\description{This method tries to create a Model object from any combination of arguments 
+\description{This method is wrapper for the generic constructor Model(...
+It tries to create a Model object from any combination of arguments 
 that can be converted into  the required set of building blocks for a model
 for n arbitrarily connected pools.}
 \arguments{

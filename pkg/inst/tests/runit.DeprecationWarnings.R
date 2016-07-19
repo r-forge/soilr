@@ -22,7 +22,7 @@ test.DeprecationTimeMap<- function(){
   t_start=0
   t_stop=1
 	checkWarning(
-    new("TimeMap",
+    TimeMap.new(
       t_start,
       t_stop,
       function(t){matrix(nrow=2,ncol=1,c(1,0,0))}

@@ -83,7 +83,10 @@ BoundLinDecompOp,
 BoundFc,
 Model,
 Model_14,
-AWBmodel
+AWBmodel,
+SeriesLinearModel,
+SeriesLinearModel14,
+TimeMap
 )
 exportClasses(
 Model,

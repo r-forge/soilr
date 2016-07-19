@@ -1,10 +1,10 @@
-\name{getValues-methods}
+\name{getTransferMatrix-methods}
 \docType{methods}
-\alias{getValues-methods}
-\alias{getValues,ConstFc-method}
-\title{ ~~ Methods for Function \code{getValues}  ~~}
+\alias{getTransferMatrix-methods}
+\alias{getTransferMatrix,TransportDecompositionOperator-method}
+\title{ ~~ Methods for Function \code{getTransferMatrix}  ~~}
 \description{
- All methods for function \code{getValues} are intended for internal use inside the package only. 
+ All methods for function \code{getTransferMatrix} are intended for internal use inside the package only. 
 }
 
 \keyword{methods}

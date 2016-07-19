@@ -1,12 +1,19 @@
-\name{computeResults-methods}
-\docType{methods}
-\alias{computeResults-methods}
-\alias{computeResults,MCSim-method}
-\alias{computeResults,NlModel-method}
-\title{ ~~ Methods for Function \code{computeResults}  ~~}
-\description{
- All methods for function \code{computeResults} are intended for internal use inside the package only. 
+\name{as.character_method__TimeMap}
+\alias{as.character_method__TimeMap}
+\title{convert TimeMap Objects to something printable.}
+\description{This method is needed to print a TimeMap object.}
+\arguments{
+  \item{x}{An Object of class time map}
+  \item{\dots}{
+}
 }
 
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

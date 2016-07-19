@@ -5,7 +5,7 @@ correctnessOfDecompOp=function(object)
   
 setClass(# constant decomposition operator 
     Class="ConstLinDecompOp",
-    contains="DecompOp",
+    contains=c("DecompOp"),
     slots=list( mat="matrix")
 )
 setMethod(
@@ -118,14 +118,9 @@ setMethod(
       shortTailEstimate=min(sapply(t,g))
       
       ttdd=getTransitTimeDistributionDensity(object,inputDistribution,t)
-      #print(paste("ttdd=",ttdd))
-      #print(paste("t=",t))
-      #print(paste("ttdd*t=",ttdd*t))
 #      meanTimeRiemann=sum(ttdd*t)*t_step
       int2=splinefun(t,ttdd*t)
       meanTimeIntegrate=integrate(int2,0,t_end,subdivisions=subd)[["value"]] 
-#      print(paste("meanTimeRiemann=",meanTimeRiemann))
-#      print(paste("meanTimeIntegrate=",meanTimeIntegrate))
       #meanTime_s=integrate(integrand,0,shortTailEstimate,subdivisions=subd)[["value"]] 
       # here we must first check if the two values differ significantly
       #return(meanTimeRiemann)

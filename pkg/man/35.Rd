@@ -16,7 +16,7 @@ Class \code{"\linkS4class{DecompOp}"}, directly.
 }
 \section{Methods}{
   \describe{
-    \item{BoundLinDecompOp}{\code{signature(map = "ConstLinDecompOp", starttime = "ANY", endtime = "ANY", lag = "ANY")}: ... }
+    \item{BoundLinDecompOp}{\code{signature(map = "ConstLinDecompOp", starttime = "ANY", endtime = "ANY")}: ... }
     \item{getFunctionDefinition}{\code{signature(object = "ConstLinDecompOp")}: ... }
     \item{getMeanTransitTime}{\code{signature(object = "ConstLinDecompOp")}: ... }
     \item{getTimeRange}{\code{signature(object = "ConstLinDecompOp")}: ... }

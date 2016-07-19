@@ -21,7 +21,7 @@ testSolution=function(){
    firstFF=FF[1]
    lastFF=FF[length(FF)]
    minFF=min(FF)
-   pp("minFF",environment())
+   #pp("minFF",environment())
    spFF=splinefun(YearsMeasured,FF)
    convfact= 1e12/12.011
    firstApprox=function(times){

@@ -1,11 +1,19 @@
-\name{[[<--methods}
+\name{[-methods}
 \docType{methods}
-\alias{[[<--methods}
-\alias{[[<-,MCSim-method}
-\title{ ~~ Methods for Function \code{[[<-}  ~~}
+\alias{[-methods}
+\alias{[,Model,character-method}
+\alias{[,NlModel,character-method}
+\title{ ~~ Methods for Function \code{[}  ~~}
 \description{
- All methods for function \code{[[<-} are intended for internal use inside the package only. 
+ ~~ Methods for function \code{[} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(x = "Model", i = "character")}}{
+      \code{\link{[_method__Model_character}}  
+    }
 
+  }
+}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

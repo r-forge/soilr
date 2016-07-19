@@ -1,15 +1,15 @@
-\name{getReleaseFlux-methods}
+\name{getMeanTransitTime-methods}
 \docType{methods}
-\alias{getReleaseFlux-methods}
-\alias{getReleaseFlux,Model-method}
-\title{ ~~ Methods for Function \code{getReleaseFlux}  ~~}
+\alias{getMeanTransitTime-methods}
+\alias{getMeanTransitTime,ConstLinDecompOp-method}
+\title{ ~~ Methods for Function \code{getMeanTransitTime}  ~~}
 \description{
- ~~ Methods for function \code{getReleaseFlux} ~~
+ ~~ Methods for function \code{getMeanTransitTime} ~~
 }
 \section{Methods}{
   \describe{
-    \item{\code{signature(object = "Model")}}{
-      \code{\link{getReleaseFlux_method__Model}}  
+    \item{\code{signature(object = "ConstLinDecompOp")}}{
+      \code{\link{getMeanTransitTime_method__ConstLinDecompOp}}  
     }
 
   }

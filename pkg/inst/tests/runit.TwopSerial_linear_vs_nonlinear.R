@@ -7,7 +7,7 @@ test.TwopSerial_linear_vs_nonlinear=function(){
   t_end=20
   tn=100
   tol=.02/tn
-  print(tol)
+  #print(tol)
   timestep=(t_end-t_start)/tn
   t=seq(t_start,t_end,timestep)
   k1=1/2
@@ -30,7 +30,7 @@ test.TwopSerial_linear_vs_nonlinear=function(){
   alpha[["1_to_2"]]=function(C,t){
     a21/k1
   }
-  pe(quote(names(alpha)),environment())
+  #pe(quote(names(alpha)),environment())
   N=matrix( 
      nrow=nr,
      ncol=nr,
@@ -68,9 +68,9 @@ test.TwopSerial_linear_vs_nonlinear=function(){
   T_00=Tr(matrix(nrow=nr,iv),0)
   af=getFunctionDefinition(A)
   af_0=af(0)
-  pp("T_00",environment())
-  pp("af_0",environment())
-  pe(quote(T_00%*%N),environment())
+  #pp("T_00",environment())
+  #pp("af_0",environment())
+  #pe(quote(T_00%*%N),environment())
   checkEquals(af_0,T_00%*%N)
   
           

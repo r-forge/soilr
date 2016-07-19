@@ -1,18 +1,18 @@
-\name{getTransitTimeDistributionDensity-methods}
-\docType{methods}
-\alias{getTransitTimeDistributionDensity-methods}
-\alias{getTransitTimeDistributionDensity,ConstLinDecompOp-method}
-\title{ ~~ Methods for Function \code{getTransitTimeDistributionDensity}  ~~}
-\description{
- ~~ Methods for function \code{getTransitTimeDistributionDensity} ~~
+\name{getTimes}
+\alias{getTimes}
+\title{Extracts the times argument}
+\description{This functions extracts the times argument from an argument of class NlModel}
+\usage{getTimes(object)}\arguments{
+  \item{object}{
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "ConstLinDecompOp")}}{
-      \code{\link{getTransitTimeDistributionDensity_method__ConstLinDecompOp}}  
-    }
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

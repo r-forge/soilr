@@ -1,11 +1,19 @@
-\name{getTransferMatrix-methods}
+\name{getTimes-methods}
 \docType{methods}
-\alias{getTransferMatrix-methods}
-\alias{getTransferMatrix,TransportDecompositionOperator-method}
-\title{ ~~ Methods for Function \code{getTransferMatrix}  ~~}
+\alias{getTimes-methods}
+\alias{getTimes,Model-method}
+\alias{getTimes,NlModel-method}
+\title{ ~~ Methods for Function \code{getTimes}  ~~}
 \description{
- All methods for function \code{getTransferMatrix} are intended for internal use inside the package only. 
+ ~~ Methods for function \code{getTimes} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "Model")}}{
+      \code{\link{getTimes_method__Model}}  
+    }
 
+  }
+}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

@@ -1,17 +1,16 @@
-\name{fW.Moyano}
-\alias{fW.Moyano}
-\title{Effects of moisture on decomposition rates according to the function proposed by Moyano et al. (2013)}
-\description{Calculates the effects of water content on decomposition rates.}
-\usage{fW.Moyano(theta, a = 3.11, b = 2.42)}\arguments{
-  \item{theta}{A scalar or vector containing values of volumetric soil water content.}
-  \item{a}{Empirical parameter}
-  \item{b}{Empirical parameter}
+\name{fT.linear}
+\alias{fT.linear}
+\title{Effects of temperature on decomposition rates according to a linear model}
+\description{Calculates the effects of temperature on decomposition rates according to a linear model.}
+\usage{fT.linear(Temp, a = 0.198306, b = 0.036337)}\arguments{
+  \item{Temp}{A scalar or vector containing values of temperature for which the effects on decomposition rates are calculated.}
+  \item{a}{A scalar defining the intercept of the linear function.}
+  \item{b}{A scalar defining the slope of the linear function.}
 }
 
-
-\references{F. E. Moyano, S. Manzoni, C. Chenu. 2013
-Responses of soil heterotrophic respiration to moisture availability: An exploration of processes and models. 
-Soil Biology and Biochemistry, Volume 59, April 2013, Pages 72-85}
+\value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
+\references{Adair, E. C., W. J. Parton, S. J. D. Grosso, W. L. Silver, M. E. Harmon, S. A. Hall, I. C. Burke, and S. C. Hart. 2008. 
+Simple three-pool model accurately describes patterns of long-term litter decomposition in diverse climates. Global Change Biology 14:2636-2660.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -19,8 +18,7 @@ Soil Biology and Biochemistry, Volume 59, April 2013, Pages 72-85}
 
 
 \examples{
-th=seq(0,1,0.01)
-xi=fW.Moyano(theta=th)
-plot(th,xi,type="l",main="Effects of soil water content on decomposition rates",
-     xlab="Volumetric soil water content (cm3 cm-3)",ylab=expression(xi))
+Temperature=0:50
+plot(Temperature,fT.linear(Temperature),type="l",ylab="f(T) (unitless)", 
+     main="Effects of temperature on decomposition rates according to a linear function")
 }

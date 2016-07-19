@@ -1,19 +1,13 @@
-\name{getReleaseFlux14}
-\alias{getReleaseFlux14}
-\title{Calculates the mass of radiocarbon in the release flux (14C fraction times release flux)}
-\description{This function computes the mass of radiocarbon in the release flux (14C fraction times release flux) as a function of time.
-Have a look at the methods for details.}
-\usage{getReleaseFlux14(object)}\arguments{
-  \item{object}{
+\name{getNumberOfPools-methods}
+\docType{methods}
+\alias{getNumberOfPools-methods}
+\alias{getNumberOfPools,MCSim-method}
+\alias{getNumberOfPools,NlModel-method}
+\alias{getNumberOfPools,TransportDecompositionOperator-method}
+\title{ ~~ Methods for Function \code{getNumberOfPools}  ~~}
+\description{
+ All methods for function \code{getNumberOfPools} are intended for internal use inside the package only. 
 }
-}
 
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

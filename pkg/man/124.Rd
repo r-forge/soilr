@@ -1,22 +1,25 @@
-\name{fT.RothC}
-\alias{fT.RothC}
-\title{Effects of temperature on decomposition rates according to the functions included in the RothC model}
-\description{Calculates the effects of temperature on decomposition rates according to the functions included in the RothC model.}
-\usage{fT.RothC(Temp)}\arguments{
+\name{fT.Century2}
+\alias{fT.Century2}
+\title{Effects of temperature on decomposition rates according the the CENTURY model}
+\description{Calculates the effects of temperature on decomposition rates according to the CENTURY model.}
+\usage{fT.Century2(Temp, Tmax = 45, Topt = 35)}\arguments{
   \item{Temp}{A scalar or vector containing values of temperature for which the effects on decomposition rates are calculated.}
+  \item{Tmax}{A scalar defining the maximum temperature in degrees C.}
+  \item{Topt}{A scalar defining the optimum temperature for the decomposition process in degrees C.}
 }
 
 \value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
-\references{Jenkinson, D. S., S. P. S. Andrew, J. M. Lynch, M. J. Goss, and P. B. Tinker (1990), 
-The Turnover of Organic Carbon and Nitrogen in Soil, Philosophical Transactions: Biological Sciences, 329(1255), 361-368.}
+\references{Adair, E. C., W. J. Parton, S. J. D. Grosso, W. L. Silver, M. E. Harmon, S. A. Hall, I. C. Burke, and S. C. Hart. 2008. 
+Simple three-pool model accurately describes patterns of long-term litter decomposition in diverse climates. Global Change Biology 14:2636-2660.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
-\note{This function returns NA for Temp <= -18.3}
+
 
 
 
 \examples{
 Temperature=0:50
-plot(Temperature,fT.RothC(Temperature),type="l",ylab="f(T) (unitless)", 
-     main="Effects of temperature on decomposition rates according to the RothC model")
+plot(Temperature,fT.Century2(Temperature),type="l",
+     ylab="f(T) (unitless)",
+     main="Effects of temperature on decomposition rates according to the Century model")
 }

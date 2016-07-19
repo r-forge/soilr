@@ -13,7 +13,7 @@ TwopMMmodel<-structure(
    r=0.6, ##<< a scalar representing the respired carbon fraction (unitless)
    Af=1, ##<< a scalar representing the Activity factor; i.e. a temperature and moisture modifier (unitless)
    ADD=3.2, ##<< a scalar representing the annual C input to the soil (g m-3 d-1)
-   ival # a vector of length 2 with the initial values of the SOM pool and the microbial biomass pool (g m-3)
+   ival ##<< a vector of length 2 with the initial values of the SOM pool and the microbial biomass pool (g m-3)
   )
 {
     t_start=min(t)
@@ -78,7 +78,10 @@ TwopMMmodel<-structure(
     ADD=3.2
     
     #Analytical solution of fixed points
-    Cs=kb/((1-r)*ks)
+    #Cs_=kb/((1-r)*ks) wrong look at the sympy test print twopMModel.pdf
+    Km=900
+    Af=1
+    Cs=kb*Km/(Af*ks*(1-r)-kb)
     abline(h=Cs,lty=2)
     
     Cb=(ADD*(1-r))/(r*kb)

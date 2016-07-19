@@ -1,17 +1,18 @@
-\name{fW.Gompertz}
-\alias{fW.Gompertz}
-\title{Effects of moisture on decomposition rates according to the Gompertz function}
-\description{Calculates the effects of water content on decomposition rates.}
-\usage{fW.Gompertz(theta, a = 0.824, b = 0.308)}\arguments{
-  \item{theta}{A scalar or vector containing values of volumetric soil water content.}
-  \item{a}{Empirical parameter}
-  \item{b}{Empirical parameter}
+\name{fT.Standcarb}
+\alias{fT.Standcarb}
+\title{Effects of temperature on decomposition rates according to the StandCarb model}
+\description{Calculates the effects of temperature on decomposition rates according to the StandCarb model.}
+\usage{fT.Standcarb(Temp, Topt = 45, Tlag = 4, Tshape = 15, Q10 = 2)}\arguments{
+  \item{Temp}{A scalar or vector containing values of temperature for which the effects on decomposition rates are calculated.}
+  \item{Topt}{A scalar representing the optimum temperature for decomposition.}
+  \item{Tlag}{A scalar that determines the lag of the response curve.}
+  \item{Tshape}{A scalar that determines the shape of the response curve.}
+  \item{Q10}{A scalar. Temperature coefficient Q10.}
 }
 
-
-\references{I. Janssens, S. Dore, D. Epron, H. Lankreijer, N. Buchmann, B. Longdoz, J. Brossaud, L. Montagnani. 2003.
-Climatic Influences on Seasonal and Spatial Differences in Soil CO2 Efflux. In Valentini, R. (Ed.)
-Fluxes of Carbon, Water and Energy of European Forests. pp 235-253. Springer. }
+\value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
+\references{Harmon, M. E., and J. B. Domingo (2001), A users guide to STANDCARB version 2.0: 
+A model to simulate carbon stores in forest stands. Oregon State University, Corvallis.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -19,8 +20,7 @@ Fluxes of Carbon, Water and Energy of European Forests. pp 235-253. Springer. }
 
 
 \examples{
-th=seq(0,1,0.01)
-xi=fW.Gompertz(theta=th)
-plot(th,xi,type="l",main="Effects of soil water content on decomposition rates",
-     xlab="Volumetric soil water content (cm3 cm-3)",ylab=expression(xi))
+Temperature=0:50
+plot(Temperature,fT.Standcarb(Temperature),type="l",ylab="f(T) (unitless)", 
+     main="Effects of temperature on decomposition rates according to the StandCarb model")
 }

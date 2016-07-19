@@ -13,8 +13,8 @@ test.TimeReversedSolution=function(){
    fs=splinefun(times,forward_sol)
    bstart=tail(forward_sol,1)#extract last value
    btimes=sort(times,decreasing=TRUE)
-   print("btimes")
-   print(btimes)
+   #print("btimes")
+   #print(btimes)
    backward_sol=solver(btimes,ydot,bstart)
    bs=splinefun(btimes,backward_sol)
    pdf(file="runit.test.TimeReversedSolution.pdf",paper="a4r")

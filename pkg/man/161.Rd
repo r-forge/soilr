@@ -1,8 +1,9 @@
-\name{getFunctionDefinition_method__BoundFc}
-\alias{getFunctionDefinition_method__BoundFc}
-\title{function definition }
-\description{extract the function definition (the R-function) }
-\arguments{
+\name{getF14C}
+\alias{getF14C}
+\title{Calculates the average radiocarbon fraction weighted by the mass of carbon}
+\description{This function calculates the average radiocarbon fraction weighted by the mass of carbon at each time step 
+Have a look at the methods for details.}
+\usage{getF14C(object)}\arguments{
   \item{object}{
 }
 }

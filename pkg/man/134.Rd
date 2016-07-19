@@ -1,20 +1,16 @@
-\name{fW.RothC}
-\alias{fW.RothC}
-\title{Effects of moisture on decomposition rates according to the RothC model}
-\description{Calculates the effects of moisture (precipitation and pan evaporation) on decomposition rates according to the RothC model.}
-\usage{fW.RothC(P, E, S.Thick = 23, pClay = 23.4, pE = 0.75, bare = FALSE)}\arguments{
-  \item{P}{A vector with monthly precipitation (mm).}
-  \item{E}{A vector with same length with open pan evaporation or evapotranspiration (mm).}
-  \item{S.Thick}{Soil thickness in cm. Default for Rothamsted is 23 cm.}
-  \item{pClay}{Percent clay.}
-  \item{pE}{Evaporation coefficient. If open pan evaporation is used pE=0.75. If Potential evaporation is used, pE=1.0.}
-  \item{bare}{Logical. Under bare soil conditions, bare=TRUE. Dafault is set under vegetated soil.}
+\name{fW.Candy}
+\alias{fW.Candy}
+\title{Effects of moisture on decomposition rates according to the Candy model}
+\description{Calculates the effects of water content and pore volume on decomposition rates.}
+\usage{fW.Candy(theta, PV)}\arguments{
+  \item{theta}{A scalar or vector containing values of volumetric soil water content.}
+  \item{PV}{A scalar or vector containing values of pore volume.}
 }
 
-\value{A data.frame with accumulated top soil moisture deficit 
-(Acc.TSMD) and the rate modifying factor b. }
-\references{Coleman, K., and D. S. Jenkinson (1999), RothC-26.3 A model for the turnover of carbon in soil: 
-model description and windows user guide (modified 2008), 47 pp, IACR Rothamsted, Harpenden.}
+
+\references{J. Bauer, M. Herbst, J.A. Huisman, L. Weiherm\"uller, H. Vereecken. 2008.
+Sensitivity of simulated soil heterotrophic respiration to temperature and moisture reduction functions.
+Geoderma, Volume 145, Issues 1-2, 15 May 2008, Pages 17-27.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -22,11 +18,13 @@ model description and windows user guide (modified 2008), 47 pp, IACR Rothamsted
 
 
 \examples{
-P=c(74,59,62,51,52,57,34,55,58,56,75,71) #Monthly Precipitation (mm)
-E=c(8,10,27,49,83,99,103,91,69,34,16,8)  #Monthly open pan evaporation (mm)
-
-Rothamsted=fW.RothC(P,E)
-data.frame(month.name,P,E,0.75*E,P-0.75*E,Rothamsted)  
-# This reproduces Table 1 in the RothC documentation (Coleman and Jenkinson 1999)
-
+th=seq(0,1,0.01)
+xi1=fW.Candy(theta=th,PV=0.4)
+xi2=fW.Candy(theta=th,PV=0.6)
+xi3=fW.Candy(theta=th,PV=0.8)
+plot(th,xi1,type="l",main="Effects of soil water content and pore volume on decomposition rates",
+     xlab="Volumetric soil water content (cm3 cm-3)",ylab=expression(xi))
+lines(th,xi2,col=2)
+lines(th,xi3,col=3)
+legend("bottomright",c("Pore volume = 0.4","Pore volume = 0.6", "Pore volume = 0.8"),lty=1,col=1:3)
 }

@@ -10,6 +10,7 @@ RothCModel<-structure(
       ks=c(k.DPM=10,k.RPM=0.3,k.BIO=0.66,k.HUM=0.02,k.IOM=0),	##<< A vector of lenght 5 containing the values of the decomposition rates for the different pools
       C0=c(0,0,0,0,2.7),	##<< A vector of length 5 containing the initial amount of carbon for the 5 pools.
       In=1.7,    ##<< A scalar or data.frame object specifying the amount of litter inputs by time. 
+      FYM=0,  ##<< A scalar or data.frame object specifying the amount of Farm Yard Manure inputs by time. 
       DR=1.44, ##<< A scalar representing the ratio of decomposable plant material to resistant plant material (DPM/RPM).
       clay=23.4, ##<< Percent clay in mineral soil. 
       xi=1,  ##<< A scalar or data.frame object specifying the external (environmental and/or edaphic) effects on decomposition rates.
@@ -21,22 +22,24 @@ RothCModel<-structure(
       t_end=max(t)
       if(length(ks)!=5) stop("ks must be of length = 5")
       if(length(C0)!=5) stop("the vector with initial conditions must be of length = 5")
+      if(class(In)!=class(FYM)) stop("Inputs In and FYM must be of the same class, either scalars or data.frame")
       
       if(length(In)==1){
           inputFluxes=BoundInFlux(
-            function(t){matrix(nrow=5,ncol=1,c(In*(DR/(DR+1)),In*(1/(DR+1)),0,0,0))},
+            function(t){matrix(nrow=5,ncol=1,c(In*(DR/(DR+1))+(FYM*0.49),In*(1/(DR+1))+(FYM*0.49),0,(FYM*0.02),0))},
             t_start,
             t_end
         )
       }
       if(class(In)=="data.frame"){
-         x=In[,1]  
-         y=In[,2]  
-         inputFlux=splinefun(x,y)
+#          x=In[,1]  
+#          y=In[,2]  
+         inputFlux=splinefun(In[,1],In[,2])
+         FYMflux=splinefun(FYM[,1],FYM[,2])
           inputFluxes=BoundInFlux(
-            function(t){matrix(nrow=5,ncol=1,c(inputFlux(t)*(DR/(DR+1)),inputFlux(t)*(1/(DR+1)),0,0,0))},
-            min(x),
-            max(x)
+            function(t){matrix(nrow=5,ncol=1,c(inputFlux(t)*(DR/(DR+1))+(FYMflux(t)*0.49),inputFlux(t)*(1/(DR+1))+(FYMflux(t)*0.49),0,FYMflux(t)*0.02,0))},
+            min(In[,1]),
+            max(In[,1])
           )
         }
 

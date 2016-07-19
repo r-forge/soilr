@@ -28,7 +28,7 @@ correctnessOfNlModel=function
         stop(simpleError("You ordered a timeinterval that ends later than the interval your function I(t) (InFluxes) is defined for. \n Have look at the timeMap object of I(t) or the data it is created from")
         )
     }
-    print("tests passed")
+    #print("tests passed")
     return(res)
 }
 is.negative=function(number){
@@ -60,7 +60,7 @@ setMethod(
     definition=function(
         .Object,
         times=c(0,1),
-        DepComp=TransportDecompositionOperator.new(
+        DepComp=new(Class="TransportDecompositionOperator",
                 0,
                 1,
                 function(t){
@@ -117,13 +117,27 @@ setMethod(
      }
 )
 #################################################
+errorPlotC=function(C,t){
+      timePlot=function(x,...){
+        scaledTime=t/max(t)*max(x)
+        lines(scaledTime,col="red",x)
+      }
+      if(ncol(C)>1){
+        pairs(C,diag.panel=timePlot)
+      }
+}
 setMethod(
    f= "plot",
       signature(x="NlModel"),
       definition=function(x){
       ### This function is a stub
       # It only starts the thing ...    
-      plot(getTimes(x),getC(x)[,1])
+      C=getC(x)
+      t=getTimes(x)
+      cul=getCumulativeC(x)
+     # print(C)
+      errorPlotC(C,t)
+      plot(t,cul)
    }
 )
 #################################################
@@ -133,8 +147,8 @@ setMethod(
       definition=function(x){
       ### This function is a stub
       # It only starts the thing ...    
-      print("Hi there I am the method print for model objects. Change me if you can")
-      print(getC(x)[,1])
+     # print("Hi there I am the method print for model objects. Change me if you can")
+     # print(getC(x)[,1])
    }
 )
 #################################################
@@ -152,11 +166,11 @@ setMethod(
       definition=function(object){
       ### This function is a stub
       # It only starts the thing ...    
-      print("Hi there, I am the method summarize for model objects. 
-            I summarize everything:\n
-            1.) I have not benn fully implemented yet.\n
-            2.) here comes the C stock at least.")
-      print(getC(object)[,1])
+      #print("Hi there, I am the method summarize for model objects. 
+      #      I summarize everything:\n
+      #      1.) I have not been fully implemented yet.\n
+      #      2.) here comes the C stock at least.")
+      #print(getC(object)[,1])
    }
 )
 #################################################
@@ -166,8 +180,8 @@ setMethod(
       definition=function(object){
       ### This function is a stub
       # It only starts the thing ...    
-      print("Hi there I am the method show for model objects")
-      print(getC(object)[,1])
+      #print("Hi there I am the method show for model objects")
+      #print(getC(object)[,1])
    }
 )
 #################################################
@@ -175,7 +189,7 @@ setMethod(
    f= "getDecompOp",
       signature= "NlModel",
       definition=function(object){
-      ### This method creates a particle simulator 
+      ### This method returns the Decomposition Operator of the Model
       return(object@DepComp)
    }
 )
@@ -197,6 +211,18 @@ setMethod(
          times=matrix(ncol=1,object@times)
          colnames(times)="times"
       return(times)
+   }
+)
+#################################################
+setMethod(
+   f= "getCumulativeC",
+      signature= "NlModel",
+      definition=function(object){
+      ### This functions sums all C pools for every time stepobject of class NlModel
+         Cpools=getC(object)
+         cul=matrix(nrow=nrow(Cpools),0)
+         for (i in 1:ncol(Cpools)){cul=cul+Cpools[,i]}
+      return(cul)
    }
 )
 #################################################
@@ -262,7 +288,7 @@ setMethod(
       (object,as.closures=F){
       ### This functions computes the output flux for all pools. Note that for any given pool not all the output of the pool is released from the system because it migtht as well be fed into other pools. If you are interested what a pool releases from the system use the method \code{\link{getReleaseFlux}}, which internally makes use of this method but afterwards substracts all parts of the outputs  that are fed to other pools.
       C=getC(object)
-      t=object@times
+      t=getTimes(object)
       DepComp=object@DepComp
       DotO=getDotOut(DepComp) #this is a function of C and t 
       single_O=function(i){DotO(C[i,],t[[i]])}
@@ -272,6 +298,37 @@ setMethod(
       }else{
         return(all_O)
       }
+   }
+)
+#------------------------------------------------------------------------------------
+setMethod(
+   f= "getReleaseFlux",
+      signature= "NlModel",
+      definition=function # get the release rate for all pools 
+      ### The method computes the release of carbon per time for all points in time 
+      ### specified in the objects time slot.
+      (
+      object ##<< an object of class NlModel
+      ## created by a call to a constructor e.g. \code{\link{NlModel}}, 
+      ## \code{\link{GeneralNlModel}}or other model creating functions.
+      ){
+      DecOp=object@DepComp
+
+      DotO=getDotOut(DecOp) #this is a function of C and t 
+      Tr=getTransferMatrix(DecOp)#note that this is a function of C,t
+      C=getC(object)
+      nc=ncol(C)
+      t=getTimes(object)
+      r_t=function(Tr_t){
+        values<-mclapply(1:nc,function(j){s<- -sum(Tr_t[,j])})
+        m<-matrix(nrow=nc,ncol=1,data=as.numeric(values))
+        return(m)
+      }
+      singleRes=function(i){
+        r_t(Tr(C[i,],t[i]))*DotO(C[i,],t[i])
+      }
+      allRes=t(mcmapply(singleRes,(1:length(t))))
+      return(allRes)
    }
 )
 #################################################
@@ -302,8 +359,34 @@ setMethod(
       sVmat=matrix(object@initialValues,ncol=1)
       C=solver(times,DotC,sVmat,object@solverfunc) 
       ### A matrix. Every column represents a pool and every row a point in time
+      
+      
+      # check the result for negative values
+      prec=1e-5
+      pos=which(C< -prec,arr.ind=T)
+      timesOfNegativeCStocks=times[pos[,1]]
+      if(length(timesOfNegativeCStocks)>0){
+        #print(timesOfNegativeCStocks)
+        errorPlotC(C,times)
+        stop("negative CStocks")
+      }
       #f=function(i){paste("C",i,sep="")}
       #colnames(C)=sapply((1:ncol(C)),f)
+      
+      # check the actual decay rates for sanity
+      # since in this nonlinear case the decay rates (the diagonal entries of N) 
+      # can be dependent on C and therefor on the actual trajectory we
+      # can generally only test after we have computed the solution.
+      #print(C)
+      n=nrow(C)
+      kts=matrix(nrow=n,mcmapply(FUN=function(C,t){DotO(C,t)/C},C,times)) 
+      pos=which(kts< -prec,arr.ind=T)
+      timesOfSOMCreation=times[pos[,1]]
+      if(length(timesOfSOMCreation)>0){
+        print(timesOfSOMCreation)
+        errorPlotC(C,times)
+        stop("SOM creation")
+      }
       if (as.closures){
         return(res2fun(times,C))
       }else{

@@ -1,13 +1,9 @@
-\name{BoundLinDecompOp_method__function_numeric_numeric_missing}
-\alias{BoundLinDecompOp_method__function_numeric_numeric_missing}
+\name{BoundLinDecompOp_method__data.frame_missing_missing}
+\alias{BoundLinDecompOp_method__data.frame_missing_missing}
 \title{a constructor }
-\description{This method creates a BoundLinDecompOp from a timedependent function and its domain }
+\description{This method creates a BoundLinDecompOp from a dataframe}
 \arguments{
   \item{map}{
-}
-  \item{starttime}{
-}
-  \item{endtime}{
 }
 }
 

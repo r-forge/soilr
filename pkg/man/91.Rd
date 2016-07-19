@@ -1,55 +1,80 @@
-\name{ThreepairMMmodel}
-\alias{ThreepairMMmodel}
-\title{Implementation of a 6-pool Michaelis-Menten model}
-\description{This function implements a 6-pool Michaelis-Meneten model with pairs of microbial biomass and substrate pools.}
-\usage{ThreepairMMmodel(t, ks, kb, Km, r, Af = 1, ADD, ival)}\arguments{
-  \item{t}{vector of times to calculate a solution.}
-  \item{ks}{a vector of length 3 representing SOM decomposition rate (m3 d-1 (gCB)-1)}
-  \item{kb}{a vector of length 3 representing microbial decay rate (d-1)}
-  \item{Km}{a vector of length 3 representing the Michaelis constant (g m-3)}
-  \item{r}{a vector of length 3 representing the respired carbon fraction (unitless)}
-  \item{Af}{a scalar representing the Activity factor; i.e. a temperature and moisture modifier (unitless)}
-  \item{ADD}{a vector of length 3 representing the annual C input to the soil (g m-3 d-1)}
-  \item{ival}{
-}
+\name{ThreepSeriesModel}
+\alias{ThreepSeriesModel}
+\title{Implementation of a three pool model with series structure}
+\description{This function creates a model for three pools connected in series. It is a wrapper for the more general function \code{\link{GeneralModel}}.}
+\usage{ThreepSeriesModel(t, ks, a21, a32, C0, In, xi = 1, solver = deSolve.lsoda.wrapper, 
+    pass = FALSE)}\arguments{
+  \item{t}{A vector containing the points in time where the solution is sought.}
+  \item{ks}{A vector of lenght 3 containing the values of the decomposition rates for pools 1, 2, and 3.}
+  \item{a21}{A scalar with the value of the transfer rate from pool 1 to pool 2.}
+  \item{a32}{A scalar with the value of the transfer rate from pool 2 to pool 3.}
+  \item{C0}{A vector of length 3 containing the initial amount of carbon for the 3 pools.}
+  \item{In}{A scalar or data.frame object specifying the amount of litter inputs by time.}
+  \item{xi}{A scalar or data.frame object specifying the external (environmental and/or edaphic) effects on decomposition rates.}
+  \item{solver}{A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.}
+  \item{pass}{if TRUE Forces the constructor to create the model even if it is invalid}
 }
 
-\value{An object of class NlModel that can be further queried.}
-
+\value{A Model Object that can be further queried }
+\references{Sierra, C.A., M. Mueller, S.E. Trumbore. 2012. Models of soil organic matter decomposition: the SoilR package version 1.0. Geoscientific Model Development 5, 1045-1060.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
 
 
-
+\seealso{\code{\link{ThreepParallelModel}}, \code{\link{ThreepFeedbackModel}} }
 \examples{
+t_start=0 
+t_end=10 
+tn=50
+timestep=(t_end-t_start)/tn 
+t=seq(t_start,t_end,timestep) 
+ks=c(k1=0.8,k2=0.4,k3=0.2)
+C0=c(C10=100,C20=150, C30=50)
+In = 50
 
-days=seq(0,1000)
+Ex1=ThreepSeriesModel(t=t,ks=ks,a21=0.5,a32=0.2,C0=C0,In=In,xi=fT.Q10(15))
+Ct=getC(Ex1)
+Rt=getReleaseFlux(Ex1)
 
-#Run the model with default parameter values
-MMmodel=ThreepairMMmodel(t=days,ival=rep(c(100,10),3),ks=c(0.1,0.05,0.01),
-                         kb=c(0.005,0.001,0.0005),Km=c(100,150,200),r=c(0.9,0.9,0.9),
-                         ADD=c(3,1,0.5))
-Cpools=getC(MMmodel)
+plot(t,rowSums(Ct),type="l",ylab="Carbon stocks (arbitrary units)",
+     xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Ct[1,]))) 
+lines(t,Ct[,1],col=2)
+lines(t,Ct[,2],col=4)
+lines(t,Ct[,3],col=3)
+legend("topright",c("Total C","C in pool 1", "C in pool 2","C in pool 3"),
+       lty=c(1,1,1,1),col=c(1,2,4,3),lwd=c(2,1,1,1),bty="n")
 
-#Time solution
-matplot(days,Cpools,type="l",ylab="Concentrations",xlab="Days",lty=rep(1:2,3),
-        ylim=c(0,max(Cpools)*1.2),col=rep(1:3,each=2),main="Multi-substrate microbial model")
-legend("topright",c("Substrate 1", "Microbial biomass 1", 
-                   "Substrate 2", "Microbial biomass 2",
-                   "Substrate 3", "Microbial biomass 3"),lty=rep(1:2,3),col=rep(1:3,each=2),
-       bty="n")
+plot(t,rowSums(Rt),type="l",ylab="Carbon released (arbitrary units)",
+     xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Rt[1,]))) 
+lines(t,Rt[,1],col=2)
+lines(t,Rt[,2],col=4)
+lines(t,Rt[,3],col=3)
+legend("topright",c("Total C release","C release from pool 1",
+                    "C release from pool 2","C release from pool 3"),
+       lty=c(1,1,1,1),col=c(1,2,4,3),lwd=c(2,1,1,1),bty="n")
 
+Inr=data.frame(t,Random.inputs=rnorm(length(t),50,10))
+plot(Inr,type="l")
 
-#State-space diagram
-plot(Cpools[,2],Cpools[,1],type="l",ylab="Substrate",xlab="Microbial biomass")
-lines(Cpools[,4],Cpools[,3],col=2)
-lines(Cpools[,6],Cpools[,5],col=3)
-legend("topright",c("Substrate-Enzyme pair 1","Substrate-Enzyme pair 2",
-                    "Substrate-Enzyme pair 3"),col=1:3,lty=1,bty="n")
+Ex2=ThreepSeriesModel(t=t,ks=ks,a21=0.5,a32=0.2,C0=C0,In=Inr)
+Ctr=getC(Ex2)
+Rtr=getReleaseFlux(Ex2)
 
-#Microbial biomass over time
-plot(days,Cpools[,2],type="l",col=2,xlab="Days",ylab="Microbial biomass")
+plot(t,rowSums(Ctr),type="l",ylab="Carbon stocks (arbitrary units)",
+     xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Ctr[1,]))) 
+lines(t,Ctr[,1],col=2)
+lines(t,Ctr[,2],col=4)
+lines(t,Ctr[,3],col=3)
+legend("topright",c("Total C","C in pool 1", "C in pool 2","C in pool 3"),
+       lty=c(1,1,1,1),col=c(1,2,4,3),lwd=c(2,1,1,1),bty="n")
 
-
+plot(t,rowSums(Rtr),type="l",ylab="Carbon released (arbitrary units)",
+     xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Rtr[1,]))) 
+lines(t,Rtr[,1],col=2)
+lines(t,Rtr[,2],col=4)
+lines(t,Rtr[,3],col=3)
+legend("topright",c("Total C release","C release from pool 1",
+                    "C release from pool 2","C release from pool 3"),
+       lty=c(1,1,1,1),col=c(1,2,4,3),lwd=c(2,1,1,1),bty="n")
 }

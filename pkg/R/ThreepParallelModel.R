@@ -47,7 +47,11 @@ ThreepParallelModel=structure(
       fX=function(t){as.numeric(spline(X,Y,xout=t)[2])}
       }
       
-      coeffs_tm=TimeMap.new(min(t),max(t),function(times){fX(t)*(-1*abs(ks))})  
+      coeffs_tm=TimeMap(
+        function(times){fX(t)*(-1*abs(ks))},
+        min(t),
+        max(t)
+        )  
         
      res=ParallelModel(t,coeffs_tm,startvalues=C0,inputrates_tm,solver,pass=pass)
    ### A  Model Object that can be further queried

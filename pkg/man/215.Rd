@@ -1,16 +1,17 @@
-\name{show-methods}
+\name{print-methods}
 \docType{methods}
-\alias{show-methods}
-\alias{show,Model-method}
-\alias{show,NlModel-method}
-\title{ ~~ Methods for Function \code{show}  ~~}
+\alias{print-methods}
+\alias{print,ANY-method}
+\alias{print,Model-method}
+\alias{print,NlModel-method}
+\title{ ~~ Methods for Function \code{print}  ~~}
 \description{
- ~~ Methods for function \code{show} ~~
+ ~~ Methods for function \code{print} ~~
 }
 \section{Methods}{
   \describe{
-    \item{\code{signature(object = "Model")}}{
-      \code{\link{show_method__Model}}  
+    \item{\code{signature(x = "Model")}}{
+      \code{\link{print_method__Model}}  
     }
 
   }

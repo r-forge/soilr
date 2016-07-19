@@ -3,12 +3,13 @@
 \title{Implementation of the RothCModel}
 \description{This function implements the RothC model of Jenkinson et al. It is a wrapper for the more general function \code{\link{GeneralModel}}.}
 \usage{RothCModel(t, ks = c(k.DPM = 10, k.RPM = 0.3, k.BIO = 0.66, k.HUM = 0.02, 
-    k.IOM = 0), C0 = c(0, 0, 0, 0, 2.7), In = 1.7, DR = 1.44, 
+    k.IOM = 0), C0 = c(0, 0, 0, 0, 2.7), In = 1.7, FYM = 0, DR = 1.44, 
     clay = 23.4, xi = 1, solver = deSolve.lsoda.wrapper, pass = FALSE)}\arguments{
   \item{t}{A vector containing the points in time where the solution is sought.}
   \item{ks}{A vector of lenght 5 containing the values of the decomposition rates for the different pools}
   \item{C0}{A vector of length 5 containing the initial amount of carbon for the 5 pools.}
   \item{In}{A scalar or data.frame object specifying the amount of litter inputs by time.}
+  \item{FYM}{A scalar or data.frame object specifying the amount of Farm Yard Manure inputs by time.}
   \item{DR}{A scalar representing the ratio of decomposable plant material to resistant plant material (DPM/RPM).}
   \item{clay}{Percent clay in mineral soil.}
   \item{xi}{A scalar or data.frame object specifying the external (environmental and/or edaphic) effects on decomposition rates.}

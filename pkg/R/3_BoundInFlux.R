@@ -16,7 +16,7 @@ return(obj)
 ### defines a time dependent inputrate as function of time and including the domain where the function is well defined. This can be used to avoid interpolations out of range when mixing different time dependent data sets
 setClass(
    Class="BoundInFlux",
-   contains="InFlux",
+   contains=c("InFlux","TimeMap"),
    slots=list(
 	starttime="numeric"
     ,
@@ -27,21 +27,21 @@ setClass(
     lag="numeric"
    )
 )
-#------------------------------ constructors------------------------------------------
-setMethod(
-    f="initialize",
-    signature="BoundInFlux",
-    definition=function # internal constructor
-    ### This mehtod is intended for internal use only, it may change with the internal representation of the class. In user code please use the generic constructor \code{\link{BoundInFlux}} instead.
-    (.Object,starttime=numeric(),endtime=numeric(),map=function(t){t},lag=0){
-    #cat("-initializer at work-\n")
-    .Object@starttime=starttime
-    .Object@endtime=endtime
-    .Object@map=map
-    .Object@lag=lag
-    return(.Object)
-    }
-)
+##------------------------------ constructors------------------------------------------
+#setMethod(
+#    f="initialize",
+#    signature="BoundInFlux",
+#    definition=function # internal constructor
+#    ### This mehtod is intended for internal use only, it may change with the internal representation of the class. In user code please use the generic constructor \code{\link{BoundInFlux}} instead.
+#    (.Object,starttime=numeric(),endtime=numeric(),map=function(t){t},lag=0){
+#    #cat("-initializer at work-\n")
+#    .Object@starttime=starttime
+#    .Object@endtime=endtime
+#    .Object@map=map
+#    .Object@lag=lag
+#    return(.Object)
+#    }
+#)
 setMethod(
   f="BoundInFlux",
   signature=c(
@@ -73,7 +73,13 @@ setMethod(
 )
 setMethod(
   f="BoundInFlux",
-  signature=c(map="data.frame",starttime="missing",endtime="missing",lag="numeric",interpolation="function"),
+  signature=c(
+    map="data.frame",
+    starttime="missing",
+    endtime="missing",
+    lag="numeric",
+    interpolation="function"
+  ),
   definition=function #constructor
   ### This function is another constructor of the class BoundInFlux.
   (
@@ -81,18 +87,11 @@ setMethod(
     lag, ##<< lag time
     interpolation ##<< function used for interpolation
   ){
-     t=map[,1]  
-     y=map[,2]  
-     o=order(t)
-     tyo=cbind(t[o],y[o])
-     #to=tyo[,1]+lag# account for the lag time
-     to=tyo[,1] # since lag is also part of the result
-     yo=tyo[,2]
-     t_start=min(to)
-     t_start=min(t)
-     t_end=max(t)
-     interpol=interpolation(to,yo)
-     obj <- BoundInFlux(map=interpol,starttime=t_start,endtime=t_end,lag=lag) 
+      # build dummy object
+      obj=new(Class="BoundInFlux")
+      # use the method inherited from TimeMap
+      obj=fromDataFrame(obj,map,lag=lag,interpolation=interpolation)
+      return(obj)
   return(obj)
   ### An object of class BoundInFlux that contains the interpolation function and the limits of the time range where the function is valid. Note that the limits change according to the time lag
   }
@@ -100,7 +99,12 @@ setMethod(
 
 setMethod(
   f="BoundInFlux",
-  signature=c(map="data.frame",starttime="missing",endtime="missing",lag="missing",interpolation="missing"),
+  signature=c(
+    map="data.frame",
+    starttime="missing",
+    endtime="missing",
+    lag="missing",
+    interpolation="missing"),
   definition=function #constructor
   ### This function is another constructor of the class BoundInFlux.
   (map##<<A data frame; the first column is interpreted as time
@@ -110,44 +114,44 @@ setMethod(
   ### An object of class BoundInFlux that contains the interpolation function and the limits of the time range where the function is valid. Note that the limits change according to the time lag
   }
 )
-#-------------------------------------------other methods---------------------------------------------------
-setMethod(
-    f="as.character",
-    signature="BoundInFlux",
-    definition=function # convert BoundInFlux Objects to something printable.
-    ### returns a string describing the object
-    (x, ##<< An object 
-     ...
-     ){
-        return(
-            paste( class(x),
-                  "(\n map=",
-                  x@map,
-                  "(\n starttime=",
-                  x@starttime,
-                  "\n endtime=",
-                  x@endtime,
-                  ")",
-                  sep=""
-            )
-        )
-    }
-)    
-setMethod(
-    f="getTimeRange",
-    signature="BoundInFlux",
-    definition=function # time domain of the function
-    ### The method returns a vector containing the start and end time where the intepolation is valid.
-    ( object){
-        return(
-               c("t_min"=object@starttime,"t_max"=object@endtime))
-    }
-)
-setMethod(
-    f="getFunctionDefinition",
-    signature="BoundInFlux",
-    definition=function(object){
-    ### extract the function definition (the R-function) from the BoundInFlux 
-        return(object@map)
-    }
-)
+##-------------------------------------------other methods---------------------------------------------------
+#setMethod(
+#    f="as.character",
+#    signature="BoundInFlux",
+#    definition=function # convert BoundInFlux Objects to something printable.
+#    ### returns a string describing the object
+#    (x, ##<< An object 
+#     ...
+#     ){
+#        return(
+#            paste( class(x),
+#                  "(\n map=",
+#                  x@map,
+#                  "(\n starttime=",
+#                  x@starttime,
+#                  "\n endtime=",
+#                  x@endtime,
+#                  ")",
+#                  sep=""
+#            )
+#        )
+#    }
+#)    
+#setMethod(
+#    f="getTimeRange",
+#    signature="BoundInFlux",
+#    definition=function # time domain of the function
+#    ### The method returns a vector containing the start and end time where the intepolation is valid.
+#    ( object){
+#        return(
+#               c("t_min"=object@starttime,"t_max"=object@endtime))
+#    }
+#)
+#setMethod(
+#    f="getFunctionDefinition",
+#    signature="BoundInFlux",
+#    definition=function(object){
+#    ### extract the function definition (the R-function) from the BoundInFlux 
+#        return(object@map)
+#    }
+#)

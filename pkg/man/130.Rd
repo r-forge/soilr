@@ -1,16 +1,16 @@
-\name{fW.Daycent2}
-\alias{fW.Daycent2}
-\title{Effects of moisture on decomposition rates according to the DAYCENT model}
-\description{Calculates the effects of volumetric water content on decomposition rates according to the Daycent/Century models.}
-\usage{fW.Daycent2(W, WP = 0, FC = 100)}\arguments{
-  \item{W}{A scalar or vector of volumetric water content in percentage.}
-  \item{WP}{A scalar representing the wilting point in percentage.}
-  \item{FC}{A scalar representing the field capacity in percentage.}
+\name{fT.Q10}
+\alias{fT.Q10}
+\title{Effects of temperature on decomposition rates according to a Q10 function}
+\description{Calculates the effects of temperature on decomposition rates according to the modified Van't Hoff function (Q10 function).}
+\usage{fT.Q10(Temp, k_ref = 1, T_ref = 10, Q10 = 2)}\arguments{
+  \item{Temp}{A scalar or vector containing values of temperature for which the effects on decomposition rates are calculated.}
+  \item{k_ref}{A scalar representing the value of the decomposition rate at a reference temperature vaule.}
+  \item{T_ref}{A scalar representing the reference temperature.}
+  \item{Q10}{A scalar. Temperature coefficient Q10.}
 }
 
-\value{A data frame with values of relative water content (RWC) and the effects of RWC on decomposition rates (fRWC).}
-\references{Del Grosso, S. J., W. J. Parton, A. R. Mosier, E. A. Holland, E. Pendall, D. S. Schimel, and D. S. Ojima (2005), 
-Modeling soil CO2 emissions from ecosystems, Biogeochemistry, 73(1), 71-91.}
+\value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
+
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -18,7 +18,10 @@ Modeling soil CO2 emissions from ecosystems, Biogeochemistry, 73(1), 71-91.}
 
 
 \examples{
-W=10:90
-fW=fW.Daycent2(W,WP=10,FC=90)
-plot(fW,type="l",ylim=c(0,6)) #This plot reproduces Figure 1b, in del Grosso et al. (2005)
+Temperature=0:50
+plot(Temperature,fT.Q10(Temperature),type="l",ylab="f(T) (unitless)", 
+     main="Effects of temperature on decomposition rates according to a Q10 function")
+lines(Temperature, fT.Q10(Temperature,Q10=2.2),col=2)
+lines(Temperature, fT.Q10(Temperature,Q10=1.4),col=4)
+legend("topleft",c("Q10 = 2", "Q10 = 2.2", "Q10 = 1.4"),lty=c(1,1,1),col=c(1,2,4),bty="n")
 }

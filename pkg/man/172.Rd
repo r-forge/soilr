@@ -1,12 +1,18 @@
-\name{getNumberOfPools-methods}
-\docType{methods}
-\alias{getNumberOfPools-methods}
-\alias{getNumberOfPools,NlModel-method}
-\alias{getNumberOfPools,TransportDecompositionOperator-method}
-\title{ ~~ Methods for Function \code{getNumberOfPools}  ~~}
-\description{
- All methods for function \code{getNumberOfPools} are intended for internal use inside the package only. 
+\name{getFunctionDefinition_method__DecompositionOperator}
+\alias{getFunctionDefinition_method__DecompositionOperator}
+\title{getFunctionDefinition method  DecompositionOperator}
+\description{extract the function definition (the R-function) }
+\arguments{
+  \item{object}{
+}
 }
 
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

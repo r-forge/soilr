@@ -53,14 +53,14 @@ Instead, we focus here on the application to the type of models implemented in \
 We present here two examples, one is the parameterization of a two-pool model with a feedback connection scheme applied to a soil incubation experiment. The other example uses observed radiocarbon data from CO$_2$ measurements conducted at Harvard Forest, USA. 
 
 \section*{Example 1: A soil incubation experiment}
-Measurements of evolved CO$_2$ from incubation experiments provide useful data for parameterizing soil organic matter decomopsition models and identify functionally distinct pools \citep{Schadel}. We present here data from an incubation experiment in which we measured the evoloved CO$_2$ from a forest soil. The dataset, {\tt eCO2}, is already included in \SoilR \, and includes data from two incubation experiments, one with a temperate forest soil and another with a boreal forest soil. First, we load \SoilR \, into our \R \, session and extract the data from the boreal site into a separate object excluding the column that identifies the sampling site; column names need to be renamed for consistency with \FME.
+Measurements of evolved CO$_2$ from incubation experiments provide useful data for parameterizing soil organic matter decomopsition models and identify functionally distinct pools \citep{Schadel}. We present here data from an incubation experiment in which we measured the evoloved CO$_2$ from a forest soil. The dataset, {\tt eCO2}, is already included in \SoilR \, and includes data from an incubation experiment with a boreal forest soil. First, we load \SoilR \, into our \R \, session and extract the data from the boreal site into a separate object; column names need to be renamed for consistency with \FME.
 
 <<>>=
 library(SoilR)
 library(FME)
 library(MASS)
 library(lattice)
-BorealCO2=subset(eCO2, subset=Sample=="AK_T25", select=-Sample)
+BorealCO2=eCO2
 names(BorealCO2)<-c("time","eCO2","eCO2sd")
 @
 
@@ -69,8 +69,9 @@ names(BorealCO2)<-c("time","eCO2","eCO2sd")
 \begin{figure}
   \centering
 <<echo=TRUE,fig=TRUE, print=FALSE>>=
-plot(BorealCO2[,1:2], xlab="Days", ylab="Evolved CO2 (mgC g-1 soil)")
-arrows(BorealCO2[,1],BorealCO2[,2]-BorealCO2[,3],BorealCO2[,1],
+plot(BorealCO2[,1:2], xlab="Days", ylab="Evolved CO2 (mgC g-1 
+     soil day-1)",ylim=c(0,50))
+arrows(BorealCO2[,1],BorealCO2[,2]-BorealCO2[,3],BorealCO2[,1], 
        BorealCO2[,2]+BorealCO2[,3],code=3,angle=90,length=0.1)
 @
   \caption{Cummulative evolved CO$_2$ from an incubation experiment with a boreal forest soil.}
@@ -84,25 +85,27 @@ To this dataset, we are interested in finding parameters for a two-pool model wi
 \end{align}
 so we are interested in finding the values of the decomposition rates $k_1$ and $k_2$ as well as the transfer coefficient to pool 2 from pool 1 ($\alpha_{2,1}$) and to pool 1 from pool 2 ($\alpha_{1,2}$). Given that the data comes from an incubation experiment, we assume that there are no inputs of carbon, so $I=0$. In addition, we are also interested in obtaining a value for the partitioning coefficient for the two fractions $\gamma$, so $C_1 = C_{total} \gamma$, and $C_2 = C_{total} (1- \gamma)$. 
 
-This model (equation \ref{Model}) is implemented in \SoilR \, with the function {\tt TwopFeedbackModel}. We will find first the best set of parameters that fit the data using classical optimization using the \FME \, package \citep{Soetaert}. For this, we need to create a function that takes arbitrary values of the parameters of the model, creates a model in \SoilR, calculates the cummulative respiration flux, and returns the output consistent with \FME \, requirements. We also need to create a vector of time steps in days and give the total amount of carbon in the soil at the begining of the experiment (7.7 mg C g$^{-1}$ C). 
+This model (equation \ref{Model}) is implemented in \SoilR \, with the function {\tt TwopFeedbackModel}. We will find first the best set of parameters that fit the data using classical optimization using the \FME \, package \citep{Soetaert}. For this, we need to create a function that takes arbitrary values of the parameters of the model, creates a model in \SoilR, calculates the daily respiration flux, and returns the output consistent with \FME \, requirements. We also need to create a vector of time steps in days and give the total amount of carbon in the soil at the begining of the experiment (soil dry weigh times the average C concentration from three replicates, units in g C). 
 
 <<>>=
-days=seq(0,42)
-Ctotal=7.7
+days=seq(0,35)
+Ctotal=mean(c(0.04683975, 0.04703255, 0.04687287))*450 #C concentration * 450 g soil
+BorealCO2=data.frame(time=BorealCO2[,1],BorealCO2[,2:3]*1e-06*Ctotal) #Changed units
 
 eCO2func=function(pars){
   mod=TwopFeedbackModel(
-  t=days,
-  ks=pars[1:2],
-  a21=pars[3]*pars[1],
-  a12=pars[4]*pars[2], 
-  C0=Ctotal*c(pars[5],1-pars[5]), 
-  In=0,
-  pass=TRUE
+    t=days,
+    ks=pars[1:2],
+    a21=0,
+    a12=0, 
+    C0=Ctotal*c(pars[3],1-pars[3]), 
+    In=0,
+    pass=TRUE
   )
-  AccR=getAccumulatedRelease(mod)
-  return(data.frame(time=days,eCO2=rowSums(AccR)))
+  Rt=getReleaseFlux(mod)
+  return(data.frame(time=days,eCO2=rowSums(Rt)))
 }
+
 @
 
 Notice that this function, {\tt eCO2func}, requires a vector of parameters {\tt pars} with the values of the two decomposition rates in positions 1 and 2, the values of the two transfer rates in position 3 and 4, and the partitioning coefficient $\gamma$ in position 5. This function returns a {\tt data.frame} with two columns, time in days and the sum of the cummulative release for the two pools. 
@@ -120,10 +123,11 @@ This function returns an object of class {\tt modCost}, which can be further use
 
 
 <<>>=
-inipars=c(k1=0.5,k2=0.05,alpha21=0.5,alpha12=0.1,gamma=0.5)
+inipars=c(k1=1/20,k2=1/100,gamma=0.5)
 
 eCO2fit=modFit(f=eCO2cost,p=inipars,method="Marq",
-               upper=c(Inf,Inf,1,1,1),lower=c(0,0,0,0,0))
+               upper=c(Inf,Inf,1),lower=c(0,0,0))
+
 @
 
 The best set of parameter values found by the function can be obtained by typing
@@ -140,7 +144,7 @@ fitmod=eCO2func(eCO2fit$par)
 \begin{figure}
   \centering
 <<fig=TRUE,echo=TRUE,print=FALSE>>=
-plot(BorealCO2[,1:2], xlab="Days", ylab="Evolved CO2 (mgC g-1 soil)")
+plot(BorealCO2[,1:2], xlab="Days", ylab="Evolved CO2 (gC day-1)",ylim=c(0,9e-04))
 arrows(BorealCO2[,1],BorealCO2[,2]-BorealCO2[,3],BorealCO2[,1],
        BorealCO2[,2]+BorealCO2[,3],code=3,angle=90,length=0.1)
 lines(fitmod)
@@ -154,9 +158,9 @@ The results from this optimization can be used for Bayesian parameter estimation
 <<echo=false,results=hide>>=
 var0=eCO2fit$var_ms_unweighted
 
-eCO2mcmc=modMCMC(f=eCO2cost, p=eCO2fit$par, niter=1000, jump=var0,  
-                 var0=var0, wvar0=0.1, updatecov=50, lower=c(0,0,0,0,0),
-                 upper=c(1,1,1,1,1))
+eCO2mcmc=modMCMC(f=eCO2cost, p=eCO2fit$par, niter=3000, jump=NULL,  
+                 var0=var0, wvar0=NULL, updatecov=100, lower=c(0,0,0),
+                 upper=c(1,1,1))
 @
 
 The results of the MCMC procedure can be obtained with the function {\tt summary()}. The output gives the mean, standard deviation, min and max, and 25\% quantiles for all parameter values. It also produces summary statistics for the variance of the observed variable. 
@@ -183,8 +187,8 @@ For model prediction, it is also possible to use \FME \, and function {\tt sensR
   \centering
 <<fig=TRUE,echo=TRUE,print=FALSE>>=
 predRange=sensRange(func=eCO2func, parInput=eCO2mcmc$par)
-plot(summary(predRange),ylim=c(0,9),xlab="Days",
-     ylab="Evolved CO2 (mg C g-1 C)",main="")
+plot(summary(predRange),ylim=c(0,9e-04),xlab="Days",
+     ylab="Evolved CO2 (g C day-1)",main="")
 points(BorealCO2)
 arrows(BorealCO2[,1],BorealCO2[,2]-BorealCO2[,3],BorealCO2[,1],
        BorealCO2[,2]+BorealCO2[,3],code=3,angle=90,length=0.1)
@@ -330,7 +334,7 @@ lines(C14Atm_NH,col=4)
 
 \clearpage
 \section*{Acknowledgements}
-We would like to thank Nicole Gimbel for performing the laboratory incubation study. Susan E. Trumbore provided the radiocarbon data for Harvard Forest and gave important support and insights for the development of this project. Funding from the Max Planck Society. 
+We would like to thank Saadat Malghani for performing the laboratory incubation study. Susan E. Trumbore provided the radiocarbon data for Harvard Forest and gave important support and insights for the development of this project. Funding from the Max Planck Society. 
 
 \begin{thebibliography}{9}
 \bibitem[Schadel et al.(2013)]{Schadel} Sch{\"a}del, C., Y.~Luo, R.~David~Evans, S.~Fei, and S.~Schaeffer.

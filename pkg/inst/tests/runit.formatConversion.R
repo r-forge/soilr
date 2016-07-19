@@ -1,6 +1,6 @@
 #
 # vim:set ff=unix expandtab ts=2 sw=2:
-test.BoundFc=function(){
+test.formatConversion=function(){
    tstart=0
    tend=10
    f=function(t){2*t}
@@ -10,7 +10,7 @@ test.BoundFc=function(){
    
    # but we expect trouble for the next line because "foo-bar" 
    # is not supported as format for atmospheric 14C
-   checkException(new(Class="BoundFc",tstart,tend,f,format="foo-bar"))
+   checkException(BoundFc(f,tstart,tend,format="foo-bar"),silent=TRUE) 
    
    # now we test the back and forth transformation from one Format to another
    tt=seq(from=tstart,to=tend,by=(tend-tstart)/100)

@@ -1,18 +1,18 @@
-\name{getTimeRange_method__BoundInFlux}
-\alias{getTimeRange_method__BoundInFlux}
-\title{time domain of the function}
-\description{The method returns a vector containing the start and end time where the intepolation is valid.}
-\arguments{
-  \item{object}{
+\name{getReleaseFlux14-methods}
+\docType{methods}
+\alias{getReleaseFlux14-methods}
+\alias{getReleaseFlux14,Model_14-method}
+\title{ ~~ Methods for Function \code{getReleaseFlux14}  ~~}
+\description{
+ ~~ Methods for function \code{getReleaseFlux14} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "Model_14")}}{
+      \code{\link{getReleaseFlux14_method__Model_14}}  
+    }
+
+  }
 }
-
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

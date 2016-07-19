@@ -1,23 +1,22 @@
-\name{getTimeRange_method__BoundFc}
-\alias{getTimeRange_method__BoundFc}
-\title{ask for the boundaries of the underlying time interval}
-\description{The method returns the time range of the given object 
-It is ( probably mostly ) used internally to make sure that 
-time dependent functions retrieved from data are not
-used outside the interval where they are valid. }
-\arguments{
-  \item{object}{
+\name{getReleaseFlux}
+\alias{getReleaseFlux}
+\title{Calculates the release of C from each pool}
+\description{This function computes carbon release from each pool of the given model as funtion of time 
+Have a look at the methods for details.}
+\usage{getReleaseFlux(object)}\arguments{
+  \item{object}{An model object (the actual class depends on the method e.g. Model or  Model14}
 }
-}
-
-\value{a vector of length two \code{ c(t_min,t_max) }
-containing start and end time of the time interval 
-for which the object has been defined.}
+\details{This function takes a Model object, which represents a system of ODEs 
+solves the system for \eqn{\mathbf{C}(t)}{C(t)}, calculates a diagonal matrix of release coefficients \eqn{\mathbf{R}(t)}{R(t)}, 
+and computes the release flux as \eqn{\mathbf{R}(t) \mathbf{C}(t)}{R(t) C(t)}.
+The numerical solver used can be specified in the model creating functions like e.g. \code{\link{Model}}.}
+\value{A matrix. Every column represents a pool and every row a point in time}
 
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
 
 
-
+\seealso{See examples in  \code{\link{Model}}, \code{\link{GeneralModel}}, \code{\link{GeneralModel_14}}, \code{\link{TwopParallelModel}}, 
+\code{\link{TwopSeriesModel}}, \code{\link{TwopFeedbackModel}}, etc.}
 

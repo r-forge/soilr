@@ -1,18 +1,18 @@
-\name{getF14R-methods}
-\docType{methods}
-\alias{getF14R-methods}
-\alias{getF14R,Model_14-method}
-\title{ ~~ Methods for Function \code{getF14R}  ~~}
-\description{
- ~~ Methods for function \code{getF14R} ~~
+\name{getC14_method__Model_14}
+\alias{getC14_method__Model_14}
+\title{getC14 method  Model 14}
+\description{This function computes the value for \eqn{^{14}C}{14C} (mass or concentration ) as function of time}
+\arguments{
+  \item{object}{
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "Model_14")}}{
-      \code{\link{getF14R_method__Model_14}}  
-    }
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

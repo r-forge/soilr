@@ -8,20 +8,21 @@ Objects of this class contain a time dependent function describing the Atmospher
 }
 \section{Slots}{
   \describe{
-    \item{\code{starttime}:}{Object of class \code{"numeric"} ~~ }
-    \item{\code{endtime}:}{Object of class \code{"numeric"} ~~ }
+    \item{\code{format}:}{Object of class \code{"character"} ~~ }
     \item{\code{map}:}{Object of class \code{"function"} ~~ }
     \item{\code{lag}:}{Object of class \code{"numeric"} ~~ }
-    \item{\code{format}:}{Object of class \code{"character"} ~~ }
+    \item{\code{starttime}:}{Object of class \code{"numeric"} ~~ }
+    \item{\code{endtime}:}{Object of class \code{"numeric"} ~~ }
   }
+}
+\section{Extends}{
+Class \code{"\linkS4class{TimeMap}"}, directly.
 }
 \section{Methods}{
   \describe{
     \item{AbsoluteFractionModern}{\code{signature(F = "BoundFc")}: ... }
     \item{Delta14C}{\code{signature(F = "BoundFc")}: ... }
     \item{getFormat}{\code{signature(object = "BoundFc")}: ... }
-    \item{getFunctionDefinition}{\code{signature(object = "BoundFc")}: ... }
-    \item{getTimeRange}{\code{signature(object = "BoundFc")}: ... }
     \item{initialize}{\code{signature(.Object = "BoundFc")}: ... }
 	 }
 }

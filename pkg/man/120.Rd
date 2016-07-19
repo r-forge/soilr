@@ -1,22 +1,29 @@
-\name{fT.Demeter}
-\alias{fT.Demeter}
-\title{Effects of temperature on decomposition rates according to the DEMETER model}
-\description{Calculates the effects of temperature on decomposition rates according to the DEMETER model.}
-\usage{fT.Demeter(Temp, Q10 = 2)}\arguments{
-  \item{Temp}{A scalar or vector containing values of temperature for which the effects on decomposition rates are calculated}
-  \item{Q10}{A scalar. Temperature coefficient Q10}
+\name{eCO2}
+\alias{eCO2}
+\docType{data}
+\title{
+ Soil CO2 efflux from an incubation experiment
 }
-
-\value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
-\references{Foley, J. A. (1995), An equilibrium model of the terrestrial carbon budget, Tellus B, 47(3), 310-319.}
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
+\description{
+A dataset with soil CO2 efflux measurements from a laboratory incubation at controlled temperature and moisture conditions.
+}
+\usage{data(eCO2)}
+\format{
+  A data frame with the following 3 variables.
+  \describe{
+    \item{\code{Days}}{A numeric vector with the day of measurement after the experiment started.}
+    \item{\code{eCO2mean}}{A numeric vector with the release flux of CO2. Units in ug C g-1 soil day-1.}
+    \item{\code{eCO2sd}}{A numeric vector with the standard deviation of the release flux of CO2-C. Units in ug C g-1 soil day-1.}
+  }
+}
+\details{
+A laboratory incubation experiment was performed in March 2014 for a period of 35 days under controlled conditions of temperature (15 degrees Celcius), moisture (30 percent soil water content), and oxygen levels (20 percent). Soil CO2 measurements were taken using an automated system for gas sampling connected to an infrared gas analyzer. The soil was sampled at a boreal forest site (Caribou Poker Research Watershed, Alaska, USA). This dataset presents the mean and standard deviation of 4 replicates.
+}
 \examples{
-Temperature=0:50
-plot(Temperature,fT.Demeter(Temperature),type="l",ylab="f(T) (unitless)", 
-     main="Effects of temperature on decomposition rates according to the DEMETER model")
+head(eCO2)
+
+plot(eCO2[,1:2],type="o",ylim=c(0,50),ylab="CO2 efflux (ug C g-1 soil day-1)")
+arrows(eCO2[,1],eCO2[,2]-eCO2[,3],eCO2[,1],eCO2[,2]+eCO2[,3], angle=90,length=0.3,code=3)
+
 }
+\keyword{datasets}

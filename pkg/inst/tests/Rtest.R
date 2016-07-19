@@ -12,16 +12,18 @@ alltests <- defineTestSuite(
    dirs=c(".","protected"),
    testFileRegexp = tfr,
    
-   testFuncRegexp = "test.Ident"
+   #testFuncRegexp = "test.Ident"
    #"^test.FourpSerial_1"
    #"test.TwopParallel_ZeroInput"
    #"^test.TwopFeedback"
    #"^test.TimeMapInterface"
    #"^test.LowVerticalRatesPaper" 
-   #"^test.check.pass"
+   "^test.check.pass"
    #"test.ModelInit"
    #"ptest.ModelOperators"
    #"test.ParallelModel"
+   #"test.TwopSerial_MCSim"
+   #"test.ThreepSerial_linear_vs_nonlinear"
    #"test.TwopSerial_linear_vs_nonlinear"
    #"test.SoilRPaper1"
    #"test.FourpSerial_1"
@@ -35,8 +37,9 @@ alltests <- defineTestSuite(
 )
 
 testResult <- runTestSuite(alltests)
-printTextProtocol(testResult)
+printTextProtocol(testResult,separateFailureList=TRUE)
 #produce exitstatus ne 0 for buildbot to notice
 ef=getErrors(testResult)
+#print(ef)
 n=ef$nErr+ef$nFail
 if (n>0) {stop(1)}

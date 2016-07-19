@@ -1,7 +1,7 @@
 \name{ParallelModel}
 \alias{ParallelModel}
 \title{ParallelModel}
-\description{This function creates a numerical model for n independent (parallel) pools that can be queried afterwards. 
+\description{This function creates a (linear) numerical model for n independent (parallel) pools that can be queried afterwards. 
 It is used by the convinient wrapper functions \code{\link{TwopParallelModel}} and \code{\link{ThreepParallelModel}}
 but can also be used independently.}
 \usage{ParallelModel(times,
@@ -30,7 +30,11 @@ but can also be used independently.}
       tn=50
       timestep=(t_end-t_start)/tn 
       t=seq(t_start,t_end,timestep) 
-      k=TimeMap.new(t_start,t_end,function(times){c(-0.5,-0.2,-0.3)})
+      k=TimeMap(
+        function(times){c(-0.5,-0.2,-0.3)},
+        t_start,
+        t_end
+      )
       c0=c(1, 2, 3)
       #constant inputrates
       inputrates=BoundInFlux(

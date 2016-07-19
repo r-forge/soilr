@@ -90,7 +90,6 @@ setClass(# Model
         times="numeric"
         ,
         mat="DecompOp"
-        #mat="TimeMap"
         ,
         initialValues="numeric"
         ,

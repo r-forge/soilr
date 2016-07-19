@@ -325,6 +325,13 @@ setGeneric ( # This function
 	object
 	){standardGeneric("getC14")}
 )
+setGeneric ( # Computes the overall C stock for every time step
+   name= "getCumulativeC",
+   def=function(# Calculates the sum of all the C stocks of the model
+   ### Have a look at the methods for details.
+	object
+	){standardGeneric("getCumulativeC")}
+)
 setGeneric ( # Computes the  \eqn{\frac{^{14}C}{C}}{14C/C} ratio 
    name= "getF14",
    def=function(# Calculates the 14C fraction of all pools
@@ -416,6 +423,13 @@ setGeneric(
     }
 )
 setGeneric(
+    name="availableResidentSets",
+    def=function(object){
+    ### Shows the sets of particles >>in<< the system available for computation
+        standardGeneric("availableResidentSets")
+    }
+)
+setGeneric(
     name="computeResults",
     def=function(object){
         standardGeneric("computeResults")
@@ -446,12 +460,41 @@ setGeneric(
     }
 )
 setGeneric(
+    name="TimeMap",
+    def=function # generic constructor
+    ### create a TimeMap object from different sources
+    (
+      map,
+      starttime,
+      endtime,
+      lag,
+      interpolation)
+    {
+        standardGeneric("TimeMap")
+    }
+)
+setGeneric(
     name="BoundFc",
     def=function # generic constructor
     ### create a BoundFc object from different sources
     (map,starttime,endtime,lag,format,interpolation)
     {
         standardGeneric("BoundFc")
+    }
+)
+setGeneric(
+    name="BoundInFlux",
+    def=function # generic constructor
+    ### create a BoundInFlux object from different sources
+    (
+      map,
+      starttime,
+      endtime,
+      lag,
+      interpolation
+     )
+    {
+        standardGeneric("BoundInFlux")
     }
 )
 setGeneric(
@@ -512,7 +555,7 @@ setGeneric(
     def=function # Generic constructor
     ### Creates a LinearDecompositonOperator from different sources.
     ### Please look at the methods to see what kind of input is supported. 
-    (map,starttime,endtime,lag)
+    (map,starttime,endtime)
     {
         standardGeneric("BoundLinDecompOp")
     }
@@ -554,7 +597,12 @@ setGeneric(
     def=function # A general constructor 
     ### Creates a Model object from different sources
     ### Have a look at the methods for details.
-    (t,A,ivList,inputFluxes,...){
+    (t,
+      A,
+      ivList,
+      inputFluxes,
+      ...
+      ){
         standardGeneric("Model")
     }
 )
@@ -577,3 +625,34 @@ setGeneric(
         standardGeneric("Model_14")
     }
 )
+setGeneric(
+  name="fromDataFrame",
+  def=function # an alternative initializer for TimeMap related classes
+  ### initializes an object of class TimeMap or one of its subclasses
+  ### from a data.frame
+  ( 
+    .Object,
+    map,
+    starttime,
+    endtime,
+    lag,
+    interpolation
+  ){
+        standardGeneric("fromDataFrame")
+  }
+)
+    
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

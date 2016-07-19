@@ -1,18 +1,22 @@
-\name{initialize_method__DecompositionOperator}
-\alias{initialize_method__DecompositionOperator}
-\title{initialize called by (new)}
-\description{This is the internal constructor for objects 
-of the deprecated Class DecompositonOperator}
+\name{initialize_method__BoundFc}
+\alias{initialize_method__BoundFc}
+\title{internal constructor (new)}
+\description{The function is probably called internally only but used by all other constructors
+It calls a sanity check on its arguments and initialized the object }
 \arguments{
   \item{.Object}{
+}
+  \item{map}{
 }
   \item{starttime}{
 }
   \item{endtime}{
 }
-  \item{map}{
-}
   \item{lag}{
+}
+  \item{format}{
+}
+  \item{interpolation}{
 }
 }
 

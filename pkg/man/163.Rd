@@ -1,18 +1,18 @@
-\name{getFunctionDefinition_method__BoundLinDecompOp}
-\alias{getFunctionDefinition_method__BoundLinDecompOp}
-\title{getFunctionDefinition method  BoundLinDecompOp}
-\description{extract the function definition (the R-function) }
-\arguments{
-  \item{object}{
+\name{getF14R-methods}
+\docType{methods}
+\alias{getF14R-methods}
+\alias{getF14R,Model_14-method}
+\title{ ~~ Methods for Function \code{getF14R}  ~~}
+\description{
+ ~~ Methods for function \code{getF14R} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "Model_14")}}{
+      \code{\link{getF14R_method__Model_14}}  
+    }
+
+  }
 }
-
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

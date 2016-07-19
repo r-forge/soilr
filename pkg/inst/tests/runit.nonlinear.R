@@ -4,3 +4,11 @@ require(RUnit)
 test.GeneralNlModel=function(){
   attr(GeneralNlModel,"ex")()
 }
+
+test.TwopMMmodel=function(){
+attr(TwopMMmodel,"ex")()
+}
+
+test.bacwaveModel=function(){
+attr(bacwaveModel,"ex")()
+}

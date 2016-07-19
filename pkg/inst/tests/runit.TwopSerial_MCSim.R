@@ -51,7 +51,7 @@ test.TwopSerial_MCSim=function(){
   }
   fac=2e3
   
-  inputrates=new("TimeMap",t_start,t_end,function(t){return(matrix(
+  inputrates=BoundInFlux(function(t){return(matrix(
     nrow=nr,
     rep(
       c(
@@ -59,7 +59,7 @@ test.TwopSerial_MCSim=function(){
       ),
       length(t)
     )
-  ))})
+  ))},t_start,t_end)
   A=new("TransportDecompositionOperator",t_start,Inf,nr,alpha,f)
   mod=GeneralNlModel(
    t,
@@ -97,23 +97,23 @@ test.TwopSerial_MCSim=function(){
 
   MCSim[["tasklist"]]<-tasklist
   plot(MCSim)
-  results=computeResults(MCSim)[["cr"]]
-  # compare with the ode solutions
-  Y=getC(mod) 
-  C1sim=results[,"Cstock_1"]
-  C2sim=results[,"Cstock_2"]
-  tsim=results[,"time"]
-  pe(quote(length(tsim)),environment())
-  pe(quote(length(t)),environment())
-  #pe(quote(t-tsim),environment())
-  #checkEquals(t,tsim) # although C1sim had a meaning for t=0 not all the # problems in tasklist have
-  plot(tsim,C1sim,col="red",ylim=c(min(C1sim,Y[,1],C2sim,Y[,2]),max(C1sim,Y[,1],C2sim,Y[,2])))
-  points(tsim,C2sim,col="blue")
-  lines(t,Y[,1],type="l",lty=2,col="red")
-  lines(t,Y[,2],type="l",lty=2,col="blue")
-  #check the inputratefunction
-  ir=getFunctionDefinition(inputrates)
-  pe(quote(ir(0)),environment())
+#  results=computeResults(MCSim)[["cr"]]
+#  # compare with the ode solutions
+#  Y=getC(mod) 
+#  C1sim=results[,"Cstock_1"]
+#  C2sim=results[,"Cstock_2"]
+#  tsim=results[,"time"]
+#  pe(quote(length(tsim)),environment())
+#  pe(quote(length(t)),environment())
+#  #pe(quote(t-tsim),environment())
+#  #checkEquals(t,tsim) # although C1sim had a meaning for t=0 not all the # problems in tasklist have
+#  plot(tsim,C1sim,col="red",ylim=c(min(C1sim,Y[,1],C2sim,Y[,2]),max(C1sim,Y[,1],C2sim,Y[,2])))
+#  points(tsim,C2sim,col="blue")
+#  lines(t,Y[,1],type="l",lty=2,col="red")
+#  lines(t,Y[,2],type="l",lty=2,col="blue")
+#  #check the inputratefunction
+#  ir=getFunctionDefinition(inputrates)
+#  pe(quote(ir(0)),environment())
 
 }
 

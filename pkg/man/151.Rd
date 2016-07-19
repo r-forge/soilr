@@ -1,19 +1,18 @@
-\name{getF14C}
-\alias{getF14C}
-\title{Calculates the average radiocarbon fraction weighted by the mass of carbon}
-\description{This function calculates the average radiocarbon fraction weighted by the mass of carbon at each time step 
-Have a look at the methods for details.}
-\usage{getF14C(object)}\arguments{
-  \item{object}{
+\name{getC14-methods}
+\docType{methods}
+\alias{getC14-methods}
+\alias{getC14,Model_14-method}
+\title{ ~~ Methods for Function \code{getC14}  ~~}
+\description{
+ ~~ Methods for function \code{getC14} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "Model_14")}}{
+      \code{\link{getC14_method__Model_14}}  
+    }
+
+  }
 }
-
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

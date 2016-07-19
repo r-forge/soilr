@@ -1,19 +1,19 @@
-\name{getTimes-methods}
-\docType{methods}
-\alias{getTimes-methods}
-\alias{getTimes,Model-method}
-\alias{getTimes,NlModel-method}
-\title{ ~~ Methods for Function \code{getTimes}  ~~}
-\description{
- ~~ Methods for function \code{getTimes} ~~
+\name{getTimeRange}
+\alias{getTimeRange}
+\title{getTimeRange}
+\description{This function returns the time range of the given object. 
+Have a look at the methods for details.}
+\usage{getTimeRange(object)}\arguments{
+  \item{object}{
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "Model")}}{
-      \code{\link{getTimes_method__Model}}  
-    }
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

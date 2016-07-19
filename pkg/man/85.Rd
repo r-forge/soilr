@@ -1,128 +1,62 @@
-\name{ThreepFeedbackModel}
-\alias{ThreepFeedbackModel}
-\title{Implementation of a three pool model with feedback structure}
-\description{This function creates a model for three pools connected with feedback. It is a wrapper for the more general function \code{\link{GeneralModel}}.}
-\usage{ThreepFeedbackModel(t, ks, a21, a12, a32, a23, C0, In, xi = 1, 
-    solver = deSolve.lsoda.wrapper, pass = FALSE)}\arguments{
+\name{SeriesLinearModel14}
+\alias{SeriesLinearModel14}
+\title{General m-pool linear C14 model with series structure}
+\description{This function creates a radiocarbon model for m number of pools connected in series. It is a wrapper for the more general function \code{\link{GeneralModel_14}}.}
+\usage{SeriesLinearModel14(t, m.pools, ki, Tij, C0, F0_Delta14C, In, 
+    xi = 1, inputFc, lambda = -0.0001209681, lag = 0, solver = deSolve.lsoda.wrapper, 
+    pass = FALSE)}\arguments{
   \item{t}{A vector containing the points in time where the solution is sought.}
-  \item{ks}{A vector of lenght 3 containing the values of the decomposition rates for pools 1, 2, and 3.}
-  \item{a21}{A scalar with the value of the transfer rate from pool 1 to pool 2.}
-  \item{a12}{A scalar with the value of the transfer rate from pool 2 to pool 1.}
-  \item{a32}{A scalar with the value of the transfer rate from pool 2 to pool 3.}
-  \item{a23}{A scalar with the value of the transfer rate from pool 3 to pool 2.}
-  \item{C0}{A vector containing the initial concentrations for the 3 pools. The length of this vector is 3}
-  \item{In}{A data.frame object specifying the amount of litter inputs by time.}
+  \item{m.pools}{An integer with the total number of pools in the model.}
+  \item{ki}{A vector of lenght m containing the values of the decomposition rates for each pool i.}
+  \item{Tij}{A vector of length m-1 with the transfer coefficients from pool j to pool i. The value of these coefficients must be in the range [0, 1].}
+  \item{C0}{A vector of length m containing the initial amount of carbon for the m pools.}
+  \item{F0_Delta14C}{A vector of length m containig the initial amount of the radiocarbon fraction for the m pools.}
+  \item{In}{A scalar or data.frame object specifying the amount of litter inputs by time.}
   \item{xi}{A scalar or data.frame object specifying the external (environmental and/or edaphic) effects on decomposition rates.}
+  \item{inputFc}{A Data Frame object containing values of atmospheric Delta14C per time. First column must be time values, second column must be Delta14C values in per mil.}
+  \item{lambda}{Radioactive decay constant. By default lambda=-0.0001209681 y^-1 . This has the side effect that all your time related data are treated as if the time unit was year.}
+  \item{lag}{A positive scalar representing a time lag for radiocarbon to enter the system.}
   \item{solver}{A function that solves the system of ODEs. This can be \code{\link{euler}} or \code{\link{ode}} or any other user provided function with the same interface.}
-  \item{pass}{if TRUE forces the constructor to create the model even if it is invalid}
+  \item{pass}{if TRUE Forces the constructor to create the model even if it is invalid}
 }
 
 \value{A Model Object that can be further queried }
-\references{Sierra, C.A., M. Mueller, S.E. Trumbore. 2012. Models of soil organic matter decomposition: the SoilR package version 1.0. Geoscientific Model Development 5, 1045-1060.}
+\references{Sierra, C.A., M. Mueller, S.E. Trumbore. 2014. Modeling radiocarbon dynamics in soils: SoilR version 1.1. Geoscientific Model Development 7, 1919-1931.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
 
 
-\seealso{\code{\link{ThreepParallelModel}}, \code{\link{ThreepSeriesModel}}}
+\seealso{\code{\link{GeneralModel_14}}, \code{\link{SeriesLinearModel}} }
 \examples{
-t_start=0 
-t_end=10 
-tn=50
-timestep=(t_end-t_start)/tn 
-t=seq(t_start,t_end,timestep) 
-ks=c(k1=0.8,k2=0.4,k3=0.2)
-C0=c(C10=100,C20=150, C30=50)
-In = 60
 
-Temp=rnorm(t,15,1)
-TempEffect=data.frame(t,fT.Daycent1(Temp))
+years=seq(1901,2009,by=0.5)
+LitterInput=700 
 
-Ex1=ThreepFeedbackModel(t=t,ks=ks,a21=0.5,a12=0.1,a32=0.2,a23=0.1,C0=C0,In=In,xi=TempEffect)
-Ct=getC(Ex1)
-Rt=getReleaseFlux(Ex1)
-
-plot(
-  t,
-  rowSums(Ct),
-  type="l",
-  ylab="Carbon stocks (arbitrary units)",
-  xlab="Time (arbitrary units)",
-  lwd=2,
-  ylim=c(0,sum(Ct[51,]))
-) 
-lines(t,Ct[,1],col=2)
-lines(t,Ct[,2],col=4)
-lines(t,Ct[,3],col=3)
-legend(
-  "topleft",
-  c("Total C","C in pool 1", "C in pool 2","C in pool 3"),
-  lty=c(1,1,1,1),
-  col=c(1,2,4,3),
-  lwd=c(2,1,1,1),
-  bty="n"
+Ex=SeriesLinearModel14(
+  t=years,ki=c(k1=1/2.8, k2=1/35, k3=1/100), m.pools=3,
+  C0=c(200,5000,500), F0_Delta14C=c(0,0,0),
+  In=LitterInput, Tij=c(0.5, 0.1),inputFc=C14Atm_NH
 )
+R14m=getF14R(Ex)
+C14m=getF14C(Ex)
+C14t=getF14(Ex)
 
-plot(
-  t,
-  rowSums(Rt),
-  type="l",
-  ylab="Carbon released (arbitrary units)",
-  xlab="Time (arbitrary units)",
-  lwd=2,
-  ylim=c(0,sum(Rt[51,]))
-) 
-lines(t,Rt[,1],col=2)
-lines(t,Rt[,2],col=4)
-lines(t,Rt[,3],col=3)
-legend(
-  "topleft",
-  c("Total C release",
-  "C release from pool 1",
-  "C release from pool 2",
-  "C release from pool 3"),
-  lty=c(1,1,1,1),
-  col=c(1,2,4,3),
-  lwd=c(2,1,1,1),
-  bty="n"
-)
-
-Inr=data.frame(t,Random.inputs=rnorm(length(t),50,10))
-plot(Inr,type="l")
-
-Ex2=ThreepFeedbackModel(t=t,ks=ks,a21=0.5,a12=0.1,a32=0.2,a23=0.1,C0=C0,In=Inr)
-Ctr=getC(Ex2)
-Rtr=getReleaseFlux(Ex2)
-
-plot(
-  t,
-  rowSums(Ctr),
-  type="l",
-  ylab="Carbon stocks (arbitrary units)",
-  xlab="Time (arbitrary units)",
-  lwd=2,
-  ylim=c(0,sum(Ctr[51,]))
-) 
-lines(t,Ctr[,1],col=2)
-lines(t,Ctr[,2],col=4)
-lines(t,Ctr[,3],col=3)
-legend("topright",c("Total C","C in pool 1", "C in pool 2","C in pool 3"),
-       lty=c(1,1,1,1),col=c(1,2,4,3),lwd=c(2,1,1,1),bty="n")
-
-plot(t,rowSums(Rtr),type="l",ylab="Carbon released (arbitrary units)",
-     xlab="Time (arbitrary units)",lwd=2,ylim=c(0,sum(Rtr[51,]))) 
-lines(t,Rtr[,1],col=2)
-lines(t,Rtr[,2],col=4)
-lines(t,Rtr[,3],col=3)
+par(mfrow=c(2,1))
+plot(C14Atm_NH,type="l",xlab="Year",
+     ylab="Delta 14C (per mil)",xlim=c(1940,2010)) 
+lines(years, C14t[,1], col=4)
+lines(years, C14t[,2],col=4,lwd=2)
+lines(years, C14t[,3],col=4,lwd=3)
 legend(
   "topright",
-  c("Total C release",
-    "C release from pool 1",
-    "C release from pool 2",
-    "C release from pool 3"
-  ),
-  lty=c(1,1,1,1),
-  col=c(1,2,4,3),
-  lwd=c(2,1,1,1),
-  bty="n")
+  c("Delta 14C Atmosphere", "Delta 14C pool 1", "Delta 14C pool 2", "Delta 14C pool 3"),
+  lty=rep(1,4),col=c(1,4,4,4),lwd=c(1,1,2,3),bty="n")
+
+plot(C14Atm_NH,type="l",xlab="Year",ylab="Delta 14C (per mil)",xlim=c(1940,2010)) 
+lines(years,C14m,col=4)
+lines(years,R14m,col=2)
+legend("topright",c("Delta 14C Atmosphere","Delta 14C SOM", "Delta 14C Respired"),
+       lty=c(1,1,1), col=c(1,4,2),bty="n")
+par(mfrow=c(1,1))
 }

@@ -1,19 +1,11 @@
-\name{getFormat-methods}
+\name{getDotOut-methods}
 \docType{methods}
-\alias{getFormat-methods}
-\alias{getFormat,BoundFc-method}
-\alias{getFormat,ConstFc-method}
-\title{ ~~ Methods for Function \code{getFormat}  ~~}
+\alias{getDotOut-methods}
+\alias{getDotOut,TransportDecompositionOperator-method}
+\title{ ~~ Methods for Function \code{getDotOut}  ~~}
 \description{
- ~~ Methods for function \code{getFormat} ~~
+ All methods for function \code{getDotOut} are intended for internal use inside the package only. 
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "BoundFc")}}{
-      \code{\link{getFormat_method__BoundFc}}  
-    }
 
-  }
-}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

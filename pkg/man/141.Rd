@@ -1,40 +1,32 @@
-\name{getC}
-\alias{getC}
-\title{Calculates the C content of the pools }
-\description{This function computes the carbon content of the pools as function of time.
-Have a look at the methods for details.}
-\usage{getC(object, as.closures = F)}\arguments{
-  \item{object}{some model object, the actual class depends on the method used.}
-  \item{as.closures}{if set to TRUE instead of a matrix a list of functions will be returned.}
+\name{fW.RothC}
+\alias{fW.RothC}
+\title{Effects of moisture on decomposition rates according to the RothC model}
+\description{Calculates the effects of moisture (precipitation and pan evaporation) on decomposition rates according to the RothC model.}
+\usage{fW.RothC(P, E, S.Thick = 23, pClay = 23.4, pE = 0.75, bare = FALSE)}\arguments{
+  \item{P}{A vector with monthly precipitation (mm).}
+  \item{E}{A vector with same length with open pan evaporation or evapotranspiration (mm).}
+  \item{S.Thick}{Soil thickness in cm. Default for Rothamsted is 23 cm.}
+  \item{pClay}{Percent clay.}
+  \item{pE}{Evaporation coefficient. If open pan evaporation is used pE=0.75. If Potential evaporation is used, pE=1.0.}
+  \item{bare}{Logical. Under bare soil conditions, bare=TRUE. Dafault is set under vegetated soil.}
 }
-\details{This function takes a Model object, which represents a system of ODEs 
-and solves the system for \eqn{\mathbf{C}(t)}{C(t)}. The numerical solver used can be specified in the constructors of the Model classes
-e.g. \code{\link{Model}},\code{\link{Model_14}},\code{\link{GeneralModel}}.}
-\value{A matrix with m columns representing the number of pools, and n rows representing the times as specified by the argument
-\code{t} in \code{\link{GeneralModel}} or another model creating function.}
 
+\value{A data.frame with accumulated top soil moisture deficit 
+(Acc.TSMD) and the rate modifying factor b. }
+\references{Coleman, K., and D. S. Jenkinson (1999), RothC-26.3 A model for the turnover of carbon in soil: 
+model description and windows user guide (modified 2008), 47 pp, IACR Rothamsted, Harpenden.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
 
 
-\seealso{See examples in \code{\link{GeneralModel}}, \code{\link{GeneralModel_14}}, \code{\link{TwopParallelModel}}, 
-\code{\link{TwopSeriesModel}}, \code{\link{TwopFeedbackModel}}, etc.}
-\examples{# This test function produces the example for testing the function getC
-  t=seq(0,10,by=0.1) 
-  k=0.8
-  C0=100
-  In = 30
-  
-  #Create two models with same arguments but calling two different model creation functions
-  Cmodel=OnepModel(t,k,C0,In)
-  C14model=OnepModel14(t,k,C0,In,F0=0,inputFc=IntCal09)
-  
-  #getC can extract the amount of C from these two type of models
-  Ctmodel=getC(Cmodel)
-  Ctmodel14=getC(C14model)
-  
-  #The output is identical because parameter values are the same
-  plot(t,Ctmodel,type="l")
-  lines(t,Ctmodel14,col=2,lty=2,lwd=2)
-  legend("topright",c("OnepModel output","OnepModel14 output"),col=1:2,lty=1:2,bty="n")}
+
+\examples{
+P=c(74,59,62,51,52,57,34,55,58,56,75,71) #Monthly Precipitation (mm)
+E=c(8,10,27,49,83,99,103,91,69,34,16,8)  #Monthly open pan evaporation (mm)
+
+Rothamsted=fW.RothC(P,E)
+data.frame(month.name,P,E,0.75*E,P-0.75*E,Rothamsted)  
+# This reproduces Table 1 in the RothC documentation (Coleman and Jenkinson 1999)
+
+}

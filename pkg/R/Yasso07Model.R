@@ -2,7 +2,7 @@
 # vim:set ff=unix expandtab ts=2 sw=2:
 Yasso07Model<-structure(
     function #Implementation of the Yasso07 model
-    ### This function creates a model for five pools as described in Tuomi et al. (2008)
+    ### This function creates a model for five pools as described in Tuomi et al. (2009)
     ##references<< Tuomi, M., Thum, T., Jarvinen, H., Fronzek, S., Berg, B., Harmon, M., Trofymow, J., Sevanto, S., and Liski, J. (2009).
     ##Leaf litter decomposition-estimates of global variability based on Yasso07 model. Ecological Modelling, 220:3362 - 3371.
      (t,      ##<< A vector containing the points in time where the solution is sought.

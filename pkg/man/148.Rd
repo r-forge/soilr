@@ -1,18 +1,18 @@
-\name{getF14-methods}
-\docType{methods}
-\alias{getF14-methods}
-\alias{getF14,Model_14-method}
-\title{ ~~ Methods for Function \code{getF14}  ~~}
-\description{
- ~~ Methods for function \code{getF14} ~~
+\name{getAccumulatedRelease_method__Model}
+\alias{getAccumulatedRelease_method__Model}
+\title{time integrals of release fluxes per pool}
+\description{The method integrates the release flux of every pool for all times in the  interval specified by the model definition.}
+\arguments{
+  \item{object}{
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "Model_14")}}{
-      \code{\link{getF14_method__Model_14}}  
-    }
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+\value{a matrix}
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+
