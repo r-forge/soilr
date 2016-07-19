@@ -1,18 +1,19 @@
-\name{getF14R-methods}
-\docType{methods}
-\alias{getF14R-methods}
-\alias{getF14R,Model_14-method}
-\title{ ~~ Methods for Function \code{getF14R}  ~~}
-\description{
- ~~ Methods for function \code{getF14R} ~~
+\name{getF14R}
+\alias{getF14R}
+\title{Calculates the average radiocarbon fraction weighted by the amount of carbon release}
+\description{This function calculates the average radiocarbon fraction weighted by the amount of carbon release at each time step.
+Have a look at the methods for details.}
+\usage{getF14R(object)}\arguments{
+  \item{object}{
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(object = "Model_14")}}{
-      \code{\link{getF14R_method__Model_14}}  
-    }
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

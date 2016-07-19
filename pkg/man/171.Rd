@@ -1,7 +1,7 @@
-\name{getFunctionDefinition_method__ConstLinDecompOp}
-\alias{getFunctionDefinition_method__ConstLinDecompOp}
-\title{creates a constant timedependent function and returns it}
-\description{The method creates a timedependent function from the existing matrix describing the operator }
+\name{getFunctionDefinition_method__DecompositionOperator}
+\alias{getFunctionDefinition_method__DecompositionOperator}
+\title{getFunctionDefinition method  DecompositionOperator}
+\description{extract the function definition (the R-function) }
 \arguments{
   \item{object}{
 }

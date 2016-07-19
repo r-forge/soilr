@@ -1,17 +1,18 @@
-\name{getF14C_method__Model_14}
-\alias{getF14C_method__Model_14}
-\title{read access to the models F14C variable }
-\description{The model was created with a F14C object to describe the atmospheric 14C content. This method serves to investigate those settings from the model.}
-\arguments{
-  \item{object}{a Model_14 object}
+\name{getF14R-methods}
+\docType{methods}
+\alias{getF14R-methods}
+\alias{getF14R,Model_14-method}
+\title{ ~~ Methods for Function \code{getF14R}  ~~}
+\description{
+ ~~ Methods for function \code{getF14R} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "Model_14")}}{
+      \code{\link{getF14R_method__Model_14}}  
+    }
 
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+  }
+}
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

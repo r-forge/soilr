@@ -1,19 +1,19 @@
-\name{getF14_method__Model_14}
-\alias{getF14_method__Model_14}
-\title{radiocarbon}
-\description{Calculates the radiocarbon fraction for each pool at each time step.
+\name{getFormat-methods}
+\docType{methods}
+\alias{getFormat-methods}
+\alias{getFormat,BoundFc-method}
+\alias{getFormat,ConstFc-method}
+\title{ ~~ Methods for Function \code{getFormat}  ~~}
+\description{
+ ~~ Methods for function \code{getFormat} ~~
 }
-\arguments{
-  \item{object}{
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "BoundFc")}}{
+      \code{\link{getFormat_method__BoundFc}}  
+    }
+
+  }
 }
-}
-
-\value{A matrix of dimension n x m; i.e. n time steps as rows and m pools as columns.}
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

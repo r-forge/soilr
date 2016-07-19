@@ -1,18 +1,24 @@
-\name{fromDataFrame-methods}
-\docType{methods}
-\alias{fromDataFrame-methods}
-\alias{fromDataFrame,TimeMap,data.frame-method}
-\title{ ~~ Methods for Function \code{fromDataFrame}  ~~}
-\description{
- ~~ Methods for function \code{fromDataFrame} ~~
+\name{fromDataFrame_method__TimeMap_data.frame}
+\alias{fromDataFrame_method__TimeMap_data.frame}
+\title{assemble the objects components}
+\description{The method is used internally to convert TimeMap objects to BoundInFlux objects, since the use of TimeMap objects is now deprecated.}
+\arguments{
+  \item{.Object}{
 }
-\section{Methods}{
-  \describe{
-    \item{\code{signature(.Object = "TimeMap", map = "data.frame")}}{
-      \code{\link{fromDataFrame_method__TimeMap_data.frame}}  
-    }
+  \item{map}{
+}
+  \item{lag}{
+}
+  \item{interpolation}{
+}
+}
 
-  }
-}
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

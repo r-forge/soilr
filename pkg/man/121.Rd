@@ -1,32 +1,24 @@
-\name{eCO2}
-\alias{eCO2}
-\docType{data}
-\title{
- Soil CO2 efflux from incubation experiments
+\name{fT.Arrhenius}
+\alias{fT.Arrhenius}
+\title{Effects of temperature on decomposition rates according the Arrhenius equation}
+\description{Calculates the effects of temperature on decomposition rates according to the Arrhenius equation.}
+\usage{fT.Arrhenius(Temp, A = 1000, Ea = 75000, Re = 8.3144621)}\arguments{
+  \item{Temp}{A scalar or vector containing values of temperature (in degrees Kelvin) for which the effects on decomposition rates are calculated.}
+  \item{A}{A scalar defining the pre-exponential factor.}
+  \item{Ea}{A scalar defining the activation energy in units of J mol^-1.}
+  \item{Re}{A scalar defining the universal gas contant in units of J K^-1 mol^-1.}
 }
-\description{
-A dataset with soil CO2 efflux measurements in two laboratory incubations at controlled temperature and moisture conditions.
-}
-\usage{data(eCO2)}
-\format{
-  A data frame with the following 4 variables.
-  \describe{
-    \item{\code{Sample}}{Sample code: AK_T25 is a soil from a boreal forest in Alaska incubated at 25 degrees C. HN_T35 is a soil from a temperate German forest (Hainich National Park) incubated at 35 degrees C.}
-    \item{\code{Days}}{A numeric vector with the day of measurement.}
-    \item{\code{eCO2mean}}{A numeric vector with the accumulated release of CO2. Units in mg C g-1 soil C.}
-    \item{\code{eCO2sd}}{A numeric vector with the standard deviation of the accumulated release of CO2. Units in mg C g-1 soil C.}
-  }
-}
-\details{
-Two laboratory incubation experiments where performed in April-May 2013 for a period of 42 days. Soil CO2 measurements were taken under controlled laboratory conditions. One soil was sampled at a boreal forest site (Caribou Poker Research Watershed, Alaska, USA) and the other from a temperate forest in Germany (Hainich National Park). For each soil 5 replicates were incubated and sampled. This dataset presents the mean and standard deviation of the measurements.
-}
-\examples{
-head(eCO2)
 
-plot(eCO2mean~Days,data=eCO2,subset=Sample=="HN_T35",col=2)
-points(eCO2mean~Days,data=eCO2,subset=Sample=="AK_T25",col=4)
-legend("topleft",
-       c("HN_T35: temperate forest soil","AK_T25: boreal forest soil"),
-       pch=1,col=c(2,4),bty="n")
+\value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+\examples{
+Temperature=273:300
+plot(Temperature,fT.Arrhenius(Temperature),type="l",ylab="f(T) (unitless)", xlab="Temperature (K)",
+     main="Effects of temperature on decomposition rates according to the Arrhenius equation")
 }
-\keyword{datasets}

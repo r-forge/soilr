@@ -1,11 +1,9 @@
-\name{getF14C}
-\alias{getF14C}
-\title{Calculates the average radiocarbon fraction weighted by the mass of carbon}
-\description{This function calculates the average radiocarbon fraction weighted by the mass of carbon at each time step 
-Have a look at the methods for details.}
-\usage{getF14C(object)}\arguments{
-  \item{object}{
-}
+\name{getF14C_method__Model_14}
+\alias{getF14C_method__Model_14}
+\title{read access to the models F14C variable }
+\description{The model was created with a F14C object to describe the atmospheric 14C content. This method serves to investigate those settings from the model.}
+\arguments{
+  \item{object}{a Model_14 object}
 }
 
 

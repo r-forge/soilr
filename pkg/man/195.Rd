@@ -1,8 +1,8 @@
-\name{getTimes}
-\alias{getTimes}
-\title{Extracts the times argument}
-\description{This functions extracts the times argument from an argument of class NlModel}
-\usage{getTimes(object)}\arguments{
+\name{getTimes_method__Model}
+\alias{getTimes_method__Model}
+\title{getTimes method  Model}
+\description{This functions extracts the times argument from an argument of class Model}
+\arguments{
   \item{object}{
 }
 }

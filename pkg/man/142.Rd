@@ -1,18 +1,21 @@
-\name{fW.Skopp}
-\alias{fW.Skopp}
-\title{Effects of moisture on decomposition rates according to the function proposed by Skopp et al. 1990}
-\description{Calculates the effects of relative soil water content on decomposition rates.}
-\usage{fW.Skopp(rwc, alpha = 2, beta = 2, f = 1.3, g = 0.8)}\arguments{
-  \item{rwc}{relative water content}
-  \item{alpha}{Empirical parameter}
-  \item{beta}{Empirical parameter}
-  \item{f}{Empirical parameter}
-  \item{g}{Empirical parameter}
+\name{fW.Standcarb}
+\alias{fW.Standcarb}
+\title{Effects of moisture on decomposition rates according to the StandCarb model}
+\description{Calculates the effects of moisture on decomposition rates according to the StandCarb model.}
+\usage{fW.Standcarb(Moist, MatricShape = 5, MatricLag = 0, MoistMin = 30, 
+    MoistMax = 350, DiffuseShape = 15, DiffuseLag = 4)}\arguments{
+  \item{Moist}{A scalar or vector containing values of moisture content of a litter or soil pool (\%).}
+  \item{MatricShape}{A scalar that determines when matric limit is reduced to the point that decay can begin to occur.}
+  \item{MatricLag}{A scalar used to offset the curve to the left or right.}
+  \item{MoistMin}{A scalar determining the minimum moisture content.}
+  \item{MoistMax}{A scalar determining the maximum moisture content without diffusion limitations.}
+  \item{DiffuseShape}{A scalar that determines the range of moisture contents where diffusion is not limiting.}
+  \item{DiffuseLag}{A scalar used to shift the point when moisture begins to limit diffusion.}
 }
 
-
-\references{J. Skopp, M. D. Jawson, and J. W. Doran. 1990.
-Steady-state aerobic microbial activity as a function of soil water content. Soil Sci. Soc. Am. J., 54(6):1619-1625}
+\value{A data frame with limitation due to water potential (MatricLimit), limitation due to oxygen diffusion (DiffuseLimit), and the overall limitation of moisture on decomposition rates (MoistDecayIndex).}
+\references{Harmon, M. E., and J. B. Domingo (2001), A users guide to STANDCARB version 2.0: 
+A model to simulate carbon stores in forest stands. Oregon State University, Corvallis.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -20,8 +23,17 @@ Steady-state aerobic microbial activity as a function of soil water content. Soi
 
 
 \examples{
-th=seq(0,1,0.01)
-xi=fW.Skopp(rwc=th)
-plot(th,xi,type="l",main="Effects of soil water content on decomposition rates",
-     xlab="Relative water content",ylab=expression(xi))
+MC=0:500
+DeadFoliage=fW.Standcarb(MC)
+DeadBranch=fW.Standcarb(MC,MoistMax=200)
+DeadWood=fW.Standcarb(MC,MoistMax=150)
+StableSoil=fW.Standcarb(MC,MoistMin=15,MoistMax=100)
+plot(MC,DeadFoliage$MoistDecayIndex,type="l",xlab="Moisture Content (\%)",
+     ylab="f(W) (unitless)",
+     main="Effects of moisture on decomposition rates according to the StandCarb model")
+lines(MC,DeadBranch$MoistDecayIndex,col=4)
+lines(MC,DeadWood$MoistDecayIndex,col=3)
+lines(MC,StableSoil$MoistDecayIndex,col=2)
+legend("topright",c("Dead Foliage","Dead Branch","Dead Wood","Stable Soil"),
+       lty=c(1,1,1),col=c(1,4,3,2),bty="n")
 }

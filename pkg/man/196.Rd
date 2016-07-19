@@ -1,18 +1,12 @@
-\name{getTimes_method__Model}
-\alias{getTimes_method__Model}
-\title{getTimes method  Model}
-\description{This functions extracts the times argument from an argument of class Model}
-\arguments{
-  \item{object}{
+\name{getTransferCoefficients-methods}
+\docType{methods}
+\alias{getTransferCoefficients-methods}
+\alias{getTransferCoefficients,NlModel-method}
+\alias{getTransferCoefficients,TransportDecompositionOperator-method}
+\title{ ~~ Methods for Function \code{getTransferCoefficients}  ~~}
+\description{
+ All methods for function \code{getTransferCoefficients} are intended for internal use inside the package only. 
 }
-}
 
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

@@ -1,18 +1,20 @@
-\name{plot_method__Model}
-\alias{plot_method__Model}
-\title{not yet implemented method to plot an overview of several inputs and outpust of a model }
-\description{This function is a stub}
-\arguments{
-  \item{x}{
+\name{print-methods}
+\docType{methods}
+\alias{print-methods}
+\alias{print,ANY-method}
+\alias{print,Model-method}
+\alias{print,NlModel-method}
+\title{ ~~ Methods for Function \code{print}  ~~}
+\description{
+ ~~ Methods for function \code{print} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(x = "Model")}}{
+      \code{\link{print_method__Model}}  
+    }
+
+  }
 }
-
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

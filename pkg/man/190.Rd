@@ -1,9 +1,9 @@
-\name{getTimeRange}
-\alias{getTimeRange}
-\title{getTimeRange}
-\description{This function returns the time range of the given object. 
-Have a look at the methods for details.}
-\usage{getTimeRange(object)}\arguments{
+\name{getTimeRange_method__ConstLinDecompOp}
+\alias{getTimeRange_method__ConstLinDecompOp}
+\title{return an (infinite) time range since the operator is constant}
+\description{some functions dealing with DecompOps in general rely on this
+so we have to implement it even though the timerange is always the same: (-inf,inf)}
+\arguments{
   \item{object}{
 }
 }

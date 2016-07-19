@@ -1,11 +1,18 @@
-\name{getInitialValues-methods}
+\name{getMeanTransitTime-methods}
 \docType{methods}
-\alias{getInitialValues-methods}
-\alias{getInitialValues,NlModel-method}
-\title{ ~~ Methods for Function \code{getInitialValues}  ~~}
+\alias{getMeanTransitTime-methods}
+\alias{getMeanTransitTime,ConstLinDecompOp-method}
+\title{ ~~ Methods for Function \code{getMeanTransitTime}  ~~}
 \description{
- All methods for function \code{getInitialValues} are intended for internal use inside the package only. 
+ ~~ Methods for function \code{getMeanTransitTime} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "ConstLinDecompOp")}}{
+      \code{\link{getMeanTransitTime_method__ConstLinDecompOp}}  
+    }
 
+  }
+}
 \keyword{methods}
 \keyword{ ~~ other possible keyword(s) ~~ }

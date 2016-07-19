@@ -1,18 +1,19 @@
-\name{getAccumulatedRelease_method__Model}
-\alias{getAccumulatedRelease_method__Model}
-\title{time integrals of release fluxes per pool}
-\description{The method integrates the release flux of every pool for all times in the  interval specified by the model definition.}
-\arguments{
-  \item{object}{
+\name{getC-methods}
+\docType{methods}
+\alias{getC-methods}
+\alias{getC,Model-method}
+\alias{getC,NlModel-method}
+\title{ ~~ Methods for Function \code{getC}  ~~}
+\description{
+ ~~ Methods for function \code{getC} ~~
 }
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "Model")}}{
+      \code{\link{getC_method__Model}}  
+    }
+
+  }
 }
-
-\value{a matrix}
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

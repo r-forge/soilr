@@ -1,14 +1,14 @@
-\name{fT.Daycent2}
-\alias{fT.Daycent2}
-\title{Effects of temperature on decomposition rates according to the DAYCENT model}
-\description{Calculates the effects of temperature on decomposition rates according to the Daycent/Century models.}
-\usage{fT.Daycent2(Temp)}\arguments{
-  \item{Temp}{A scalar or vector containing values of soil temperature for which the effects on decomposition rates are calculated.}
+\name{fT.Demeter}
+\alias{fT.Demeter}
+\title{Effects of temperature on decomposition rates according to the DEMETER model}
+\description{Calculates the effects of temperature on decomposition rates according to the DEMETER model.}
+\usage{fT.Demeter(Temp, Q10 = 2)}\arguments{
+  \item{Temp}{A scalar or vector containing values of temperature for which the effects on decomposition rates are calculated}
+  \item{Q10}{A scalar. Temperature coefficient Q10}
 }
 
 \value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
-\references{Del Grosso, S. J., W. J. Parton, A. R. Mosier, E. A. Holland, E. Pendall, D. S. Schimel, and D. S. Ojima (2005), 
-Modeling soil CO2 emissions from ecosystems, Biogeochemistry, 73(1), 71-91.}
+\references{Foley, J. A. (1995), An equilibrium model of the terrestrial carbon budget, Tellus B, 47(3), 310-319.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -17,7 +17,6 @@ Modeling soil CO2 emissions from ecosystems, Biogeochemistry, 73(1), 71-91.}
 
 \examples{
 Temperature=0:50
-plot(Temperature,fT.Daycent2(Temperature),type="l",
-     ylab="f(T) (unitless)",
-     main="Effects of temperature on decomposition rates according to the DAYCENT model")
+plot(Temperature,fT.Demeter(Temperature),type="l",ylab="f(T) (unitless)", 
+     main="Effects of temperature on decomposition rates according to the DEMETER model")
 }

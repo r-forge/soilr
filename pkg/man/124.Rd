@@ -1,16 +1,14 @@
-\name{fT.Century2}
-\alias{fT.Century2}
-\title{Effects of temperature on decomposition rates according the the CENTURY model}
-\description{Calculates the effects of temperature on decomposition rates according to the CENTURY model.}
-\usage{fT.Century2(Temp, Tmax = 45, Topt = 35)}\arguments{
-  \item{Temp}{A scalar or vector containing values of temperature for which the effects on decomposition rates are calculated.}
-  \item{Tmax}{A scalar defining the maximum temperature in degrees C.}
-  \item{Topt}{A scalar defining the optimum temperature for the decomposition process in degrees C.}
+\name{fT.Daycent1}
+\alias{fT.Daycent1}
+\title{Effects of temperature on decomposition rates according to the DAYCENT model}
+\description{Calculates the effects of temperature on decomposition rates according to the DAYCENT model.}
+\usage{fT.Daycent1(Temp)}\arguments{
+  \item{Temp}{A scalar or vector containing values of soil temperature for which the effects on decomposition rates are calculated}
 }
 
 \value{A scalar or a vector containing the effects of temperature on decomposition rates (unitless).}
-\references{Adair, E. C., W. J. Parton, S. J. D. Grosso, W. L. Silver, M. E. Harmon, S. A. Hall, I. C. Burke, and S. C. Hart. 2008. 
-Simple three-pool model accurately describes patterns of long-term litter decomposition in diverse climates. Global Change Biology 14:2636-2660.}
+\references{Kelly, R. H., W. J. Parton, M. D. Hartman, L. K. Stretch, D. S. Ojima, and D. S. Schimel (2000), 
+Intra-annual and interannual variability of ecosystem processes in shortgrass steppe, J. Geophys. Res., 105.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -19,7 +17,6 @@ Simple three-pool model accurately describes patterns of long-term litter decomp
 
 \examples{
 Temperature=0:50
-plot(Temperature,fT.Century2(Temperature),type="l",
-     ylab="f(T) (unitless)",
-     main="Effects of temperature on decomposition rates according to the Century model")
+plot(Temperature,fT.Daycent1(Temperature),type="l",ylab="f(T) (unitless)", 
+     main="Effects of temperature on decomposition rates according to the DAYCENT model")
 }

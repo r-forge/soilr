@@ -1,10 +1,10 @@
-\name{getCumulativeC-methods}
+\name{getDecompOp-methods}
 \docType{methods}
-\alias{getCumulativeC-methods}
-\alias{getCumulativeC,NlModel-method}
-\title{ ~~ Methods for Function \code{getCumulativeC}  ~~}
+\alias{getDecompOp-methods}
+\alias{getDecompOp,NlModel-method}
+\title{ ~~ Methods for Function \code{getDecompOp}  ~~}
 \description{
- All methods for function \code{getCumulativeC} are intended for internal use inside the package only. 
+ All methods for function \code{getDecompOp} are intended for internal use inside the package only. 
 }
 
 \keyword{methods}

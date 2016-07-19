@@ -1,22 +1,12 @@
-\name{initialize_method__BoundFc}
-\alias{initialize_method__BoundFc}
-\title{internal constructor (new)}
-\description{The function is probably called internally only but used by all other constructors
-It calls a sanity check on its arguments and initialized the object }
+\name{initialize_method__ConstLinDecompOp}
+\alias{initialize_method__ConstLinDecompOp}
+\title{internal constructor }
+\description{This mehtod is intendet to be used internally. It may change in the future.
+For user code it is recommended to use one of the generic constructor \code{ConstLinDecompOp} instead.}
 \arguments{
   \item{.Object}{
 }
-  \item{map}{
-}
-  \item{starttime}{
-}
-  \item{endtime}{
-}
-  \item{lag}{
-}
-  \item{format}{
-}
-  \item{interpolation}{
+  \item{mat}{
 }
 }
 

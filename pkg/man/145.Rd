@@ -1,24 +1,18 @@
-\name{fromDataFrame_method__TimeMap_data.frame}
-\alias{fromDataFrame_method__TimeMap_data.frame}
-\title{assemble the objects components}
-\description{The method is used internally to convert TimeMap objects to BoundInFlux objects, since the use of TimeMap objects is now deprecated.}
-\arguments{
-  \item{.Object}{
+\name{getAccumulatedRelease-methods}
+\docType{methods}
+\alias{getAccumulatedRelease-methods}
+\alias{getAccumulatedRelease,Model-method}
+\title{ ~~ Methods for Function \code{getAccumulatedRelease}  ~~}
+\description{
+ ~~ Methods for function \code{getAccumulatedRelease} ~~
 }
-  \item{map}{
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "Model")}}{
+      \code{\link{getAccumulatedRelease_method__Model}}  
+    }
+
+  }
 }
-  \item{lag}{
-}
-  \item{interpolation}{
-}
-}
-
-
-
-\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
-<mamueller@bgc-jena.mpg.de>}
-
-
-
-
-
+\keyword{methods}
+\keyword{ ~~ other possible keyword(s) ~~ }

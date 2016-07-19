@@ -1,16 +1,17 @@
-\name{fW.Candy}
-\alias{fW.Candy}
-\title{Effects of moisture on decomposition rates according to the Candy model}
-\description{Calculates the effects of water content and pore volume on decomposition rates.}
-\usage{fW.Candy(theta, PV)}\arguments{
-  \item{theta}{A scalar or vector containing values of volumetric soil water content.}
-  \item{PV}{A scalar or vector containing values of pore volume.}
+\name{fW.Century}
+\alias{fW.Century}
+\title{Effects of moisture on decomposition rates according to the CENTURY model}
+\description{Calculates the effects of precipitation and potential evapotranspiration on decomposition rates.}
+\usage{fW.Century(PPT, PET)}\arguments{
+  \item{PPT}{A scalar or vector containing values of monthly precipitation.}
+  \item{PET}{A scalar or vector containing values of potential evapotranspiration.}
 }
 
-
-\references{J. Bauer, M. Herbst, J.A. Huisman, L. Weiherm\"uller, H. Vereecken. 2008.
-Sensitivity of simulated soil heterotrophic respiration to temperature and moisture reduction functions.
-Geoderma, Volume 145, Issues 1-2, 15 May 2008, Pages 17-27.}
+\value{A scalar or a vector containing the effects of precipitation and potential evapotranspiration on decomposition rates (unitless).}
+\references{Adair, E. C., W. J. Parton, S. J. D. Grosso, W. L. Silver, M. E. Harmon, S. A. Hall, I. C. Burke, and S. C. Hart (2008), 
+Simple three-pool model accurately describes patterns of long-term litter decomposition in diverse climates, Global Change Biology, 14(11), 2636-2660.
+\code{\\} Parton, W. J., J. A. Morgan, R. H. Kelly, and D. S. Ojima (2001), Modeling soil C responses to environmental change in grassland systems, 
+in The potential of U.S. grazing lands to sequester carbon and mitigate the greenhouse effect, edited by R. F. Follett, J. M. Kimble and R. Lal, pp. 371-398, Lewis Publishers, Boca Raton.}
 \author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
 <mamueller@bgc-jena.mpg.de>}
 
@@ -18,13 +19,10 @@ Geoderma, Volume 145, Issues 1-2, 15 May 2008, Pages 17-27.}
 
 
 \examples{
-th=seq(0,1,0.01)
-xi1=fW.Candy(theta=th,PV=0.4)
-xi2=fW.Candy(theta=th,PV=0.6)
-xi3=fW.Candy(theta=th,PV=0.8)
-plot(th,xi1,type="l",main="Effects of soil water content and pore volume on decomposition rates",
-     xlab="Volumetric soil water content (cm3 cm-3)",ylab=expression(xi))
-lines(th,xi2,col=2)
-lines(th,xi3,col=3)
-legend("bottomright",c("Pore volume = 0.4","Pore volume = 0.6", "Pore volume = 0.8"),lty=1,col=1:3)
+PPT=seq(0,1500,by=10)
+PET=rep(1500,length(PPT))
+PPT.PET=fW.Century(PPT,PET)
+plot(PPT/PET,PPT.PET, 
+     ylab="f(PPT, PET) (unitless)", 
+     main="Effects of precipitation and potential evapotranspiration on decomposition rates")
 }

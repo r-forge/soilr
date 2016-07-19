@@ -1,5 +1,10 @@
 importFrom(parallel,mclapply,mcmapply,detectCores)
+importFrom(stats,"integrate", "optimize", "runif", "spline", "splinefun")
+importFrom("graphics", "abline", "curve", "legend", "lines", "par", "points")
+importFrom("grDevices", "dev.off", "pdf")
 importFrom(deSolve,lsoda)
+importFrom("graphics", "pairs")
+importFrom("utils", "tail")
 import(methods)
 import(RUnit)
 export(

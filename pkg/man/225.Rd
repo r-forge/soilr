@@ -1,11 +1,21 @@
-\name{[[<--methods}
-\docType{methods}
-\alias{[[<--methods}
-\alias{[[<-,MCSim-method}
-\title{ ~~ Methods for Function \code{[[<-}  ~~}
-\description{
- All methods for function \code{[[<-} are intended for internal use inside the package only. 
+\name{[_method__Model_character}
+\alias{[_method__Model_character}
+\title{(experimenta) partially overload [ ] for models }
+\description{This method overloads the [] operator for Model objects but is not yet finished so the full interface for [] is not yet implemented
+and the behavior is very likely to change in future versions of SoilR}
+\arguments{
+  \item{x}{
+}
+  \item{i}{
+}
 }
 
-\keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }
+
+
+\author{Carlos A. Sierra <csierra@bgc-jena.mpg.de>, Markus Mueller
+<mamueller@bgc-jena.mpg.de>}
+
+
+
+
+

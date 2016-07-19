@@ -1,10 +1,10 @@
-\name{[[-methods}
+\name{[[<--methods}
 \docType{methods}
-\alias{[[-methods}
-\alias{[[,MCSim-method}
-\title{ ~~ Methods for Function \code{[[}  ~~}
+\alias{[[<--methods}
+\alias{[[<-,MCSim-method}
+\title{ ~~ Methods for Function \code{[[<-}  ~~}
 \description{
- All methods for function \code{[[} are intended for internal use inside the package only. 
+ All methods for function \code{[[<-} are intended for internal use inside the package only. 
 }
 
 \keyword{methods}
