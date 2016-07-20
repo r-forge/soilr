@@ -90,14 +90,18 @@ ex=function(){
   
   #Run the model with default parameter values
   bcmodel=AWBmodel(t=hours)
-  Cpools=getC(bcmodel)
-  
-  #Time solution
-  matplot(hours,Cpools,type="l",ylab="Concentrations",xlab="Hours",lty=1,ylim=c(0,max(Cpools)*1.2))
-  legend("topleft",c("B", "E", "S", "D"),lty=1,col=c(1:4),bty="n")
-  
-  #State-space diagram
-  plot(as.data.frame(Cpools))
+
+  # fixme mm:
+  # the next line causes trouble on Rforge Windows patched build
+
+  #Cpools=getC(bcmodel)
+  #
+  ##Time solution
+  #matplot(hours,Cpools,type="l",ylab="Concentrations",xlab="Hours",lty=1,ylim=c(0,max(Cpools)*1.2))
+  #legend("topleft",c("B", "E", "S", "D"),lty=1,col=c(1:4),bty="n")
+  #
+  ##State-space diagram
+  #plot(as.data.frame(Cpools))
   
 }
 )

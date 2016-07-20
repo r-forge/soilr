@@ -15,7 +15,9 @@ TimeMapWarningInFluxes <- function(){
             To get rid of this warning adapt your code to use BoundInFlux yourself instead of TimeMap.
             Other classes describing InFluxes may be implemented in the future as need be." 
 }
-TimeMapWarningBoundFc<- function(){
+TimeMapWarningBoundFc<- function()# warning
+            ### warning
+            {
             "The direct use of object of class TimeMap is deprecated for the BoundFc argument.
             At the moment we cast TimeMap objects to the new class BoundFc
             which replaces TimeMap as input to this function.

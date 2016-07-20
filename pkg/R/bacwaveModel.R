@@ -68,17 +68,20 @@ bacwaveModel<-structure(
     
     #Run the model with default parameter values
     bcmodel=bacwaveModel(t=hours)
-    Cpools=getC(bcmodel)
-    
-    #Time solution
-    matplot(hours,Cpools,type="l",ylab="Concentrations",xlab="Hours",lty=1,ylim=c(0,max(Cpools)*1.2))
-    legend("topleft",c("Substrate", "Microbial biomass"),lty=1,col=c(1,2),bty="n")
-    
-    #State-space diagram
-    plot(Cpools[,2],Cpools[,1],type="l",ylab="Substrate",xlab="Microbial biomass")
-    
-    #Microbial biomass over time
-    plot(hours,Cpools[,2],type="l",col=2,xlab="Hours",ylab="Microbial biomass")
+  # fixme mm:
+  # the next line causes trouble on Rforge Windows patched build
+
+  #  Cpools=getC(bcmodel)
+  #  
+  #  #Time solution
+  #  matplot(hours,Cpools,type="l",ylab="Concentrations",xlab="Hours",lty=1,ylim=c(0,max(Cpools)*1.2))
+  #  legend("topleft",c("Substrate", "Microbial biomass"),lty=1,col=c(1,2),bty="n")
+  #  
+  #  #State-space diagram
+  #  plot(Cpools[,2],Cpools[,1],type="l",ylab="Substrate",xlab="Microbial biomass")
+  #  
+  #  #Microbial biomass over time
+  #  plot(hours,Cpools[,2],type="l",col=2,xlab="Hours",ylab="Microbial biomass")
     
   }
 )
