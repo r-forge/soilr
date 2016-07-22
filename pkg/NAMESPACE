@@ -91,7 +91,8 @@ Model_14,
 AWBmodel,
 SeriesLinearModel,
 SeriesLinearModel14,
-TimeMap
+TimeMap,
+CenturyModel
 )
 exportClasses(
 Model,
