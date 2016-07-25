@@ -1,3 +1,13 @@
+                                   Changes to version 1.1-29
+==============================================================================================
+- Two new functions were added to compute transit time and age densities for linear models.
+  These functions are systemAge and transitTime. 
+- Package expm is now required. It is used to calculate the matrix exponential in the
+  computation of system age and transit time distributions. 
+- The Century model was added.
+- Nonlinear microbial models were implemented. These include: AWBmodel, ThreepairMMmodel,
+  TwopMMmodel, and bacwaveModel.
+
                                    Changes to version 1.1.
 ==============================================================================================
 - The name structure of the SoilR internal classes has been changed. 

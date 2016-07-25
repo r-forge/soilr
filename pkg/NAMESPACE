@@ -5,6 +5,7 @@ importFrom("grDevices", "dev.off", "pdf")
 importFrom(deSolve,lsoda)
 importFrom("graphics", "pairs")
 importFrom("utils", "tail")
+importFrom(expm,"expm")
 import(methods)
 import(RUnit)
 export(
@@ -92,7 +93,9 @@ AWBmodel,
 SeriesLinearModel,
 SeriesLinearModel14,
 TimeMap,
-CenturyModel
+CenturyModel,
+systemAge,
+transitTime
 )
 exportClasses(
 Model,
