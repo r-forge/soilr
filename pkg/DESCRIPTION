@@ -11,3 +11,4 @@ Depends: deSolve,methods,parallel,RUnit,expm
 Suggests: FME,lattice,MASS
 LazyData: TRUE
  
+ 
